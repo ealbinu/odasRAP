@@ -1,0 +1,75 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Identifico la trama del cuento</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .ex1, .ex2, .ex3{
+          border-radius: 10px;
+          padding: 10px;
+      }
+      .ex1{background: var(--pastel1);}
+      .ex2{background: var(--pastel2);}
+      .ex3{background: var(--pastel3);}
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Identifico la trama del cuento</h1>
+      <h2>Lo que conozco</h2>
+      <div class="instruccion mt-5">Lee las siguientes partes de un cuento. Después, escribe el nombre de cada una en los espacios correspondientes.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-md-8">
+          <p>Los hermanos mapache estaban entusiasmados por jugar con su pelota nueva. Mientras caminaban rumbo al lugar donde comerían, comenzaron a pasarse la pelota. Al ver esto, el papá mapache les dijo que tuvieran cuidado porque había muchas plantas con espinas y se podría ponchar su pelota. Los hermanos no hicieron caso y siguieron jugando, y al poco tiempo se les ponchó la pelota. Se pusieron muy tristes porque ya no podrían jugar y su día no sería igual.</p>
+        </div>
+        <div class="col-md-4"><img class="img-fluid" src="aimg/a1.png"/>
+          <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" answer="Desarrollo" type="text" placeh="-"></inputbox>
+        </div>
+      </div>
+      <div class="row mt-3 ex2">
+        <div class="col-md-8">
+          <p>El papá mapache convenció a sus hijos de que podían jugar otras cosas en el bosque sin tener su pelota, como a las escondidas. Toda la familia jugó y pasaron un gran día juntos.</p>
+        </div>
+        <div class="col-md-4"><img class="img-fluid" src="aimg/a2.png"/>
+          <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" answer="Final" type="text" placeh="-"></inputbox>
+        </div>
+      </div>
+      <div class="row mt-3 ex3">
+        <div class="col-md-8"> 
+          <div class="text-center h4">La familia mapache</div>
+          <p>Un día en el bosque se encontraban reunidos el papá y la mamá mapache con sus dos hijos. Ellos se alistaban para comer debajo de un pino y pasar un día familiar. Prepararon su comida para salir, su pelota para jugar y una sábana para acostarse en ella.</p>
+        </div>
+        <div class="col-md-4"><img class="img-fluid" src="aimg/a3.png"/>
+          <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" answer="Inicio" type="text" placeh="-"></inputbox>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

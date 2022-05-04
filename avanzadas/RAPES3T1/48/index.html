@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifico los materiales de consulta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+
+        .title{
+            font-size: 2rem;
+            margin: 20px 0;
+            text-align: center;
+        }
+        img{width: 100%;}
+        .comicstrip { position: relative; margin:0 auto;}
+        .buttons { justify-content: space-between;}
+        .button{ font-size: 1.4rem; }
+        .finalizar {
+            background: var(--c1);
+            color: #fff;
+        }
+        .aud{
+            width: 60px;
+            position: absolute;
+            z-index: 9;
+        }
+        .aud.left { left: 5%; }
+        .aud.right { right: 5%; }
+        .aud.top { top: 5%; }
+        .aud.bottom { bottom: 5%; }
+
+        .opts{text-align: center;}
+        .opts .number.small{
+            font-size: 1.4rem;
+            -webkit-text-stroke-width: 1px;
+            margin: 20px;
+        }
+        .opts .clickable{
+            width: 30%;
+            margin: 1%;
+        }
+        @media (max-width:680px){
+            .aud { width: 40px; }
+        }
+    </style>
+    </head>
+<body>
+    <div id="app">
+        
+        <scene v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted"></scene>
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==1" :key="1" hidescorebox :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#ED1C25">
+
+        
+            <info type="seleccionar" title="Identifico los materiales de consulta" text="Lee con atención la historieta." textaudio="asound/instruccion.mp3" :autoplay="true" @completedinstructions="$refs.a1.play()"></info>
+            <activity>
+
+                <!--strip A-->
+                <div v-if="temps=='a'" class="w100">
+                    <div class="row w100"> <div class="title"><audiotext text="Una mañana en la escuela..." audio="asound/a1.mp3" :autoplay="false" ref="a1" @completed="$refs.a2.playstop()"></audiotext></div> </div>
+                    <div class="row w100 comicstrip">
+                        <img src="aimg/1.svg" class="w100">
+                        <div class="aud left"><dialogaudio key="a2"  audio="asound/a2.mp3" :autoplay="false" show-on-play ref="a2" @completed="$refs.a3.playstop()"></dialogaudio></div>
+                        <div class="aud right"><dialogaudio key="a3"  audio="asound/a3.mp3" :autoplay="false" show-on-play ref="a3" @completed=""></dialogaudio></div>
+                    </div>
+                    <div class="row buttons w100">
+                        <!--<button class="button prev" @click="clickjump('a')">Anterior</button>--><div></div><button class="button next" @click="clickjump('b')">Siguiente</button>
+                    </div>
+                </div>
+                <!--strip B-->
+                <div v-if="temps=='b'" class="w100">
+                    <div class="row w80 comicstrip">
+                        <img src="aimg/2.svg" class="w100">
+                        <div class="aud"><dialogaudio key="b1"  audio="asound/b1.mp3" :autoplay="true" show-on-play ref="b1" @completed="$refs.b2.playstop()"></dialogaudio></div>
+                        <div class="aud bottom"><dialogaudio key="b2"  audio="asound/b2.mp3" :autoplay="false" show-on-play ref="b2" @completed=""></dialogaudio></div>
+                    </div>
+                    <div class="row buttons w100">
+                        <button class="button prev" @click="clickjump('a')">Anterior</button><button class="button next" @click="clickjump('c')">Siguiente</button>
+                    </div>
+                </div>
+                <!--strip C-->
+                <div v-if="temps=='c'" class="w100">
+                    <div class="row w100 comicstrip">
+                        <img src="aimg/3.svg" class="w100">
+                        <div class="aud left"><dialogaudio key="c1"  audio="asound/c1.mp3" :autoplay="true" show-on-play ref="c1" @completed="$refs.c2.playstop()"></dialogaudio></div>
+                        <div class="aud right"><dialogaudio key="c2"  audio="asound/c2.mp3" :autoplay="false" show-on-play ref="c2" @completed="$refs.c3.playstop()"></dialogaudio>
+                            <dialogaudio key="c3"  audio="asound/c3.mp3" :autoplay="false" show-on-play ref="c3" @completed=""></dialogaudio></div>
+                    </div>
+                    <div class="row buttons w100">
+                        <button class="button prev" @click="clickjump('b')">Anterior</button><button class="button next" @click="clickjump('d')">Siguiente</button>
+                    </div>
+                </div>
+                <!--strip D-->
+                <div v-if="temps=='d'" class="w100">
+                    <div class="row w50 comicstrip">
+                        <img src="aimg/4.svg" class="w100">
+                        <div class="aud top right"><dialogaudio key="d1"  audio="asound/d1.mp3" :autoplay="true" show-on-play ref="d1" @completed="$refs.d2.playstop()"></dialogaudio></div>
+                        <div class="aud right"><dialogaudio key="d2"  audio="asound/d2.mp3" :autoplay="false" show-on-play ref="d2" @completed=""></dialogaudio></div>
+                    </div>
+                    <div class="row buttons w100">
+                        <button class="button prev" @click="clickjump('c')">Anterior</button><button class="button next" @click="clickjump('e')">Siguiente</button>
+                    </div>
+                </div>
+                <!--strip E-->
+                <div v-if="temps=='e'" class="w100">
+                    <div class="row w40 comicstrip">
+                        <img src="aimg/5.svg" class="w100">
+                        <div class="aud top right"><dialogaudio key="e1"  audio="asound/e1.mp3" :autoplay="true" show-on-play ref="e1" @completed="$refs.e2.playstop()"></dialogaudio></div>
+                        <div class="aud right"><dialogaudio key="e2"  audio="asound/e2.mp3" :autoplay="false" show-on-play ref="e2" @completed=""></dialogaudio></div>
+                    </div>
+                    <div class="row buttons w100">
+                        <button class="button prev" @click="clickjump('d')">Anterior</button><button class="button next" @click="clickjump('f')">Siguiente</button>
+                    </div>
+                </div>
+                <!--strip F-->
+                <div v-if="temps=='f'" class="w100">
+                    <div class="row w100 comicstrip">
+                        <img src="aimg/6.svg" class="w100">
+                        <div class="aud left"><dialogaudio key="f1"  audio="asound/f1.mp3" :autoplay="true" show-on-play ref="f1" @completed="$refs.f2.playstop()"></dialogaudio></div>
+                        <div class="aud"><dialogaudio key="f2"  audio="asound/f2.mp3" :autoplay="false" show-on-play ref="f2" @completed="$refs.f3.playstop()"></dialogaudio></div>
+                        <div class="aud right"><dialogaudio key="f3"  audio="asound/f3.mp3" :autoplay="false" show-on-play ref="f3" @completed=""></dialogaudio></div>
+                    </div>
+                    <div class="row buttons w100">
+                        <button class="button prev" @click="clickjump('e')">Anterior</button><button class="button next" @click="clickjump('g')">Siguiente</button>
+                    </div>
+                </div>
+                
+                <!--strip G-->
+                <div v-if="temps=='g'" class="w100">
+                    <div class="row w90 comicstrip">
+                        <img src="aimg/7.svg" class="w100">
+                        <div class="aud bottom"><dialogaudio key="g1"  audio="asound/g1.mp3" :autoplay="true" show-on-play ref="g1" @completed=""></dialogaudio></div>
+                    </div>
+                    <div class="row buttons w100">
+                        <button class="button prev" @click="clickjump('f')">Anterior</button><button class="button next" @click="clickjump('h')">Siguiente</button>
+                    </div>
+                </div>
+
+                <!--strip H-->
+                <div v-if="temps=='h'" class="w100">
+                    <div class="row 100 comicstrip">
+                        <img src="aimg/8.svg" class="w100">
+                        <div class="aud left bottom"><dialogaudio key="h1"  audio="asound/h1.mp3" :autoplay="true" show-on-play ref="h1" @completed="$refs.h2.playstop()"></dialogaudio></div>
+                        <div class="aud bottom"><dialogaudio key="h2"  audio="asound/h2.mp3" :autoplay="false" show-on-play ref="h2" @completed=""></dialogaudio></div>
+                    </div>
+                    <div class="row buttons w100">
+                        <button class="button prev" @click="clickjump('g')">Anterior</button><button class="button next finalizar" @click="endingFirst">Finalizar</button>
+                    </div>
+                </div>
+
+            </activity>
+        </scene> <!-- end scene -->
+
+
+        <!-- ### scene -->
+        <scene v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="3" scene-color="#ED1C25">
+            <info type="seleccionar" title="Identifico los materiales de consulta" text="Con base en la historieta, selecciona las respuestas correctas." textaudio="asound/instruccion2.mp3" :autoplay="true" @completedinstructions=""></info>
+            <activity>
+                <div class="row w100"><div class="title">Además de libros, ¿qué otro tipo de material tienen en la biblioteca de tu escuela o del aula?</div></div>
+                <div class="row w100 opts">
+                    <clickable :isok="true" v-model="temporals[0]"><div class="number small c1">Revistas y películas</div></clickable>
+                    <clickable :isok="true" v-model="temporals[1]"><div class="number small c1">Juegos de mesa</div></clickable>
+                    <clickable :isok="true" v-model="temporals[2]"><div class="number small c1">Periódicos y revistas</div></clickable>
+                </div>
+            </activity>
+        </scene><!--end scene-->
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#ED1C25">
+            <info type="seleccionar" title="Identifico los materiales de consulta" text="Con base en la historieta, selecciona las respuestas correctas." textaudio="asound/instruccion2.mp3" :autoplay="false" @completedinstructions=""></info>
+            <activity>
+                <div class="row w100"><div class="title">¿Cuál sería un ejemplo de regla para prestar materiales de la biblioteca? </div></div>
+                <div class="row w100 opts">
+                    <clickable :isok="true" v-model="temporals[0]"><div class="number small c2">Presentar mi credencial para solicitar un libro</div></clickable>
+                    <clickable :isok="false" block-if-error><div class="number small c2">Poner mis huellas digitales en un formato</div></clickable>
+                    <clickable :isok="false" block-if-error><div class="number small c2">Pagar por el préstamo y cuando lo devuelva, me devuelven mi dinero</div></clickable>
+                </div>
+            </activity>
+        </scene><!--end scene-->
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==4" :key="4" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#ED1C25">
+            <info type="seleccionar" title="Identifico los materiales de consulta" text="Con base en la historieta, selecciona las respuestas correctas." textaudio="asound/instruccion2.mp3" :autoplay="false" @completedinstructions=""></info>
+            <activity>
+                <div class="row w100"><div class="title">¿Cuál es un ejemplo de material "hemerográfico"?</div></div>
+                <div class="row w100 opts">
+                    <clickable :isok="true" v-model="temporals[0]"><div class="number small c3">Periódicos y revistas</div></clickable>
+                    <clickable :isok="false" block-if-error><div class="number small c3">Libros</div></clickable>
+                    <clickable :isok="false" block-if-error><div class="number small c3">Películas y música</div></clickable>
+                </div>
+            </activity>
+        </scene><!--end scene-->
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==5" :key="5" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#ED1C25">
+            <info type="seleccionar" title="Identifico los materiales de consulta" text="Con base en la historieta, selecciona las respuestas correctas." textaudio="asound/instruccion2.mp3" :autoplay="false" @completedinstructions=""></info>
+            <activity>
+                <div class="row w100"><div class="title">De los siguientes ejemplos, ¿cuáles son materiales audiovisuales?</div></div>
+                <div class="row w100 opts">
+                    <clickable :isok="true" v-model="temporals[0]"><div class="number small c4">Cualquier material en formato auditivo o de video</div></clickable>
+                    <clickable :isok="false" block-if-error><div class="number small c4">Acetatos</div></clickable>
+                    <clickable :isok="false" block-if-error><div class="number small c4">Juegos de mesa</div></clickable>
+                </div>
+            </activity>
+        </scene><!--end scene-->
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==6" :key="6" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#ED1C25">
+            <info type="seleccionar" title="Identifico los materiales de consulta" text="Con base en la historieta, selecciona las respuestas correctas." textaudio="asound/instruccion2.mp3" :autoplay="false" @completedinstructions=""></info>
+            <activity>
+                <div class="row w100"><div class="title">De los siguientes ejemplos, ¿cuál es un tema informativo y de interés general?</div></div>
+                <div class="row w100 opts">
+                    <clickable :isok="false" block-if-error><div class="number small c5">La vida de un cantante famoso</div></clickable>
+                    <clickable :isok="true" v-model="temporals[0]"><div class="number small c5">Un descubrimiento científico</div></clickable>
+                    <clickable :isok="false" block-if-error><div class="number small c5">La inauguración del campeonato de futbol</div></clickable>
+                </div>
+            </activity>
+        </scene><!--end scene-->
+
+
+        <scene v-if="currentScene==7" :key="7" end-scene :final-data="finalData"></scene>
+    
+
+    
+
+    </div>
+    <!-- libraries -->
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    
+    <!-- fireworks -->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- modulos -->
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- mainscript -->
+    <script src="../../assets/assets.js"></script>
+    <script>
+
+        app.temps = 'a'
+        app.currentScene = 0
+        app.scenesCount = 5
+        app.$devmode = 0
+
+
+        app.endingFirst = function(){
+            for(var hw in Howler._howls){Howler._howls[hw].stop()}
+            app.sceneCompleted(false)
+        }
+        app.clickjump = function(arg){
+            for(var hw in Howler._howls){Howler._howls[hw].stop()}
+            this.temps = arg
+        }
+
+    </script>
+</body>
+</html>

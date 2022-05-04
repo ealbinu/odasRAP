@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practico la escritura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        /* STYLES */
+       .drag{
+           width: 100%;
+           height: 60px;
+       }
+       .drag img{height: 100%; }
+
+       .piece{
+           width: 100%;
+           height: 50px;
+           margin: 10px 0;
+       }
+       .piece img {
+           height: 100%;
+           max-width: 49%;
+       }
+       .piece img:nth-child(2){margin-left:-18px;}
+       .pieceind{
+           width: 50%;
+           height: 60px;
+       }
+       .dropzone{
+           height: 60px;
+           width: 100%;
+           
+           text-align: left;
+           border-radius: 20px;
+           background: linear-gradient(to right, rgba(0,0,0,0), #fff);
+           border: 2px solid #5EB247;
+       }
+       .drags{
+           width: 60%;
+           display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+       }
+       .drops {
+           width: 40%;
+       }
+
+       @media (max-width: 680px){
+           .drag, .pieceind, .dropzone{
+               height: 36px;
+           }
+       }
+    </style>
+    </head>
+<body>
+    <div id="app">
+        
+        <scene v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted"></scene>
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="6" scene-color="#ED1C25">
+
+            <info type="dragdrop" title="Practico la escritura" text="Cuando escribimos, usamos signos de puntuación. ¿Los sabes usar? Coloca la función en el signo de puntuación que corresponda. " textaudio="asound/instruccion.mp3" :autoplay="true"></info>
+            <activity>
+               <div class="row w100 wrap">
+                    <div class="drags">
+                        <template v-for="i in [
+                            {name: 'interrogacion'},
+                            {name: 'guion'},
+                            {name: 'punto'},
+                            {name: 'admiracion'},
+                            {name: 'puntofinal'},
+                            {name: 'coma'},
+                        ]">
+                        <div class="piece row">
+                            <div class="pieceind dropzone" :data="i.name" droptimes="untilok" :oksound="'asound/a'+i.name+'.mp3'"><img :src="'aimg/a'+i.name+'.svg'"></div>
+                            <!--<div class="dropzone" :data="i.name" droptimes="untilok" :oksound="'asound/a'+i.name+'.mp3'"></div>-->
+
+                        </div>
+                        </template>
+                    </div>
+                    <div class="drops">
+                        <template v-for="i in [
+                            {name: 'guion'},
+                            {name: 'interrogacion'},
+                            {name: 'coma'},
+                            {name: 'puntofinal'},
+                            {name: 'admiracion'},
+                            {name: 'punto'},
+                        ]">
+                        <drag dropzone=".dropzone" :data="i.name"  :dragsound="'asound/b'+i.name+'.mp3'" stay-if-ok append-to-dropzone><img :src="'aimg/b'+i.name+'.svg'"></drag>
+
+                        </template>
+                    </div>
+               </div>
+            </activity>
+        </scene> <!-- end scene -->
+
+
+        <scene v-if="currentScene==2" :key="2" end-scene :final-data="finalData"></scene>
+    
+
+    
+
+    </div>
+    <!-- libraries -->
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    
+    <!-- fireworks -->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- modulos -->
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- mainscript -->
+    <script src="../../assets/assets.js"></script>
+    <script>
+        app.currentScene = 0
+        app.scenesCount = 1
+        app.$devmode = false
+    </script>
+</body>
+</html>

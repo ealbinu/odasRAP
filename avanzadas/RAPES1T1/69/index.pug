@@ -1,0 +1,143 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Leo el periódico'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .lanota {
+                text-align: center;
+                cursor: pointer;
+                background: #fff;
+                border-radius: 10px;
+                margin: 20px;
+                border: 2px solid var(--sec);
+                box-shadow: 8px 8px 0 var(--sec);
+            }
+            .lanota .audiotextBtn {
+                text-align: center;
+                margin: 10px auto -30px;
+            }
+            .popup img {
+                max-width: 600px;
+            }
+            .btns{
+                margin-top: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .btns button{
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+            @media (max-width: 1024px){
+                .btns {
+                    flex-direction: row;
+                }
+                .btns button img{
+                    max-height: 40px;
+                    width: auto !important;
+                }
+            }
+
+    mixin infobtnsPanda
+        button(@click="$refs.notapanda.open()").button
+            img(src="i/nota.png").w20
+            p Ver periódico
+    mixin infobtnsAnim
+        button(@click="$refs.animation.open()").button
+            img(src="i/anim.png").w20
+            p Ver animación
+
+    body
+        
+        #app
+            // START
+            scene(v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted")
+
+            // SCENES
+            scene(v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="¡Vamos a leer el periodico para ver qué noticias nuevas hay!" textaudio="s/instruccion1.mp3" :autoplay="true" @completedinstructions="$refs.nota.playstop()")
+                activity
+                    .row.w100
+                        dialogaudio(audio="s/naceosapanda.mp3" always-visible ref="nota" initclass="lanota")
+                            img(src="i/nota.png").w80
+                    .row.w100: button(@click="sceneCompleted(false)").button.big Continuar
+            // SCENES
+            scene(v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="¡Vamos a leer el periodico para ver qué noticias nuevas hay!" textaudio="s/instruccion1.mp3" :autoplay="false" @completedinstructions="")
+                    .btns: +infobtnsPanda
+                activity
+                    .row.w100.mb-1: videoplayer(initclass="w100" path="i/v1" :autoplay="true" c="5" @completed="temps.a = true")
+                    .row.w100(v-if="temps.a"): button(@click="sceneCompleted(false)").button.big Siguiente
+            
+            // SCENES - P 1
+            scene(v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="true" @completedinstructions="$refs.pregunta1.play()")
+                    .btns
+                        +infobtnsPanda
+                        +infobtnsAnim
+                activity
+                    .h4.text-center: audiotext(text="¿Dónde están leyendo la noticia?" audio="s/p1.mp3" ref="pregunta1" :autoplay="false")
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.p1" :key="index" :isok="index == 0" simple-ok initclass="pa-1" :click-sound="'s/p1'+index+'.mp3'"): number(randomc smaller) {{i}}
+            // SCENES - P 2
+            scene(v-if="currentScene==4" :key="4" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="false" @completedinstructions="$refs.pregunta1.play()")
+                    .btns
+                        +infobtnsPanda
+                        +infobtnsAnim
+                activity
+                    .h4.text-center: audiotext(text="¿De qué trata la noticia?" audio="s/p2.mp3" :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.p2" :key="index" :isok="index == 2" simple-ok initclass="pa-1" :click-sound="'s/p2'+index+'.mp3'"): number(randomc smaller) {{i}}
+            // SCENES - P 3
+            scene(v-if="currentScene==5" :key="5" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="false" @completedinstructions="$refs.pregunta1.play()")
+                    .btns
+                        +infobtnsPanda
+                        +infobtnsAnim
+                activity
+                    .h4.text-center: audiotext(text="¿Cómo se llama el periódico que está leyendo el papá?" audio="s/p3.mp3" :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.p3" :key="index" :isok="index == 3" simple-ok initclass="pa-1" :click-sound="'s/p3'+index+'.mp3'"): number(randomc smaller) {{i}}
+            // SCENES - P 4
+            scene(v-if="currentScene==6" :key="6" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="false" @completedinstructions="$refs.pregunta1.play()")
+                    .btns
+                        +infobtnsPanda
+                        +infobtnsAnim
+                activity
+                    .h4.text-center: audiotext(text="¿Cómo se llama el periódico que están leyendo la mamá y la hija?" audio="s/p4.mp3" :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.p4" :key="index" :isok="index == 0" simple-ok initclass="pa-1" :click-sound="'s/p3'+index+'.mp3'"): number(randomc smaller) {{i}}
+            // SCENES - P 5
+            scene(v-if="currentScene==7" :key="7" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="2" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="false" @completedinstructions="$refs.pregunta1.play()")
+                    .btns
+                        +infobtnsPanda
+                        +infobtnsAnim
+                activity
+                    .h4.text-center: audiotext(text="Además del periódico, ¿cuáles son otras dos fuentes dónde puedes leer noticias?" audio="s/p5.mp3" :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.p5" :key="index" :isok="index == 0 || index == 1" simple-ok initclass="pa-1" :click-sound="'s/p5'+index+'.mp3'"): number(randomc smaller) {{i}}
+                        
+            
+            // END
+            scene(v-if="currentScene==8" :key="8" end-scene :final-data="finalData")
+
+            popup(:conf="['10%', '10%', '80%', '80%']" ref="notapanda" c="1"): dialogaudio(key="audionota" audio="s/naceosapanda.mp3" always-visible ref="nota" initclass="lanota"): img(src="i/nota.png").w80
+            popup(:conf="['10%', '10%', '80%', '80%']" ref="animation" c="1"): videoplayer(key="animvideo" initclass="w100" path="i/v1" :autoplay="false" c="5")
+        
+        +scripts
+            script.
+
+                app.$devmode = false
+                app.$set(app.temps, 'a', false)
+                app.$set(app.temps, 'p1', ['Periódico.','Internet.','Radio.','Televisíón.'])
+                app.$set(app.temps, 'p2', ['Del nacimiento de un oso polar.','De un concierto en un zoológico.','Del nacimiento de un oso panda.','De una obra de teatro de un oso panda.'])
+                app.$set(app.temps, 'p3', ['El Informante.','Japón.','Los Osos Panda.','El Mundo.'])
+                app.$set(app.temps, 'p4', ['El Informante.','Japón.','Los Osos Panda.','El Mundo.'])
+                app.$set(app.temps, 'p5', ['Internet.','Revistas.','Televisión.','Radio.'])
+                
+                app.currentScene = 0
+                app.scenesCount = 5

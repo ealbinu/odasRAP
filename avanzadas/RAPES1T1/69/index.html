@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Leo el periódico</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css"/>
+    <style>
+      .lanota {
+          text-align: center;
+          cursor: pointer;
+          background: #fff;
+          border-radius: 10px;
+          margin: 20px;
+          border: 2px solid var(--sec);
+          box-shadow: 8px 8px 0 var(--sec);
+      }
+      .lanota .audiotextBtn {
+          text-align: center;
+          margin: 10px auto -30px;
+      }
+      .popup img {
+          max-width: 600px;
+      }
+      .btns{
+          margin-top: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+      }
+      .btns button{
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+      }
+      @media (max-width: 1024px){
+          .btns {
+              flex-direction: row;
+          }
+          .btns button img{
+              max-height: 40px;
+              width: auto !important;
+          }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- START-->
+      <scene v-if="currentScene==0" :key="0" start-scene="start-scene" @completed="sceneCompleted"></scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25">
+        <info type="seleccionar" title="Leo el periódico" text="¡Vamos a leer el periodico para ver qué noticias nuevas hay!" textaudio="s/instruccion1.mp3" :autoplay="true" @completedinstructions="$refs.nota.playstop()"></info>
+        <activity>
+          <div class="row w100">
+            <dialogaudio audio="s/naceosapanda.mp3" always-visible="always-visible" ref="nota" initclass="lanota"><img class="w80" src="i/nota.png"/></dialogaudio>
+          </div>
+          <div class="row w100">
+            <button class="button big" @click="sceneCompleted(false)">Continuar</button>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25">
+        <info type="seleccionar" title="Leo el periódico" text="¡Vamos a leer el periodico para ver qué noticias nuevas hay!" textaudio="s/instruccion1.mp3" :autoplay="false" @completedinstructions="">
+          <div class="btns">
+              <button class="button" @click="$refs.notapanda.open()"><img class="w20" src="i/nota.png"/>
+                <p>Ver periódico</p>
+              </button>
+          </div>
+        </info>
+        <activity>
+          <div class="row w100 mb-1">
+            <videoplayer initclass="w100" path="i/v1" :autoplay="true" c="5" @completed="temps.a = true"></videoplayer>
+          </div>
+          <div class="row w100" v-if="temps.a">
+            <button class="button big" @click="sceneCompleted(false)">Siguiente</button>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES - P 1-->
+      <scene v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25">
+        <info type="seleccionar" title="Leo el periódico" text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="true" @completedinstructions="$refs.pregunta1.play()">
+          <div class="btns">
+              <button class="button" @click="$refs.notapanda.open()"><img class="w20" src="i/nota.png"/>
+                <p>Ver periódico</p>
+              </button>
+              <button class="button" @click="$refs.animation.open()"><img class="w20" src="i/anim.png"/>
+                <p>Ver animación</p>
+              </button>
+          </div>
+        </info>
+        <activity>
+          <div class="h4 text-center">
+            <audiotext text="¿Dónde están leyendo la noticia?" audio="s/p1.mp3" ref="pregunta1" :autoplay="false"></audiotext>
+          </div>
+          <div class="row wrap around">
+            <clickable v-for="(i, index) in temps.p1" :key="index" :isok="index == 0" simple-ok="simple-ok" initclass="pa-1" :click-sound="'s/p1'+index+'.mp3'">
+              <number randomc="randomc" smaller="smaller">{{i}}</number>
+            </clickable>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES - P 2-->
+      <scene v-if="currentScene==4" :key="4" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25">
+        <info type="seleccionar" title="Leo el periódico" text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="false" @completedinstructions="$refs.pregunta1.play()">
+          <div class="btns">
+              <button class="button" @click="$refs.notapanda.open()"><img class="w20" src="i/nota.png"/>
+                <p>Ver periódico</p>
+              </button>
+              <button class="button" @click="$refs.animation.open()"><img class="w20" src="i/anim.png"/>
+                <p>Ver animación</p>
+              </button>
+          </div>
+        </info>
+        <activity>
+          <div class="h4 text-center">
+            <audiotext text="¿De qué trata la noticia?" audio="s/p2.mp3" :autoplay="true"></audiotext>
+          </div>
+          <div class="row wrap around">
+            <clickable v-for="(i, index) in temps.p2" :key="index" :isok="index == 2" simple-ok="simple-ok" initclass="pa-1" :click-sound="'s/p2'+index+'.mp3'">
+              <number randomc="randomc" smaller="smaller">{{i}}</number>
+            </clickable>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES - P 3-->
+      <scene v-if="currentScene==5" :key="5" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25">
+        <info type="seleccionar" title="Leo el periódico" text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="false" @completedinstructions="$refs.pregunta1.play()">
+          <div class="btns">
+              <button class="button" @click="$refs.notapanda.open()"><img class="w20" src="i/nota.png"/>
+                <p>Ver periódico</p>
+              </button>
+              <button class="button" @click="$refs.animation.open()"><img class="w20" src="i/anim.png"/>
+                <p>Ver animación</p>
+              </button>
+          </div>
+        </info>
+        <activity>
+          <div class="h4 text-center">
+            <audiotext text="¿Cómo se llama el periódico que está leyendo el papá?" audio="s/p3.mp3" :autoplay="true"></audiotext>
+          </div>
+          <div class="row wrap around">
+            <clickable v-for="(i, index) in temps.p3" :key="index" :isok="index == 3" simple-ok="simple-ok" initclass="pa-1" :click-sound="'s/p3'+index+'.mp3'">
+              <number randomc="randomc" smaller="smaller">{{i}}</number>
+            </clickable>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES - P 4-->
+      <scene v-if="currentScene==6" :key="6" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25">
+        <info type="seleccionar" title="Leo el periódico" text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="false" @completedinstructions="$refs.pregunta1.play()">
+          <div class="btns">
+              <button class="button" @click="$refs.notapanda.open()"><img class="w20" src="i/nota.png"/>
+                <p>Ver periódico</p>
+              </button>
+              <button class="button" @click="$refs.animation.open()"><img class="w20" src="i/anim.png"/>
+                <p>Ver animación</p>
+              </button>
+          </div>
+        </info>
+        <activity>
+          <div class="h4 text-center">
+            <audiotext text="¿Cómo se llama el periódico que están leyendo la mamá y la hija?" audio="s/p4.mp3" :autoplay="true"></audiotext>
+          </div>
+          <div class="row wrap around">
+            <clickable v-for="(i, index) in temps.p4" :key="index" :isok="index == 0" simple-ok="simple-ok" initclass="pa-1" :click-sound="'s/p3'+index+'.mp3'">
+              <number randomc="randomc" smaller="smaller">{{i}}</number>
+            </clickable>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES - P 5-->
+      <scene v-if="currentScene==7" :key="7" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="2" scene-color="#ED1C25">
+        <info type="seleccionar" title="Leo el periódico" text="Ahora que conoces la noticia del periódico, selecciona las respuestas correctas." textaudio="s/instruccion2.mp3" :autoplay="false" @completedinstructions="$refs.pregunta1.play()">
+          <div class="btns">
+              <button class="button" @click="$refs.notapanda.open()"><img class="w20" src="i/nota.png"/>
+                <p>Ver periódico</p>
+              </button>
+              <button class="button" @click="$refs.animation.open()"><img class="w20" src="i/anim.png"/>
+                <p>Ver animación</p>
+              </button>
+          </div>
+        </info>
+        <activity>
+          <div class="h4 text-center">
+            <audiotext text="Además del periódico, ¿cuáles son otras dos fuentes dónde puedes leer noticias?" audio="s/p5.mp3" :autoplay="true"></audiotext>
+          </div>
+          <div class="row wrap around">
+            <clickable v-for="(i, index) in temps.p5" :key="index" :isok="index == 0 || index == 1" simple-ok="simple-ok" initclass="pa-1" :click-sound="'s/p5'+index+'.mp3'">
+              <number randomc="randomc" smaller="smaller">{{i}}</number>
+            </clickable>
+          </div>
+        </activity>
+      </scene>
+      <!-- END-->
+      <scene v-if="currentScene==8" :key="8" end-scene="end-scene" :final-data="finalData"></scene>
+      <popup :conf="['10%', '10%', '80%', '80%']" ref="notapanda" c="1">
+        <dialogaudio key="audionota" audio="s/naceosapanda.mp3" always-visible="always-visible" ref="nota" initclass="lanota"><img class="w80" src="i/nota.png"/></dialogaudio>
+      </popup>
+      <popup :conf="['10%', '10%', '80%', '80%']" ref="animation" c="1">
+        <videoplayer key="animvideo" initclass="w100" path="i/v1" :autoplay="false" c="5"></videoplayer>
+      </popup>
+    </div>
+    <!-- CDNS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <!-- Fireworks-->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- Modulos-->
+    <script src="../../assets/modulos/sequence.js"></script>
+    <script src="../../assets/modulos/videoplayer.js"></script>
+    <script src="../../assets/modulos/popup.js"></script>
+    <script src="../../assets/modulos/number.js"></script>
+    <script src="../../assets/modulos/inputable.js"></script>
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/tooltiper.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/selectives.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/desplegar.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- Mainscript-->
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$devmode = false
+      app.$set(app.temps, 'a', false)
+      app.$set(app.temps, 'p1', ['Periódico.','Internet.','Radio.','Televisíón.'])
+      app.$set(app.temps, 'p2', ['Del nacimiento de un oso polar.','De un concierto en un zoológico.','Del nacimiento de un oso panda.','De una obra de teatro de un oso panda.'])
+      app.$set(app.temps, 'p3', ['El Informante.','Japón.','Los Osos Panda.','El Mundo.'])
+      app.$set(app.temps, 'p4', ['El Informante.','Japón.','Los Osos Panda.','El Mundo.'])
+      app.$set(app.temps, 'p5', ['Internet.','Revistas.','Televisión.','Radio.'])
+      
+      app.currentScene = 0
+      app.scenesCount = 5
+    </script>
+  </body>
+</html>

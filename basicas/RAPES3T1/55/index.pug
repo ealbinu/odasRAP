@@ -1,0 +1,52 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Analizo un texto informativo'
+- subtitle = 'Analizamos un texto informativo / Del texto informativo a la infografía'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            /*
+            .ex1 {}
+            */
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Lee el texto informativo de las páginas 100 y 101 de tu libro de texto SEP. Después contesta las preguntas seleccionando la respuesta correcta.
+
+            .row.mt-3
+                .col-12
+                    choose(:key="index" v-model="r[index]" :ref="refCount()" :num="(index+1)" :text="i.p" :options="i.ops" @isright="right++" :answer="i.ops[i.a]" v-for="(i, index) in temps")
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app, 'temps', [
+                    {
+                        p: '¿Cómo se llaman los pequeños organismos que afectan el funcionamiento del cuerpo?',
+                        ops: ['Insectos.','Gérmenes.'],
+                        a:1
+                    },
+                    {
+                        p: '¿Cuál es un medio por el que se transmiten los gérmenes?',
+                        ops: ['La saliva.','La vista.'],
+                        a:0
+                    },
+                    {
+                        p: ' ¿Cuál es una manera sencilla de cuidarnos de los gérmenes?',
+                        ops: ['Lavarnos las manos.','Comer con las manos sucias.'],
+                        a:0
+                    },
+                    {
+                        p: '¿Qué debemos hacer al toser o estornudar?',
+                        ops: ['Ir al médico.','Taparnos la boca con el antebrazo.'],
+                        a:1
+                    },
+                    
+                ])

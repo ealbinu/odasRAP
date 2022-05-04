@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conocemos poemas y rimas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+
+.palabras {
+	background: #E8E1D0;
+	padding: 4px 10px;
+	border-radius: 10px;
+}
+.palabras div {
+	background: #fff;
+	padding: 10px 20px;
+	border-radius: 10px;
+	margin: 6px 8px;
+}
+
+
+
+/*cross*/
+
+
+.crucigrama {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+.crucigrama .box {
+	width: 7.6%;
+	min-height: 60px;
+    color: #00A3DA; 
+}
+.crucigrama .box div {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.crucigrama .box .inputbox {
+	height: 100%;
+}
+.crucigrama .box .inputbox input {
+	height: 100%;
+	padding: 0;
+	border-radius: 2px;
+	font-size: 1.2rem;
+    border: 2px solid #B17031;
+}
+
+
+.crucigrama {
+	padding: 10px;
+	border-radius: 10px;
+    background-image: url(aimg/a1.svg);
+    background-position: left;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.crucigrama .number {
+	width: 100%;
+	border-radius: 3px;
+	color: var(--accent);
+    background: #EFE3D7;
+    border: 2px solid var(--accent);
+    border-radius: 40px;
+    font-weight: bold;;
+    font-size: 1.2rem;
+}
+.crucigrama .cell.demo {
+	width: 100%;
+	border: 2px solid #B17031;
+    background: #fff;
+}
+
+
+/*.box{outline:1px solid #f5f6f6; }*/
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Conocemos poemas y rimas</h1>
+
+        <div class="instruccion mt-5">Completa el crucigrama para identificar las características de los poemas.</div>
+       
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <p class="h4"><strong class="main">Horizontal:</strong><br></p>
+                <p><strong class="accent">1.</strong> Estados de ánimo que expresan los escritores por medio de la poesía.</p>
+                <p><strong class="accent">2.</strong> Está formada por un grupo de versos y se delimita por un punto y aparte.</p>
+            </div>
+            <div class="col-md-6">
+                <p class="h4"><strong class="main">Vertical:</strong><br></p>
+                <p><strong class="accent">1.</strong> Igualdad o semejanza de sonidos que existe al final de los versos de un poema.</p>
+                <p><strong class="accent">2.</strong> Conjunto de palabras que tienen cierto ritmo.</p>
+            </div>
+        </div>
+
+
+        <div class="crucigrama mt-3">
+            <template v-for="y in 7">
+                <template v-for="x in 13">
+                    <div :class="'box ' + 'x'+x+'y'+y" :data="x+'-'+y">
+                        <!--horizontales-->
+                        <div v-for="(b,index) in [1, ['S',0], ['E',1], ['N',2], ['T',3],['I',4],['M',5],['I',6],['E',7],['N',8],['T',9],['O',10]]" v-if="x==1+index && y==5"><div v-if="typeof b == 'number'" class="number">{{b}}</div><div v-else-if="b!=false" class="cell"><inputbox v-model="r[b[1]]" :ref="refCount()" @isright="right++" :answer="b[0]" type="text" placeh="-"></inputbox></div></div>
+                        <div v-for="(b,index) in [2, ['E',11],['S',12],['T',13],['R',14],['O',15],['F',16],['A',17]]" v-if="x==1+index && y==7"><div v-if="typeof b == 'number'" class="number">{{b}}</div><div v-else-if="b!=false" class="cell"><inputbox v-model="r[b[1]]" :ref="refCount()" @isright="right++" :answer="b[0]" type="text" placeh="-"></inputbox></div></div>
+                        
+                        <!--verticales-->
+                        <div v-for="(b,index) in [1, ['R',18], false, ['M',19]]" v-if="y==3+index && x==8"><div v-if="index == 0" class="number">{{b}}</div><div v-else-if="b!=false" class="cell"><inputbox v-model="r[b[1]]" :ref="refCount()" @isright="right++" :answer="b[0]" type="text" placeh="-"></inputbox></div></div>
+                        <div v-for="(b,index) in [2, 'V', 'E', 'R', 'S', 'O']" v-if="y==1+index && x==13"><div v-if="index == 0" class="number">{{b}}</div><div v-else-if="b!=false" class="cell demo"><strong>{{b}}</strong></div></div>
+                       
+                    </div>
+                </template>
+            </template>
+        </div>
+
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    
+    <script src="../../assets/assets.js"></script>
+</body>
+</html>

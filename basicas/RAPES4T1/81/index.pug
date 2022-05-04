@@ -1,0 +1,64 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+include ../../assets/pug/_parrafosinput
+
+- title = 'Ordeno los sucesos importantes'
+- subtitle = 'Reconstruir los hechos'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .parrafoinputs {
+                background: linear-gradient(#FDF8F1, #F5E9D7);
+                margin: 10px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border: 2px solid #E8CC93;
+                padding: 20px;
+            }
+            .recuadropalabras {
+                background: #E7CC93;
+            }
+            .recuadropalabras strong {
+                background: #fff;
+                color: #887544;
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Completa el texto con las expresiones de temporalidad que se encuentran en el recuadro.
+
+            recuadropalabras(:palabras="['Antes','entonces','después','A la mañana siguiente','después de ese día','En el año']")
+
+            .row.mt-3.ex1
+                .col-12
+                    - var arra = []
+                    - arra.push(['En el año', 0])
+                    - arra.push(' 1492, un navegante genovés llamado Cristóbal Colón se hizo a la mar, no iba de viaje, no iba a pasear, pero tampoco sabía que a América iba a llegar.')
+                    - arra.push(['Antes', 1])
+                    - arra.push(' de su viaje algunos creían que el océano se acabaría,')
+                    - arra.push(['entonces', 2])
+                    - arra.push(' mostraría lo contrario en su travesía.')
+                    - arra.push('<br>En Palos se embarcaría en una carabela maciza, en el nombre de Isabel de Castilla, y acompañado de los Pinzón, la aventura empezaría. Navegó durante semanas, pero')
+                    - arra.push(['después',3])
+                    - arra.push(' de que todos la esperanza perdían, Triana gritó "tierra a la vista".')
+                    - arra.push(['A la mañana siguiente', 4])
+                    - arra.push(' de su barco bajaría, puso los pies en la tierra creyendo que eran las Indias, pero')
+                    - arra.push(['después de ese día',5])
+                    - arra.push(' todos sabemos que Colón un nuevo continente encontraría.')
+                    +parrafoinputs(arra)
+                        
+            
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

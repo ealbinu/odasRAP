@@ -1,0 +1,124 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Completo palabras'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .clickable {
+                background: #fff;
+                border-radius: 10px;
+                margin: 6px;
+                font-size: 1.4rem;
+                border: 2px solid var(--c3);
+                box-shadow: 4px 4px 0 var(--c4);
+            }
+            .clickable:nth-child(3n) {
+                box-shadow: 4px 4px 0 var(--c5);
+            }
+            .clickable:nth-child(3n+1) {
+                box-shadow: 4px 4px 0 var(--c6);
+            }
+
+
+    body
+        #app
+            // START
+            scene(v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted")
+
+            // SCENES
+            scene(v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="5" scene-color="#ED1C25" @loaded="resetit")
+                info(type="seleccionar" title=title text="Selecciona la palabra que está escrita de manera correcta." textaudio="s/instruccion1.mp3" :autoplay="true")
+                activity
+                    .row.w100
+                        .w10.ws20: img(src="i/apple.png").w100
+                    .row.w100.wrap.mt-1
+                        template(v-for="(i, index) in temps.a")
+                            clickable(ref="ex1" :key="'a'+index" :isok="i.v" simple-ok initclass="pa-1" ext-validation @itsok="checkclicks(true, 5)" @itserror="checkclicks(false, 5)"): div {{i.t}}
+                    button(@click="verifyclicks(5, 'ex1')").button.big.animate__animated.animate__flip Verificar
+                    .row.w100
+                        .w10.ws20: img(src="i/cheese.png").w100
+            
+            // SCENES
+            scene(v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="5" scene-color="#ED1C25" @loaded="resetit")
+                info(type="seleccionar" title=title text="Selecciona la palabra que está escrita de manera correcta." textaudio="s/instruccion1.mp3" :autoplay="false")
+                activity
+                    .row.w100.wrap.mt-1
+                        template(v-for="(i, index) in temps.b")
+                            clickable(ref="ex2" :key="'b'+index" :isok="i.v" simple-ok initclass="pa-1" ext-validation @itsok="checkclicks(true, 5)" @itserror="checkclicks(false, 5)"): div {{i.t}}
+                    button(@click="verifyclicks(5, 'ex2')").button.big.animate__animated.animate__flip Verificar
+                    .row.w100
+                        .w20.ws30: img(src="i/kid.png").w100
+
+            // END
+            scene(v-if="currentScene==3" :key="3" end-scene :final-data="finalData")
+        
+        +scripts
+            script.
+
+                app.$devmode = false
+
+                app.$set(app.temps, 'clickeds', 0)
+
+                app.checkclicks = function (okerr, valids) {
+                    if(okerr){
+                        app.temps.clickeds++
+                    } else {
+                        app.temps.clickeds--
+                    }
+                }
+
+                app.verifyclicks = function (valids, refs) {
+                    if(app.temps.clickeds == valids){
+                        for(var i = 0; i < valids; i ++){
+                            EventBus.$emit('isok')
+                        }
+                    } else {
+                        s_error.play()
+
+                        for(var r in app.$refs[refs]){
+                            var item = app.$refs[refs][r]
+                            if(!item.validateok && item.status){
+                                item.reset()
+                                app.temps.clickeds++
+                            }
+                        }
+                    }
+
+                }
+
+                app.resetit = function () {
+                    app.temps.clickeds = 0
+                }
+
+                app.$set(app.temps, 'a', [
+                    {v: 1, t:'membrillo'},
+                    {v: 0, t:'menvrillo'},
+                    {v: 0, t:'mansana'},
+                    {v: 1, t:'manzana'},
+                    {v: 1, t:'ladrillo'},
+                    {v: 0, t:'ladriyo'},
+                    {v: 0, t:'cincero'},
+                    {v: 1, t:'sincero'},
+                    {v: 1, t:'queso'},
+                    {v: 0, t:'keso'},
+                ])
+
+                app.$set(app.temps, 'b', [
+
+                    {v: 0, t:'veso'},
+                    {v: 1, t:'beso'},
+                    {v: 1, t:'mañana'},
+                    {v: 0, t:'mallana'},
+                    {v: 1, t:'blanca'},
+                    {v: 0, t:'vlanca'},
+                    {v: 0, t:'vibo'},
+                    {v: 1, t:'vivo'},
+                    {v: 1, t:'cultivo'},
+                    {v: 0, t:'cultibo'},
+                ])
+                
+                app.currentScene = 0
+                app.scenesCount = 2

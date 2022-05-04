@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparo las fábulas y los refranes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+	.heads {
+		font-weight: bold;
+		font-size: 1.4rem;
+		background: var(--accent);
+		color: #fff;
+		padding: 10px;
+	}
+	.bodys {
+		border: 2px solid var(--accent);
+		border-radius: 10px;
+		background: #FDE8CF;
+	}
+	.soptions {
+		justify-content: space-around !important;
+		text-align: center;
+	}
+
+	.soptions img {
+		width: 30px;
+	}
+	.soptions .selectable {
+		padding: 10px 0;
+	}
+	.soptions .off img {
+		filter:grayscale();
+		opacity: 0.5;
+	}
+	@media (max-width: 680px) {
+		.heads {
+			font-size: 0.9rem;
+		}
+	}
+
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+		<h1>Comparo las fábulas y los refranes</h1>
+		<h2 class="repaso">Página de repaso</h2>
+
+        <div class="instruccion mt-5">Marca las características que pertenecen a las fábulas y a los refranes.</div>
+        
+        <div class="row mt-3 heads text-center">
+			<div class="col-6">Características</div>
+			<div class="col-3">Fábulas</div>
+			<div class="col-3">Refranes</div>
+        </div>
+        <div class="row mt-3 align-items-center bodys">
+			<div class="col-6">Son narraciones con inicio, desarrollo y final.</div>
+			<div class="col-6">
+				<div class="row justify-content-center align-items-center soptions">
+					<div class="col-3 option"><selectable :isok="true" v-model="r[0]" :ref="refCount()" @isright="right++"><img src="aimg/markcheck.svg"></selectable></div>
+					<div class="col-3 option"><selectable :isok="false" v-model="r[1]" :ref="refCount()" @isright="right++"><img src="aimg/markcheck.svg"></selectable></div>
+				</div>
+				<!--	
+				<selectableoptions v-model="r[0]" ref="q0" @isright="right++" answer="yes" :options="[{val:'yes', img:'aimg/markcheck.svg'},  {val:'no', img:'aimg/markcheck.svg'}]" customclass="col-3">
+					<template v-slot:option="{option}">
+						<img :src="option.img" class="img-fluid">
+					</template>
+				</selectableoptions>
+			-->
+			</div>
+        </div>
+        <div class="row mt-3 align-items-center bodys">
+			<div class="col-6">Transmiten una enseñanza.</div>
+			<div class="col-6">
+				<div class="row justify-content-center align-items-center soptions">
+					<div class="col-3 option"><selectable :isok="true" v-model="r[2]" :ref="refCount()" @isright="right++"><img src="aimg/markcheck.svg"></selectable></div>
+					<div class="col-3 option"><selectable :isok="true" v-model="r[3]" :ref="refCount()" @isright="right++"><img src="aimg/markcheck.svg"></selectable></div>
+				</div>
+				<!--
+				<selectableoptions v-model="r[1]" ref="q1" @isright="right++" :answer="['yes', 'no']" :options="[{val:'yes', img:'aimg/markcheck.svg'},  {val:'no', img:'aimg/markcheck.svg'}]" customclass="col-3">
+					<template v-slot:option="{option}"><img :src="option.img" class="img-fluid"></template>
+				</selectableoptions>
+				-->
+			</div>
+        </div>
+        <div class="row mt-3 align-items-center bodys">
+			<div class="col-6">Son expresiones de sabiduría popular.</div>
+			<div class="col-6">
+				<div class="row justify-content-center align-items-center soptions">
+					<div class="col-3 option"><selectable :isok="false" v-model="r[4]" :ref="refCount()" @isright="right++"><img src="aimg/markcheck.svg"></selectable></div>
+					<div class="col-3 option"><selectable :isok="true" v-model="r[5]" :ref="refCount()" @isright="right++"><img src="aimg/markcheck.svg"></selectable></div>
+				</div>
+				<!--
+				<selectableoptions v-model="r[2]" ref="q2" @isright="right++" answer="no" :options="[{val:'yes', img:'aimg/markcheck.svg'},  {val:'no', img:'aimg/markcheck.svg'}]" customclass="col-3">
+					<template v-slot:option="{option}"><img :src="option.img" class="img-fluid"></template>
+				</selectableoptions>
+				-->
+			</div>
+        </div>
+        <div class="row mt-3 align-items-center bodys">
+			<div class="col-6">Los protagonistas son animales y objetos animados.</div>
+			<div class="col-6">
+				<div class="row justify-content-center align-items-center soptions">
+					<div class="col-3 option"><selectable :isok="true" v-model="r[6]" :ref="refCount()" @isright="right++"><img src="aimg/markcheck.svg"></selectable></div>
+					<div class="col-3 option"><selectable :isok="false" v-model="r[7]" :ref="refCount()" @isright="right++"><img src="aimg/markcheck.svg"></selectable></div>
+				</div>
+				<!--
+				<selectableoptions v-model="r[3]" ref="q3" @isright="right++" answer="yes" :options="[{val:'yes', img:'aimg/markcheck.svg'},  {val:'no', img:'aimg/markcheck.svg'}]" customclass="col-3">
+					<template v-slot:option="{option}"><img :src="option.img" class="img-fluid"></template>
+				</selectableoptions>
+			-->
+			</div>
+        </div>
+		
+		
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

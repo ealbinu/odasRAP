@@ -1,0 +1,208 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Conozco los tiempos del pasado'
+- subtitle = ''
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .ex1 .inputbox {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                margin-bottom: 20px;
+            }
+            .ex1 .inputbox input {
+                max-width: 140px;
+                font-size: 1rem;
+                padding: 2px;
+                border-radius: 4px;
+                margin-right: 8px;
+            }
+            .ex1 .inputbox strong:not(:first-child) {
+                color: var(--clear);
+                margin-left: 8px;
+            }
+
+            .parrafoinputs.ex2{
+                background: #E7F2D8;
+            }
+
+            .ex2 .selectable {
+                display: inline-block;
+                padding: 0 2px;
+                margin-right: 4px;
+            }
+            .ex2 .selectable.on {
+                border-radius: 0;
+                background: var(--main);
+                color: #fff;
+                border-radius: 4px;
+            }
+            .ex2 .selectable.on .circledactive {
+                display: none;
+            }
+
+            .ex3 .head {
+                background: #EFDEE6;
+            }
+            .ex3 .head div {
+                border: 1px solid #AE4E8F;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                line-height: 1;
+                padding: 4px;
+                font-size: 0.9rem;
+                font-weight: bold;
+                color: #AE4E8F;
+            }
+            @media (max-width: 680px) {
+                .ex3 .head div {
+                    font-size: 0.6rem;
+                }
+            }
+            .ex3 .head div:first-child {
+                border-radius: 10px 0 0 0;
+            }
+            .ex3 .head div:last-child {
+                border-radius: 0 10px 0 0;
+            }
+            .ex3 .body > div {
+                padding: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #AE4E8F;
+                font-size: 0.9rem;
+            }
+            @media (max-width: 680px) {
+                .ex3 .body > div {
+                    font-size: 0.6rem;
+                }
+            }
+            .ex3 .body > div:first-child {
+                background: #E5CBDA;
+                font-weight: bold;
+            }
+            .ex3 .body > div .inputbox {
+                display: flex;
+            }
+            .ex3 .body > div .inputbox input {
+                font-size: 0.9rem;
+                padding: 0;
+                min-height: 40px;
+                border-radius: 3px;
+            }
+            @media (max-width: 680px) {
+                .ex3 .body > div .inputbox input {
+                    font-size: 0.6rem;
+                }
+            }
+            .selectable:nth-child(3) {
+                margin-right: 0;
+            }
+
+
+
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5  Completa las oraciones con el pretérito de los verbos que están entre paréntesis. No olvides escribir los acentos necesarios. Consulta la página 93 de tu libro de texto SEP.
+
+            .row.mt-3.ex1
+                .col-12
+                    div.label
+                        inputbox(v-model="r[0]" :ref="refCount()" @isright="right++" answer="evitó" type="text" placeh="-")
+                            template(v-slot:before="") #[strong 1.] Después de fundar Roma, el pueblo romano #[strong (evitar)]
+                            template(v-slot:after="") la invasión griega.
+                    div.label
+                        inputbox(v-model="r[1]" :ref="refCount()" @isright="right++" answer="extendió" type="text" placeh="-")
+                            template(v-slot:before="") #[strong 2.] Roma #[strong (extender)]
+                            template(v-slot:after="") su poderío al sur de la península itálica.
+                    div.label
+                        inputbox(v-model="r[2]" :ref="refCount()" @isright="right++" answer="recibió" type="text" placeh="-")
+                            template(v-slot:before="") #[strong 3.] Octavio, primer emperador romano,  #[strong (recibir)]
+                            template(v-slot:after="") el título de Augusto.
+            
+            .instruccion.mt-5 Ahora selecciona los verbos en copretérito.
+
+            .parrafoinputs.row.align-items-center.ex2
+                .col-md-10
+                    | Durante el feudalismo, el poder y la riqueza de las personas 
+                    selectable(:isok="true" v-model="r[3]" :ref="refCount()" @isright="right++") dependían
+                    | de la cantidad de tierras bajo su dominio. Originalmente las tierras
+                    selectable(:isok="true" v-model="r[4]" :ref="refCount()" @isright="right++") eran
+                    | de quienes las 
+                    selectable(:isok="true" v-model="r[5]" :ref="refCount()" @isright="right++") conquistaban
+                    | , pero los reyes también 
+                    selectable(:isok="true" v-model="r[6]" :ref="refCount()" @isright="right++") repartían
+                    | grandes extensiones entre sus aliados. A cambio, éstos 
+                    selectable(:isok="true" v-model="r[7]" :ref="refCount()" @isright="right++") brindaban
+                    | al rey obediencia y apoyo en caso de guerra. A quienes 
+                    selectable(:isok="true" v-model="r[8]" :ref="refCount()" @isright="right++") recibían
+                    | el derecho de explotar la tierra, se les 
+                    selectable(:isok="true" v-model="r[9]" :ref="refCount()" @isright="right++") denominaba
+                    | señores feudales.
+                .col-md: img(src="aimg/b2.png").img-fluid
+
+
+            
+            .instruccion.mt-5 Escribe en las dos primeras columnas las conjugaciones indicadas del verbo haber, y en la última columna, conjuga el verbo haber en presente y utiliza el participio pasado del verbo viajar.
+            .mt-3.ex3.text-center
+                .row.head
+                    .col-3 Pronombre
+                    .col-3 Presente
+                    .col-3 Pretérito imperfecto o copretérito
+                    .col-3 Pretérito perfecto compuesto o antepresente
+                .row.body
+                    .col-3 Yo
+                    .col-3: inputbox(v-model="r[10]" :ref="refCount()" @isright="right++" answer="he" type="text" placeh="-")
+                    .col-3 había
+                    .col-3 he viajado
+                .row.body
+                    .col-3 Tú
+                    .col-3 has
+                    .col-3 habías
+                    .col-3: inputbox(v-model="r[11]" :ref="refCount()" @isright="right++" answer="has viajado" type="text" placeh="-")
+                .row.body
+                    .col-3 Él, ella
+                    .col-3 ha
+                    .col-3: inputbox(v-model="r[12]" :ref="refCount()" @isright="right++" answer="había" type="text" placeh="-")
+                    .col-3 ha viajado
+                .row.body
+                    .col-3 Nosotros
+                    .col-3: inputbox(v-model="r[13]" :ref="refCount()" @isright="right++" answer="hemos" type="text" placeh="-")
+                    .col-3: inputbox(v-model="r[14]" :ref="refCount()" @isright="right++" answer="habíamos" type="text" placeh="-")
+                    .col-3 hemos viajado
+                .row.body
+                    .col-3 Ustedes
+                    .col-3: inputbox(v-model="r[15]" :ref="refCount()" @isright="right++" answer="han" type="text" placeh="-")
+                    .col-3: inputbox(v-model="r[16]" :ref="refCount()" @isright="right++" answer="habían" type="text" placeh="-")
+                    .col-3: inputbox(v-model="r[17]" :ref="refCount()" @isright="right++" answer="han viajado" type="text" placeh="-")
+                .row.body
+                    .col-3 Ellos, ellas
+                    .col-3 han
+                    .col-3 habían
+                    .col-3 han viajado
+
+
+
+
+
+
+
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

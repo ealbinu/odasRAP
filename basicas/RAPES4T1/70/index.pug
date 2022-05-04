@@ -1,0 +1,92 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+include ../../assets/pug/_crossword
+
+- title = 'Conozco el tipo de descripción'
+- subtitle = 'Describimos con finalidades diferentes'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .crowsswordmod .box {
+                width: 6.25%;
+                min-height: 30px;
+            }
+            .crowsswordmod .number {
+                background: var(--accent);
+            }
+            .crowsswordmod .inputbox input,
+            .crowsswordmod .inputbox textarea {
+                border: 1px dashed var(--accent);
+            }
+            .crowsswordmod .box {
+                outline: none;
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Contesta el siguiente crucigrama utilizando las palabras del recuadro. Observa el ejemplo.
+
+            recuadropalabras(:palabras="['Diferencias','Comportamiento','Físicas','Semejanzas','Atributos']" c=4)
+
+            .row.mt-3.ex1
+                .col-md-6
+                    numbers(c=4 smaller) Verticales
+                    labeltext(num="1.") Características de cosas o personas que sean diferentes a otras.
+                    labeltext(num="2.") Es la manera en que se indican varios elementos de un conjunto.
+                    labeltext(num="3.") Es la forma de explicar, de manera objetiva, los rasgos de una persona o cosa.
+                    numbers(c=4 smaller) Horizontales
+                    labeltext(num="4.") Es la forma en que expresamos cualidades de una persona o cosa.
+                    labeltext(num="5.") Características comunes de cosas o personas.
+                    labeltext(num="6.") Es la manera en que decimos cómo actúa el sujeto al que describimos.
+            
+                .col-md-6
+                    //PUG
+                    - var hor = []
+                    - var ver = []
+                    //[x,y,code,word, isexample]
+                    - ver.push([2, 4, '1', 'DIFERENCIAS'])
+                    - ver.push([8, 2, '2', 'PARTESDELTODO', true]) //example
+                    - ver.push([16, 1, '3', 'FÍSICAS'])
+
+                    - hor.push([7, 4, '4', 'ATRIBUTOS'])
+                    - hor.push([6, 10, '5', 'SEMEJANZAS'])
+                    - hor.push([1, 12, '6', 'COMPORTAMIENTO'])
+                    //v-modelcount, width, height, horizontalwords, verticalwords
+                    //v-modelcount, width, height, horizontalwords, verticalwords , test:true para modo debug
+                    +crosswordmod(0, 16,15, hor, ver)
+
+            .instruccion.mt-5  Con ayuda de la información del crucigrama, relaciona con una línea cada enunciado con la descripción que le corresponde.
+
+            .row.mt-3.ex2
+                .col
+                    relational(v-if="tempsobj.sources" v-model="d['relat']" :ref="refCount()" @isright="right++" :sources="tempsobj.sources" :targets="tempsobj.targets" :oks="tempsobj.oks")
+                        template(v-slot:source="{source}"): div.pa-2.text-center {{source.t}}
+                        template(v-slot:target="{target}"): numbers(c=2 smaller) {{target.t}}
+                    
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'sources', [
+                    {t: 'Los gatos son animales independientes y solitarios.'},
+                    {t: 'Sofía tiene los ojos grandes y la nariz chata.'},
+                    {t: 'Las ballenas jorobadas son similares en forma a las orcas.'},
+                ])
+                app.$set(app.tempsobj, 'targets', [
+                    {t: 'Física'},
+                    {t: 'Semejanzas'},
+                    {t: 'Comportamiento'},
+                ])
+                app.$set(app.tempsobj, 'oks', [
+                    ['s_0', 't_2'],
+                    ['s_1', 't_0'],
+                    ['s_2', 't_1'],
+                ])

@@ -1,0 +1,110 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Identifico las partes de un reporte</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      /*
+      .ex1 {}
+      */
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Identifico las partes de un reporte</h1>
+      <h2>Reflexiona sobre la encuesta</h2>
+      <div class="instruccion mt-5">Relaciona las columnas escribiendo en cada recuadro la letra correspondiente.</div>
+      <div class="row mt-3 ex1 trueorfalse left">
+        <div class="col-md-6 verticalrow">
+          <div class="common">
+            <labeltext num="A.">Reporte o informe.</labeltext>
+          </div>
+          <div class="common">
+            <labeltext num="B.">Introducción.</labeltext>
+          </div>
+          <div class="common">
+            <labeltext num="C.">Desarrollo.</labeltext>
+          </div>
+          <div class="common">
+            <labeltext num="D.">Conclusiones.</labeltext>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" answer="c" type="text" placeh="-">
+            <template v-slot:after="">
+              <div class="ml-3">En esta parte del texto se presentan las preguntas y sus resultados, además se pueden hacer gráficas o tablas.</div>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" answer="d" type="text" placeh="-">
+            <template v-slot:after="">
+              <div class="ml-3">En esta parte del texto se resumen los resultados, se interpreta la información y se valora si se cumplieron los propósitos.</div>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" answer="b" type="text" placeh="-">
+            <template v-slot:after="">
+              <div class="ml-3">En esta parte del texto se explican los propósitos de la encuesta y en cuál población se realizó.</div>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[3]" :ref="refCount()" @isright="right++" answer="a" type="text" placeh="-">
+            <template v-slot:after="">
+              <div class="ml-3">Es un documento que presenta los datos de una encuesta con el fin de informar.</div>
+            </template>
+          </inputbox>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Ordena los pasos para realizar un reporte o informe escribiendo del <strong>1</strong> al <strong>3</strong>.</div>
+      <div class="row mt-3 ex2 trueorfalse left">
+        <div class="col-12">
+          <div class="common">
+            <inputbox v-model="r[4]" :ref="refCount()" @isright="right++" answer="2" type="text" placeh="-">
+              <template v-slot:after="">
+                <div class="ml-3">Escribir las preguntas y los resultados del tema que se quiere investigar. En caso de ser necesario, se pueden presentar los datos o la información con el apoyo de tablas y gráficas.</div>
+              </template>
+            </inputbox>
+          </div>
+          <div class="common mt-2">
+            <inputbox v-model="r[5]" :ref="refCount()" @isright="right++" answer="3" type="text" placeh="-">
+              <template v-slot:after="">
+                <div class="ml-3">Explicar los resultados o la interpretación de los datos sobre el tema con la finalidad de informar.</div>
+              </template>
+            </inputbox>
+          </div>
+          <div class="common mt-2">
+            <inputbox v-model="r[6]" :ref="refCount()" @isright="right++" answer="1" type="text" placeh="-">
+              <template v-slot:after="">
+                <div class="ml-3">Describir cuáles son los propósitos de la encuesta y qué información se quiere obtener sobre un tema en específico.</div>
+              </template>
+            </inputbox>
+          </div>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

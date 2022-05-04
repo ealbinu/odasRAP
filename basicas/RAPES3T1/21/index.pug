@@ -1,0 +1,51 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Juego a describir cuentos'
+- subtitle = 'Producto final'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .inputbox{
+                justify-content: flex-start;
+            }
+            .trueorfalse .inputbox input{
+                margin-left: 0;
+            }
+            .inputbox input{
+                margin: 0 6px;
+                padding: 4px;
+                font-size: 1.4rem;
+            }
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Escribe #[strong V] si la oración es verdadera o #[strong F] si es falsa.
+
+            .col-12.trueorfalse
+                template(v-for="(i, index) in tempsobj.torf" v-if="tempsobj.torf")
+                    inputbox(v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i.v" type="text" placeh="-")
+                        template(v-slot:after="")
+                            labeltext {{i.t}}
+              
+            
+            
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'torf', [
+                    {v: 'V', t: 'Los adjetivos calificativos nos ayudan a conocer las características del sustantivo.'},
+                    {v: 'V', t: 'Para describir eventos que ya sucedieron en un cuento deben escribirse en pasado.'},
+                    {v: 'F', t: 'Los adverbios nos ayudan a conocer las cualidades y características de los sustantivos.'},
+                    {v: 'V', t: 'A las personas, los objetos o los animales que aparecen en los cuentos se les conoce como personajes.'},
+                    {v: 'V', t: 'Los adverbios modifican al verbo y pueden ir antes o después del mismo.'},
+                ])

@@ -1,0 +1,72 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])-->
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ordeno los sucesos importantes</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .parrafoinputs {
+          background: linear-gradient(#FDF8F1, #F5E9D7);
+          margin: 10px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          border: 2px solid #E8CC93;
+          padding: 20px;
+      }
+      .recuadropalabras {
+          background: #E7CC93;
+      }
+      .recuadropalabras strong {
+          background: #fff;
+          color: #887544;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Ordeno los sucesos importantes</h1>
+      <h2>Reconstruir los hechos</h2>
+      <div class="instruccion mt-5">Completa el texto con las expresiones de temporalidad que se encuentran en el recuadro.</div>
+      <recuadropalabras :palabras="['Antes','entonces','después','A la mañana siguiente','después de ese día','En el año']"></recuadropalabras>
+      <div class="row mt-3 ex1">
+        <div class="col-12">
+          <div class="parrafoinputs">
+            <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" :answer="'En el año'" type="text" placeh="-"></inputbox><span> 1492, un navegante genovés llamado Cristóbal Colón se hizo a la mar, no iba de viaje, no iba a pasear, pero tampoco sabía que a América iba a llegar. </span>
+            <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" :answer="'Antes'" type="text" placeh="-"></inputbox><span> de su viaje algunos creían que el océano se acabaría, </span>
+            <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" :answer="'entonces'" type="text" placeh="-"></inputbox><span> mostraría lo contrario en su travesía. </span><span><br>En Palos se embarcaría en una carabela maciza, en el nombre de Isabel de Castilla, y acompañado de los Pinzón, la aventura empezaría. Navegó durante semanas, pero </span>
+            <inputbox v-model="r[3]" :ref="refCount()" @isright="right++" :answer="'después'" type="text" placeh="-"></inputbox><span> de que todos la esperanza perdían, Triana gritó "tierra a la vista". </span>
+            <inputbox v-model="r[4]" :ref="refCount()" @isright="right++" :answer="'A la mañana siguiente'" type="text" placeh="-"></inputbox><span> de su barco bajaría, puso los pies en la tierra creyendo que eran las Indias, pero </span>
+            <inputbox v-model="r[5]" :ref="refCount()" @isright="right++" :answer="'después de ese día'" type="text" placeh="-"></inputbox><span> todos sabemos que Colón un nuevo continente encontraría. </span>
+          </div>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Completo palabras</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css"/>
+    <style>
+      .clickable {
+          background: #fff;
+          border-radius: 10px;
+          margin: 6px;
+          font-size: 1.4rem;
+          border: 2px solid var(--c3);
+          box-shadow: 4px 4px 0 var(--c4);
+      }
+      .clickable:nth-child(3n) {
+          box-shadow: 4px 4px 0 var(--c5);
+      }
+      .clickable:nth-child(3n+1) {
+          box-shadow: 4px 4px 0 var(--c6);
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- START-->
+      <scene v-if="currentScene==0" :key="0" start-scene="start-scene" @completed="sceneCompleted"></scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="5" scene-color="#ED1C25" @loaded="resetit">
+        <info type="seleccionar" title="Completo palabras" text="Selecciona la palabra que está escrita de manera correcta." textaudio="s/instruccion1.mp3" :autoplay="true"></info>
+        <activity>
+          <div class="row w100">
+            <div class="w10 ws20"><img class="w100" src="i/apple.png"/></div>
+          </div>
+          <div class="row w100 wrap mt-1">
+            <template v-for="(i, index) in temps.a">
+              <clickable ref="ex1" :key="'a'+index" :isok="i.v" simple-ok="simple-ok" initclass="pa-1" ext-validation="ext-validation" @itsok="checkclicks(true, 5)" @itserror="checkclicks(false, 5)">
+                <div>{{i.t}}</div>
+              </clickable>
+            </template>
+          </div>
+          <button class="button big animate__animated animate__flip" @click="verifyclicks(5, 'ex1')">Verificar</button>
+          <div class="row w100">
+            <div class="w10 ws20"><img class="w100" src="i/cheese.png"/></div>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="5" scene-color="#ED1C25" @loaded="resetit">
+        <info type="seleccionar" title="Completo palabras" text="Selecciona la palabra que está escrita de manera correcta." textaudio="s/instruccion1.mp3" :autoplay="false"></info>
+        <activity>
+          <div class="row w100 wrap mt-1">
+            <template v-for="(i, index) in temps.b">
+              <clickable ref="ex2" :key="'b'+index" :isok="i.v" simple-ok="simple-ok" initclass="pa-1" ext-validation="ext-validation" @itsok="checkclicks(true, 5)" @itserror="checkclicks(false, 5)">
+                <div>{{i.t}}</div>
+              </clickable>
+            </template>
+          </div>
+          <button class="button big animate__animated animate__flip" @click="verifyclicks(5, 'ex2')">Verificar</button>
+          <div class="row w100">
+            <div class="w20 ws30"><img class="w100" src="i/kid.png"/></div>
+          </div>
+        </activity>
+      </scene>
+      <!-- END-->
+      <scene v-if="currentScene==3" :key="3" end-scene="end-scene" :final-data="finalData"></scene>
+    </div>
+    <!-- CDNS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <!-- Fireworks-->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- Modulos-->
+    <script src="../../assets/modulos/sequence.js"></script>
+    <script src="../../assets/modulos/videoplayer.js"></script>
+    <script src="../../assets/modulos/popup.js"></script>
+    <script src="../../assets/modulos/number.js"></script>
+    <script src="../../assets/modulos/inputable.js"></script>
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/tooltiper.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/selectives.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/desplegar.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- Mainscript-->
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$devmode = false
+      
+      app.$set(app.temps, 'clickeds', 0)
+      
+      app.checkclicks = function (okerr, valids) {
+          if(okerr){
+              app.temps.clickeds++
+          } else {
+              app.temps.clickeds--
+          }
+      }
+      
+      app.verifyclicks = function (valids, refs) {
+          if(app.temps.clickeds == valids){
+              for(var i = 0; i < valids; i ++){
+                  EventBus.$emit('isok')
+              }
+          } else {
+              s_error.play()
+      
+              for(var r in app.$refs[refs]){
+                  var item = app.$refs[refs][r]
+                  if(!item.validateok && item.status){
+                      item.reset()
+                      app.temps.clickeds++
+                  }
+              }
+          }
+      
+      }
+      
+      app.resetit = function () {
+          app.temps.clickeds = 0
+      }
+      
+      app.$set(app.temps, 'a', [
+          {v: 1, t:'membrillo'},
+          {v: 0, t:'menvrillo'},
+          {v: 0, t:'mansana'},
+          {v: 1, t:'manzana'},
+          {v: 1, t:'ladrillo'},
+          {v: 0, t:'ladriyo'},
+          {v: 0, t:'cincero'},
+          {v: 1, t:'sincero'},
+          {v: 1, t:'queso'},
+          {v: 0, t:'keso'},
+      ])
+      
+      app.$set(app.temps, 'b', [
+      
+          {v: 0, t:'veso'},
+          {v: 1, t:'beso'},
+          {v: 1, t:'mañana'},
+          {v: 0, t:'mallana'},
+          {v: 1, t:'blanca'},
+          {v: 0, t:'vlanca'},
+          {v: 0, t:'vibo'},
+          {v: 1, t:'vivo'},
+          {v: 1, t:'cultivo'},
+          {v: 0, t:'cultibo'},
+      ])
+      
+      app.currentScene = 0
+      app.scenesCount = 2
+    </script>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Conozco las narraciones</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css"/>
+    <style>
+      .words .text {
+          background: rgba(255, 255, 255, 0.5);
+          padding: 10px;
+          margin: 10px 0;
+          border-radius: 10px;
+          box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+          line-height: 2;
+      }
+      .words .drop {
+          width: 30%;
+          height: 26px;
+          background: #fff;
+          display: inline-block;
+          vertical-align: middle;
+          box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+          border-radius: 4px;
+          margin-right: 4px;
+          text-align: center;
+      }
+      .words .drop .number{
+          font-size: 1rem;
+          line-height: 1.5;
+      }
+      .drag {
+         width: fit-content; width: -moz-fit-content;
+          height: auto;
+          margin: 10px;
+      }
+      .drags {
+          display: flex;
+          flex-wrap: wrap;
+      }
+      [wascloned] {
+          display: none;
+      }
+      .title .drop{
+          height: 40px;
+      }
+      @media (max-width:680px){
+          .words .text{
+              font-size: 0.6rem;
+              line-height: 1.4;
+          }
+          .words .drop{
+              width: 100%;
+          }
+          .drag .number{
+              font-size: 0.8rem;
+          }
+      }
+      
+      
+      
+      
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- START-->
+      <scene v-if="currentScene==0" :key="0" start-scene="start-scene" @completed="sceneCompleted"></scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="4" scene-color="#ED1C25">
+        <info type="dragdrop" title="Conozco las narraciones" text="Coloca las palabras que completen el texto." textaudio="s/instruccion1.mp3" :autoplay="true"></info>
+        <activity>
+          <div class="row w100">
+            <div class="w40"><img class="w100" src="i/a1.png"/></div>
+          </div>
+          <div class="row w100">
+            <div class="w60 words">
+              <div class="title">
+                <div class="drop" data="t" droptimes="untilok"></div>
+              </div>
+              <div class="text">Narración imaginaria en la que los
+                <div class="drop" data="t1" droptimes="untilok"></div>tienen características humanas.<br/>Su propósito es dar una
+                <div class="drop" data="t2" droptimes="untilok"></div>o un consejo, que se incluye en una frase o un mensaje llamado
+                <div class="drop" data="t3" droptimes="untilok"></div>.
+              </div>
+            </div>
+            <div class="w40 drags">
+              <drag ref="t3" data="t3" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
+                <number c="4" smaller="smaller">moraleja</number>
+              </drag>
+              <drag ref="t1" data="t1" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
+                <number c="4" smaller="smaller">animales</number>
+              </drag>
+              <drag ref="t4" data="t2" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
+                <number c="4" smaller="smaller">enseñanza</number>
+              </drag>
+              <drag ref="t2" data="t" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
+                <number c="4" small="small">Fábula</number>
+              </drag>
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="button big animate__animated animate__flip" @click="dragValidation(['t1','t2','t3','t4'], 4)">Verificar</button>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="3" scene-color="#ED1C25">
+        <info type="dragdrop" title="Conozco las narraciones" text="Coloca las palabras que completen el texto." textaudio="s/instruccion1.mp3" :autoplay="false"></info>
+        <activity>
+          <div class="row w100">
+            <div class="w40"><img class="w100" src="i/a2.png"/></div>
+          </div>
+          <div class="row w100">
+            <div class="w60 words">
+              <div class="title">
+                <number c="3" small="small">Leyenda</number>
+              </div>
+              <div class="text">Narración
+                <div class="drop" data="t1" droptimes="untilok"></div>de un hecho
+                <div class="drop" data="t2" droptimes="untilok"></div>o imaginario, en la que se explican sucesos importantes para una  
+                <div class="drop" data="t3" droptimes="untilok"></div>. 
+              </div>
+            </div>
+            <div class="w40 drags">
+              <drag ref="g1" data="t3" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
+                <number c="3" smaller="smaller">comunidad</number>
+              </drag>
+              <drag ref="g2" data="t1" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
+                <number c="3" smaller="smaller">popular</number>
+              </drag>
+              <drag ref="g3" data="t2" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
+                <number c="3" smaller="smaller">real</number>
+              </drag>
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="button big animate__animated animate__flip" @click="dragValidation(['g1','g2','g3'], 4)">Verificar</button>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="2" scene-color="#ED1C25">
+        <info type="dragdrop" title="Conozco las narraciones" text="Ahora, coloca en el pizarrón las características que debe tener un cuento." textaudio="s/instruccion2.mp3" :autoplay="true"></info>
+        <activity>
+          <div class="row w100">
+            <div class="w40 drags">
+              <drag ref="m1" data="yes" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
+                <number c="2" smaller="smaller">La narración debe ser breve.</number>
+              </drag>
+              <drag ref="m2" data="no" isfalse="isfalse" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
+                <number c="2" smaller="smaller">No hay personajes importantes.</number>
+              </drag>
+              <drag ref="m3" data="no" isfalse="isfalse" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
+                <number c="2" smaller="smaller">La narración debe ser muy larga.</number>
+              </drag>
+              <drag ref="m4" data="yes" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
+                <number c="2" smaller="smaller">Un personaje debe resolver un problema.</number>
+              </drag>
+              <drag ref="m5" data="no" isfalse="isfalse" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
+                <number c="2" smaller="smaller">Los animales son los personajes principales.</number>
+              </drag>
+            </div>
+            <div class="row w100">
+              <div class="w100 drop" data="yes" droptimes="multiple" droplimit="2"><img class="w100" src="i/b1.png"/></div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="button big animate__animated animate__flip" @click="dragValidation(['m1','m2','m3', 'm4','m5'], 2)">Verificar</button>
+          </div>
+        </activity>
+      </scene>
+      <!-- END-->
+      <scene v-if="currentScene==4" :key="4" end-scene="end-scene" :final-data="finalData"></scene>
+    </div>
+    <!-- CDNS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <!-- Fireworks-->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- Modulos-->
+    <script src="../../assets/modulos/sequence.js"></script>
+    <script src="../../assets/modulos/videoplayer.js"></script>
+    <script src="../../assets/modulos/popup.js"></script>
+    <script src="../../assets/modulos/number.js"></script>
+    <script src="../../assets/modulos/inputable.js"></script>
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/tooltiper.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/selectives.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/desplegar.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- Mainscript-->
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$devmode = false
+      app.$set(app.temps, 'a', [])
+      
+      app.currentScene = 0
+      app.scenesCount = 3
+    </script>
+  </body>
+</html>

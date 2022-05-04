@@ -1,0 +1,92 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+include ../../assets/pug/_crossword
+include ../../assets/pug/_table
+
+- title = 'Conozco los tiempos'
+- subtitle = ''
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .crowsswordmod .box {
+                width: 9.09%;
+                min-height: 30px;
+            }
+
+            .ex2 .tablemod .ix_0 .col {
+                background: var(--pastel4);
+                text-align: center;
+            }
+            .ex2 .tablemod .cl_0 {
+                background: var(--pastel3);
+            }
+            .ex2 .tablemod strong {
+                font-size: 0.8rem;
+                color: var(--clear);
+            }
+            @media (max-width: 680px) {
+                .ex2 .tablemod {
+                    font-size: 0.6rem;
+                }
+                .ex2 .tablemod strong {
+                    font-size: 0.4rem;
+                }
+                .ex2 .tablemod .inputbox input {
+                    padding: 0;
+                    font-size: 0.8rem;
+                }
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .row: .col-12: img(src="aimg/tecuento.png").w-100
+
+            .instruccion.mt-5 Para recordar algunos elementos de las narraciones, resuelve el siguiente crucigrama.
+
+            .row.mt-3.ex1
+                .col-md-6
+                    labeltext(num="1.") Aparecen en una obra literaria (personas, animales, etcétera).
+                    labeltext(num="2.") Es el espacio donde sucede la historia. Puede ser real o ficticio.
+                    labeltext(num="3.") Así se le llama a los personajes que prota- gonizan la historia, son los que realizan las acciones más importantes.
+                    labeltext(num="4.") Las acciones de estos personajes no son las más importantes de la historia; aunque aparecen en la trama, tienen una participación menor.
+            
+                .col-md-6
+                    //PUG
+                    - var hor = []
+                    - var ver = []
+
+                    - hor.push([1, 2, '1', 'PERSONAJES'])
+                    - hor.push([3, 5, '2', 'LUGAR'])
+
+                    - ver.push([2, 1, '3', 'PRINCIPALES'])
+                    - ver.push([5, 1, '4', 'SECUNDARIOS'])
+
+                    +crosswordmod(0, 11,12, hor, ver)
+
+
+            .instruccion.mt-5 Conjuga los verbos como se indica.
+
+            .row.mt-3.ex2
+                .col
+                    - var tb = []
+                    - tb.push(['Verbos', 'Presente', 'Pretérito perfecto', 'Pretérito imperfecto'])
+                    - tb.push([ 'Encontrar', '<strong>(yo)</strong> Encuentro', '<strong>(yo)</strong> Encontré', 'Encontraba'  ])
+                    - tb.push([ 'Estar', ['"estoy"', '<strong>(yo)</strong>'], ['"estuve"', '<strong>(yo)</strong>'], ['"estaba"']  ])
+                    - tb.push([ 'Ver', ['"ves"', '<strong>(tú)</strong>'], ['"viste"', '<strong>(tú)</strong>'], ['"veías"']  ])
+                    - tb.push([ 'Tomar', ['"tomas"', '<strong>(tú)</strong>'], ['"tomaste"', '<strong>(tú)</strong>'], ['"tomabas"']  ])
+                    - tb.push([ 'Correr', ['"corre"', '<strong>(él/ella)</strong>'], ['"corrió"', '<strong>(él/ella)</strong>'], ['"corría"']  ])
+                    - tb.push([ 'Colocar', ['"coloca"', '<strong>(él/ella)</strong>'], ['"colocó"', '<strong>(él/ella)</strong>'], ['"colocaba"']  ])
+                    +table(0, tb, true)
+                    // +table(vmmodel, camposVar, regulartext)
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

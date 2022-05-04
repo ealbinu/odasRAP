@@ -1,0 +1,161 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Transformo una ronda'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .canto, .canto2 {
+                flex-direction: column;
+                background: #DDD6E2;
+                padding: 10px 10px 40px;
+                border-radius: 8px;
+                box-shadow: 10px 10px 20px #D4C3BB;
+            }
+            .canto .h3, .canto2 .h3 {
+                color: #6A4287;
+                font-weight: bold;
+                text-align:center;
+                padding: 6px;
+                border-bottom: 2px solid #FCF4CE;
+            }
+            .canto .audiotext .audiotextTxt, .canto2 .audiotext .audiotextTxt {
+                font-size: 1.4rem;
+                line-height: 1.5;
+                justify-content: flex-start;
+            }
+            .canto .audiotext .audiotextTxt strong, .canto2 .audiotext .audiotextTxt strong {
+                color: #6A4287;
+            }
+            .customtxt {
+                margin-top: 20px;
+            }
+            .customtxt .audiotextTxt > div {
+                width: 100%;
+            }
+            .canto2 {
+                background: #FFAAAA;
+            }
+            .canto2 .audiotext .audiotextTxt strong {
+                color: #C5382F;
+            }
+            .canto2 .h3 {
+                color: #C5382F;
+            }
+            .drag {
+                width: auto;
+                height: auto;
+                padding: 6px;
+            }
+            .drop {
+                background: #fff;
+                max-width: 50%;
+                min-width: 20%;
+                height: 30px;
+                border-radius: 4px;
+                display: inline-block;
+                text-align: center;
+            }
+            .drop .number {
+                margin: 0;
+                padding: 0;
+                font-size: 1.2rem;
+                -webkit-text-stroke: 0;
+                color: #C5382F;
+                text-shadow: none !important;
+            }
+            @media (max-width:768px){
+                .canto .audiotext .audiotextTxt, .canto2 .audiotext .audiotextTxt {
+                    font-size: 0.9rem;
+                }
+                .canto .h3, .canto2 .h3{
+                    font-size: 1rem;
+                }
+                .drop{
+                    max-width: 70%;
+                    height: 20px;
+                }
+                .drop .number {
+                    font-size: 0.9rem;
+                }
+            }
+
+
+
+
+    body
+        #app
+            // START
+            scene(v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted")
+
+            // SCENES
+            scene(v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="dragdrop" title=title text="Lee y escucha la ronda." textaudio="s/instruccion1.mp3" :autoplay="true" @completedinstructions="$refs.canto1.play()")
+                activity
+                    .row.w40.wm80.canto
+                        .h3 El patio de mi casa
+                        audiotext(ref="canto1" audio="s/canto1.mp3" text=" El <strong>patio</strong> de mi casa <br> es <strong>particular</strong>. <br> Si llueve, se <strong>moja</strong> <br> como los demás. <br> <strong>Agáchate</strong>, <br> y vuélvete a agachar, <br> que todos los niños <br> quieren <strong>bailar</strong>." speed-offset="1.3" @completed="temps.canto1_btn = true")
+                    .text-center(v-if="temps.canto1_btn"): button(@click="sceneCompleted(false)").button.big.animate__animated.animate__flip Continuar
+            
+            // SCENES 2
+            scene(v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="5" scene-color="#ED1C25")
+                info(type="dragdrop" title=title text="Utiliza las palabras del recuadro y cambia las palabras de la ronda para hacer una nueva versión. " textaudio="s/instruccion2.mp3" :autoplay="true")
+                activity
+                    .row.w100.palabras.wrap
+                        drag(data="A" dropzone=".drop" stay-if-ok append-to-dropzone): number(c=1 smaller) enoja
+                        drag(data="B" dropzone=".drop" stay-if-ok append-to-dropzone): number(c=2 smaller) aparecer
+                        drag(data="C" dropzone=".drop" stay-if-ok append-to-dropzone): number(c=3 smaller) sensacional
+                        drag(data="D" dropzone=".drop" stay-if-ok append-to-dropzone): number(c=4 smaller) Escóndete
+                        drag(data="E" dropzone=".drop" stay-if-ok append-to-dropzone): number(c=5 smaller) gato
+                    .row
+                        .w40.wm50.canto
+                            .h3 El patio de mi casa
+                            .audiotext.customtxt
+                                .audiotextTxt
+                                    div El <strong>patio</strong> de mi casa
+                                    div es <strong>particular</strong>. 
+                                    div Si llueve, se <strong>moja</strong>
+                                    div como los demás.
+                                .audiotextTxt
+                                    div <strong>Agáchate</strong>, 
+                                    div y vuélvete a agachar, 
+                                    div que todos los niños 
+                                    div quieren <strong>bailar</strong>.
+                        .w40.wm50.canto2
+                            .h3 El gato de mi casa
+                            .audiotext.customtxt
+                                .audiotextTxt
+                                    div El <div class="drop" data="E" droptimes="untilok"></div> de mi casa
+                                    div es <div class="drop" data="C" droptimes="untilok"></div>. 
+                                    div Si llueve, se <div class="drop" data="A" droptimes="untilok"></div>
+                                    div como los demás.
+                                .audiotextTxt
+                                    div <div class="drop" data="D" droptimes="untilok"></div>, 
+                                    div y vuélvete a esconder, 
+                                    div que todos los niños 
+                                    div quieren <div class="drop" data="B" droptimes="untilok"></div>.
+            
+            // SCENES
+            scene(v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="dragdrop" title=title text="Escucha ahora cómo cambiaste la ronda." textaudio="s/instruccion3.mp3" :autoplay="true" @completedinstructions="$refs.canto2.play()")
+                activity
+                    .row.w40.wm80.canto2
+                        .h3 El gato de mi casa
+                        audiotext(ref="canto2" audio="s/canto2.mp3" text="El <strong>gato</strong> de mi casa <br> es <strong>sensacional</strong>. <br> Si llueve, se <strong>enoja</strong> <br> como los demás. <br> <strong>Escóndete</strong>, <br> y vuélvete a esconder, <br> que todos los niños <br> quieren <strong>aparecer</strong>." speed-offset="1.3" @completed="temps.canto2_btn = true")
+                    
+                    .text-center(v-if="temps.canto2_btn"): button(@click="sceneCompleted(false)").button.big.animate__animated.animate__flip Finalizar
+
+            // END
+            scene(v-if="currentScene==4" :key="4" end-scene :final-data="finalData")
+        
+        +scripts
+            script.
+
+                app.$devmode = false
+                app.$set(app.temps, 'canto1_btn', false)
+                app.$set(app.temps, 'canto2_btn', false)
+                
+                app.currentScene = 0
+                app.scenesCount = 1

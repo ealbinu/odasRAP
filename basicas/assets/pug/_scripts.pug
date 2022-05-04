@@ -1,0 +1,27 @@
+mixin scripts(extrascript)
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js")
+    script(src="https://unpkg.com/vue@2.6.11/dist/vue.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js")
+    
+    script(src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js")
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js")
+
+    script(src="../../assets/modulos/dragdropMod.js")
+    script(src="../../assets/modulos/dropdowns.js")
+    script(src="../../assets/modulos/selectable.js")
+    script(src="../../assets/modulos/selectableoptions.js")
+    script(src="../../assets/modulos/check.js")
+    script(src="../../assets/modulos/inputbox.js")
+    script(src="../../assets/modulos/choose.js")
+    script(src="../../assets/modulos/tip.js")
+    script(src="../../assets/modulos/relational.js")
+    script(src="../../assets/modulos/finalize.js")
+    script(src="../../assets/modulos/utils.js")
+    if extrascript
+        script(src=extrascript)
+
+    script(src="../../assets/assets.js")
+    if block
+        block

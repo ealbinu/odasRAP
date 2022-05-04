@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmo lo que aprendí</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style></style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Confirmo lo que aprendí</h1>
+
+
+        <div class="instruccion mt-5">Selecciona la respuesta correcta</div>
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <choose v-model="r[0]" ref="q0" num="1." text="Se utilizan al inicio de un escrito, después de un punto y en los nombres propios."
+                    :options="['Las comas', 'Las vocales', 'Las mayúsculas']" @isright="right++" answer="Las mayúsculas"></choose>
+                <choose v-model="r[1]" ref="q1" num="2." text="Es una historia con inicio, desarrollo y final."
+                    :options="['Cuento', 'Poema', 'Instructivo']" @isright="right++" answer="Cuento"></choose>
+                <choose v-model="r[2]" ref="q2" num="3." text="¿Cuál es la regla que permite cuidar los materiales de la biblioteca?"
+                    :options="['Levantar la mano', 'Evitar rayar los libros', 'Anotar mi nombre']" @isright="right++" answer="Evitar rayar los libros"></choose>
+                <choose v-model="r[3]" ref="q3" num="4." text="¿Qué deberías consultar para encontrar información sobre las abejas?"
+                    :options="['El diccionario', 'Un cuento', 'Un texto informativo']" @isright="right++" answer="Un texto informativo"></choose>
+                <choose v-model="r[4]" ref="q4" num="5." text="Son palabras que riman con mañana."
+                    :options="['anciana - cana', 'sol - nube', 'día - noche']" @isright="right++" answer="anciana - cana"></choose>
+                <choose v-model="r[5]" ref="q5" num="6." text="Es una característica que deben tener los carteles."
+                    :options="['Letra pequeña', 'Imágenes referentes al tema', 'Faltas de ortografía']" @isright="right++" answer="Imágenes referentes al tema"></choose>
+                <choose v-model="r[6]" ref="q6" num="7." text="Te ayuda a seguir los pasos para armar un objeto."
+                    :options="['Instructivo', 'Cartel', 'Invitación']" @isright="right++" answer="Instructivo"></choose>
+                <choose v-model="r[7]" ref="q7" num="8." text="Generalmente se compone por estrofas de cuatro versos con rima."
+                    :options="['Una adivinanza', 'Un cuento', 'Una copla']" @isright="right++" answer="Una copla"></choose>
+            </div>
+        </div>
+        
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

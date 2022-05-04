@@ -1,0 +1,101 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Reviso las notas informativas'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+
+
+    body
+        #app
+            // START
+            scene(v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted")
+
+            // SCENES
+            scene(v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Lee la nota informativa." textaudio="s/instruccion1.mp3" :autoplay="true")
+                activity
+                    .row.w100
+                        img(src="i/nota.png").w100
+                    .row.w100
+                        button(@click="sceneCompleted(false)").button.big Continuar
+            
+            // SCENES Preg 1
+            scene(v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora, elige la respuesta correcta." textaudio="s/instruccion2.mp3" :autoplay="true")
+                activity
+                    .row.w100.mb-1: img(src="i/nota.png").w80
+                    .row.w100.h4.mb-1 ¿Cuál es el nombre del periódico?
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.a" :key="index" :isok="index == 1" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            // SCENES Preg 2
+            scene(v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora, elige la respuesta correcta." textaudio="s/instruccion2.mp3" :autoplay="false")
+                activity
+                    .row.w100.mb-1: img(src="i/nota.png").w80
+                    .row.w100.h4.mb-1 ¿Cuál es el título de la nota informativa?
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.b" :key="index" :isok="index == 2" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            // SCENES Preg 3
+            scene(v-if="currentScene==4" :key="4" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora, elige la respuesta correcta." textaudio="s/instruccion2.mp3" :autoplay="false")
+                activity
+                    .row.w100.mb-1: img(src="i/nota.png").w80
+                    .row.w100.h4.mb-1 ¿De qué lugar habla la nota?
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.c" :key="index" :isok="index == 2" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            // SCENES Preg 4
+            scene(v-if="currentScene==5" :key="5" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora, elige la respuesta correcta." textaudio="s/instruccion2.mp3" :autoplay="false")
+                activity
+                    .row.w100.mb-1: img(src="i/nota.png").w80
+                    .row.w100.h4.mb-1 ¿Quién es el autor de la nota?
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.d" :key="index" :isok="index == 1" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            // SCENES Preg 5
+            scene(v-if="currentScene==6" :key="6" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora, elige la respuesta correcta." textaudio="s/instruccion2.mp3" :autoplay="false")
+                activity
+                    .row.w100.mb-1: img(src="i/nota.png").w80
+                    .row.w100.h4.mb-1 ¿Por qué el título de la nota es más grande y está resaltado?
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.e" :key="index" :isok="index == 2" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            // SCENES Preg 6
+            scene(v-if="currentScene==7" :key="7" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora, elige la respuesta correcta." textaudio="s/instruccion2.mp3" :autoplay="false")
+                activity
+                    .row.w100.mb-1: img(src="i/nota.png").w80
+                    .row.w100.h4.mb-1 ¿De qué otra forma podemos llamar al título de la noticia?
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.f" :key="index" :isok="index == 0" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            // SCENES Preg 7
+            scene(v-if="currentScene==8" :key="8" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora, elige la respuesta correcta." textaudio="s/instruccion2.mp3" :autoplay="false")
+                activity
+                    .row.w100.mb-1: img(src="i/notaMarca.png").w80
+                    .row.w100.h4.mb-1 ¿Cómo se le llama al texto que está encerrado en color rosa?
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.g" :key="index" :isok="index == 1" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            // SCENES Preg 8
+            scene(v-if="currentScene==9" :key="9" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Ahora, elige la respuesta correcta." textaudio="s/instruccion2.mp3" :autoplay="false")
+                activity
+                    .row.w100.mb-1: img(src="i/nota.png").w80
+                    .row.w100.h4 ¿Qué se informa en la noticia?
+                    .row.wrap.around: clickable(v-for="(i, index) in temps.h" :key="index" :isok="index == 1" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+           
+
+            // END
+            scene(v-if="currentScene==10" :key="10" end-scene :final-data="finalData")
+        
+        +scripts
+            script.
+
+                app.$devmode = false
+                app.$set(app.temps, 'a', ['La Noticia Importante.','La Nación Impresa.','El Periódico Nacional.'])
+                app.$set(app.temps, 'b', ['Media tonelada de basura llega a las calles.','Alumnos contaminan la calle.','Alumnos recogen media tonelada de basura.'])
+                app.$set(app.temps, 'c', ['De Sinaloa.','De Veracruz.','De Tampico.'])
+                app.$set(app.temps, 'd', ['José Roberto Méndez.','José Alfredo Mendieta.','Alfredo Luis Pérez.'])
+                app.$set(app.temps, 'e', ['Porque así queda más bonito.','Porque no tenían letra más pequeña.','Porque así se sabe de qué trata la noticia.'])
+                app.$set(app.temps, 'f', ['Encabezado.','Título mayor.','Cuerpo.'])
+                app.$set(app.temps, 'g', ['Encabezado.','Cuerpo.','Complemento.'])
+                app.$set(app.temps, 'h', [' Que los alumnos de primer grado serán los recolectores de basura de la ciudad.','Que los alumnos de primer grado junto con sus padres y maestros recolectaron basura en la ciudad.','Que los maestros pidieron a los alumnos de primer grado que recolectaran basura.'])
+                
+                app.currentScene = 0
+                app.scenesCount = 8

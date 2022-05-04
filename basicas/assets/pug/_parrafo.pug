@@ -1,0 +1,27 @@
+mixin parrafo(indexvmodel, campos, initclass)
+    - var vmcount = (typeof indexvmodel == 'string' ? 0 : indexvmodel)
+    .parrafoinputs(class=initclass)
+        each field in campos
+            if typeof field === 'object'
+                if typeof indexvmodel == 'string'
+                    inputbox(v-model="d['"+indexvmodel+(vmcount)+"']" :ref="refCount()" @isright="right++" answer=field[0] type="text" placeh="-")
+                        if field[1]
+                            template(v-slot:before=""): span=field[1]
+                        if field[2]
+                            template(v-slot:after=""): span=field[2]
+                else
+                    inputbox(v-model="r["+(vmcount)+"]" :ref="refCount()" @isright="right++" answer=field[0] type="text" placeh="-")
+                        if field[1]
+                            template(v-slot:before=""): span=field[1]
+                        if field[2]
+                            template(v-slot:after=""): span=field[2]
+                - vmcount++
+            else 
+                span !{field}
+
+
+//
+    - var arr = []
+    - arr.push('El ')
+    - arr.push(['comercio'])
+    +parrafo(0, arr)

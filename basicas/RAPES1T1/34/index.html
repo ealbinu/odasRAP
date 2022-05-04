@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaboro un reglamento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style></style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Elaboro un reglamento</h1>
+
+        <h2>El reglamento de la biblioteca del salón.</h2>
+
+        <div class="instruccion mt-5">Lee la siguiente lista de acciones y marca así <img src="../../assets/aimg/check.svg" class="animate__animated animate__heartBeat"> sólo las que ayudan al buen funcionamiento de una biblioteca.</div>
+        <div class="row mt-3">
+            <div class="col-sm-6"><check v-model="r[0]" ref="q0" num="1." @isright="right++" :answer="true" text="Tener un registro de los libros." /></div>
+            <div class="col-sm-6"><check v-model="r[1]" ref="q1" num="2." @isright="right++" :answer="false" text="Rayar los libros." /></div>
+            <div class="col-sm-6"><check v-model="r[2]" ref="q2" num="3." @isright="right++" :answer="false" text="Dejar los libros por todo el salón." /></div>
+            <div class="col-sm-6"><check v-model="r[3]" ref="q3" num="4." @isright="right++" :answer="true" text="Cuidar los libros." /></div>
+            <div class="col-sm-6"><check v-model="r[4]" ref="q4" num="5." @isright="right++" :answer="true" text="Colocar los libros en su lugar." /></div>
+            <div class="col-sm-6"><check v-model="r[5]" ref="q5" num="6." @isright="right++" :answer="false" text="Arrancar las hojas de los libros." /></div>
+            <div class="col-sm-6"><check v-model="r[6]" ref="q6" num="7." @isright="right++" :answer="false" text="Comer en el área de lectura." /></div>
+            <div class="col-sm-6"><check v-model="r[7]" ref="q7" num="8." @isright="right++" :answer="true" text="Mantener los libros ordenados." /></div>
+        </div>
+        
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

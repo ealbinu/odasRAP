@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 660 263" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-24164.9,-1709.74)">
+        <g transform="matrix(5.55556,0,0,5.55556,21791.3,0)">
+            <g transform="matrix(1,0,0,1,435.743,355.039)">
+                <path d="M0,-47.285C-4.697,-47.285 -8.504,-43.478 -8.504,-38.781L-8.504,-8.504C-8.504,-3.807 -4.697,0 0,0L101.698,0C106.395,0 110.202,-3.807 110.202,-8.504L110.202,-38.781C110.202,-43.478 106.395,-47.285 101.698,-47.285L0,-47.285Z" style="fill:rgb(231,242,222);fill-rule:nonzero;"/>
+            </g>
+        </g>
+        <g transform="matrix(5.55556,0,0,5.55556,21791.3,0)">
+            <text x="445.424px" y="335.466px" style="font-family:'ITCAvantGardeStd-Bk', 'ITC Avant Garde Gothic Std', sans-serif;font-weight:300;font-size:11px;fill:rgb(35,31,32);">Caminar<tspan x="492.239px " y="335.466px ">-</tspan>bailar<tspan x="525.162px " y="335.466px ">.</tspan></text>
+        </g>
+    </g>
+</svg>

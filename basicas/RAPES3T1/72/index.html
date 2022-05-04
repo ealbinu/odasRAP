@@ -1,0 +1,119 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Uso el sentido figurado y literal</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .instruccion strong.main {
+          color: #6CB743;
+      }
+      .coloring {
+          background: #f5f5f5;
+          border-radius: 10px;
+          border: 2px solid #fff;
+      }
+      .coloring.col_A {
+          background: var(--accent);
+      }
+      .coloring.col_V {
+          background: #6CB743;
+      }
+      .coloring .options {
+          padding: 0;
+          margin: 0;
+      }
+      .coloring .options div {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          border: 4px solid #fff;
+          border-radius: 50%;
+          text-indent: -9999px;
+          overflow: hidden;
+      }
+      .coloring .options div.active {
+          border: 4px solid #fff;
+      }
+      .coloring .options div:first-child {
+          background: var(--accent);
+      }
+      .coloring .options div:last-child {
+          background: #6CB743;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Uso el sentido figurado y literal</h1>
+      <h2>Práctica 8. Leer poemas. Lo que conozco</h2>
+      <div class="instruccion mt-5">Marca así <checkmark></checkmark> las oraciones que son correctas.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-12">
+          <template v-for="(i, index) in tempsobj.ex1" v-if="tempsobj.ex1">
+            <check v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i.isok" :text="i.t"></check>
+          </template>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Colorea de <strong class="accent">anaranjado</strong> las oraciones que están en sentido figurado y de <strong class="main">verde</strong> las oraciones que están en sentido literal.</div>
+      <div class="row mt-3 ex2 centerrow">
+        <div class="col-md-8">
+          <div class="row">
+            <template v-for="(i, index) in tempsobj.ex2" v-if="tempsobj.ex2">
+              <div class="col-6 coloring" :class="'col_'+r[index+5]">
+                <choose v-model="r[index+5]" :ref="refCount()" :text="i.t" :options="['A','V']" @isright="right++" :answer="i.col"></choose>
+              </div>
+            </template>
+          </div>
+        </div>
+        <div class="col-md"><img class="img-fluid" src="aimg/ojos.png" alt=""/></div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$set(app.tempsobj, 'ex1', [
+          { isok: true, t: 'El sentido figurado se utiliza para dar significados distintos a los correspondientes.'},
+          { isok: true, t: 'Cuando usamos las palabras como indican lo que significan exactamente, nos referimos al sentido literal.'},
+          { isok: false, t: 'Los poemas no utilizan el sentido figurado para expresar ideas.'},
+          { isok: true, t: 'El sentido literal se utiliza más en los textos explicativos.'},
+          { isok: true, t: 'El sentido figurado puede servir en la poesía para expresar emociones.'}
+      ])
+      
+      app.$set(app.tempsobj, 'ex2', [
+          {col: 'A', t: 'Tus ojos azules como el mar.' },
+          {col: 'V', t: 'Tus ojos son de color azul.' },
+          {col: 'V', t: 'Siento nervios por conocer a esa persona.' },
+          {col: 'A', t: 'Mi corazón explota de emoción por conocerte.' },
+          {col: 'V', t: 'Me duele el estómago por estar nervioso.' },
+          {col: 'A', t: 'Siento mariposas en el estómago.' },
+          {col: 'V', t: 'Quiero decirte que te quiero demasiado.' },
+          {col: 'A', t: ' Te quiero con todo mi corazón y las fuerzas del mundo.' },
+      ])
+    </script>
+  </body>
+</html>

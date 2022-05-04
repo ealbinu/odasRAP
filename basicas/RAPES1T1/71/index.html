@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuido la biblioteca</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+
+        .selectableoptions {
+            width: 100%;
+            max-width: 160px;
+            margin: 4% auto;
+            background: #fff;
+
+            text-align: center;
+        }
+        .selectableoptions img {
+            max-width: 30px;
+            margin: 5px auto;
+        }
+        .theimg{
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Cuido la biblioteca</h1>
+
+        <!-- <img src="../../assets/aimg/check.svg" class="animate__animated animate__heartBeat"> -->
+        <div class="instruccion mt-5">Marca así <span><img src="aimg/markcheck.svg" /></span> las acciones que sirven para mantener la biblioteca ordenada y así <span><img src="aimg/markerr.svg" /></span> las que no.</div>
+        <div class="row mt-3 imgs2">
+            <template v-for="(i, index) in [
+            {val: 'm', img: 'a1.svg'},
+            {val: 't', img: 'a2.svg'},
+            {val: 'm', img: 'a3.svg'},
+            {val: 't', img: 'a4.svg'},
+            ]">
+            <div class="col-6 text-center mb-5">
+                <img :src="'aimg/'+i.img" class="img-fluid theimg ">
+                <selectableoptions v-model="r[index]" :ref="'q'+(index)" @isright="right++" :answer="i.val" :options="[{val:'t', img:'aimg/markerr.svg'},  {val:'m', img:'aimg/markcheck.svg'}]" customclass="col-6">
+                    <template v-slot:option="{option}">
+                        <img :src="option.img" class="img-fluid">
+                    </template>
+                </selectableoptions>
+                </div>
+            </template>
+        </div>
+
+        
+
+
+        
+        
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>
