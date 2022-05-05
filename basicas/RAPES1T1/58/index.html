@@ -28,52 +28,24 @@
     <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
       <h1>Conozco canciones populares</h1>
       <h2>Tiempo de leer / Aprendamos a leer y escribir</h2>
-      <div class="instruccion mt-5">Lee los fragmentos de estas canciones populares mexicanas y encierra las rimas que encuentres.</div>
+      <div class="instruccion mt-5">Lee las siguientes canciones y colorea las palabras que terminan igual.</div>
       <div class="row mt-3 ex1">
         <div class="col-md-6 mt-3">
           <div class="common">
-            <div class="h3">Naranja dulce</div>
-            <div>Naranja dulce,</div>
-            <div>limón
-              <selectable :isok="true" v-model="r[0]" :ref="refCount()" @isright="right++">partido</selectable>,
+            <div class="h3">Vamos a la cama</div>
+            <div>Vamos a la 
+              <selectable :isok="true" v-model="r[0]" :ref="refCount()" @isright="right++">cama</selectable>
             </div>
-            <div>dame un abrazo</div>
-            <div>que yo te 
-              <selectable :isok="true" v-model="r[1]" :ref="refCount()" @isright="right++">pido</selectable>.
+            <div>que hay que 
+              <selectable :isok="true" v-model="r[1]" :ref="refCount()" @isright="right++">descansar</selectable>
             </div>
-          </div>
-          <div class="common mt-3">
-            <div class="h3">A la víbora de la mar</div>
-            <div>Una mexicana</div>
-            <div>que frutas 
-              <selectable :isok="true" v-model="r[2]" :ref="refCount()" @isright="right++">vendía</selectable>:
+            <div>para que 
+              <selectable :isok="true" v-model="r[0]" :ref="refCount()" @isright="right++">mañana</selectable>
             </div>
-            <div>ciruela, chabacano,</div>
-            <div>melón o 
-              <selectable :isok="true" v-model="r[3]" :ref="refCount()" @isright="right++">sandía</selectable>.
+            <div>podamos
+              <selectable :isok="true" v-model="r[1]" :ref="refCount()" @isright="right++">madrugar.</selectable>
             </div>
           </div>
-        </div>
-        <div class="col-md-6 mt-3">
-          <div class="common">
-            <div class="h3">Aserrín, aserrán</div>
-            <div>Aserrín, 
-              <selectable :isok="true" v-model="r[4]" :ref="refCount()" @isright="right++">aserrán</selectable>.
-            </div>
-            <div>Los maderos de 
-              <selectable :isok="true" v-model="r[5]" :ref="refCount()" @isright="right++">San Juan</selectable>
-            </div>
-            <div>piden 
-              <selectable :isok="true" v-model="r[6]" :ref="refCount()" @isright="right++">queso</selectable>,
-            </div>
-            <div>les dan un 
-              <selectable :isok="true" v-model="r[7]" :ref="refCount()" @isright="right++">hueso</selectable>
-            </div>
-            <div>que se les atora</div>
-            <div>en el 
-              <selectable :isok="true" v-model="r[8]" :ref="refCount()" @isright="right++">pescuezo</selectable>.
-            </div>
-          </div><img class="mt-3 img-fluid" src="aimg/a.png"/>
         </div>
       </div>
       <div class="instruccion mt-5">Completa las rimas con las palabras del recuadro.</div>
