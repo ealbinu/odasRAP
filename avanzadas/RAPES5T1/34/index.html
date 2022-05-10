@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Conozco las narraciones</title>
+    <title>Las fabulosas fábulas</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
     <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
@@ -19,7 +19,7 @@
           line-height: 2;
       }
       .words .drop {
-          width: 30%;
+          width: auto;
           height: 26px;
           background: #fff;
           display: inline-block;
@@ -29,6 +29,11 @@
           margin-right: 4px;
           text-align: center;
       }
+      
+      .words .drop:empty{
+          width: 30%;
+      }
+      
       .words .drop .number{
           font-size: 1rem;
           line-height: 1.5;
@@ -72,110 +77,49 @@
       <scene v-if="currentScene==0" :key="0" start-scene="start-scene" @completed="sceneCompleted"></scene>
       <!-- SCENES-->
       <scene v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="4" scene-color="#ED1C25">
-        <info type="dragdrop" title="Conozco las narraciones" text="Coloca las palabras que completen el texto." textaudio="s/instruccion1.mp3" :autoplay="true"></info>
+        <info type="dragdrop" title="Las fabulosas fábulas" text="Coloca las palabras que completen el texto." textaudio="s/instruccion1.mp3" :autoplay="true"></info>
         <activity>
-          <div class="row w100">
-            <div class="w40"><img class="w100" src="i/a1.png"/></div>
-          </div>
           <div class="row w100">
             <div class="w60 words">
-              <div class="title">
-                <div class="drop" data="t" droptimes="untilok"></div>
+              <div class="text">Son relatos en los que al final se da 
+                <div class="drop" data="t0" droptimes="untilok"></div> que se llama 
+                <div class="drop" data="t1" droptimes="untilok"></div>
               </div>
-              <div class="text">Narración imaginaria en la que los
-                <div class="drop" data="t1" droptimes="untilok"></div>tienen características humanas.<br/>Su propósito es dar una
-                <div class="drop" data="t2" droptimes="untilok"></div>o un consejo, que se incluye en una frase o un mensaje llamado
-                <div class="drop" data="t3" droptimes="untilok"></div>.
+              <div class="text">Los  
+                <div class="drop" data="t2" droptimes="untilok"></div> generalmente son  
+                <div class="drop" data="t3" droptimes="untilok"></div> que hablan y actúan como personas.
               </div>
-            </div>
-            <div class="w40 drags">
-              <drag ref="t3" data="t3" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
-                <number c="4" smaller="smaller">moraleja</number>
-              </drag>
-              <drag ref="t1" data="t1" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
-                <number c="4" smaller="smaller">animales</number>
-              </drag>
-              <drag ref="t4" data="t2" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
-                <number c="4" smaller="smaller">enseñanza</number>
-              </drag>
-              <drag ref="t2" data="t" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
-                <number c="4" small="small">Fábula</number>
-              </drag>
-            </div>
-          </div>
-          <div class="text-center">
-            <button class="button big animate__animated animate__flip" @click="dragValidation(['t1','t2','t3','t4'], 4)">Verificar</button>
-          </div>
-        </activity>
-      </scene>
-      <!-- SCENES-->
-      <scene v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="3" scene-color="#ED1C25">
-        <info type="dragdrop" title="Conozco las narraciones" text="Coloca las palabras que completen el texto." textaudio="s/instruccion1.mp3" :autoplay="false"></info>
-        <activity>
-          <div class="row w100">
-            <div class="w40"><img class="w100" src="i/a2.png"/></div>
-          </div>
-          <div class="row w100">
-            <div class="w60 words">
-              <div class="title">
-                <number c="3" small="small">Leyenda</number>
+              <div class="text">Pueden estar escritas en prosa o en  
+                <div class="drop" data="t4" droptimes="untilok"></div>.
               </div>
-              <div class="text">Narración
-                <div class="drop" data="t1" droptimes="untilok"></div>de un hecho
-                <div class="drop" data="t2" droptimes="untilok"></div>o imaginario, en la que se explican sucesos importantes para una  
-                <div class="drop" data="t3" droptimes="untilok"></div>. 
+              <div class="text">Presentan en su estructura la situación inicial y luego un  
+                <div class="drop" data="t5" droptimes="untilok"></div> que algunas veces tiene  
+                <div class="drop" data="t6" droptimes="untilok"></div> y otras no.
+              </div>
+              <div class="text">En las fábulas se critica 
+                <div class="drop" data="t7" droptimes="untilok"></div> negativo del ser humano como la envidia, la avaricia y  
+                <div class="drop" data="t8" droptimes="untilok"></div>, entre otros, y se elogian las características positivas, como  
+                <div class="drop" data="t9" droptimes="untilok"></div> y  
+                <div class="drop" data="t10" droptimes="untilok"></div>.
               </div>
             </div>
-            <div class="w40 drags">
-              <drag ref="g1" data="t3" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
-                <number c="3" smaller="smaller">comunidad</number>
-              </drag>
-              <drag ref="g2" data="t1" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
-                <number c="3" smaller="smaller">popular</number>
-              </drag>
-              <drag ref="g3" data="t2" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
-                <number c="3" smaller="smaller">real</number>
-              </drag>
+            <div class="w40">
+              <div class="drags">
+                <template v-for="(item,index) in temps.a">
+                  <drag :ref="'t'+item.v" :data="'t'+item.v" dropzone=".drop" stay-if-ok="stay-if-ok" append-clone="append-clone" extval="extval">
+                    <number c="4" smaller="smaller">{{item.t}}</number>
+                  </drag>
+                </template>
+              </div>
+              <div class="text-center">
+                <button class="button big animate__animated animate__flip" @click="dragValidation(['t0', 't1','t2','t3','t4', 't5', 't6', 't7', 't8', 't9','t10'], 4)">Verificar</button>
+              </div>
             </div>
-          </div>
-          <div class="text-center">
-            <button class="button big animate__animated animate__flip" @click="dragValidation(['g1','g2','g3'], 4)">Verificar</button>
-          </div>
-        </activity>
-      </scene>
-      <!-- SCENES-->
-      <scene v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="2" scene-color="#ED1C25">
-        <info type="dragdrop" title="Conozco las narraciones" text="Ahora, coloca en el pizarrón las características que debe tener un cuento." textaudio="s/instruccion2.mp3" :autoplay="true"></info>
-        <activity>
-          <div class="row w100">
-            <div class="w40 drags">
-              <drag ref="m1" data="yes" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
-                <number c="2" smaller="smaller">La narración debe ser breve.</number>
-              </drag>
-              <drag ref="m2" data="no" isfalse="isfalse" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
-                <number c="2" smaller="smaller">No hay personajes importantes.</number>
-              </drag>
-              <drag ref="m3" data="no" isfalse="isfalse" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
-                <number c="2" smaller="smaller">La narración debe ser muy larga.</number>
-              </drag>
-              <drag ref="m4" data="yes" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
-                <number c="2" smaller="smaller">Un personaje debe resolver un problema.</number>
-              </drag>
-              <drag ref="m5" data="no" isfalse="isfalse" dropzone=".drop" stay-if-ok="stay-if-ok" extval="extval">
-                <number c="2" smaller="smaller">Los animales son los personajes principales.</number>
-              </drag>
-            </div>
-            <div class="row w100">
-              <div class="w100 drop" data="yes" droptimes="multiple" droplimit="2"><img class="w100" src="i/b1.png"/></div>
-            </div>
-          </div>
-          <div class="text-center">
-            <button class="button big animate__animated animate__flip" @click="dragValidation(['m1','m2','m3', 'm4','m5'], 2)">Verificar</button>
           </div>
         </activity>
       </scene>
       <!-- END-->
-      <scene v-if="currentScene==4" :key="4" end-scene="end-scene" :final-data="finalData"></scene>
+      <scene v-if="currentScene==2" :key="2" end-scene="end-scene" :final-data="finalData"></scene>
     </div>
     <!-- CDNS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
@@ -210,10 +154,22 @@
     <script src="../../assets/assets.js"></script>
     <script>
       app.$devmode = false
-      app.$set(app.temps, 'a', [])
+      app.$set(app.temps, 'a', [
+          {   v:2, t:'personajes' },
+          {   v:1, t:'moraleja' },
+          {   v:3, t:'animales o cosas' },
+          {   v:0, t:'una enseñanza o un consejo' },
+          {   v:4, t:'verso' },
+          {   v:5, t:'problema' },
+          {   v:6, t:'solución' },
+          {   v:8, t:'la mentira' },
+          {   v:10, t:'la tenacidad' },
+          {   v:7, t:'el comportamiento' },
+          {   v:9, t:'la honradez' }
+      ])
       
       app.currentScene = 0
-      app.scenesCount = 3
+      app.scenesCount = 1
     </script>
   </body>
 </html>

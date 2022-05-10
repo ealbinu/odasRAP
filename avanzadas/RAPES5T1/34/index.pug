@@ -1,7 +1,7 @@
 include ../../assets/pug/_head
 include ../../assets/pug/_scripts
 
-- title = 'Conozco las narraciones'
+- title = 'Las fabulosas fábulas'
 
 <!DOCTYPE html>
 html(lang="es")
@@ -16,7 +16,7 @@ html(lang="es")
                 line-height: 2;
             }
             .words .drop {
-                width: 30%;
+                width: auto;
                 height: 26px;
                 background: #fff;
                 display: inline-block;
@@ -26,6 +26,11 @@ html(lang="es")
                 margin-right: 4px;
                 text-align: center;
             }
+
+            .words .drop:empty{
+                width: 30%;
+            }
+
             .words .drop .number{
                 font-size: 1rem;
                 line-height: 1.5;
@@ -70,78 +75,74 @@ html(lang="es")
             scene(v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="4" scene-color="#ED1C25")
                 info(type="dragdrop" title=title text="Coloca las palabras que completen el texto." textaudio="s/instruccion1.mp3" :autoplay="true")
                 activity
-                    .row.w100: .w40: img(src="i/a1.png").w100
 
                     .row.w100
                         .w60.words
-                            .title: .drop(data="t" droptimes="untilok")
                             .text
-                                | Narración imaginaria en la que los
+                                | Son relatos en los que al final se da 
+                                .drop(data="t0" droptimes="untilok")
+                                |  que se llama 
                                 .drop(data="t1" droptimes="untilok")
-                                | tienen características humanas.
-                                br
-                                | Su propósito es dar una
+                            .text
+                                | Los  
                                 .drop(data="t2" droptimes="untilok")
-                                | o un consejo, que se incluye en una frase o un mensaje llamado
+                                |  generalmente son  
                                 .drop(data="t3" droptimes="untilok")
-                                |.
-                        .w40.drags
-                            drag(ref="t3" data="t3" dropzone=".drop" stay-if-ok append-clone extval): number(c=4 smaller) moraleja
-                            drag(ref="t1" data="t1" dropzone=".drop" stay-if-ok append-clone extval): number(c=4 smaller) animales
-                            drag(ref="t4" data="t2" dropzone=".drop" stay-if-ok append-clone extval): number(c=4 smaller) enseñanza
-                            drag(ref="t2" data="t" dropzone=".drop" stay-if-ok append-clone extval): number(c=4 small) Fábula
+                                |  que hablan y actúan como personas.
+                            .text
+                                | Pueden estar escritas en prosa o en  
+                                .drop(data="t4" droptimes="untilok")
+                                | .
+                            .text
+                                | Presentan en su estructura la situación inicial y luego un  
+                                .drop(data="t5" droptimes="untilok")
+                                |  que algunas veces tiene  
+                                .drop(data="t6" droptimes="untilok")
+                                |  y otras no.
+                            .text
+                                | En las fábulas se critica 
+                                .drop(data="t7" droptimes="untilok")
+                                |  negativo del ser humano como la envidia, la avaricia y  
+                                .drop(data="t8" droptimes="untilok")
+                                | , entre otros, y se elogian las características positivas, como  
+                                .drop(data="t9" droptimes="untilok")
+                                |  y  
+                                .drop(data="t10" droptimes="untilok")
+                                | .
 
-                    .text-center: button(@click="dragValidation(['t1','t2','t3','t4'], 4)").button.big.animate__animated.animate__flip Verificar
+
+
+
+                            
+                        .w40
+                            .drags
+                                template(v-for="(item,index) in temps.a")
+                                    drag(:ref="'t'+item.v" :data="'t'+item.v" dropzone=".drop" stay-if-ok append-clone extval): number(c=4 smaller) {{item.t}}
+                            
+                            .text-center: button(@click="dragValidation(['t0', 't1','t2','t3','t4', 't5', 't6', 't7', 't8', 't9','t10'], 4)").button.big.animate__animated.animate__flip Verificar
 
             
-            // SCENES
-            scene(v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="3" scene-color="#ED1C25")
-                info(type="dragdrop" title=title text="Coloca las palabras que completen el texto." textaudio="s/instruccion1.mp3" :autoplay="false")
-                activity
-                    .row.w100: .w40: img(src="i/a2.png").w100
-
-                    .row.w100
-                        .w60.words
-                            .title: number(c=3 small) Leyenda
-                            .text
-                                | Narración
-                                .drop(data="t1" droptimes="untilok")
-                                | de un hecho
-                                .drop(data="t2" droptimes="untilok")
-                                | o imaginario, en la que se explican sucesos importantes para una  
-                                .drop(data="t3" droptimes="untilok")
-                                | . 
-                        .w40.drags
-                            drag(ref="g1" data="t3" dropzone=".drop" stay-if-ok append-clone extval): number(c=3 smaller) comunidad
-                            drag(ref="g2" data="t1" dropzone=".drop" stay-if-ok append-clone extval): number(c=3 smaller) popular
-                            drag(ref="g3" data="t2" dropzone=".drop" stay-if-ok append-clone extval): number(c=3 smaller) real
-
-                    .text-center: button(@click="dragValidation(['g1','g2','g3'], 4)").button.big.animate__animated.animate__flip Verificar
-
-            // SCENES
-            scene(v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="2" scene-color="#ED1C25")
-                info(type="dragdrop" title=title text="Ahora, coloca en el pizarrón las características que debe tener un cuento." textaudio="s/instruccion2.mp3" :autoplay="true")
-                activity
-                    .row.w100
-                        .w40.drags
-                            drag(ref="m1" data="yes" dropzone=".drop" stay-if-ok extval): number(c=2 smaller) La narración debe ser breve.
-                            drag(ref="m2" data="no" isfalse dropzone=".drop" stay-if-ok  extval): number(c=2 smaller) No hay personajes importantes.
-                            drag(ref="m3" data="no" isfalse dropzone=".drop" stay-if-ok  extval): number(c=2 smaller) La narración debe ser muy larga.
-                            drag(ref="m4" data="yes" dropzone=".drop" stay-if-ok extval): number(c=2 smaller) Un personaje debe resolver un problema.
-                            drag(ref="m5" data="no" isfalse dropzone=".drop" stay-if-ok extval): number(c=2 smaller) Los animales son los personajes principales.
-                        .row.w100: .w100.drop(data="yes" droptimes="multiple" droplimit="2"): img(src="i/b1.png").w100
-
-                    .text-center: button(@click="dragValidation(['m1','m2','m3', 'm4','m5'], 2)").button.big.animate__animated.animate__flip Verificar
-
-
+            
             // END
-            scene(v-if="currentScene==4" :key="4" end-scene :final-data="finalData")
+            scene(v-if="currentScene==2" :key="2" end-scene :final-data="finalData")
         
         +scripts
             script.
 
                 app.$devmode = false
-                app.$set(app.temps, 'a', [])
+                app.$set(app.temps, 'a', [
+                    {   v:2, t:'personajes' },
+                    {   v:1, t:'moraleja' },
+                    {   v:3, t:'animales o cosas' },
+                    {   v:0, t:'una enseñanza o un consejo' },
+                    {   v:4, t:'verso' },
+                    {   v:5, t:'problema' },
+                    {   v:6, t:'solución' },
+                    {   v:8, t:'la mentira' },
+                    {   v:10, t:'la tenacidad' },
+                    {   v:7, t:'el comportamiento' },
+                    {   v:9, t:'la honradez' }
+                ])
                 
                 app.currentScene = 0
-                app.scenesCount = 3
+                app.scenesCount = 1
