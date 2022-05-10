@@ -1,0 +1,80 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Las colecciones</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      /*
+      .ex1 {}
+      */
+      .relational img{
+          max-width: 160px;
+      }
+      .relational .numbers{
+          margin: 5px 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Las colecciones</h1>
+      <div class="instruccion mt-5">Cuenta los elementos de cada colección y une con una línea el número que les corresponda de acuerdo a su cantidad.</div>
+      <div class="row mt-3">
+        <div class="col-12">
+          <relational v-if="tempsobj.sources" v-model="d['rela']" :ref="refCount()" @isright="right++" :sources="tempsobj.sources" :targets="tempsobj.targets" :oks="tempsobj.oks">
+            <template v-slot:source="{source}"><img class="img-fluid" :src="source.i"/></template>
+            <template v-slot:target="{target}">
+              <numbers c="1"> {{target.t}}</numbers>
+            </template>
+          </relational>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+       app.$set(app.tempsobj, 'sources', [
+           {i: 'i/a1.png'},
+           {i: 'i/a2.png'},
+           {i: 'i/a3.png'},
+           {i: 'i/a4.png'}
+       ])
+       app.$set(app.tempsobj, 'targets', [
+           {t: '6'},
+           {t: '9'},
+           {t: '5'},
+           {t: '4'}
+       ])
+      app.$set(app.tempsobj, 'oks', [
+           ['s_0', 't_2'],
+           ['s_1', 't_0'],
+           ['s_2', 't_3'],
+           ['s_3', 't_1'],
+      ])
+    </script>
+  </body>
+</html>

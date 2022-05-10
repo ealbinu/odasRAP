@@ -1,0 +1,60 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Las colecciones'
+- subtitle = ''
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            /*
+            .ex1 {}
+            */
+            .relational img{
+                max-width: 160px;
+            }
+            .relational .numbers{
+                margin: 5px 40px;
+            }
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Cuenta los elementos de cada colección y une con una línea el número que les corresponda de acuerdo a su cantidad.
+
+            .row.mt-3
+                .col-12
+                    relational(v-if="tempsobj.sources" v-model="d['rela']" :ref="refCount()" @isright="right++" :sources="tempsobj.sources" :targets="tempsobj.targets" :oks="tempsobj.oks")
+                        template(v-slot:source="{source}"): img(:src="source.i").img-fluid
+                        template(v-slot:target="{target}"): numbers(c="1")  {{target.t}}
+                        
+            
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'sources', [
+                    {i: 'i/a1.png'},
+                    {i: 'i/a2.png'},
+                    {i: 'i/a3.png'},
+                    {i: 'i/a4.png'}
+                ])
+                app.$set(app.tempsobj, 'targets', [
+                    {t: '6'},
+                    {t: '9'},
+                    {t: '5'},
+                    {t: '4'}
+                ])
+               app.$set(app.tempsobj, 'oks', [
+                    ['s_0', 't_2'],
+                    ['s_1', 't_0'],
+                    ['s_2', 't_3'],
+                    ['s_3', 't_1'],
+               ])
