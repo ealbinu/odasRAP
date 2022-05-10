@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sé cuántos faltan</title>
+    <title>Dime si son iguales</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/font/stylesheet.css">
@@ -76,7 +76,7 @@
                 r: [[2, false], [5, false], [3, true], [6, false]  ] },
             { in: 3, p: '¿Cuántos pastelitos se necesitan hacer ahora para tener 20? Elige la respuesta correcta.', s: 'instruccion2.mp3',
                 r: [[12, false], [9, false], [2, false], [8, true]  ] },
-            { in: 4, p: 'Si ahora se tienen 20 pastelitos y la mamá y la hija se comen 3 pastelitos cada uno, ¿cuántos pastelitos quedan?', s: 'instruccion3.mp3',
+            { in: 4, p: 'Si ahora se tienen 20 pastelitos y la mamá y la hija se comen 3 pastelitos cada una, ¿cuántos pastelitos quedan?', s: 'instruccion3.mp3',
                 r: [[6, false], [14, true], [9, false], [19, false]  ] },
         ]" v-if="currentScene==i.in" :key="i.in"
             :answers="1" scene-color="#B9DAD6" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_nino.mp3" @completed="sceneCompleted" :devmode="false">
