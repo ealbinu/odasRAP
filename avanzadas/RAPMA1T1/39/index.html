@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrupo Figuras</title>
+    <title>Contando objetos</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/font/stylesheet.css">
     <link rel="stylesheet" href="../../assets/assets.css">
     <style>
         .figuras {
-            width: 260px;
+            width: 20%;
             height: 260px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .figuras img { max-width: 140px; max-height: 140px;}
+        .figuras img {width:100%}
         .simbolo{
             font-size: 4rem;
-            margin: 0 20px;
+            margin: 0 5px;
         }
         .respuestas {
             padding: 10px;
@@ -51,7 +51,7 @@
             flex-wrap: wrap;
         }
         .tarjeta img {
-            width: 40%;
+            width: 30% !important;
         }
         .tarjeta.manysuns img{
             width: 30%;
@@ -75,7 +75,7 @@
         :answers="1" scene-color="#015093">
             <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="true"></info>
             <activity>
-                <div class="row">
+                <div class="row w100">
                     <div class="figuras"><img src="aimg/i1.svg"></div>
                     <div class="simbolo number c1">+</div>
                     <div class="figuras"><img src="aimg/i2.svg"></div>
@@ -97,7 +97,7 @@
         :answers="1" scene-color="#ED1C25">
             <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
             <activity>
-                <div class="row">
+                <div class="row w100">
                     <div class="figuras"><img src="aimg/i3.svg"></div>
                     <div class="simbolo number c1">+</div>
                     <div class="figuras"><img src="aimg/i4.svg"></div>
@@ -118,7 +118,7 @@
         :answers="1" scene-color="#015093">
             <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
             <activity>
-                <div class="row">
+                <div class="row w100">
                     <div class="figuras"><img src="aimg/i5.svg"></div>
                     <div class="simbolo number c1">+</div>
                     <div class="figuras"><img src="aimg/i6.svg"></div>
@@ -139,7 +139,7 @@
         :answers="1" scene-color="#ED1C25">
             <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
             <activity>
-                <div class="row">
+                <div class="row w100">
                     <div class="figuras"><img src="aimg/i7.svg"></div>
                     <div class="simbolo number c1">+</div>
                     <div class="figuras"><img src="aimg/i8.svg"></div>
@@ -160,7 +160,7 @@
         :answers="1" scene-color="#015093">
             <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
             <activity>
-                <div class="row">
+                <div class="row w100">
                     <div class="figuras"><img src="aimg/i9.svg"></div>
                     <div class="simbolo number c1">+</div>
                     <div class="figuras"><img src="aimg/i10.svg"></div>
@@ -181,7 +181,7 @@
         :answers="1" scene-color="#FEBA11">
             <info type="dragdrop" title="Agrupo Figuras" text="Ahora, coloca la tarjeta que complete la suma." textaudio="asound/instruccion2.mp3" :autoplay="true"></info>
             <activity>
-                <div class="row">
+                <div class="row w100">
                     <div class="tarjeta"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div>
                     <div class="simbolo number c1">+</div>
                     <div class="tarjeta dropzonecard" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="ok"></div>
