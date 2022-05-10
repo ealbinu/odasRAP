@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mido la capacidad y el peso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+       .options div{margin: 10px 20px;} 
+       .choose .options div.active {
+            border-bottom: none;
+            background: #FEDDE1;
+            border-radius: 10px;
+        }
+        .choose .options {
+            text-align: center;
+        }
+        .choose .options > div, .choose .options div {
+            border-bottom: none;
+            background: rgba(200,200,200,0.1);
+        }
+        .choose .options hr {
+            margin: 0;
+            border-top: 3px solid var(--main);
+            min-width: 20px;
+        }
+        .label div {
+            display: inline-block;
+            max-width: 30px;
+            text-align: center;
+            transform: translatey(15px);
+            margin: 0 10px;
+        }
+        .label div hr {
+            margin: 0;
+            max-width: 30px;
+            min-width: 20px;
+            border-top: 2px solid #000;
+        }
+        .options {
+	flex-wrap: wrap;
+}
+.options .row {
+	min-width: 120px;
+}
+.options .row div {
+	margin: 0 8px;
+}
+
+.label div {
+            display: inline-block;
+            max-width: 30px;
+            text-align: center;
+            transform: translatey(15px);
+            margin: 0 10px;
+        }
+        .label div hr {
+            margin: 0;
+            max-width: 40px;
+            min-width: 20px;
+            border-top: 2px solid #000;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Mido la capacidad y el peso</h1>
+        <h2>Litros y mililitros / Mayoreo y menudeo</h2>
+
+
+        <div class="instruccion mt-5">Resuelve los siguientes problemas y marca la respuesta correcta</div>
+        <div class="row mt-3">
+            <div class="col-sm-12">
+
+                <choose v-for="(i, index) in [
+                    {
+                        p: 'Marisa compró <div>2<hr>4</div> de kg de carne para asar y <div>4<hr>8</div> de kg de carne para hamburguesas. ¿Cuántos gramos de carne compró en total?',
+                        ops: ['1 000 gramos.', '500 gramos.', '750 gramos.'],
+                        a: 0
+                    },
+                    {
+                        p: 'En una ferretería venden pintura en botes de 750 ml. Daniel quiere pintar la fachada de su casa y necesita 9 litros. ¿Cuántos botes tendría que comprar?',
+                        ops: ['15 botes.','12 botes.', '13 botes.'],
+                        a: 1
+                    },
+                    {
+                        p: 'La familia de Belén vendió 2 toneladas de harina a una panadería y <div>1<hr>2</div> tonelada a otra. ¿Cuántos kilogramos vendieron en total?',
+                        ops: ['3 500 kilogramos.','250 kilogramos.','2 500 kilogramos.'],
+                        a: 2
+                    },
+                    
+                    {
+                        p: '¿Cuántos kilogramos hay en <div>3<hr>12</div> toneladas?',
+                        ops: ['3 500 kilogramos.','250 kilogramos.','2 500 kilogramos.'],
+                        a: 0
+                    },
+                ]"
+                    :key="index" v-model="r[index]" :ref="'q'+index" :num="(index+1)+'.'" :text="i.p"
+                    :options="i.ops" @isright="right++" :answer="i.ops[i.a]"></choose>
+                
+            </div>
+        </div>
+        
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

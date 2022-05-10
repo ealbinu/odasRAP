@@ -1,0 +1,135 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = '¡Sumo fácilmente!'
+- subtitle = '¿Cuántas fichas faltan? / Junto y sumo 10'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .ex1 .inputbox {
+                width: 10%;
+            }
+            .ex1 .inputbox:nth-child(1) {
+                left: 8%;
+                top: 45%;
+            }
+            .ex1 .inputbox:nth-child(2) {
+                left: 40.5%;
+                top: 45%;
+            }
+            .ex1 .inputbox:nth-child(3) {
+                left: 8%;
+                top: 72%;
+            }
+            .ex1 .inputbox:nth-child(4) {
+                left: 40.5%;
+                top: 72%;
+            }
+            .ex2 .inputbox {
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+            }
+            .ex2 .inputbox input {
+                font-size: 1.6rem;
+                max-width: 80px;
+                margin: 0 10px;
+            }
+            .ex2 .inp1 .inputbox input {
+                border-color: #7E5F99;
+            }
+            .ex2 .inp1 .inputbox strong {
+                color: #7E5F99;
+            }
+            .ex2 .inp2 .inputbox input {
+                border-color: #6BB8BF;
+            }
+            .ex2 .inp2 .inputbox strong {
+                color: #6BB8BF;
+            }
+            .thecat {
+                max-width: 120px;
+            }
+
+            .ex3 .inputbox {
+                width: 14%;
+            }
+            .ex3 .inputbox:nth-child(1) {
+                left: 55%;
+                top: 4%;
+            }
+            .ex3 .inputbox:nth-child(2) {
+                left: 55%;
+                top: 34%;
+            }
+            .ex3 .inputbox:nth-child(3) {
+                left: 55%;
+                top: 64%;
+            }
+
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+            .row: embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+
+            .instruccion.mt-5 Escribe el número que falta para completar cada número.
+            .row.mt-3
+                .col: imgbg(img="aimg/a1.png" initclass="ex1")
+                    inputbox(v-model="r[0]" :ref="refCount()" @isright="right++" answer="4" type="number" placeh="#")
+                    inputbox(v-model="r[1]" :ref="refCount()" @isright="right++" answer="5" type="number" placeh="#")
+                    inputbox(v-model="r[2]" :ref="refCount()" @isright="right++" answer="7" type="number" placeh="#")
+                    inputbox(v-model="r[3]" :ref="refCount()" @isright="right++" answer="4" type="number" placeh="#")
+
+
+            .instruccion.mt-5 Completa los números que faltan para que el resultado sea el indicado dentro de la figura.
+            .row.mt-3.ex2.justify-content-center.align-items-center
+                .col-md-5
+                    .row.justify-content-center.align-items-center
+                        .col-6.inp1
+                            inputbox(v-model="r[4]" :ref="refCount()" @isright="right++" answer="5" type="number" placeh="#")
+                                template(v-slot:before=""): strong.c8 5 +
+                                template(v-slot:after=""): strong.c8 =
+                            inputbox(v-model="r[5]" :ref="refCount()" @isright="right++" answer="8" type="number" placeh="#")
+                                template(v-slot:before=""): strong.c8 2 +
+                                template(v-slot:after=""): strong.c8 =
+                            inputbox(v-model="r[6]" :ref="refCount()" @isright="right++" answer="9" type="number" placeh="#")
+                                template(v-slot:before=""): strong.c8 1 +
+                                template(v-slot:after=""): strong.c8 =
+                        .col-6: img(src="aimg/b1.png").img-fluid
+                .col-md-2.text-center: img(src="aimg/cat.png").img-fluid.thecat
+                .col-md-5
+                    .row.justify-content-center.align-items-center
+                        .col-6.inp2
+                            inputbox(v-model="r[7]" :ref="refCount()" @isright="right++" answer="8" type="number" placeh="#")
+                                template(v-slot:before=""): strong.c8 12 +
+                                template(v-slot:after=""): strong.c8 =
+                            inputbox(v-model="r[8]" :ref="refCount()" @isright="right++" answer="3" type="number" placeh="#")
+                                template(v-slot:before=""): strong.c8 17 +
+                                template(v-slot:after=""): strong.c8 =
+                            inputbox(v-model="r[9]" :ref="refCount()" @isright="right++" answer="4" type="number" placeh="#")
+                                template(v-slot:before=""): strong.c8 16 +
+                                template(v-slot:after=""): strong.c8 =
+                        .col-6: img(src="aimg/b2.png").img-fluid
+                           
+                        
+            
+            .instruccion.mt-5 Suma a cada número la cantidad indicada en la figura y escribe el resultado.
+            .row.mt-3
+                .col: imgbg(img="aimg/c1.png" initclass="ex3")
+                    inputbox(v-model="r[10]" :ref="refCount()" @isright="right++" answer="15" type="number" placeh="#")
+                    inputbox(v-model="r[11]" :ref="refCount()" @isright="right++" answer="40" type="number" placeh="#")
+                    inputbox(v-model="r[12]" :ref="refCount()" @isright="right++" answer="25" type="number" placeh="#")
+            
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

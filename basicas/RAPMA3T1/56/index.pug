@@ -1,0 +1,86 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Calculamos el resultado'
+- subtitle = 'Precisión'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .img {
+                position: relative;
+            }
+            .inputbox {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 10%;
+            }
+            .inputbox input {
+                padding: 0;
+                font-size: 1.2rem;
+            }
+            @media (max-width: 680px) {
+                .inputbox input {
+                    font-size: 0.5rem;
+                }
+            }
+            .inputbox:nth-child(1) {
+                left: 44%;
+                top: 12%;
+            }
+            .inputbox:nth-child(2) {
+                left: 88%;
+                top: 12%;
+            }
+            .inputbox:nth-child(3) {
+                left: 27%;
+                top: 32%;
+            }
+            .inputbox:nth-child(4) {
+                left: 77%;
+                top: 32%;
+            }
+            .inputbox:nth-child(5) {
+                left: 46%;
+                top: 51%;
+            }
+            .inputbox:nth-child(6) {
+                left: 93%;
+                top: 51%;
+            }
+            .inputbox:nth-child(7) {
+                left: 25%;
+                top: 68.5%;
+            }
+            .inputbox:nth-child(8) {
+                left: 79%;
+                top: 68.5%;
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+            
+            .row: embedvideo(urlid="anySBBAeyik" title="Restamos mentalmente")
+
+            .instruccion.mt-5 Resuelve las siguientes operaciones usando el cálculo mental.
+
+            .row.ex1: .col-12: .img
+                img(src="aimg/a1.png").w-100
+                .ins
+                    template(v-for="(i, index) in [1640, 1026, 3170, 3300, 5650, 250, 1000, 3800]")
+                        inputbox(v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i" type="number" placeh="#")
+            
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

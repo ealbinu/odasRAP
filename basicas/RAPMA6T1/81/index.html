@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construyo múltiplos de 10</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+
+.camp {
+	background: #F9CF91;
+	padding: 10px;
+	border-radius: 10px;
+	font-size: 1.2rem;
+	border: 2px solid #fff;
+	height: 100%;
+}
+.camp div {
+	text-align: center;
+}
+.camp .inputbox input {
+	padding: 5px 2px;
+	font-size: 1.2rem;
+	border-color: var(--accent);
+}
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Construyo múltiplos de 10</h1>
+        <h2>Rápido y correcto / Por 10, por 100 y por 1 000</h2>
+        <div class="instruccion mt-5">Completa las siguientes multiplicaciones.</div>
+
+        <div class="row mt-3 justify-content-center align-items-center">
+           <div class="col-lg-6 camp" v-for="(i, index) in [
+            {t: '45 x ', a: 10, t2: ' = 450'},
+            {t: '450 x ', a: 1000, t2: ' = 450 000'},
+            {t: '670 x ', a: 100, t2: ' = 67 000'},
+            
+            {t: '987 x ', a: 10, t2: ' = 9 870'},
+            {t: '769 x ', a: 100, t2: ' = 76 900'},
+            {t: '4 500 x ', a: 10, t2: ' = 45 000'},
+            
+            {t: '6 x ', a: 1000, t2: ' = 6 000'},
+            {t: '560 x ', a: 10, t2: ' = 5 600'},
+            {t: '780 x ', a: 100, t2: ' = 78 000'},
+            
+            {t: '33 x ', a: 100, t2: ' = 3 300'},
+            {t: '7 800 x ', a: 10, t2: ' = 78 000'},
+            {t: '3 300 x ', a: 1000, t2: ' = 3 300 000'},
+           ]">
+            <div class="row text-align-center justify-content-center align-items-center w-100">
+                <div class="col-3">{{i.t}}</div> <div class="col"><inputbox v-model="r[index]" :ref="'q'+(index)" @isright="right++" :answer="i.a" type="number" placeh="#"></inputbox></div> <div class="col-4">{{i.t2}}</div>
+             </div>
+               
+           </div>
+        </div>
+
+
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Practico divisiones con fracciones'
+- subtitle = 'Repartos equitativos'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            /*
+            .ex1 {}
+            */
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Resuelve las siguientes divisiones de fracciones.
+
+            .row.mt-3.ex1
+                template(v-for="(i, index) in tempsobj.a")
+                    .col-md-4.my-2: .common.br.row.centerrow
+                            .col-8: img(:src="'aimg/a'+(index+1)+'.png'").img-fluid
+                            .col.fr
+                                inputbox(v-model="d['a'+index]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="i[0]")
+                                hr
+                                inputbox(v-model="d['b'+index]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="i[1]")
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'a', [
+                    [4,25],
+                    [4,30],
+                    [4,35],
+                    [6,6],
+                    [6,9],
+                    [6,12],
+                    [8,54],
+                    [8,63],
+                    [8,72],
+                ])

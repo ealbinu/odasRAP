@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifico qué número sigue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style type="text/css">
+.tag {
+	background: #DDD6E2;
+	display: inline-block;
+	padding: 4px 30px;
+	border-radius: 20px;
+	font-size: 1.2rem;
+	margin-bottom: 20px;
+}
+.tag strong {
+	color: var(--main);
+}
+.escala {
+	border-top: 4px solid var(--accent);
+	position: relative;
+	margin-top: 20px;
+	margin-bottom: 80px;
+}
+.escala .arrl,
+.escala .arrr {
+	position: absolute;
+	top: -20px;
+}
+.escala .arrl {
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-right: 20px solid var(--accent);
+	left: -1%;
+}
+.escala .arrr {
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 20px solid var(--accent);
+	right: -1%;
+}
+.escala .num {
+	position: absolute;
+	width: 8%;
+	text-align: center;
+	background: #f5f5f5;
+	border-radius: 6px;
+	top: 9px;
+	font-size: 1.2rem;
+	color: #0084BF;
+}
+.escala .num:before {
+	content: "";
+	width: 10%;
+	height: 14px;
+	background: #0084BF;
+	position: absolute;
+	top: -20px;
+	left: 50%;
+	border-radius: 4px;
+}
+.escala .num.nin:before {
+	background: var(--main);
+}
+.escala .num .inputbox input {
+	padding: 0;
+	font-size: 1.2rem;
+	border-color: var(--main);
+}
+
+    </style>
+
+
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Identifico qué número sigue</h1>
+        <h2>¿Cuál es la escala? / ¿Es necesario el cero? / Cero información</h2>
+
+        <!-- <img src="../../assets/aimg/check.svg" class="animate__animated animate__heartBeat"> -->
+        <div class="instruccion mt-5">Localiza en las siguientes rectas los números que se indican.</div>
+
+        <div class="row mt-5">
+            <div class="col-12"><div class="tag">Número <strong>6</strong> y <strong>12</strong>.</div></div>
+            <div class="escala col-10 offset-1">
+                <div class="arrl"></div>
+                <div class="arrr"></div>
+                <div class="num" style="left:5%"><strong>0</strong></div>
+                <div class="num" style="left:25%"><strong>3</strong></div>
+                <div class="num nin" style="left:40%"><inputbox v-model="r[0]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#"></inputbox></div>
+                <div class="num nin" style="left:70%"><inputbox v-model="r[1]" :ref="refCount()" @isright="right++" :answer="12" type="number" placeh="#"></inputbox></div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12"><div class="tag">Número <strong>20</strong> y <strong>50</strong>.</div></div>
+            <div class="escala col-10 offset-1">
+                <div class="arrl"></div>
+                <div class="arrr"></div>
+                <div class="num" style="left:5%"><strong>0</strong></div>
+                <div class="num" style="left:40%"><strong>30</strong></div>
+                <div class="num nin" style="left:25%"><inputbox v-model="r[2]" :ref="refCount()" @isright="right++" :answer="20" type="number" placeh="#"></inputbox></div>
+                <div class="num nin" style="left:60%"><inputbox v-model="r[3]" :ref="refCount()" @isright="right++" :answer="50" type="number" placeh="#"></inputbox></div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12"><div class="tag">Número <strong>2</strong> y <strong>15</strong>.</div></div>
+            <div class="escala col-10 offset-1">
+                <div class="arrl"></div>
+                <div class="arrr"></div>
+                <div class="num" style="left:5%"><strong>0</strong></div>
+                <div class="num" style="left:35%"><strong>10</strong></div>
+                <div class="num nin" style="left:14%"><inputbox v-model="r[4]" :ref="refCount()" @isright="right++" :answer="2" type="number" placeh="#"></inputbox></div>
+                <div class="num nin" style="left:50%"><inputbox v-model="r[5]" :ref="refCount()" @isright="right++" :answer="15" type="number" placeh="#"></inputbox></div>
+            </div>
+        </div>
+        
+        
+        <div class="row mt-5">
+            <div class="col-12"><div class="tag">Número <strong>35</strong> y <strong>40</strong>.</div></div>
+            <div class="escala col-10 offset-1">
+                <div class="arrl"></div>
+                <div class="arrr"></div>
+                <div class="num" style="left:16%"><strong>30</strong></div>
+                <div class="num" style="left:70%"><strong>100</strong></div>
+                <div class="num nin" style="left:24%"><inputbox v-model="r[6]" :ref="refCount()" @isright="right++" :answer="35" type="number" placeh="#"></inputbox></div>
+                <div class="num nin" style="left:32%"><inputbox v-model="r[7]" :ref="refCount()" @isright="right++" :answer="40" type="number" placeh="#"></inputbox></div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12"><div class="tag">Número <strong>13</strong> y <strong>2</strong>.</div></div>
+            <div class="escala col-10 offset-1">
+                <div class="arrl"></div>
+                <div class="arrr"></div>
+                <div class="num" style="left:35%"><strong>5</strong></div>
+                <div class="num" style="left:55%"><strong>8</strong></div>
+                <div class="num nin" style="left:10%"><inputbox v-model="r[8]" :ref="refCount()" @isright="right++" :answer="2" type="number" placeh="#"></inputbox></div>
+                <div class="num nin" style="left:80%"><inputbox v-model="r[9]" :ref="refCount()" @isright="right++" :answer="13" type="number" placeh="#"></inputbox></div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12"><div class="tag">Número <strong>25</strong> y <strong>75</strong>.</div></div>
+            <div class="escala col-10 offset-1">
+                <div class="arrl"></div>
+                <div class="arrr"></div>
+                <div class="num" style="left:45%"><strong>50</strong></div>
+                <div class="num" style="left:88%"><strong>100</strong></div>
+                <div class="num nin" style="left:25%"><inputbox v-model="r[10]" :ref="refCount()" @isright="right++" :answer="25" type="number" placeh="#"></inputbox></div>
+                <div class="num nin" style="left:67%"><inputbox v-model="r[11]" :ref="refCount()" @isright="right++" :answer="75" type="number" placeh="#"></inputbox></div>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-12"><div class="tag">Número <strong>15</strong> y <strong>20</strong>.</div></div>
+            <div class="escala col-10 offset-1">
+                <div class="arrl"></div>
+                <div class="arrr"></div>
+                <div class="num" style="left:40%"><strong>10</strong></div>
+                <div class="num" style="left:85%"><strong>30</strong></div>
+                <div class="num nin" style="left:50%"><inputbox v-model="r[12]" :ref="refCount()" @isright="right++" :answer="15" type="number" placeh="#"></inputbox></div>
+                <div class="num nin" style="left:60%"><inputbox v-model="r[13]" :ref="refCount()" @isright="right++" :answer="20" type="number" placeh="#"></inputbox></div>
+            </div>
+        </div>
+
+
+
+
+        
+        
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

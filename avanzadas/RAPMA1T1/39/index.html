@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrupo Figuras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        .figuras {
+            width: 260px;
+            height: 260px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .figuras img { max-width: 140px; max-height: 140px;}
+        .simbolo{
+            font-size: 4rem;
+            margin: 0 20px;
+        }
+        .respuestas {
+            padding: 10px;
+            border-radius: 40px;
+            background: #fff;
+        }
+        .respuestas .clickable{
+            padding: 15px 30px;
+            margin: 0 30px;
+        }
+        .dropzone {
+            background: rgba(255,255,255,0.7);
+            border: 8px solid #fff;
+            width: 80px; height: 80px;
+            border-radius: 20px;
+        }
+        .dropzone.hover {
+            background: var(--main);
+        }
+
+        .tarjeta, .tarjeta div{
+            width: 200px;
+            height: 240px;
+            background: #fff;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .tarjeta img {
+            width: 40%;
+        }
+        .tarjeta.manysuns img{
+            width: 30%;
+        }
+        .drag.tarjeta{
+            margin: 20px;
+            border: 4px solid #FFD900;
+        }
+        .dropzonecard.hover {
+            background: #FFD900;
+        }
+    </style>
+    </head>
+<body>
+    <div id="app">
+        
+        <scene v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted"></scene>
+
+        <!-- ### scene -->
+        <scene v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#015093">
+            <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="true"></info>
+            <activity>
+                <div class="row">
+                    <div class="figuras"><img src="aimg/i1.svg"></div>
+                    <div class="simbolo number c1">+</div>
+                    <div class="figuras"><img src="aimg/i2.svg"></div>
+                    <div class="simbolo number c1">=</div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="ok"></div>
+                </div>
+                <div class="row respuestas">
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c2">8</div></drag>
+                    <drag data="ok" dropzone=".dropzone" stay-if-ok><div class="number c3">9</div></drag>
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c4">7</div></drag>
+                </div>
+
+            </activity>
+        </scene> <!-- end scene -->
+        
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#ED1C25">
+            <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
+            <activity>
+                <div class="row">
+                    <div class="figuras"><img src="aimg/i3.svg"></div>
+                    <div class="simbolo number c1">+</div>
+                    <div class="figuras"><img src="aimg/i4.svg"></div>
+                    <div class="simbolo number c1">=</div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="ok"></div>
+                </div>
+                <div class="row respuestas">
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c2">7</div></drag>
+                    <drag data="ok" dropzone=".dropzone" stay-if-ok><div class="number c3">9</div></drag>
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c4">8</div></drag>
+                </div>
+            </activity>
+        </scene> <!-- end scene -->
+        
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#015093">
+            <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
+            <activity>
+                <div class="row">
+                    <div class="figuras"><img src="aimg/i5.svg"></div>
+                    <div class="simbolo number c1">+</div>
+                    <div class="figuras"><img src="aimg/i6.svg"></div>
+                    <div class="simbolo number c1">=</div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="ok"></div>
+                </div>
+                <div class="row respuestas">
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c2">5</div></drag>
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c3">0</div></drag>
+                    <drag data="ok" dropzone=".dropzone" stay-if-ok><div class="number c4">6</div></drag>
+                </div>
+            </activity>
+        </scene> <!-- end scene -->
+        
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==4" :key="4" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#ED1C25">
+            <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
+            <activity>
+                <div class="row">
+                    <div class="figuras"><img src="aimg/i7.svg"></div>
+                    <div class="simbolo number c1">+</div>
+                    <div class="figuras"><img src="aimg/i8.svg"></div>
+                    <div class="simbolo number c1">=</div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="ok"></div>
+                </div>
+                <div class="row respuestas">
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c2">13</div></drag>
+                    <drag data="ok" dropzone=".dropzone" stay-if-ok><div class="number c3">10</div></drag>
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c4">11</div></drag>
+                </div>
+            </activity>
+        </scene> <!-- end scene -->
+        
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==5" :key="5" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#015093">
+            <info type="dragdrop" title="Agrupo Figuras" text="Ayuda a Monse con su tarea. Coloca el resultado de la suma en el espacio correspondiente." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
+            <activity>
+                <div class="row">
+                    <div class="figuras"><img src="aimg/i9.svg"></div>
+                    <div class="simbolo number c1">+</div>
+                    <div class="figuras"><img src="aimg/i10.svg"></div>
+                    <div class="simbolo number c1">=</div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="ok"></div>
+                </div>
+                <div class="row respuestas">
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c2">5</div></drag>
+                    <drag data="no" dropzone=".dropzone" stay-if-ok><div class="number c3">8</div></drag>
+                    <drag data="ok" dropzone=".dropzone" stay-if-ok><div class="number c4">6</div></drag>
+                </div>
+            </activity>
+        </scene> <!-- end scene -->
+       
+       
+        <!-- ### scene -->
+        <scene v-if="currentScene==6" :key="6" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#FEBA11">
+            <info type="dragdrop" title="Agrupo Figuras" text="Ahora, coloca la tarjeta que complete la suma." textaudio="asound/instruccion2.mp3" :autoplay="true"></info>
+            <activity>
+                <div class="row">
+                    <div class="tarjeta"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div>
+                    <div class="simbolo number c1">+</div>
+                    <div class="tarjeta dropzonecard" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="ok"></div>
+                    <div class="simbolo number c1">=</div>
+                    <div class="tarjeta"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div>
+
+                </div>
+                <div class="row">
+                    <drag initclass="tarjeta" data="ok" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"></div></drag>
+                    <drag initclass="tarjeta" data="no" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"></div></drag>
+                    <drag initclass="tarjeta" data="no" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div></drag>
+
+                </div>
+            </activity>
+        </scene> <!-- end scene -->
+        
+        
+        <!-- ### scene -->
+        <scene v-if="currentScene==7" :key="7" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="1" scene-color="#FEBA11">
+            <info type="dragdrop" title="Agrupo Figuras" text="Ahora, coloca la tarjeta que complete la suma." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
+            <activity>
+                <div class="row">
+                    <div class="tarjeta"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"></div>
+                    <div class="simbolo number c1">+</div>
+                    <div class="tarjeta dropzonecard" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="ok"></div>
+                    <div class="simbolo number c1">=</div>
+                    <div class="tarjeta manysuns"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div>
+
+                </div>
+                <div class="row">
+                    <drag initclass="tarjeta" data="no" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"></div></drag>
+                    <drag initclass="tarjeta" data="no" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"></div></drag>
+                    <drag initclass="tarjeta" data="ok" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div></drag>
+
+                </div>
+            </activity>
+        </scene> <!-- end scene -->
+        
+
+
+
+        <scene v-if="currentScene==8" :key="8" end-scene :final-data="finalData"></scene>
+    
+    </div>
+    <!-- libraries -->
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    
+    <!-- fireworks -->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- modulos -->
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- mainscript -->
+    <script src="../../assets/assets.js"></script>
+    <script>
+        app.currentScene = 0
+        app.scenesCount = 7
+        app.$devmode = false
+    </script>
+</body>
+</html>

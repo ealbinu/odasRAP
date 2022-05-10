@@ -1,0 +1,250 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])-->
+<!--
+- var tb = []
+- tb.push([[8], 16, [32], [40], 56])
++table(0, tb)
+// +table(vmmodel, camposVar, regulartext)
+--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cuento unidades</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .relational{
+          display: block !important;
+          flex-direction: column;
+          justify-content: center;
+      }
+      .relational .sources, .relational .targets{
+          flex-grow: 1;
+          width: 100% !important;
+          flex-direction: row;
+      }
+       .ex1 .relational .targets{
+          margin-top: 60px !important;
+          margin-bottom: 300px !important;
+      }
+      
+      .sources img{
+          max-height: 100px;
+      }
+      .targets .numbers {
+          font-size: 1.6rem;
+      }
+      @media (max-width: 992px) {
+          .targets .numbers {
+              font-size: 1rem;
+              padding: 20px 0;
+          }
+          strong {
+              color: var(--accent);
+          }
+      }
+      .jtk-endpoint{
+          z-index: 9;
+      }
+      
+      .relational .sources {
+          flex-wrap: wrap;
+      }
+      .relational .sources > div {
+          width: 33%;
+      }
+      .relational .sources > div:nth-child(n+4) {
+          margin-top: 300px;
+          margin-bottom: -300px;
+      }
+      .targets .r_target {
+          background: #ffdd00;
+      }
+      .ex2 .tablemod .col {
+          background: var(--pastel3);
+      }
+      .ex2 .tablemod .col:nth-child(1) .inputbox .inp_example .numbers {
+          color: var(--sec);
+      }
+      .ex2 .tablemod .row:nth-child(1) {
+          text-align: center;
+      }
+      .ex2 .tablemod .row:nth-child(1) .inputbox .inp_example .numbers {
+          color: var(--rightcol);
+          padding: 10px 0;
+      }
+      @media (max-width: 768px) {
+          .ex2 .tablemod .row:nth-child(1) .inputbox .inp_example .numbers {
+              font-size: 0.6rem;
+          }
+      }
+      .ex2 .inputbox input {
+          max-width: 60px;
+          margin-right: 5px;
+          font-size: 1.2rem;
+          padding: 2px;
+      }
+      @media (max-width: 768px) {
+          .ex2 .inputbox {
+              font-size: 0.6rem;
+          }
+          .ex2 .inputbox .numbers {
+              font-size: 0.6rem;
+          }
+      }
+      
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Cuento unidades</h1>
+      <h2>Cubos y más cubos / ¿Qué pasa con el volumen?</h2>
+      <div class="instruccion mt-5">Cuenta la cantidad de cubos de los siguientes cuerpos geométricos y une con una línea la operación y el resultado que corresponden a cada una.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-12">
+          <relational v-if="tempsobj.sources" key="a" v-model="r[0]" :ref="refCount()" @isright="right++" :sources="tempsobj.sources" :targets="tempsobj.targets" :oks="tempsobj.oks" anchors="Bottom" anchort="Top">
+            <template v-slot:source="{source}"><img class="img-fluid" :src="source.i" v-if="source.i"/>
+              <numbers c="3" v-else="v-else" v-html="source.t"> </numbers>
+            </template>
+            <template v-slot:target="{target}">
+              <numbers c="2">
+                <div v-html="target.t"></div>
+              </numbers>
+            </template>
+          </relational>
+        </div>
+      </div>
+      <div class="instruccion mt-5"> Completa la siguiente tabla para conocer cuántos cubos conforman cada cuerpo geométrico.</div>
+      <div class="row mt-3 ex2">
+        <div class="col-12">
+          <div class="tablemod">
+            <div class="row no-gutters ix_0">
+              <div class="col cl_0">
+                <inputbox answer="Cuerpo geométrico" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_1">
+                <inputbox answer="Dimensiones" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_2">
+                <inputbox answer="Volumen" type="number" example="example"></inputbox>
+              </div>
+            </div>
+            <div class="row no-gutters ix_1">
+              <div class="col cl_0">
+                <inputbox answer="A" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_1">
+                <inputbox answer="3 largo × 7 ancho × 4 de altura" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_2">
+                <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" :answer="84" type="number" placeh="#">
+                  <template v-slot:after=""> cubos</template>
+                </inputbox>
+              </div>
+            </div>
+            <div class="row no-gutters ix_2">
+              <div class="col cl_0">
+                <inputbox answer="B" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_1">
+                <inputbox answer="4 largo × 5 ancho × 3 de altura" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_2">
+                <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" :answer="60" type="number" placeh="#">
+                  <template v-slot:after=""> cubos</template>
+                </inputbox>
+              </div>
+            </div>
+            <div class="row no-gutters ix_3">
+              <div class="col cl_0">
+                <inputbox answer="C" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_1">
+                <inputbox answer="2 largo × 6 ancho × 2 de altura" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_2">
+                <inputbox v-model="r[3]" :ref="refCount()" @isright="right++" :answer="24" type="number" placeh="#">
+                  <template v-slot:after=""> cubos</template>
+                </inputbox>
+              </div>
+            </div>
+            <div class="row no-gutters ix_4">
+              <div class="col cl_0">
+                <inputbox answer="D" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_1">
+                <inputbox answer="7 largo × 4 ancho × 7 de altura" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_2">
+                <inputbox v-model="r[4]" :ref="refCount()" @isright="right++" :answer="196" type="number" placeh="#">
+                  <template v-slot:after=""> cubos</template>
+                </inputbox>
+              </div>
+            </div>
+            <div class="row no-gutters ix_5">
+              <div class="col cl_0">
+                <inputbox answer="E" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_1">
+                <inputbox answer="4 largo × 8 ancho × 6 de altura" type="number" example="example"></inputbox>
+              </div>
+              <div class="col cl_2">
+                <inputbox v-model="r[5]" :ref="refCount()" @isright="right++" :answer="192" type="number" placeh="#">
+                  <template v-slot:after=""> cubos</template>
+                </inputbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$set(app.tempsobj, 'sources', [
+          {i: 'aimg/i1.png'},
+          {i: 'aimg/i2.png'},
+          {i: 'aimg/i3.png'},
+          {t: '24 cubos.'},
+          {t: '48 cubos.'},
+          {t: '30 cubos.'},
+      ])
+      app.$set(app.tempsobj, 'targets', [
+          {t: 'V <strong>=</strong> 5 <strong>×</strong> 2 <strong>×</strong> 3'},
+          {t: 'V <strong>=</strong> 4 <strong>×</strong> 3 <strong>×</strong> 4'},
+          {t: 'V <strong>=</strong> 3 <strong>×</strong> 2 <strong>×</strong> 4'},
+      ])
+      app.$set(app.tempsobj, 'oks', [
+          ['s_0', 't_2'],
+          ['s_1', 't_0'],
+          ['s_2', 't_1'],
+          ['s_3', 't_2'],
+          ['s_4', 't_1'],
+          ['s_5', 't_0'],
+      ])
+    </script>
+  </body>
+</html>

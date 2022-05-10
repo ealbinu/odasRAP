@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uso el calendario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        .cal {
+	position: relative;
+}
+.cal .inputbox {
+	width: 24%;
+	position: absolute;
+}
+.cal .inputbox input {
+	padding: 6px;
+	font-size: 1.6rem;
+}
+.cal .inputbox:nth-child(1) {
+	left: 2.2%;
+	top: 28%;
+}
+.cal .inputbox:nth-child(2) {
+	left: 2.2%;
+	top: 43.5%;
+}
+.cal .inputbox:nth-child(3) {
+	left: 2.2%;
+	top: 51.5%;
+}
+.cal .inputbox:nth-child(4) {
+	left: 2.2%;
+	top: 59.5%;
+}
+.cal .inputbox:nth-child(5) {
+	left: 2.2%;
+	top: 74%;
+}
+.cal .inputbox:nth-child(6) {
+	right: 2.3%;
+	width: 26%;
+	top: 13%;
+}
+.cal .inputbox:nth-child(7) {
+	right: 2.3%;
+	width: 26%;
+	top: 21%;
+}
+.cal .inputbox:nth-child(8) {
+	right: 2.3%;
+	width: 26%;
+	top: 36.5%;
+}
+.cal .inputbox:nth-child(9) {
+	right: 2.3%;
+	width: 26%;
+	top: 44.2%;
+}
+.cal .inputbox:nth-child(10) {
+	right: 2.3%;
+	width: 26%;
+	top: 52%;
+}
+.cal .inputbox:nth-child(11) {
+	right: 2.3%;
+	width: 26%;
+	top: 67%;
+}
+.cal .inputbox:nth-child(12) {
+	right: 2.3%;
+	width: 26%;
+	top: 75%;
+}
+.cal .inputbox:nth-child(13) {
+	right: 2.3%;
+	width: 26%;
+	top: 83%;
+}
+.cal .inputbox:nth-child(14) {
+	right: 2.3%;
+	width: 26%;
+	top: 90.5%;
+}
+@media (max-width: 992px) {
+	.cal .inputbox input {
+		font-size: 1rem;
+	}
+}
+@media (max-width: 768px) {
+	.cal .inputbox input {
+		padding: 0;
+	}
+}
+
+.pregs{
+	font-size: 1.2rem;
+	background: #E9E4EA;
+	padding: 10px;
+	border-radius: 10px;
+}
+.pregs .inputbox input {
+	max-width: 120px;
+	margin-right: 10px;
+	border-color: #513241;
+}
+.pregs .inputbox strong {
+	color: #513241;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Uso el calendario</h1>
+        <h2>Trayecto 1. La semana y el mes. La lista y el horario</h2>
+
+        <!-- <img src="../../assets/aimg/check.svg" class="animate__animated animate__heartBeat"> -->
+        <div class="instruccion mt-5">Observa el siguiente calendario y escribe los días y meses que faltan. Después contesta las preguntas.</div>
+        <div class="row mt-3">
+           <div class="cal">
+               <img src="aimg/a1.png" class="w-100 img-fluid" />
+               <div class="inputs">
+                <template v-for="(i, index) in ['Domingo', 'Martes', 'Miércoles', 'Jueves', 'Sábado']">
+                    <inputbox v-model="r[index]" :ref="'q'+(index)" @isright="right++" :answer="i" type="text" placeh="-"></inputbox>
+                </template>
+                <template v-for="(i, index) in ['Febrero', 'Marzo', 'Mayo', 'Junio', 'Julio', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']">
+                    <inputbox v-model="r[index+5]" :ref="'q'+(index+5)" @isright="right++" :answer="i" type="text" placeh="-"></inputbox>
+                </template>
+               </div>
+           </div>
+        </div>
+
+        <div class="row align-items-center mt-3 pregs">
+            <div class="col-md-8"><strong class="accent">1.</strong> ¿Cuántas horas tiene un día?</div>
+            <div class="col"><inputbox v-model="r[14]" ref="q14" @isright="right++" answer="24" type="number" placeh="#">
+                <template v-slot:after><strong>horas.</strong></template>
+            </inputbox></div>
+        </div>
+        <div class="row align-items-center mt-3 pregs">
+            <div class="col-md-8"><strong class="accent">2.</strong> ¿Cuántos días tiene una semana?</div>
+             <div class="col"><inputbox v-model="r[15]" ref="q15" @isright="right++" answer="7" type="number" placeh="#">
+                <template v-slot:after><strong>dias.</strong></template>
+            </inputbox></div>
+        </div>
+        <div class="row align-items-center mt-3 pregs">
+            <div class="col-md-8"><strong class="accent">3.</strong> ¿Cuántos meses tiene un año?</div>
+             <div class="col"><inputbox v-model="r[16]" ref="q16" @isright="right++" answer="12" type="number" placeh="#">
+                <template v-slot:after><strong>meses.</strong></template>
+            </inputbox></div>
+        </div>
+        
+
+
+        
+        
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

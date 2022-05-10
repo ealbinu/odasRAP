@@ -1,0 +1,59 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Sumo y multiplico'
+- subtitle = ''
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .ex1 {
+                background: #FEF3E1;
+                padding: 10px;
+                border-radius: 10px;
+            }
+            .ex1 .inputbox {
+                font-size: 1.6rem;
+                color: #8C6F54;
+            }
+            .ex1 .inputbox input {
+                max-width: 200px;
+                margin-right: 10px;
+                font-size: 1.6rem;
+                border-color: #8C6F54;
+                color: #8C6F54;
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+            
+            .row: embedvideo(urlid="TOYb54iai-w" title="La multiplicación")
+
+            .row: .col-12: img(src="aimg/a1.png").w-100
+
+            .instruccion.mt-5 Contesta las siguientes preguntas con base en la información anterior.
+
+            .row.mt-3.ex1
+                .col-12.mb-5
+                    labeltext(num="1.") ¿Cuántas palanquetas compran en la escuela Federal 1 en dos semanas?
+                    inputbox(v-model="r[0]" :ref="refCount()" @isright="right++" :answer="1530" type="number" placeh="#")
+                        template(v-slot:after=""): strong palanquetas.
+                .col-12.mb-5
+                    labeltext(num="2.") ¿Cuántas cajas se venden en las cinco escuelas en una semana?
+                    inputbox(v-model="r[1]" :ref="refCount()" @isright="right++" :answer="101" type="number" placeh="#")
+                        template(v-slot:after=""): strong cajas.
+                .col-12
+                    labeltext(num="3.") Si el precio de cada palanqueta es de $2.50, ¿cuánto cobra el vendedor si vende la misma cantidad durante cuatro semanas?
+                    inputbox(v-model="r[2]" :ref="refCount()" @isright="right++" :answer="45450" type="number" placeh="#")
+                        template(v-slot:after=""): strong pesos.
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

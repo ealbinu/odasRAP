@@ -1,0 +1,443 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sumo y resto fracciones y decimales</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .operacion {
+          background: #f5f5f5;
+          border-radius: 10px;
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          height: 100%;
+      }
+      .operacion .fraccion {
+          display: flex;
+          flex-direction: column;
+          font-size: 1.2rem;
+          min-width: 36px;
+          text-align: center;
+      }
+      .operacion .fraccion hr {
+          border-top: 3px solid var(--sec);
+          margin: 0;
+      }
+      .operacion .fraccion .inputbox input {
+          border-radius: 4px;
+          font-size: 1.2rem;
+          padding: 2px;
+          max-width: 70px;
+          margin: 0 4px;
+      }
+      .operacion .numbers {
+          font-size: 1.8rem;
+          margin: 0 4px;
+          color: var(--accent);
+      }
+      
+      .ex2 .fraccion {
+          display: flex;
+          flex-direction: column;
+          justify-content:center;
+          font-size: 1.2rem;
+          min-width: 36px;
+          text-align: center;
+          max-width: 60px;
+      }
+      .ex2 .fraccion hr {
+          border-top: 3px solid var(--sec);
+          margin: 0;
+      }
+      .ex2 .fraccion .inputbox input {
+          border-radius: 4px;
+          font-size: 1.2rem;
+          padding: 2px;
+          max-width: 70px;
+          margin: 0 4px;
+      }
+      
+      .row.head > div {
+          background: #FADAB8;
+          border: 2px solid #fff;
+          text-align: center;
+          border-radius: 6px 6px 0 0;
+          font-size: 1.2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          font-weight: bold;
+      }
+      @media (max-width: 680px) {
+          .row.head > div {
+              font-size: 0.7rem;
+              line-height: 1;
+          }
+      }
+      .row.body > div {
+          display: flex;
+          justify-content: center;
+          background: #f5f5f5;
+          border: 2px solid #fff;
+          border-radius: 6px;
+      }
+      .row.body > div:first-child {
+          background: var(--clear);
+          border-radius: 6px;
+      }
+      @media (max-width: 680px) {
+          .row.body > div .fraccion {
+              font-size: 0.8rem;
+          }
+          .row.body > div .fraccion .inputbox input {
+              font-size: 0.8rem;
+              padding: 1px;
+          }
+      }
+      .ex3 .fraccion {
+          display: inline-block;
+          vertical-align: middle;
+          font-size: 1.2rem;
+          min-width: 36px;
+          text-align: center;
+          max-width: 60px;
+      }
+      .ex3 .fraccion hr {
+          border-top: 3px solid var(--sec);
+          margin: 0;
+      }
+      .ex3 .fraccion .inputbox input {
+          border-radius: 4px;
+          font-size: 1.2rem;
+          padding: 2px;
+          max-width: 70px;
+          margin: 0 4px;
+      }
+      .ex3 .fraccion .inputbox {
+          font-size: 1rem;
+      }
+      .ex3 .fraccion .inputbox .numbers{
+          margin: 0 4px;
+          font-size: 1.6rem;
+      }
+      .ex3 .fraccion.inp {
+          background: var(--accent);
+          padding: 20px;
+          min-width: 280px;
+          border-radius: 10px;
+      }
+      
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Sumo y resto fracciones y decimales</h1>
+      <h2>¡Atajos con fracciones! / ¡Atajos con decimales!</h2>
+      <div class="text-center">
+        <embedvideo urlid="m5OVfWSGgso" title="Sumar y restar fracciones mentalmente"></embedvideo>
+      </div>
+      <div class="instruccion mt-5">Realiza mentalmente las siguientes sumas y restas de fracciones y decimales.</div>
+      <div class="row mt-3 ex1 justify-content-around">
+        <div class="col-md-4 mb-1">
+          <div class="operacion"><span>11.78</span>
+            <numbers>-</numbers><span>9.54</span>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" :answer="2.24" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion"><span>7.86</span>
+            <numbers>+</numbers><span>6.14</span>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" :answer="14" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion">
+            <div class="fraccion">9<hr>12</div>
+            <numbers>+</numbers>
+            <div class="fraccion">18<hr>12</div>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" :answer="27" type="number" placeh="#"></inputbox>
+              <hr/>
+              <inputbox v-model="r[3]" :ref="refCount()" @isright="right++" :answer="12" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion">
+            <div class="fraccion">3<hr>4</div>
+            <numbers>+</numbers>
+            <div class="fraccion">2<hr>4</div>
+            <numbers>-</numbers>
+            <div class="fraccion">2<hr>4</div>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[4]" :ref="refCount()" @isright="right++" :answer="3" type="number" placeh="#"></inputbox>
+              <hr/>
+              <inputbox v-model="r[5]" :ref="refCount()" @isright="right++" :answer="4" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion"><span>10.24</span>
+            <numbers>-</numbers><span>9.24</span>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[6]" :ref="refCount()" @isright="right++" :answer="1" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion"><span>16.09</span>
+            <numbers>-</numbers><span>8.46</span>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[7]" :ref="refCount()" @isright="right++" :answer="7.63" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion">
+            <div class="fraccion">4<hr>5</div>
+            <numbers>-</numbers>
+            <div class="fraccion">2<hr>10</div>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[8]" :ref="refCount()" @isright="right++" :answer="3" type="number" placeh="#"></inputbox>
+              <hr/>
+              <inputbox v-model="r[9]" :ref="refCount()" @isright="right++" :answer="5" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion"><span>34.6</span>
+            <numbers>+</numbers><span>8.72</span>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[10]" :ref="refCount()" @isright="right++" :answer="43.32" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion"><span>12.56</span>
+            <numbers>-</numbers><span>7.33</span>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[11]" :ref="refCount()" @isright="right++" :answer="5.23" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion"><span>12.40</span>
+            <numbers>+</numbers><span>5.8</span>
+            <numbers>-</numbers><span>9.46</span>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[12]" :ref="refCount()" @isright="right++" :answer="8.74" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-1">
+          <div class="operacion"><span>15.07</span>
+            <numbers>+</numbers><span>4.76</span>
+            <numbers>-</numbers><span>13.2</span>
+            <numbers>=</numbers>
+            <div class="fraccion">
+              <inputbox v-model="r[13]" :ref="refCount()" @isright="right++" :answer="6.63" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Completa la siguiente tabla sólo con fracciones simples (no utilices fracciones mixtas: entero y fracción).</div>
+      <div class="row mt-3 ex2 head">
+        <div class="col-3">Fracción </div>
+        <div class="col-3">La mitad </div>
+        <div class="col-3">El doble </div>
+        <div class="col-3">El triple</div>
+      </div>
+      <div class="row mt-1 ex2 body">
+        <div class="col-3">
+          <div class="fraccion">4<hr>12</div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">2<hr>12</div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">8<hr>12</div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">12<hr>12</div>
+        </div>
+      </div>
+      <div class="row mt-1 ex2 body">
+        <div class="col-3">
+          <div class="fraccion">5<hr>9</div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[14]" :ref="refCount()" @isright="right++" :answer="5" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[15]" :ref="refCount()" @isright="right++" :answer="18" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[16]" :ref="refCount()" @isright="right++" :answer="10" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[17]" :ref="refCount()" @isright="right++" :answer="9" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[18]" :ref="refCount()" @isright="right++" :answer="15" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[19]" :ref="refCount()" @isright="right++" :answer="9" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-1 ex2 body">
+        <div class="col-3">
+          <div class="fraccion">8<hr>10</div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[20]" :ref="refCount()" @isright="right++" :answer="4" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[21]" :ref="refCount()" @isright="right++" :answer="10" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[22]" :ref="refCount()" @isright="right++" :answer="16" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[23]" :ref="refCount()" @isright="right++" :answer="10" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[24]" :ref="refCount()" @isright="right++" :answer="24" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[25]" :ref="refCount()" @isright="right++" :answer="10" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-1 ex2 body">
+        <div class="col-3">
+          <div class="fraccion">3<hr>7</div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[26]" :ref="refCount()" @isright="right++" :answer="3" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[27]" :ref="refCount()" @isright="right++" :answer="14" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[28]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[29]" :ref="refCount()" @isright="right++" :answer="7" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[30]" :ref="refCount()" @isright="right++" :answer="9" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[31]" :ref="refCount()" @isright="right++" :answer="7" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-1 ex2 body">
+        <div class="col-3">
+          <div class="fraccion">5<hr>6</div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[32]" :ref="refCount()" @isright="right++" :answer="5" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[33]" :ref="refCount()" @isright="right++" :answer="12" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[34]" :ref="refCount()" @isright="right++" :answer="10" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[35]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="fraccion">
+            <inputbox v-model="r[36]" :ref="refCount()" @isright="right++" :answer="15" type="number" placeh="#"></inputbox>
+            <hr/>
+            <inputbox v-model="r[37]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#"></inputbox>
+          </div>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Resuelve los siguientes problemas.</div>
+      <div class="row mt-3 ex3">
+        <div class="col-12">
+          <labeltext num="1.">Lázaro compró <div class="fraccion">1<hr>2</div> kg de huevo, <div class="fraccion">2<hr>4</div> kg de azúcar y <div class="fraccion">1<hr>4</div> kg de mantequilla para hacer un pastel. Si le pusieron todo en una sola bolsa, ¿cuánto pesa la bolsa?</labeltext>
+          <div class="text-center">
+            <div class="fraccion inp">
+              <inputbox v-model="r[38]" :ref="refCount()" @isright="right++" :answer="5" type="number" placeh="#"></inputbox>
+              <hr/>
+              <inputbox v-model="r[39]" :ref="refCount()" @isright="right++" :answer="4" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3 ex3">
+        <div class="col-12">
+          <labeltext num="2.">Si Irene tenía $87.50 pero compró una malteada de $34.50 y una gelatina de $16.80, ¿cuánto dinero le quedó?</labeltext>
+          <div class="text-center">
+            <div class="fraccion inp">
+              <inputbox v-model="r[40]" :ref="refCount()" @isright="right++" :answer="36.20" type="number" placeh="#">
+                <template v-slot:before="">Le quedaron 
+                  <numbers>$</numbers>
+                </template>
+              </inputbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total" fields-text="opciones"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

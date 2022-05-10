@@ -1,0 +1,221 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Aprendo nuevos sistemas numéricos</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .ex1 .imagerelative .items > div {
+          width: 13%;
+      }
+      .ex1 .imagerelative .items > div:nth-child(1) {
+          left: 3%;
+          top: 6%;
+      }
+      .ex1 .imagerelative .items > div:nth-child(2) {
+          left: 53.5%;
+          top: 6%;
+      }
+      .ex1 .imagerelative .items > div:nth-child(3) {
+          left: 25.5%;
+          top: 59%;
+          width: 9%;
+      }
+      .ex1 .imagerelative .items > div:nth-child(4) {
+          left: 80%;
+          top: 35%;
+          width: 8%;
+      }
+      .ex1 .imagerelative .items > div input {
+          padding: 0;
+      }
+      @media (max-width: 820px) {
+          .ex1 .imagerelative .items > div input {
+              padding: 1px;
+              font-size: 0.9rem;
+          }
+      }
+      @media (max-width: 680px) {
+          .ex1 .imagerelative .items > div input {
+              padding: 0;
+              font-size: 0.5rem;
+              border-width: 1px;
+              border-radius: 3px;
+          }
+      }
+      
+      .ex2 .inputbox {
+          background: #f5f5f5;
+          margin-bottom: 10px;
+          padding: 10px;
+          border-radius: 10px;
+          font-size: 1.2rem;
+      }
+      .ex2 .inputbox input {
+          font-size: 1.2rem;
+          max-width: 160px;
+          margin-left: auto;
+      }
+      .ex3 .imagerelative .items > div {
+          width: 17%;
+      }
+      .ex3 .imagerelative .items > div input {
+          border-color: #CFCFCE;
+      }
+      .ex3 .imagerelative .items > div:nth-child(1) {
+          left: 36%;
+          top: 24%;
+      }
+      .ex3 .imagerelative .items > div:nth-child(2) {
+          left: 36%;
+          top: 36%;
+      }
+      .ex3 .imagerelative .items > div:nth-child(3) {
+          left: 36%;
+          top: 48%;
+      }
+      .ex3 .imagerelative .items > div:nth-child(4) {
+          left: 36%;
+          top: 60%;
+      }
+      .ex3 .imagerelative .items > div:nth-child(5) {
+          left: 36%;
+          top: 72%;
+      }
+      .ex3 .imagerelative .items > div:nth-child(6) {
+          left: 36%;
+          top: 84%;
+      }
+      @media (max-width: 680px) {
+          .ex3 .imagerelative .items > div input {
+              padding: 0;
+              font-size: 0.5rem;
+              border: none;
+          }
+      }
+      
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Aprendo nuevos sistemas numéricos</h1>
+      <h2>Los números romanos</h2>
+      <div class="text-center">
+        <embedvideo urlid="mRL-lkmuu5c" title="Los números romanos"></embedvideo>
+      </div>
+      <div class="instruccion mt-5">Completa la información que falta en la siguiente línea del tiempo.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-12">
+          <div class="imagerelative"><img class="w-100" src="aimg/a1.png"/>
+            <div class="items">
+              <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" answer="MCMXVII" type="text" placeh="-"></inputbox>
+              <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" answer="MCMXXIV" type="text" placeh="-"></inputbox>
+              <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" answer="1925" type="text" placeh="-"></inputbox>
+              <inputbox v-model="r[3]" :ref="refCount()" @isright="right++" answer="1929" type="text" placeh="-"></inputbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Escribe las siguientes cantidades en números romanos.</div>
+      <div class="row mt-3 ex2">
+        <div class="col-md-6">
+          <inputbox v-model="r[4]" :ref="refCount()" @isright="right++" answer="CMXC" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="1.">990</labeltext>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[5]" :ref="refCount()" @isright="right++" answer="MCCXXXV" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="2.">1 235</labeltext>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[6]" :ref="refCount()" @isright="right++" answer="MDXXIV" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="3.">1 524</labeltext>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[7]" :ref="refCount()" @isright="right++" answer="MMCLXXXVI" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="4.">2 186</labeltext>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[8]" :ref="refCount()" @isright="right++" answer="MMMLXXVII" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="5.">3 077</labeltext>
+            </template>
+          </inputbox>
+        </div>
+        <div class="col-md-6">
+          <inputbox v-model="r[9]" :ref="refCount()" @isright="right++" answer="MDCCCLIX" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="1.">1 850</labeltext>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[10]" :ref="refCount()" @isright="right++" answer="MMDCCCLXIV" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="2.">2 864</labeltext>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[11]" :ref="refCount()" @isright="right++" answer="MMXXVI" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="3.">2 026</labeltext>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[12]" :ref="refCount()" @isright="right++" answer="DCCCLXXII" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="4.">872</labeltext>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[13]" :ref="refCount()" @isright="right++" answer="MMMCDXXVIII" type="text" placeh="-">
+            <template v-slot:before="">
+              <labeltext num="5.">3 428</labeltext>
+            </template>
+          </inputbox>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Resuelve las siguientes operaciones con números romanos. Observa el ejemplo.</div>
+      <div class="row mt-3 ex3">
+        <div class="col-12">
+          <div class="imagerelative"><img class="w-100" src="aimg/b1.png"/>
+            <div class="items">
+              <inputbox v-model="r[14]" :ref="refCount()" @isright="right++" answer="LXXV" type="text" placeh="-"></inputbox>
+              <inputbox v-model="r[15]" :ref="refCount()" @isright="right++" answer="CIV" type="text" placeh="-"></inputbox>
+              <inputbox v-model="r[16]" :ref="refCount()" @isright="right++" answer="LXVI" type="text" placeh="-"></inputbox>
+              <inputbox v-model="r[17]" :ref="refCount()" @isright="right++" answer="LII" type="text" placeh="-"></inputbox>
+              <inputbox v-model="r[18]" :ref="refCount()" @isright="right++" answer="L" type="text" placeh="-"></inputbox>
+              <inputbox v-model="r[19]" :ref="refCount()" @isright="right++" answer="CLXVI" type="text" placeh="-"></inputbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

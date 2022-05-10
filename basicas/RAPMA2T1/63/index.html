@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llego hasta el 100</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        .inputbox input{ width: 80px; text-align: center; position: relative; }
+        .inputbox .result{ right: auto; left: 0px; top:-6px; }
+        .bg1, .bg2, .bg3, .bg4, .bg5, .bg6 {border-radius: 10px; padding: 4px; border: 2px solid #fff; box-sizing: border-box;}
+        .bg1 {background: #E7F1D8;  }
+        .bg2 {background: #EFDFE6;  }
+        .bg3 {background: #FDE8CF;  }
+        .bg4 {background: #D2E5EF;  }
+        .bg5 {background: #FEF6D8;  }
+        .bg6 {background: #DCEFEF;  }
+        .middle {
+            font-size: 1.8rem;
+            padding: 6px 10px;
+            border: 2px solid var(--main);
+            color: var(--main);
+            border-radius: 20px;
+            margin: 0 4px;
+        }
+        .arrow { max-width: 20px; }
+        .borderize {
+            border:2px solid var(--accent);
+            border-radius: 10px;
+            box-sizing: border-box;
+            background: #FEE8B6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Cuento más de 10</h1>
+
+        <div class="instruccion mt-5">Escribe en cada recuadro el número antecesor y sucesor.</div>
+        
+        <div class="row justify-content-center mt-5">
+            
+            <div class="col-lg-3 col-md-6 bg1 d-flex justify-content-center">
+                <inputbox v-model="r[0]" ref="q0" @isright="right++" :answer="27" type="number" placeh="#">
+                    <template v-slot:after><strong class="middle"> 28 </strong></template>
+                </inputbox>
+                <inputbox v-model="r[1]" ref="q1" @isright="right++" :answer="29" type="number" placeh="#"></inputbox>
+            </div>
+
+            <div class="col-lg-3 col-md-6 bg2 d-flex justify-content-center">
+                <inputbox v-model="r[2]" ref="q2" @isright="right++" :answer="31" type="number" placeh="#">
+                    <template v-slot:after><strong class="middle"> 32 </strong></template>
+                </inputbox>
+                <inputbox v-model="r[3]" ref="q3" @isright="right++" :answer="33" type="number" placeh="#"></inputbox>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 bg3 d-flex justify-content-center">
+                <inputbox v-model="r[4]" ref="q4" @isright="right++" :answer="44" type="number" placeh="#">
+                    <template v-slot:after><strong class="middle"> 45 </strong></template>
+                </inputbox>
+                <inputbox v-model="r[5]" ref="q5" @isright="right++" :answer="46" type="number" placeh="#"></inputbox>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 bg4 d-flex justify-content-center">
+                <inputbox v-model="r[6]" ref="q6" @isright="right++" :answer="50" type="number" placeh="#">
+                    <template v-slot:after><strong class="middle"> 51 </strong></template>
+                </inputbox>
+                <inputbox v-model="r[7]" ref="q7" @isright="right++" :answer="52" type="number" placeh="#"></inputbox>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 bg5 d-flex justify-content-center">
+                <inputbox v-model="r[8]" ref="q8" @isright="right++" :answer="66" type="number" placeh="#">
+                    <template v-slot:after><strong class="middle"> 67 </strong></template>
+                </inputbox>
+                <inputbox v-model="r[9]" ref="q9" @isright="right++" :answer="68" type="number" placeh="#"></inputbox>
+            </div>
+
+            <div class="col-lg-3 col-md-6 bg6 d-flex justify-content-center">
+                <inputbox v-model="r[10]" ref="q10" @isright="right++" :answer="75" type="number" placeh="#">
+                    <template v-slot:after><strong class="middle"> 76 </strong></template>
+                </inputbox>
+                <inputbox v-model="r[11]" ref="q11" @isright="right++" :answer="77" type="number" placeh="#"></inputbox>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 bg1 d-flex justify-content-center">
+                <inputbox v-model="r[12]" ref="q12" @isright="right++" :answer="83" type="number" placeh="#">
+                    <template v-slot:after><strong class="middle"> 84 </strong></template>
+                </inputbox>
+                <inputbox v-model="r[13]" ref="q13" @isright="right++" :answer="85" type="number" placeh="#"></inputbox>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 bg2 d-flex justify-content-center">
+                <inputbox v-model="r[14]" ref="q14" @isright="right++" :answer="98" type="number" placeh="#">
+                    <template v-slot:after><strong class="middle"> 99 </strong></template>
+                </inputbox>
+                <inputbox v-model="r[15]" ref="q15" @isright="right++" :answer="100" type="number" placeh="#"></inputbox>
+            </div>
+
+        </div>
+
+
+        <div class="instruccion mt-5">Sigue las flechas y escribe los números que faltan en las siguientes series.</div>
+        
+        <div class="row mt-4 justify-content-center align-items-center borderize py-2">
+            <strong class="middle">28</strong>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <strong class="middle">29</strong>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <inputbox v-model="r[16]" ref="q16" @isright="right++" :answer="30" type="number" placeh="#"></inputbox>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <strong class="middle">31</strong>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <inputbox v-model="r[17]" ref="q17" @isright="right++" :answer="32" type="number" placeh="#"></inputbox>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <strong class="middle">33</strong>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <inputbox v-model="r[18]" ref="q18" @isright="right++" :answer="34" type="number" placeh="#"></inputbox>
+        </div>
+        
+        <div class="row mt-4 justify-content-center align-items-center borderize py-2">
+            <strong class="middle">45</strong>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <inputbox v-model="r[19]" ref="q19" @isright="right++" :answer="46" type="number" placeh="#"></inputbox>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <strong class="middle">47</strong>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <strong class="middle">48</strong>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <inputbox v-model="r[20]" ref="q20" @isright="right++" :answer="49" type="number" placeh="#"></inputbox>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <inputbox v-model="r[21]" ref="q21" @isright="right++" :answer="50" type="number" placeh="#"></inputbox>
+            <div><img src="aimg/arr.png" class="arrow"></div>
+            <strong class="middle">51</strong>
+        </div>
+        
+        
+        <div class="instruccion mt-5">Observa los números y ordénalos de <strong>menor a mayor</strong>.</div>
+        
+        <div class="row mt-4 justify-content-center">
+            <div class="col-sm-12 text-center">
+                <img src="aimg/i1.png" class="img-fluid" />
+            </div>
+            <div class="row justify-content-center mt-4">
+                <inputbox v-model="r[22]" ref="q22" @isright="right++" :answer="20" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[23]" ref="q23" @isright="right++" :answer="30" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[24]" ref="q24" @isright="right++" :answer="40" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[25]" ref="q25" @isright="right++" :answer="50" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[26]" ref="q26" @isright="right++" :answer="60" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[27]" ref="q27" @isright="right++" :answer="70" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[28]" ref="q28" @isright="right++" :answer="80" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[29]" ref="q29" @isright="right++" :answer="90" type="number" placeh="#"></inputbox>
+            </div>
+        </div>
+        <div class="instruccion mt-5">Escribe los números de <strong>10 en 10</strong> hasta llegar al <strong>100</strong>.</div>
+        
+        <div class="row mt-4 justify-content-center">
+                <inputbox v-model="r[30]" ref="q30" @isright="right++" :answer="10" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[31]" ref="q31" @isright="right++" :answer="20" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[32]" ref="q32" @isright="right++" :answer="30" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[33]" ref="q33" @isright="right++" :answer="40" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[34]" ref="q34" @isright="right++" :answer="50" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[35]" ref="q35" @isright="right++" :answer="60" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[36]" ref="q36" @isright="right++" :answer="70" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[37]" ref="q37" @isright="right++" :answer="80" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[38]" ref="q38" @isright="right++" :answer="90" type="number" placeh="#"></inputbox>
+                <inputbox v-model="r[39]" ref="q39" @isright="right++" :answer="100" type="number" placeh="#"></inputbox>
+                <div class="col-sm-2 col-4"><img src="aimg/i2.png" class="img-fluid"></div>
+        </div>
+
+
+
+       <!-- ENDING -->
+       <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+       <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+   </div>
+   
+   <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+   <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+   <script src="../../assets/modulos/check.js"></script>
+   <script src="../../assets/modulos/inputbox.js"></script>
+   <script src="../../assets/modulos/choose.js"></script>
+   <script src="../../assets/modulos/finalize.js"></script>
+   <script src="../../assets/assets.js"></script>
+   <script></script>
+</body>
+</html>

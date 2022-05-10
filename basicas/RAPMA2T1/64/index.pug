@@ -1,0 +1,98 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Sumo centenas'
+- subtitle = '1 000 chocolates'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .ex1 .inputbox {
+                font-size: 1.4rem;
+                background: #f5f5f5;
+                padding: 10px;
+                border-radius: 10px;
+            }
+            .ex1 .inputbox input {
+                max-width: 120px;
+                font-size: 1.4rem;
+                padding: 2px;
+                margin-right: 6px;
+            }
+            @media (max-width: 680px) {
+                .ex1 .inputbox {
+                    font-size: 1.2rem;
+                }
+                .ex1 .inputbox input {
+                    max-width: 100px;
+                    font-size: 1.2rem;
+                }
+            }
+            .ex2 .inputbox .numbers {
+                background: var(--clear);
+                width: 30%;
+                font-size: 1.6rem;
+                color: var(--sec);
+                text-align: center;
+                border-radius: 10px 0 0 10px;
+            }
+            .ex2 .inputbox input {
+                padding: 2px;
+                font-size: 1.3rem;
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Observa la imagen y contesta las preguntas.
+
+            .row: .col-12: img(src="aimg/1a.png").w-100
+
+            .row.mt-3.ex1
+                .col-12
+                    labeltext(num="1.") ¿Cuántas cajas se pueden formar con 600 tornillos sueltos?
+                    inputbox(v-model="r[0]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#")
+                        template(v-slot:after="") cajas de tornillos.
+                .col-12
+                    labeltext(num="2.") ¿Cuántas cajas se pueden formar con 800 tornillos sueltos?
+                    inputbox(v-model="r[1]" :ref="refCount()" @isright="right++" :answer="8" type="number" placeh="#")
+                        template(v-slot:after="") cajas de tornillos.
+                .col-12
+                    labeltext(num="3.") Si tienes 5 cajas y la mitad de otra, ¿cuántos tornillos tienes en total?
+                    inputbox(v-model="r[2]" :ref="refCount()" @isright="right++" :answer="550" type="number" placeh="#")
+                        template(v-slot:after="") tornillos.
+                .col-12
+                    labeltext(num="4.")  Si Ignacio y Luis ayudaron a su papá a empacar 900 tornillos, ¿cuántas cajas formaron?
+                    inputbox(v-model="r[3]" :ref="refCount()" @isright="right++" :answer="9" type="number" placeh="#")
+                        template(v-slot:after="") cajas de tornillos.
+                .col-12
+                    labeltext(num="5.") Si el tío de Ignacio y Luis tiene 10 cajas de tornillos, ¿cuántos tornillos sueltos tiene en total?
+                    inputbox(v-model="r[4]" :ref="refCount()" @isright="right++" :answer="1000" type="number" placeh="#")
+                        template(v-slot:after="") tornillos.
+            
+            .instruccion.mt-5 Escribe el nombre de los siguientes números.
+
+            .row.mt-3.ex2
+                .col-md-6(v-for="(i, index) in tempsobj.a").mb-3
+                    inputbox(v-model="r[index+5]" :ref="refCount()" @isright="right++" :answer="i.t" type="text" placeh="-")
+                        template(v-slot:before=""): numbers {{i.n}}
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'a', [
+                    {n:100, t:'Cien'},
+                    {n:200, t:'Doscientos'},
+                    {n:300, t:'Trescientos'},
+                    {n:400, t:'Cuatrocientos'},
+                    {n:500, t:'Quinientos'},
+                    {n:600, t:'Seiscientos'},
+                    {n:700, t:'Setecientos'},
+                    {n:800, t:'Ochocientos'},
+                    {n:900, t:'Novecientos'},
+                    {n:1000, t:'Mil'},
+                ])

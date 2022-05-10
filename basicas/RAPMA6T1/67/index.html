@@ -1,0 +1,102 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Calculo los porcentajes</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .completa {
+          display: inline-block;
+          width: 100px;
+          border-bottom: 2px dashed var(--main);
+          margin: 0 6px;
+      }
+      .options div {
+          background: #f5f5f5;
+          padding: 6px;
+          border-radius: 10px;
+          border: none !important;
+          margin: 2px;
+      }
+      .options div.active {
+          background: var(--main);
+          color: #fff !important;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Calculo los porcentajes</h1>
+      <h2>Tantos de cada 100</h2>
+      <div class="row">
+        <embedvideo urlid="oM_gIvx9DaQ" title="Porcentajes"></embedvideo>
+      </div>
+      <div class="instruccion mt-5">Resuelve los siguientes problemas y selecciona la respuesta correcta.</div>
+      <div class="row mt-3">
+        <div class="col-12">
+          <choose :key="index" v-model="r[index]" :ref="refCount()" :num="(index+1)" :text="i.p" :options="i.ops" @isright="right++" :answer="i.ops[i.a]" v-for="(i, index) in temps"></choose>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$set(app, 'temps', [
+          {
+              p: 'Cuando nos referimos al <strong>25 %</strong> de una cantidad, se está indicando la <div class="completa"></div> parte del todo.',
+              ops: ['completo', 'cuarta', 'medio'],
+              a:1
+          },
+          {
+              p: 'Cuando nos referimos al <strong>50 %</strong> de una cantidad, se está indicando la <div class="completa"></div> del todo.',
+              ops: ['mitad', 'tercio', 'completo'],
+              a:0
+          },
+          {
+              p: 'Cuando nos referimos al <strong>75 %</strong> de una cantidad, se están indicando las <div class="completa"></div> partes del todo.',
+              ops: ['un cuarto', 'dos cuartos', 'tres cuartas'],
+              a:2
+          },
+          {
+              p: 'De un grupo de 48 alumnos, el 50 % irá a una excursión. ¿Cuántos alumnos no irán a la excursión?',
+              ops: ['20 alumnos.', '24 alumnos.', '5 alumnos.'],
+              a:1
+          },
+          {
+              p: 'En la clase de Inglés hay 30 alumnos de los cuales, 6 sacaron 10 de calificación. ¿Qué porcentaje de alumnos sacó 10? ',
+              ops: ['20%', '15%', '10%'],
+              a:0
+          },
+          {
+              p: 'En el mismo grupo de Inglés, el 40 % son hombres. ¿Cuántos hombres hay en el grupo?',
+              ops: ['10 hombres.', '15 hombres.', '12 hombres.'],
+              a:2
+          },
+      ])
+    </script>
+  </body>
+</html>

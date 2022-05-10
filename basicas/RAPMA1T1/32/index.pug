@@ -1,0 +1,121 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Conozco los meses del año'
+- subtitle = 'La lista de asistencia / ¿Qué pasó primero? / El horario de clases'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .cal {
+                position: relative;
+            }
+            .cal .inputbox {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 23%;
+            }
+            .cal .inputbox:nth-child(1) {
+                left: 2.5%;
+                top: 17%;
+            }
+            .cal .inputbox:nth-child(2) {
+                left: 26.6%;
+                top: 17%;
+            }
+            .cal .inputbox:nth-child(3) {
+                left: 50.5%;
+                top: 17%;
+            }
+            .cal .inputbox:nth-child(4) {
+                left: 74.4%;
+                top: 17%;
+            }
+            .cal .inputbox:nth-child(5) {
+                left: 2.5%;
+                top: 44%;
+            }
+            .cal .inputbox:nth-child(6) {
+                left: 26.6%;
+                top: 44%;
+            }
+            .cal .inputbox:nth-child(7) {
+                left: 50.5%;
+                top: 44%;
+            }
+            .cal .inputbox:nth-child(8) {
+                left: 74.4%;
+                top: 44%;
+            }
+            .cal .inputbox:nth-child(9) {
+                left: 2.5%;
+                top: 71%;
+            }
+            .cal .inputbox:nth-child(10) {
+                left: 26.6%;
+                top: 71%;
+            }
+            .cal .inputbox:nth-child(11) {
+                left: 50.5%;
+                top: 71%;
+            }
+            .cal .inputbox:nth-child(12) {
+                left: 74.4%;
+                top: 71%;
+            }
+            .cal .inputbox input {
+                font-size: 1.2rem;
+            }
+            @media (max-width: 900px) {
+                .inputbox input {
+                    padding: 0;
+                }
+            }
+            @media (max-width: 680px) {
+                .inputbox input {
+                    font-size: 0.8rem !important;
+                }
+            }
+            .palabras strong {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+                border-radius: 10px 20px;
+                background: #DDD6E2;
+            }
+            .palabras .col {
+                margin: 10px;
+                min-width: 140px;
+                text-align: center;
+            }
+
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+            
+            .row: embedvideo(urlid="Ws4YG1NEBTc" title="Los meses del año")
+
+            .instruccion.mt-5 Utiliza los nombres de los meses que están en el recuadro y escríbelos en el orden correcto.
+
+            .my-5.d-flex.justify-content-center.align-items-center.flex-wrap.palabras
+                .col(v-for="(i, index) in ['Junio', 'Enero', 'Mayo','Febrero','Noviembre','Julio','Abril','Marzo','Septiembre','Agosto','Octubre','Diciembre']"): strong {{i}}
+
+            .row.mt-3
+                .col-12
+                    .cal
+                        img(src="aimg/calendario.png").w-100
+                        .inputs
+                            template(v-for="(i, index) in ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']")
+                                inputbox(v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i" type="text" placeh="-")
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busco el número 10</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        .operacion{
+            font-size: 1.4rem;
+            background: #FCD66B;
+            border-radius: 10px;
+            padding: 10px;
+            border: 2px solid #fff;
+        }
+        .operacion hr{
+            border-top: 2px solid #000;
+            max-width: 80px;
+        }
+
+         .operacion input{
+             width: 100px;
+        }
+
+        .op input{
+            width: 100px;
+        }
+
+        img{
+            max-width: 200px;
+        }
+        .inputbox {
+            font-size: 2rem;
+        }
+        .inputbox input {
+            background: #fff;
+            padding: 4px;
+            font-size: 1.4rem;
+            border-color: #FBE790;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Busco el número 10</h1>
+
+        <!-- <img src="../../assets/aimg/check.svg" class="animate__animated animate__heartBeat"> -->
+        <div class="instruccion mt-5">Resuelve y completa las siguientes sumas y restas</div>
+        
+        <div class="row mt-3">
+           <div class="col-md-3 col-6 text-center my-4 operacion">
+               10<br>+6
+               <hr>
+               <inputbox v-model="r[0]" ref="q0" @isright="right++" :answer="16" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion">
+                10<br>+3
+                <hr>
+                <inputbox v-model="r[1]" ref="q1" @isright="right++" :answer="13" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion">
+                10<br>+2
+                <hr>
+                <inputbox v-model="r[2]" ref="q2" @isright="right++" :answer="12" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion">
+                10<br>+1
+                <hr>
+                <inputbox v-model="r[3]" ref="q3" @isright="right++" :answer="11" type="number" placeh="#"></inputbox>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-3 col-6 text-center my-4 operacion op ">
+                10<br>
+                <inputbox v-model="r[4]" ref="q4" @isright="right++" :answer="10" type="number" placeh="#"><template v-slot:before>-</template></inputbox>
+                <hr>0
+                
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion op">
+                10<br>
+                <inputbox v-model="r[5]" ref="q5" @isright="right++" :answer="3" type="number" placeh="#"><template v-slot:before>-</template></inputbox>
+                <hr>7
+                
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion op">
+                10<br>
+                <inputbox v-model="r[6]" ref="q6" @isright="right++" :answer="8" type="number" placeh="#"><template v-slot:before>-</template></inputbox>
+                <hr>2
+                
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion op">
+                10<br>
+                <inputbox v-model="r[7]" ref="q7" @isright="right++" :answer="5" type="number" placeh="#"><template v-slot:before>-</template></inputbox>
+                <hr>5
+                
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-3 col-6 text-center my-4 operacion">
+                10<br>+7
+                <hr>
+                <inputbox v-model="r[8]" ref="q8" @isright="right++" :answer="17" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion">
+                10<br>+4
+                <hr>
+                <inputbox v-model="r[9]" ref="q9" @isright="right++" :answer="14" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion">
+                10<br>+9
+                <hr>
+                <inputbox v-model="r[10]" ref="q10" @isright="right++" :answer="19" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion">
+                10<br>+8
+                <hr>
+                <inputbox v-model="r[11]" ref="q11" @isright="right++" :answer="18" type="number" placeh="#"></inputbox>
+
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-3 col-6 text-center my-4 operacion op ">
+                10<br>
+                <inputbox v-model="r[12]" ref="q12" @isright="right++" :answer="1" type="number" placeh="#"><template v-slot:before>-</template></inputbox>
+                <hr>9
+                
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion op">
+                10<br>
+                <inputbox v-model="r[13]" ref="q13" @isright="right++" :answer="4" type="number" placeh="#"><template v-slot:before>-</template></inputbox>
+                <hr>6
+                
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion op">
+                10<br>
+                <inputbox v-model="r[14]" ref="q14" @isright="right++" :answer="7" type="number" placeh="#"><template v-slot:before>-</template></inputbox>
+                <hr>3
+                
+            </div>
+            <div class="col-md-3 col-6 text-center my-4  operacion op">
+                10<br>
+                <inputbox v-model="r[15]" ref="q15" @isright="right++" :answer="9" type="number" placeh="#"><template v-slot:before>-</template></inputbox>
+                <hr>1
+                
+            </div>
+        </div>
+
+          <div class="row mt-3">
+           <div class="col-md-3 col-6 text-center  operacion">
+               10<br>+5
+               <hr>
+               <inputbox v-model="r[16]" ref="q16" @isright="right++" :answer="15" type="number" placeh="#"></inputbox>
+            </div>
+           <div class="col-md-3 col-6 text-center  operacion">
+                10<br>-6
+                <hr>
+                <inputbox v-model="r[17]" ref="q17" @isright="right++" :answer="4" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-md-6 text-center  ">
+                <img src="aimg/kid.png" class="img-fluid">
+              
+            </div>
+         
+        </div>
+        
+        
+
+
+        
+        
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

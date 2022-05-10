@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divido un entero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        .ex1 hr {
+            margin: 4px auto;
+            border-top: 4px solid var(--sec);
+            max-width: 40px;
+        }
+        .ex1 strong {
+            font-size: 1.6rem;
+            color: var(--main);
+        }
+        .ex1 .frac {
+            background: #FFF4CE;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .ex1 .inputbox input {
+            padding: 0;
+            font-size: 1.4rem;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Divido un entero</h1>
+
+        <div class="instruccion mt-5">Observa los pasteles que ha horneado Mercedes en su pastelería y escribe la fracción que vendió de cada pastel. Observa el ejemplo.</div>
+
+        <div class="row mt-3 ex1 wrap">
+           <div class="col-md-3 col-6 text-center">
+               <img src="aimg/a1.svg" class="img-fluid">
+               <div class="frac">
+                   <strong>6</strong>
+                   <hr>
+                   <strong>8</strong>
+               </div>
+           </div>
+           <div class="col-md-3 col-6 text-center">
+               <img src="aimg/a2.svg" class="img-fluid">
+               <div class="frac">
+                    <inputbox v-model="r[0]" ref="q0" @isright="right++" :answer="4" type="number" placeh="#"></inputbox><hr>
+                   <inputbox v-model="r[1]" ref="q1" @isright="right++" :answer="8" type="number" placeh="#"></inputbox>
+               </div>
+           </div>
+           <div class="col-md-3 col-6 text-center">
+               <img src="aimg/a3.svg" class="img-fluid">
+               <div class="frac">
+                    <inputbox v-model="r[2]" ref="q2" @isright="right++" :answer="1" type="number" placeh="#"></inputbox><hr>
+                   <inputbox v-model="r[3]" ref="q3" @isright="right++" :answer="4" type="number" placeh="#"></inputbox>
+               </div>
+           </div>
+           <div class="col-md-3 col-6 text-center">
+               <img src="aimg/a4.svg" class="img-fluid">
+               <div class="frac">
+                    <inputbox v-model="r[4]" ref="q4" @isright="right++" :answer="1" type="number" placeh="#"></inputbox><hr>
+                   <inputbox v-model="r[5]" ref="q5" @isright="right++" :answer="6" type="number" placeh="#"></inputbox>
+               </div>
+           </div>
+        </div>
+
+        <div class="row mt-3 ex1 wrap">
+           <div class="col-md-3 col-6 text-center">
+               <img src="aimg/b1.svg" class="img-fluid">
+               <div class="frac">
+                    <inputbox v-model="r[6]" ref="q6" @isright="right++" :answer="2" type="number" placeh="#"></inputbox><hr>
+                   <inputbox v-model="r[7]" ref="q7" @isright="right++" :answer="8" type="number" placeh="#"></inputbox>
+               </div>
+           </div>
+           <div class="col-md-3 col-6 text-center">
+               <img src="aimg/b2.svg" class="img-fluid">
+               <div class="frac">
+                    <inputbox v-model="r[8]" ref="q8" @isright="right++" :answer="6" type="number" placeh="#"></inputbox><hr>
+                   <inputbox v-model="r[9]" ref="q9" @isright="right++" :answer="8" type="number" placeh="#"></inputbox>
+               </div>
+           </div>
+           <div class="col-md-3 col-6 text-center">
+               <img src="aimg/b3.svg" class="img-fluid">
+               <div class="frac">
+                    <inputbox v-model="r[10]" ref="q10" @isright="right++" :answer="5" type="number" placeh="#"></inputbox><hr>
+                   <inputbox v-model="r[11]" ref="q11" @isright="right++" :answer="6" type="number" placeh="#"></inputbox>
+               </div>
+           </div>
+           <div class="col-md-3 col-6 text-center">
+               <img src="aimg/b4.svg" class="img-fluid">
+               <div class="frac">
+                    <inputbox v-model="r[12]" ref="q12" @isright="right++" :answer="5" type="number" placeh="#"></inputbox><hr>
+                   <inputbox v-model="r[13]" ref="q13" @isright="right++" :answer="8" type="number" placeh="#"></inputbox>
+               </div>
+           </div>
+        </div>
+
+
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

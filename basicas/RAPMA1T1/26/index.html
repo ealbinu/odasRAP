@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Cuántos elementos son?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>¿Cuántos elementos son?</h1>
+
+        <div class="instruccion mt-5">Cuenta los elementos de cada conjunto y escribe en los recuadros cuántos hay en cada uno.</div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <img class="img-fluid" src="aimg/i1.png">
+                <inputbox v-model="r[0]" ref="q0" @isright="right++" :answer="9" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-sm-6">
+                <img class="img-fluid" src="aimg/i2.png">
+                <inputbox v-model="r[1]" ref="q1" @isright="right++" :answer="7" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-sm-6">
+                <img class="img-fluid" src="aimg/i3.png">
+                <inputbox v-model="r[2]" ref="q2" @isright="right++" :answer="5" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col-sm-6">
+                <img class="img-fluid" src="aimg/i4.png">
+                <inputbox v-model="r[3]" ref="q3" @isright="right++" :answer="10" type="number" placeh="#"></inputbox>
+            </div>
+        </div>
+
+
+        <div class="instruccion mt-5">Observa las imágenes y señala la que tenga más elementos.</div>
+        <selectableoptions v-model="r[4]" ref="q4" @isright="right++" answer="yes" :options="[{val:'yes', img: 'aimg/i5.png'}, {val:'no', img: 'aimg/i6.png'}]" customclass="col-sm-6">
+                <template v-slot:option="{option}">
+                    <img class="img-fluid" :src="option.img">
+                </template>
+        </selectableoptions>
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

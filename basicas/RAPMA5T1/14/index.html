@@ -1,0 +1,183 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Comparo fracciones</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .fracomp{
+          display: flex;
+      }
+      .ex2 .inputbox {
+          margin-bottom: 20px;
+      }
+      .ex2 .inputbox input {
+          min-width: 60px;
+          margin-left: -40px;
+          max-width: 80px;
+          padding: 2px;
+          font-size: 1.3rem;
+          box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+      }
+      .ex2 > div:nth-child(1) input {
+          border-color: #DB8743;
+      }
+      .ex2 > div:nth-child(2) input {
+          border-color: #49B0B7;
+      }
+      .ex2 > div:nth-child(3) input {
+          border-color: #A96293;
+      }
+      .ex2 > div:nth-child(4) input {
+          border-color: #A55D90;
+      }
+      .ex2 > div:nth-child(5) input {
+          border-color: #DB8844;
+      }
+      .ex2 > div:nth-child(6) input {
+          border-color: #3DABB3;
+      }
+      .illu{
+          width: 90%;
+          max-width: 180px;
+          
+      }
+      .selectableoptions {
+          flex-grow: 1;
+          font-size: 4rem;
+          font-family: 'barnacle_boyregular';
+      }
+      .selectableoptions .option {
+          text-align: center;
+      }
+      .selectableoptions .option.off {
+          color: #888;
+      }
+      .selectableoptions .option.on {
+          color: var(--main);
+      }
+      .ex3 .label span[frac] {
+          display: inline-block;
+          vertical-align: middle;
+          width: 30px;
+          text-align: center;
+      }
+      .ex3 .label span[frac] hr {
+          border: none;
+          border-top: 3px solid var(--sec);
+          margin: 0;
+      }
+      
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Comparo fracciones</h1>
+      <h2>¿Cuál es mayor? / Comparación de cantidades</h2>
+      <div class="text-center">
+        <embedvideo urlid="56JHaprztGw" title="Estrategias para comparar fracciones"></embedvideo>
+      </div>
+      <div class="instruccion mt-5">Compara las siguientes fracciones y escribe los signos <strong>></strong> o <strong><</strong> según corresponda.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-md-6 text-center fracomp"><img class="img-fluid" src="aimg/1a.png"/>
+          <!--inputbox(v-model="r[0]" :ref="refCount()" @isright="right++" answer="<" type="text" placeh="> o <")-->
+          <selectableoptions v-model="r[0]" :ref="refCount()" @isright="right++" answer="me" :options="[{val:'ma', sym:'&gt;'},  {val:'me', sym:'&lt;'},  ]" customclass="col-6">
+            <template v-slot:option="{option}">{{option.sym}}</template>
+          </selectableoptions><img class="img-fluid" src="aimg/1b.png"/>
+        </div>
+        <div class="col-md-6 text-center fracomp"><img class="img-fluid" src="aimg/1c.png"/>
+          <!--inputbox(v-model="r[1]" :ref="refCount()" @isright="right++" answer=">" type="text" placeh="> o <")-->
+          <selectableoptions v-model="r[1]" :ref="refCount()" @isright="right++" answer="ma" :options="[{val:'ma', sym:'&gt;'},  {val:'me', sym:'&lt;'},  ]" customclass="col-6">
+            <template v-slot:option="{option}">{{option.sym}}</template>
+          </selectableoptions><img class="img-fluid" src="aimg/1d.png"/>
+        </div>
+        <div class="col-md-6 text-center fracomp"><img class="img-fluid" src="aimg/1e.png"/>
+          <!--inputbox(v-model="r[2]" :ref="refCount()" @isright="right++" answer="<" type="text" placeh="> o <")-->
+          <selectableoptions v-model="r[2]" :ref="refCount()" @isright="right++" answer="me" :options="[{val:'ma', sym:'&gt;'},  {val:'me', sym:'&lt;'},  ]" customclass="col-6">
+            <template v-slot:option="{option}">{{option.sym}}</template>
+          </selectableoptions><img class="img-fluid" src="aimg/1f.png"/>
+        </div>
+        <div class="col-md-6 text-center fracomp"><img class="img-fluid" src="aimg/1g.png"/>
+          <!--inputbox(v-model="r[3]" :ref="refCount()" @isright="right++" answer=">" type="text" placeh="> o <")-->
+          <selectableoptions v-model="r[3]" :ref="refCount()" @isright="right++" answer="ma" :options="[{val:'ma', sym:'&gt;'},  {val:'me', sym:'&lt;'},  ]" customclass="col-6">
+            <template v-slot:option="{option}">{{option.sym}}</template>
+          </selectableoptions><img class="img-fluid" src="aimg/1h.png"/>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Escribe los números del <strong>1</strong> al <strong>6</strong> para ordenar las siguientes figuras de menor a mayor, de acuerdo a la fracción que representan.</div>
+      <div class="row mt-3 ex2">
+        <div class="col-md-4 col-6">
+          <inputbox v-model="r[4]" :ref="refCount()" @isright="right++" :answer="2" type="number" placeh="#">
+            <template v-slot:before=""><img class="img-fluid" src="aimg/2a.png"/></template>
+          </inputbox>
+        </div>
+        <div class="col-md-4 col-6">
+          <inputbox v-model="r[5]" :ref="refCount()" @isright="right++" :answer="3" type="number" placeh="#">
+            <template v-slot:before=""><img class="img-fluid" src="aimg/2b.png"/></template>
+          </inputbox>
+        </div>
+        <div class="col-md-4 col-6">
+          <inputbox v-model="r[6]" :ref="refCount()" @isright="right++" :answer="4" type="number" placeh="#">
+            <template v-slot:before=""><img class="img-fluid" src="aimg/2c.png"/></template>
+          </inputbox>
+        </div>
+        <div class="col-md-4 col-6">
+          <inputbox v-model="r[7]" :ref="refCount()" @isright="right++" :answer="5" type="number" placeh="#">
+            <template v-slot:before=""><img class="img-fluid" src="aimg/2d.png"/></template>
+          </inputbox>
+        </div>
+        <div class="col-md-4 col-6">
+          <inputbox v-model="r[8]" :ref="refCount()" @isright="right++" :answer="1" type="number" placeh="#">
+            <template v-slot:before=""><img class="img-fluid" src="aimg/2e.png"/></template>
+          </inputbox>
+        </div>
+        <div class="col-md-4 col-6">
+          <inputbox v-model="r[9]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#">
+            <template v-slot:before=""><img class="img-fluid" src="aimg/2f.png"/></template>
+          </inputbox>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Elige la respuesta correcta.</div>
+      <div class="row mt-3 ex3">
+        <div class="col-12">
+          <labeltext num="1.">Manuel tiene tres parcelas, en la primera siembra <span frac>2<hr>4</span> de maíz, en la segunda <span frac>4<hr>6</span> de frijol y en la tercera <span frac>4<hr>8</span> de soya.</labeltext>
+          <div class="text-center"><img class="illu" src="aimg/3a.png"/></div>
+          <choose v-model="r[10]" :ref="refCount()" num="a)" text="¿Cuál producto es el que más siembra?" :options="['Siembra más frijol.','Siembra más maíz.','Siembra más soya.']" @isright="right++" answer="Siembra más frijol."></choose>
+          <choose v-model="r[11]" :ref="refCount()" num="b)" text="¿Cuál de los otros dos productos siembra más?" :options="['Siembra más soya.','Siembra la misma cantidad.','Siembra más maíz.']" @isright="right++" answer="Siembra la misma cantidad."></choose>
+          <labeltext num="2.">Isabel fue al mercado y compró <span frac>5<hr>6</span> kg de jitomates, <span frac>3<hr>5</span> kg de chiles y <span frac>5<hr>3</span> kg de cebollas.</labeltext>
+          <div class="text-center"><img class="illu" src="aimg/3b.png"/></div>
+          <choose v-model="r[12]" :ref="refCount()" num="a)" text="¿De qué verdura compró menos?" :options="['Compró menos jitomates.','Compró menos chiles.','Compró menos cebollas.']" @isright="right++" answer="Compró menos chiles."></choose>
+          <choose v-model="r[13]" :ref="refCount()" num="b)" text="Selecciona la opción que muestre los productos de mayor a menor peso." :options="['Chiles, cebollas y jitomates.','Jitomates, chiles y cebollas.','Cebollas, jitomates y chiles.']" @isright="right++" answer="Cebollas, jitomates y chiles."></choose>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

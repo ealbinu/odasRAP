@@ -1,0 +1,142 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Comparo y ordeno números</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .inputbox {
+          text-align: center;
+          font-size: 1.2rem;
+          margin-bottom: 20px;
+          padding: 10px;
+          background: #f5f5f5;
+          border-radius: 10px;
+      }
+      .inputbox input {
+          border: 2px solid var(--main);
+          color: var(--main);
+          max-width: 120px;
+          min-width: 80px;
+          padding: 4px;
+          margin: 0 10px;
+          font-size: 1.6rem;
+      }
+      @media (max-width: 680px) {
+          .inputbox input {
+              font-size: 1.2rem;
+          }
+      }
+      @media (max-width: 680px) {
+          .inputbox {
+              font-size: 1rem;
+          }
+      }
+      .inputbox .t1,
+      .inputbox .t2 {
+          width: 40%;
+          font-weight: bold;
+      }
+      .inputbox .t1 {
+          text-align: right;
+      }
+      .inputbox .t2 {
+          text-align: left;
+      }
+      .inputbox:nth-child(odd) .t1 {
+          color: #E9832C;
+      }
+      .inputbox:nth-child(odd) .t2 {
+          color: #6A4287;
+      }
+      .inputbox:nth-child(even) .t1 {
+          color: #0084BF;
+      }
+      .inputbox:nth-child(even) .t2 {
+          color: #6CB743;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Comparo y ordeno números</h1>
+      <h2>Camino a la escuela / Los cheques del jefe</h2>
+      <div class="row">
+        <embedvideo urlid="qz7OfcWv63k" title="Nombro números muy grandes"></embedvideo>
+        <embedvideo urlid="3R1GoZqL1NE" title="Comparando números"></embedvideo>
+      </div>
+      <div class="instruccion mt-5">Lee las siguientes cantidades y escribe el signo <strong>></strong> o <strong><</strong> según corresponda.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-12">
+          <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" answer="&lt;" type="text" placeh="&gt; o &lt;">
+            <template v-slot:before="">
+              <div class="t1">Mil setecientos treinta y cinco.</div>
+            </template>
+            <template v-slot:after="">
+              <div class="t2">Mil setecientos cincuenta y tres.</div>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" answer="&gt;" type="text" placeh="&gt; o &lt;">
+            <template v-slot:before="">
+              <div class="t1">Ocho mil doscientos sesenta y cinco.</div>
+            </template>
+            <template v-slot:after="">
+              <div class="t2">Mil ochocientos sesenta y cinco.</div>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" answer="&gt;" type="text" placeh="&gt; o &lt;">
+            <template v-slot:before="">
+              <div class="t1">Tres mil doscientos veintiuno.</div>
+            </template>
+            <template v-slot:after="">
+              <div class="t2">Tres mil doscientos uno.</div>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[3]" :ref="refCount()" @isright="right++" answer="&lt;" type="text" placeh="&gt; o &lt;">
+            <template v-slot:before="">
+              <div class="t1">Cinco mil ciento cuarenta y cuatro.</div>
+            </template>
+            <template v-slot:after="">
+              <div class="t2">Cinco mil cuatrocientos cuarenta y uno.</div>
+            </template>
+          </inputbox>
+          <inputbox v-model="r[4]" :ref="refCount()" @isright="right++" answer="&lt;" type="text" placeh="&gt; o &lt;">
+            <template v-slot:before="">
+              <div class="t1">Ochocientos cuarenta y dos.</div>
+            </template>
+            <template v-slot:after="">
+              <div class="t2">Novecientos noventa y cinco.</div>
+            </template>
+          </inputbox>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

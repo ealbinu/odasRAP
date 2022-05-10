@@ -1,0 +1,75 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Encuentro el factor desconocido'
+- subtitle = ''
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .parrafoinputs .inputbox {
+                display: flex;
+            }
+            .parrafoinputs .inputbox input {
+                max-width: 100px;
+                margin-right: 6px;
+            }
+            .parrafoinputs{
+                display: flex;
+                justify-content: center;
+            }
+            .parrafoinputs .inputbox{
+                display: inline-block;
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Resuelve los siguientes problemas en tu cuaderno. Después, escribe en los recuadros correspondientes el resultado.
+
+            .row.mt-3.ex1
+                .col-12
+                    labeltext(num="1.") En un museo se registraron 630 visitas durante una semana. Si el museo está abierto de lunes a domingo, ¿cuántas visitas tuvieron por día?
+                    .parrafoinputs: inputbox(v-model="r[0]" :ref="refCount()" @isright="right++" :answer="90" type="number" placeh="#")
+                        template(v-slot:after="") visitas por día.
+                .col-12.mt-3
+                    labeltext(num="2.") En la celebración del Día del Niño se repartieron dulces a los alumnos de 4º. Si la maestra tenía una bolsa con 90 paletas y las repartió equitativamente entre 25 niños, ¿cuántas paletas le tocaron a cada uno y cuántas paletas sobraron?
+                    .parrafoinputs
+                        inputbox(v-model="r[1]" :ref="refCount()" @isright="right++" :answer="3" type="number" placeh="#")
+                            template(v-slot:after="") paletas a cada niño y sobraron
+                        inputbox(v-model="r[2]" :ref="refCount()" @isright="right++" :answer="15" type="number" placeh="#")
+                            template(v-slot:after="") paletas.
+                .col-12.mt-3
+                    labeltext(num="3.") El 14 de febrero le regalaron a mi hermana una bolsa de 168 chocolates. Diariamente se come 5 y a mí me regala 3. ¿Para cuántos días le alcanzará la bolsa?
+                    .parrafoinputs: inputbox(v-model="r[3]" :ref="refCount()" @isright="right++" :answer="21" type="number" placeh="#")
+                        template(v-slot:after="") días.
+                    labeltext() ¿Para cuántos días alcanzarían si comiéramos solamente 3 chocolates cada uno?
+                    .parrafoinputs: inputbox(v-model="r[4]" :ref="refCount()" @isright="right++" :answer="28" type="number" placeh="#")
+                        template(v-slot:after="")  días.
+                .col-12.mt-3
+                    labeltext(num="4.") Tomás gasta diariamente $18.00 en camiones y $12.00 en una torta para el recreo. Si su papá le dio $300.00, ¿para cuántos días le alcanzará el dinero?
+                    .parrafoinputs: inputbox(v-model="r[5]" :ref="refCount()" @isright="right++" :answer="10" type="number" placeh="#")
+                        template(v-slot:before="") Para 
+                        template(v-slot:after="") días.
+                .col-12.mt-3
+                    labeltext(num="5.") Sonia quiere acomodar 240 huevos en cajas de 12 huevos. ¿Cuántas cajas podrá llenar?
+                    .parrafoinputs: inputbox(v-model="r[6]" :ref="refCount()" @isright="right++" :answer="20" type="number" placeh="#")
+                        template(v-slot:after="") cajas.
+                .col-12.mt-3
+                    labeltext(num="6.") Una costurera hace una funda para almohada con 1 metro de tela. ¿Cuántos pares de fundas saldrán de una pieza de tela que tiene 340 metros?
+                    .parrafoinputs: inputbox(v-model="r[7]" :ref="refCount()" @isright="right++" :answer="170" type="number" placeh="#")
+                        template(v-slot:after="") pares.
+            
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

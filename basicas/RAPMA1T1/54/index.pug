@@ -1,0 +1,156 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Sumo más de 10'
+- subtitle = '¿Cuántas fichas faltan? / Junto y sumo 10'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+
+            .ex1 .inputbox {
+                color: #005093;
+                margin-bottom: 10px;
+                justify-content: flex-end;
+                text-align: right;
+                font-size: 1.4rem;
+                background: #C5E9F5;
+                padding: 10px;
+                border-radius: 10px;
+            }
+            .ex1 .inputbox input {
+                border-color: #005093;
+                font-size: 1.2rem;
+                max-width: 50px;
+                margin-left: 4px;
+                padding: 8px 0;
+            }
+            .ex2 .inputbox {
+                position: absolute;
+                width: 7%;
+                padding: 2px;
+            }
+            .ex2 .inputbox:nth-child(1) {
+                left: 10%;
+                top: 11%;
+            }
+            .ex2 .inputbox:nth-child(2) {
+                left: 36%;
+                top: 11%;
+            }
+            .ex2 .inputbox:nth-child(3) {
+                left: 63%;
+                top: 11%;
+            }
+            .ex2 .inputbox:nth-child(4) {
+                left: 10%;
+                top: 38%;
+            }
+            .ex2 .inputbox:nth-child(5) {
+                left: 36%;
+                top: 38%;
+            }
+            .ex2 .inputbox:nth-child(6) {
+                left: 63%;
+                top: 38%;
+            }
+            .ex2 .inputbox:nth-child(7) {
+                left: 10%;
+                top: 64%;
+            }
+            .ex2 .inputbox:nth-child(8) {
+                left: 36%;
+                top: 64%;
+            }
+            .ex2 .inputbox:nth-child(9) {
+                left: 63%;
+                top: 64%;
+            }
+            .ex2 .inputbox input {
+                border-color: #6CB743;
+                color: var(--main);
+            }
+            .ex3 .inputbox:nth-child(1) {
+                left: 31%;
+                top: 2%;
+            }
+            .ex3 .inputbox:nth-child(1) input {
+                border: 4px solid #A2568C;
+            }
+            .ex3 .inputbox:nth-child(2) {
+                left: 6%;
+                top: 29%;
+            }
+            .ex3 .inputbox:nth-child(2) input {
+                border: 4px solid #DB8743;
+            }
+            .ex3 .inputbox:nth-child(3) {
+                left: 43%;
+                top: 57%;
+            }
+            .ex3 .inputbox:nth-child(3) input {
+                border: 4px solid #7EB455;
+            }
+            .ex3 .inputbox:nth-child(4) {
+                left: 25%;
+                top: 85%;
+            }
+            .ex3 .inputbox:nth-child(4) input {
+                border: 4px solid #84774C;
+            }
+
+            @media (max-width: 680px) {
+                .ex3 .inputbox input {
+                    font-size: 2.6rem;
+                }
+            }
+
+
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+            
+            .row: embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+
+            .instruccion.mt-5 Resuelve las siguientes sumas.
+            .row.mt-3.ex1
+                .col-md-4.col-6.text-right(v-for="(i, index) in tempsobj.a")
+                        inputbox(v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i.r" type="number" placeh="#")
+                            template(v-slot:before=""): strong {{i.o}}
+
+
+            .instruccion.mt-5 Utiliza los signos #[strong +] o #[strong −] en cada operación para obtener el resultado indicado.
+            .row.mt-3
+                .col: imgbg(img="aimg/b1.png" initclass="ex2")
+                    inputbox(v-for="(i, index) in tempsobj.b" v-model="r[index+tempsobj.a.length]" :ref="refCount()" @isright="right++" :answer="i" type="text" placeh="- +")
+            .instruccion.mt-5 Completa las sumas para que las operaciones sumen 20.
+
+            .row.mt-3.justify-content-center.align-items-center
+                .col-md-6: imgbg(img="aimg/c1.png" initclass="ex3")
+                    inputbox(v-for="(i, index) in tempsobj.c" v-model="r[index+tempsobj.a.length+tempsobj.b.length]" :ref="refCount()" @isright="right++" :answer="i" type="number" placeh="#")
+                .col-md-6: img(src="aimg/c2.png").img-fluid.girl
+            
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'a', [
+                    {o: '2 + 8 =', r: 10}, {o: '26 + 4 =', r: 30}, {o: '20 + 30 =', r: 50},
+                    {o: '5 + 5  =', r: 10}, {o: '6 + 4 =', r: 10}, {o: '20 + 20 =', r: 40},
+                    {o: '15 + 5 =', r: 20}, {o: '22 + 8 =', r: 30}, {o: '37 + 3 =', r: 40},
+                    {o: '11 + 9 =', r: 20}, {o: '10 + 10 + 10 =', r: 30}, {o: '41 + 9 =', r: 50},
+                ])
+                app.$set(app.tempsobj, 'b', [
+                    '+', '-', '+',
+                    '-', '+', '+',
+                    '-', '+', '-',
+                ])
+                app.$set(app.tempsobj, 'c', [7, 8, 10, 10])

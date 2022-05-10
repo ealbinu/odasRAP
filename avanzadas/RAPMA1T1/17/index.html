@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuento cuántas frutas son</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+
+    <style>
+        :root {
+        
+        --plyr-video-control-background-hover: #fff;
+        --plyr-control-icon-size: 28px;
+        --plyr-control-padding: 6px;
+        --plyr-control-radius: 10px;
+        }
+        .next{font-size: 2rem; margin: 20px;}
+
+        
+        img.zoominImg{
+	        position: absolute;
+            z-index: 1;
+            animation: zoominImgKey 3s;
+            animation-delay: 1s;
+            transform: scale(1.1);
+            animation-fill-mode: forwards;
+        }
+
+
+        @keyframes zoominImgKey {
+            0% {
+                transform: scale(1.1);
+                opacity: 1;
+                z-index: 1;
+                bottom: 0;
+            }
+            99% {
+                transform: scale(3);
+                opacity: 0;
+                bottom: 25%;
+                z-index: 1;
+            }
+            100% {
+                z-index: -1;
+            }
+        }
+        .clickable{
+            margin: 20px 40px;
+        }
+
+        @media (max-width: 680px){}
+    </style>
+    </head>
+<body>
+    <div id="app">
+        
+        <scene v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted"></scene>
+
+
+        <scene v-if="currentScene==1" :key="1" hidescorebox
+            :answers="4" scene-color="#B9DAD6" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_nino.mp3" @completed="sceneCompleted" :devmode="false">
+            <!--<info type="relacionar" text="false" audio="false"  :autoplay="false"></info>-->
+            <activity>
+                <div class="row w100 info"><h1>Cuénto cuántas frutas son</h1></div>
+                <div class="row w100">
+                    <videoplayer initclass="w80" path="aimg/v1" :autoplay="true" c="8" @completed="temps.a=true"></videoplayer>
+                </div>
+                <button v-if="temps.a" class="button next animate__animated animate__zoomIn" @click="sceneCompleted(false)">Siguiente</button>
+            </activity>
+        </scene>
+
+        <!---->
+        <scene v-for="i in [
+            { in: 2,
+                img: 'limones.svg', p: '¿Cuántos limones hay en la caja? Elige la respuesta correcta.', s: 'ilimones.mp3',
+                r: [['5', true, '5.mp3'], ['7', false, '7.mp3']]},
+            { in: 3,
+                img: 'melones.svg', p: '¿Cuántos melones hay en la caja? Elige la respuesta correcta.', s: 'imelones.mp3',
+                r: [['5', false, '5.mp3'], ['2', true, '2.mp3']]},
+            { in: 4,
+                img: 'manzanas.svg', p: '¿Cuántas manzanas hay en la caja? Elige la respuesta correcta.', s: 'imanzanas.mp3',
+                r: [['4', true, '4.mp3'], ['3', false, '3.mp3']]},
+            { in: 5,
+                img: 'naranjas.svg', p: '¿Cuántas naranjas hay en la caja? Elige la respuesta correcta.', s: 'inaranjas.mp3',
+                r: [['6', false, '6.mp3'], ['4', true, '4.mp3']]},
+            { in: 6,
+                img: 'peras.svg', p: '¿Cuántas peras hay en la caja? Elige la respuesta correcta.', s: 'iperas.mp3',
+                r: [['8', false, '8.mp3'], ['6', true, '6.mp3']]},
+            { in: 7,
+                img: 'todas.svg', p: '¿Qué caja tiene la misma cantidad que la caja de manzanas? Elige la respuesta correcta.', s: 'icantidad.mp3',
+                r: [['limones', false, 'limones.mp3'], ['naranjas', true, 'naranjas.mp3']]},
+        ]" v-if="currentScene==i.in" :key="i.in"
+            :answers="1" scene-color="#B9DAD6" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_nino.mp3" @completed="sceneCompleted" :devmode="false">
+            <info type="seleccionar" title="Cuento cuántas frutas son" :text="i.p" :textaudio="'asound/'+i.s" :autoplay="true"></info>
+            <activity>
+                <img src="aimg/bg.svg" class="w100 zoominImg">
+                <div class="row w100"><div :class="i.in!=7?'w40':'w60'"><img :src="'aimg/'+i.img" class="w100"></div></div>
+                <div class="row wrap animate__animated animate__delay-3s	animate__bounceIn">
+                    <clickable simple-ok block-if-error :isok="i.r[0][1]" :click-sound="'asound/'+i.r[0][2]"><number randomc>{{i.r[0][0]}}</number></clickable>
+                    <clickable simple-ok block-if-error :isok="i.r[1][1]" :click-sound="'asound/'+i.r[1][2]"><number randomc>{{i.r[1][0]}}</number></clickable>
+                </div>
+            </activity>
+        </scene>
+
+
+        <scene v-if="currentScene==8" :key="8" hidescorebox
+            :answers="4" scene-color="#B9DAD6" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_nino.mp3" @completed="sceneCompleted" :devmode="false">
+            <!--<info type="relacionar" text="false" audio="false"  :autoplay="false"></info>-->
+            <activity>
+                <div class="row w100 info"><h1>Cuénto cuántas frutas son</h1></div>
+                <div class="row w100">
+                    <videoplayer initclass="w80" path="aimg/v2" :autoplay="true" c="8" @completed="temps.a=true"></videoplayer>
+                </div>
+                <button v-if="temps.a" class="button next animate__animated animate__zoomIn" @click="sceneCompleted(false)">Finalizar</button>
+            </activity>
+        </scene>
+
+
+
+
+        <scene v-if="currentScene==9" :key="9" end-scene :final-data="finalData"></scene>
+    
+
+    
+
+    </div>
+    <!-- libraries -->
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <!-- fireworks -->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- modulos -->
+    <script src="../../assets/modulos/videoplayer.js"></script>
+    <script src="../../assets/modulos/number.js"></script>
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- mainscript -->
+    <script src="../../assets/assets.js"></script>
+    <script>
+        app.$set(app.temps, 'a', false)
+        app.currentScene = 0
+        app.scenesCount = 6
+        app.$devmode = false
+    </script>
+</body>
+</html>

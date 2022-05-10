@@ -1,0 +1,125 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Multiplico</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .inputbox input,
+      .inputbox .inp_example {
+          max-width: 80px;
+          margin-right: auto;
+          font-size: 1.2rem;
+          padding: 4px;
+          min-width: 60px;
+      }
+      .inputbox .numbers {
+          color: var(--main);
+      }
+      .maxsize {
+          max-width: 220px;
+      }
+      .op {
+          background: #f5f5f5;
+          padding: 10px;
+          border-radius: 10px;
+          margin: 10px 0;
+          font-size: 1.2rem;
+      }
+      .op .inputbox input {
+          font-size: 1.2rem;
+          padding: 2px;
+          border-radius: 4px;
+          margin: 0 4px;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Multiplico</h1>
+      <h2>Trayecto 6. La multiplicación. ¡A dibujar! / ¿Cuál operación? / La multiplicación</h2>
+      <div class="row">
+        <embedvideo urlid="R_Z22uvHFaY" title="Multiplicación"></embedvideo>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center"><img class="img-fluid" src="aimg/a0.png"/></div>
+      </div>
+      <div class="instruccion mt-5">Escribe el resultado de la multiplicación que representa el total de colores en cada fila. Observa el ejemplo.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-12">
+          <inputbox :answer="2" type="number" placeh="#" example="example">
+            <template v-slot:before=""><img class="img-fluid" src="aimg/a1.png"/></template>
+          </inputbox>
+        </div>
+        <div class="col-12" v-for="(i, index) in [4,6,8,10,12,14,16,18,20]">
+          <p>{{index}}</p>
+          <inputbox v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i" type="number" placeh="#">
+            <template v-slot:before=""><img class="img-fluid" :src="'aimg/a'+(index+2)+'.png'"/></template>
+          </inputbox>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Observa la imagen y resuelve los siguientes problemas.</div>
+      <div class="row">
+        <div class="col-12 text-center"><img class="w-100 maxsize" src="aimg/b0.png"/></div>
+      </div>
+      <div class="row mt-3 ex2">
+        <div class="col-12">
+          <labeltext num="1.">Si Emilio tiene 5 cajas de 6 colores cada una, ¿cuántos colores tiene en total?</labeltext>
+          <div class="row op centerrow">
+            <inputbox v-model="r[9]" :ref="refCount()" @isright="right++" :answer="5" type="number" placeh="#"></inputbox><span>cajas de </span>
+            <inputbox v-model="r[10]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#"></inputbox><span>colores = </span>
+            <inputbox v-model="r[11]" :ref="refCount()" @isright="right++" :answer="30" type="number" placeh="#"></inputbox><span>colores en total.</span>
+          </div>
+          <div class="row op centerrow">
+            <inputbox v-model="r[12]" :ref="refCount()" @isright="right++" :answer="5" type="number" placeh="#"></inputbox><span>x </span>
+            <inputbox v-model="r[13]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#"></inputbox><span>= </span>
+            <inputbox v-model="r[14]" :ref="refCount()" @isright="right++" :answer="30" type="number" placeh="#"></inputbox><span>colores en total.</span>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3 ex2">
+        <div class="col-12">
+          <labeltext num="2."> Si Emilio regaló 4 cajas de colores a su hermana, ¿cuántos colores regaló en total?</labeltext>
+          <div class="row op centerrow">
+            <inputbox v-model="r[15]" :ref="refCount()" @isright="right++" :answer="4" type="number" placeh="#"></inputbox><span>cajas de </span>
+            <inputbox v-model="r[16]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#"></inputbox><span>colores = </span>
+            <inputbox v-model="r[17]" :ref="refCount()" @isright="right++" :answer="24" type="number" placeh="#"></inputbox><span>colores en total.</span>
+          </div>
+          <div class="row op centerrow">
+            <inputbox v-model="r[18]" :ref="refCount()" @isright="right++" :answer="4" type="number" placeh="#"></inputbox><span>x </span>
+            <inputbox v-model="r[19]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#"></inputbox><span>= </span>
+            <inputbox v-model="r[20]" :ref="refCount()" @isright="right++" :answer="24" type="number" placeh="#"></inputbox><span>colores en total.</span>
+          </div>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

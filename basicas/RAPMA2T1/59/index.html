@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifico figuras geométricas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        .shapes{
+            background: #fff;
+            border: 2px solid var(--sec);
+            border-radius: 20px;
+            padding: 20px;
+        }
+        .img-fluid{max-width: 120px;}
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Identifico figuras geométricas</h1>
+        <h2>Cajas de figuras / ¿En qué se parecen?</h2>
+
+        <div class="instruccion mt-5">Observa las figuras geométricas y encierra con <strong>rojo</strong> las figuras que sean cuadriláteros.</div>
+        
+        <div class="row shapes justify-content-center align-items-center mt-5">
+                <template v-for="(i, index) in [
+                {val:true, img:'aimg/i1.png'}, 
+                {val:true, img:'aimg/i2.png'},
+                {val:true, img:'aimg/i3.png'},
+                {val:false, img:'aimg/i4.png'},
+                {val:false, img:'aimg/i5.png'},
+                {val:true, img:'aimg/i6.png'},
+                {val:false, img:'aimg/i7.png'},
+                {val:false, img:'aimg/i8.png'},
+                {val:false, img:'aimg/i9.png'},
+                {val:false, img:'aimg/i10.png'},
+                {val:true, img:'aimg/i11.png'},
+                {val:false, img:'aimg/i12.png'},
+                ]">
+                    <div class="col-sm-3">
+                        <selectable :isok="i.val" v-model="r[index]" :ref="'q'+index" @isright="right++">
+                            <img :src="i.img" class="img-fluid">
+                        </selectable>
+                    </div>
+                </template>
+        </div>
+
+        <div class="instruccion mt-5">Contesta las preguntas con base en las figuras anteriores.</div>
+
+        <div class="col-sm-12 h4 mt-5">
+            <div class="label"><strong>1.</strong> ¿Cuál es el nombre de la figura que tiene sus 4 lados iguales?</div>
+            <inputbox v-model="r[12]" ref="q12" @isright="right++" :answer="'cuadrado'" type="text" placeh=""></inputbox>
+        </div>
+        
+        <div class="col-sm-12 h4 mt-5">
+            <div class="label"><strong>2.</strong> ¿Cómo se llama la figura que tiene los 4 lados de diferente medida?</div>
+            <inputbox v-model="r[13]" ref="q13" @isright="right++" :answer="'trapezoide'" type="text" placeh=""></inputbox>
+        </div>
+<!--
+    <div class="col-sm-6 mt-2"><inputbox v-model="r[7]" ref="q7" @isright="right++" answer="treinta y cinco" type="text" placeh="# de cerezas"></inputbox></div>
+-->
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

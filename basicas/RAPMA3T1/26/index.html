@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmo lo que aprendí</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+       .options div{margin: 10px 20px;} 
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Confirmo lo que aprendí</h1>
+
+
+        <div class="instruccion mt-5">Marca la respuesta correcta</div>
+        <div class="row mt-3">
+            <div class="col-sm-12">
+
+                <choose v-for="(i, index) in [
+                    {
+                        p: '¿Cuál es el número que corresponde a la siguiente descomposición? <strong>6 000 + 700 + 90 + 9 =</strong>',
+                        ops: ['6 799','6 979','7 699'],
+                        a: 0
+                    },
+                    {
+                        p: 'En el número <strong>7 458</strong>, ¿cuál es el valor posicional de la cifra que se encuentra en las unidades de millar?',
+                        ops: ['70','7 000','7'],
+                        a: 1
+                    },
+                    {
+                        p: 'Karla tiene 2 billetes de $1 000, 2 de $500, 3 de $200, 1 de $100, 1 de $50 y 1 de $20. ¿Cuánto dinero tiene?',
+                        ops: ['$3 970','$3 870','$3 770'],
+                        a: 2
+                    },
+                    {
+                        p: '¿Cuál de las siguientes operaciones tiene un resultado mayor?',
+                        ops: ['4 000 + 500 =','5 000 + 20 =','4 000 + 200 ='],
+                        a: 1
+                    },
+                    {
+                        p: 'Ramón tenía $3 000 y compró un celular que le costó $2 100. ¿Cuánto dinero le quedó?',
+                        ops: ['$900','$1 100','$1 090'],
+                        a: 0
+                    },
+                    {
+                        p: '¿Cuál de las operaciones no resuelve el siguiente problema?<div><strong>Si un carpintero hace 20 sillas en una semana, ¿cuántas sillas hará en 5 semanas?</strong></div>',
+                        ops: ['20 + 20 + 20 + 20 + 20 =','5 × 20 =','20 × 20 × 20 × 20 × 20 ='],
+                        a: 2
+                    },
+                    {
+                        p: 'En una fábrica empacan 10 chocolates por caja. ¿Cuántos chocolates habrá en 500 cajas?',
+                        ops: ['50 000 chocolates.','5 000 chocolates.','500 chocolates.'],
+                        a: 1
+                    },
+                    {
+                        p: 'Arturo entra a la escuela a las 8:00 a. m. Si de su casa a la escuela hace 45 minutos, ¿a qué hora tiene que salir de su casa para estar puntual en la escuela?',
+                        ops: ['A las 7:15 a.m.','A las 7:25 a.m.','A las 7:05 a.m.'],
+                        a: 0
+                    },
+                    
+                    
+                    
+                    
+                ]"
+                    :key="index" v-model="r[index]" :ref="'q'+index" :num="(index+1)+'.'" :text="i.p"
+                    :options="i.ops" @isright="right++" :answer="i.ops[i.a]"></choose>
+                
+            </div>
+        </div>
+        
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

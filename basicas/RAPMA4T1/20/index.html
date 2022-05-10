@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reparto agrupando</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        table {
+            border: 2px solid #AE508F;
+        }
+        th {
+            background: #EEDFE7;
+            color: #AE4E8F;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-align: center;
+            border: 2px solid #AE508F;
+        }
+        td {
+            border: 2px solid #AE508F;
+            text-align: center;
+        }
+        td .col {
+            font-size: 1.2rem;
+            margin: 10px;
+            color: var(--accent);
+        }
+        td:nth-child(2) {
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #02A3DA;
+        }
+        td:nth-child(3) {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        td:nth-child(3) .inputbox {
+            margin: 0 auto;
+            max-width: 200px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Reparto agrupando</h1>
+
+        <div class="instruccion mt-5">Lee con atención y resuelve como se indica.</div>
+
+        <div class="row mt-3">
+            <p class="h5">La maestra Ana continúa organizando el salón y ahora necesita acomodar libros en los repisas correspondientes. Para hacerlo ha realizado la siguiente tabla, en la que se muestra el número de libros que tiene de cada tipo. Ayúdala a completar la tabla.</p>
+        
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Total de libros</th>
+                        <th>Libros por repisa</th>
+                        <th>Número de repisas necesarias para organizar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="col">42 libros de cuentos.</div>
+                            <div class="img"><img src="aimg/I1.svg"></div>
+                        </td>
+                        <td>7</td>
+                        <td><inputbox v-model="r[0]" ref="q0" @isright="right++" :answer="6" type="number" placeh="#"></inputbox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="col">64 libros de leyendas mexicanas.</div>
+                            <div class="img"><img src="aimg/I2.svg"></div>
+                        </td>
+                        <td>8</td>
+                        <td><inputbox v-model="r[1]" ref="q1" @isright="right++" :answer="8" type="number" placeh="#"></inputbox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="col">63 libros de experimentos.</div>
+                            <div class="img"><img src="aimg/I3.svg"></div>
+                        </td>
+                        <td>7</td>
+                        <td><inputbox v-model="r[2]" ref="q2" @isright="right++" :answer="9" type="number" placeh="#"></inputbox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="col">20 libros de historietas.</div>
+                            <div class="img"><img src="aimg/I4.svg"></div>
+                        </td>
+                        <td>4</td>
+                        <td><inputbox v-model="r[3]" ref="q3" @isright="right++" :answer="5" type="number" placeh="#"></inputbox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="col">60 libros de escritura.</div>
+                            <div class="img"><img src="aimg/I5.svg"></div>
+                        </td>
+                        <td>6</td>
+                        <td><inputbox v-model="r[4]" ref="q4" @isright="right++" :answer="10" type="number" placeh="#"></inputbox></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    
+    
+    
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

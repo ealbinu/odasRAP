@@ -1,0 +1,368 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Cuento hasta 100'
+- subtitle = 'Hasta 100 / Tablero de 100'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .boxes {
+                display: flex;
+                justify-content: center;
+            }
+            .boxes .selectable {
+                flex-direction: column;
+            }
+            .boxes .selectable .box {
+                width: 16px;
+                height: 16px;
+                border: 1px solid #fff;
+                background: var(--clear);
+                border-radius: 4px;
+            }
+            .boxes .selectable:hover:not(.dis) {
+                cursor: pointer;
+            }
+            .boxes .selectable:hover:not(.dis) .box {
+                background: var(--main);
+            }
+            .boxes .selectable.on .circledactive {
+                display: none;
+            }
+            .boxes .selectable.on .box {
+                background: var(--main);
+            }
+            .boxes .selectable.on.first .box {
+                background: var(--accent);
+            }
+
+            .ex1 {
+                background: #f5f5f5;
+                padding: 10px;
+                border-radius: 10px;
+            }
+            .ex1 .numbers {
+                font-size: 2rem;
+            }
+            .ex1 .inputbox {
+                margin-top: 10px;
+            }
+            .ex1 .inputbox input {
+                max-width: 160px;
+                font-size: 1.3rem;
+                margin: 0 10px;
+            }
+
+            .ex2 {
+                background-image: url("aimg/2a.png");
+            }
+            .ex3 {
+                background-image: url("aimg/2b.png");
+            }
+            .ex2,
+            .ex3 {
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                padding: 0 20%;
+                min-height: 200px;
+            }
+            .ex2 .inputbox input,
+            .ex3 .inputbox input {
+                font-size: 1.6rem;
+                padding: 4px 2px;
+            }
+            .ex2 .inputbox .inp_example,
+            .ex3 .inputbox .inp_example {
+                background: #fff;
+                border-radius: 10px;
+                padding: 6px;
+                width: 100%;
+                text-align: center;
+            }
+            .ex2 .inputbox .inp_example .numbers,
+            .ex3 .inputbox .inp_example .numbers {
+                line-height: 1;
+                font-size: 1.6rem
+            }
+            @media (max-width: 992px) {
+                .ex2, .ex3{
+                    background-size: cover;
+                    background-position: right;
+                    padding: 4%;
+                }
+                .ex2 .col,
+                .ex3 .col {
+                    min-width: 60px;
+                }
+                .ex2 .inputbox .inp_example .numbers,
+                .ex3 .inputbox .inp_example .numbers {
+                    font-size: 1.1rem;
+                }
+                .ex2 .inputbox input,
+                .ex3 .inputbox input {
+                    font-size: 1.1rem;
+                    padding: 2px;
+                }
+            }
+
+            .playeras {
+                position: relative;
+            }
+            .playeras .inputbox {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 5.5%;
+            }
+            .playeras .inputbox input {
+                padding: 2px 0;
+                font-size: 1rem;
+                border-color: #CD7C9E;
+            }
+            @media (max-width: 768px) {
+                .playeras .inputbox input {
+                    border-width: 1px;
+                    padding: 0;
+                }
+            }
+            .playeras .inputbox:nth-child(1) {
+                left: 30.5%;
+                top: 25%;
+            }
+            .playeras .inputbox:nth-child(2) {
+                left: 39.2%;
+                top: 25%;
+            }
+            .playeras .inputbox:nth-child(3) {
+                left: 49%;
+                top: 25%;
+            }
+            .playeras .inputbox:nth-child(4) {
+                left: 58.5%;
+                top: 25%;
+            }
+            .playeras .inputbox:nth-child(5) {
+                left: 69.5%;
+                top: 25%;
+            }
+            .playeras .inputbox:nth-child(6) {
+                left: 78.5%;
+                top: 25%;
+            }
+            .playeras .inputbox:nth-child(7) {
+                left: 14%;
+                top: 77%;
+            }
+            .playeras .inputbox:nth-child(8) {
+                left: 22.4%;
+                top: 77%;
+            }
+            .playeras .inputbox:nth-child(9) {
+                left: 29.6%;
+                top: 77%;
+            }
+            .playeras .inputbox:nth-child(10) {
+                left: 37.7%;
+                top: 77%;
+            }
+            .playeras .inputbox:nth-child(11) {
+                left: 46%;
+                top: 77%;
+            }
+            .playeras .inputbox:nth-child(12) {
+                left: 55%;
+                top: 77%;
+            }
+            .playeras .inputbox:nth-child(13) {
+                left: 62.5%;
+                top: 77%;
+            }
+            .playeras .inputbox:nth-child(14) {
+                left: 70.9%;
+                top: 77%;
+            }
+            .selectable .result{
+                transform: scale(0.5);
+            }
+
+
+
+            /* MOD tenbox*/
+
+            .boxes {
+                position: relative;
+            }
+            .boxes.isright {
+                border: 2px solid var(--rightcol);
+            }
+            .boxes.iswrong {
+                border: 2px solid var(--wrongcol);
+            }
+            .boxes .isright,
+            .boxes .iswrong {
+                position: absolute;
+                right: -2%;
+                top: -10%;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+            .boxes .isright:after,
+            .boxes .iswrong:after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-image: url("../../assets/aimg/iswrong.svg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 70%;
+            }
+            .boxes .isright {
+                background: var(--rightcol);
+            }
+            .boxes .isright:after {
+                background-image: url("../../assets/aimg/isright.svg");
+            }
+            .boxes .iswrong {
+                background: var(--wrongcol);
+            }
+
+            
+
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+            
+            .row
+                embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+                embedvideo(urlid="qBblVFRW3uw" title="Sumas con números de dos cifras")
+
+            .instruccion.mt-5 Colorea la cantidad que se indica. Observa el ejemplo.
+
+            .row.mt-3.ex0.justify-content-center
+                .col-md-4.col-6.text-center
+                    .boxes
+                        .selectable(v-for="(i, index) in 10" :class="index==0?'on first':'dis'"): .box(v-for="(i, index) in 10")
+                    numbers 10
+                .col-md-4.col-6.text-center
+                    tenboxes(:howmany="2" v-model="r[0]" key="0" :ref="refCount()" @isright="right++")
+                    //selectable(:isok="index<2" v-model="r[index+9]" :ref="refCount()" @isright="right++" v-for="(i, index) in 10"): .box(v-for="(i, index) in 10")
+                    numbers 20
+                .col-md-4.col-6.text-center
+                    tenboxes(:howmany="3" v-model="r[1]"  key="1" :ref="refCount()" @isright="right++")
+                    //selectable(:isok="index<3" v-model="r[index+18]" :ref="refCount()" @isright="right++" v-for="(i, index) in 10"): .box(v-for="(i, index) in 10")
+                    numbers 30
+                .col-md-4.col-6.text-center
+                    tenboxes(:howmany="4" v-model="r[2]"  key="2" :ref="refCount()" @isright="right++")
+                    //selectable(:isok="index<4" v-model="r[index+27]" :ref="refCount()" @isright="right++" v-for="(i, index) in 10"): .box(v-for="(i, index) in 10")
+                    numbers 40
+                .col-md-4.col-6.text-center
+                    tenboxes(:howmany="5" v-model="r[3]"  key="3" :ref="refCount()" @isright="right++")
+                    //selectable(:isok="index<5" v-model="r[index+36]" :ref="refCount()" @isright="right++" v-for="(i, index) in 10"): .box(v-for="(i, index) in 10")
+                    numbers 50
+            .instruccion.mt-5 Observa las placas anteriores y contesta las siguientes preguntas.
+            .row.mt-3.ex1
+                .col-12
+                    labeltext(num="1.") ¿Cuántos cubos quedaron sin colorear en la primera placa?
+                    inputbox(v-model="r[4]" :ref="refCount()" @isright="right++" :answer="90" type="number" placeh="#")
+                    labeltext Entonces:
+                    inputbox(v-model="r[5]" :ref="refCount()" @isright="right++" :answer="100" type="number" placeh="#")
+                        template(v-slot:before=""): numbers 10 + 90 = 
+            .row.mt-3.ex1
+                .col-12
+                    labeltext(num="2.") ¿Cuántos cubos quedaron sin colorear en la segunda placa?
+                    inputbox(v-model="r[6]" :ref="refCount()" @isright="right++" :answer="80" type="number" placeh="#")
+                    labeltext Entonces:
+                    inputbox(v-model="r[7]" :ref="refCount()" @isright="right++" :answer="80" type="number" placeh="#")
+                        template(v-slot:before=""): numbers 20 + 
+                        template(v-slot:after=""): numbers = 100 
+            .row.mt-3.ex1
+                .col-12
+                    labeltext(num="3.") ¿Cuántos cubos quedaron sin colorear en la tercera placa?
+                    inputbox(v-model="r[8]" :ref="refCount()" @isright="right++" :answer="70" type="number" placeh="#")
+                    labeltext Entonces:
+                    inputbox(v-model="r[9]" :ref="refCount()" @isright="right++" :answer="100" type="number" placeh="#")
+                        template(v-slot:before=""): numbers 30 + 70 = 
+            .row.mt-3.ex1
+                .col-12
+                    labeltext(num="4.") ¿Con qué suma representarías la última placa?
+                    .row.justify-content-center.align-items-center.text-center.no-gutters
+                        .col: inputbox(v-model="r[10]" :ref="refCount()" @isright="right++" :answer="50" type="number" placeh="#")
+                        .col-1: numbers +
+                        .col: inputbox(v-model="r[11]" :ref="refCount()" @isright="right++" :answer="50" type="number" placeh="#")
+                        .col-1: numbers =
+                        .col: inputbox(v-model="r[12]" :ref="refCount()" @isright="right++" :answer="100" type="number" placeh="#")
+            
+            .instruccion.mt-5 Completa la serie de #[strong 10] en #[strong 10] hasta #[strong 100].
+
+            .row.mt-3.ex2.justify-content-center.align-items-center.no-gutters.flex-wrap.wrap
+                .col(v-for="(i, index) in tempsobj.a")
+                    inputbox(v-model="r[i.model]" :ref="refCount()" @isright="right++" :answer="i.val" type="number" placeh="-" v-if="i.model")
+                    inputbox(:answer="i.val" :example="true" v-else="i.model")
+
+            .instruccion.mt-5 Completa la serie de #[strong 20] en #[strong 20] hasta #[strong 100].
+
+            .row.mt-3.ex3.justify-content-center.align-items-center.no-gutters.flex-wrap.wrap
+                .col(v-for="(i, index) in tempsobj.b")
+                    inputbox(v-model="r[i.model]" :ref="refCount()" @isright="right++" :answer="i.val" type="number" placeh="-" v-if="i.model")
+                    inputbox(:answer="i.val" :example="true" v-else="i.model")
+            
+            .instruccion.mt-5 Completa la serie de 1 en 1.
+
+            .row.mt-3.ex4
+                .col-12.playeras
+                    img(src="aimg/3a.png").w-100 
+                    .inps
+                        inputbox(v-for="(i, index) in tempsobj.c" :key="i.model" v-model="r[i.model]" :ref="refCount()" @isright="right++" :answer="i.val" type="number" placeh="#")
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total" fields-text="opciones")
+        +scripts('tenboxes.js')
+            script.
+                app.$set(app.tempsobj, 'a', [
+                    { val: 10 },
+                    {model: 13, val: 20 },
+                    {model: 14, val: 30 },
+                    {model: 15, val: 40 },
+                    {model: 16, val: 50 },
+                    {model: 17, val: 60 },
+                    {model: 18, val: 70 },
+                    {model: 19, val: 80 },
+                    {val: 90 },
+                    {model: 20, val: 100 }
+                ])
+
+                app.$set(app.tempsobj, 'b', [
+                    { val: 20 },
+                    { val: 40 },
+                    {model: 21, val: 60 },
+                    {model: 22, val: 80 },
+                    {model: 23, val: 100 },
+                ])
+
+                app.$set(app.tempsobj, 'c', [
+                    {model: 24, val: 18 },
+                    {model: 25, val: 17 },
+                    {model: 26, val: 16 },
+                    {model: 27, val: 15 },
+                    {model: 28, val: 14 },
+                    {model: 29, val: 13 },
+                    
+                    {model: 30, val: 19 },
+                    {model: 31, val: 18 },
+                    {model: 32, val: 17 },
+                    {model: 33, val: 16 },
+                    {model: 34, val: 15 },
+                    {model: 35, val: 14 },
+                    {model: 36, val: 13 },
+                    {model: 37, val: 12 },
+                ])
+                

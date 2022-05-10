@@ -1,0 +1,147 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+include ../../assets/pug/_table
+
+- title = 'Cuento unidades'
+- subtitle = 'Cubos y más cubos / ¿Qué pasa con el volumen?'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .relational{
+                display: block !important;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .relational .sources, .relational .targets{
+                flex-grow: 1;
+                width: 100% !important;
+                flex-direction: row;
+            }
+             .ex1 .relational .targets{
+                margin-top: 60px !important;
+                margin-bottom: 300px !important;
+            }
+            
+            .sources img{
+                max-height: 100px;
+            }
+            .targets .numbers {
+                font-size: 1.6rem;
+            }
+            @media (max-width: 992px) {
+                .targets .numbers {
+                    font-size: 1rem;
+                    padding: 20px 0;
+                }
+                strong {
+                    color: var(--accent);
+                }
+            }
+            .jtk-endpoint{
+                z-index: 9;
+            }
+
+            .relational .sources {
+                flex-wrap: wrap;
+            }
+            .relational .sources > div {
+                width: 33%;
+            }
+            .relational .sources > div:nth-child(n+4) {
+                margin-top: 300px;
+                margin-bottom: -300px;
+            }
+            .targets .r_target {
+                background: #ffdd00;
+            }
+            .ex2 .tablemod .col {
+                background: var(--pastel3);
+            }
+            .ex2 .tablemod .col:nth-child(1) .inputbox .inp_example .numbers {
+                color: var(--sec);
+            }
+            .ex2 .tablemod .row:nth-child(1) {
+                text-align: center;
+            }
+            .ex2 .tablemod .row:nth-child(1) .inputbox .inp_example .numbers {
+                color: var(--rightcol);
+                padding: 10px 0;
+            }
+            @media (max-width: 768px) {
+                .ex2 .tablemod .row:nth-child(1) .inputbox .inp_example .numbers {
+                    font-size: 0.6rem;
+                }
+            }
+            .ex2 .inputbox input {
+                max-width: 60px;
+                margin-right: 5px;
+                font-size: 1.2rem;
+                padding: 2px;
+            }
+            @media (max-width: 768px) {
+                .ex2 .inputbox {
+                    font-size: 0.6rem;
+                }
+                .ex2 .inputbox .numbers {
+                    font-size: 0.6rem;
+                }
+            }
+
+
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Cuenta la cantidad de cubos de los siguientes cuerpos geométricos y une con una línea la operación y el resultado que corresponden a cada una.
+
+            .row.mt-3.ex1
+                .col-12
+                    relational(v-if="tempsobj.sources" key="a" v-model="r[0]" :ref="refCount()" @isright="right++" :sources="tempsobj.sources" :targets="tempsobj.targets" :oks="tempsobj.oks" anchors="Bottom" anchort="Top")
+                        template(v-slot:source="{source}")
+                            img(:src="source.i" v-if="source.i").img-fluid
+                            numbers(c=3 v-else v-html="source.t") 
+                        template(v-slot:target="{target}"): numbers(c=2):  div(v-html="target.t")
+                    
+            
+            .instruccion.mt-5  Completa la siguiente tabla para conocer cuántos cubos conforman cada cuerpo geométrico.
+            
+            .row.mt-3.ex2
+                .col-12
+                    - var tb = []
+                    - tb.push(['Cuerpo geométrico', 'Dimensiones', 'Volumen'])
+                    - tb.push(['A', '3 largo × 7 ancho × 4 de altura', [84, '', ' cubos']])
+                    - tb.push(['B', '4 largo × 5 ancho × 3 de altura', [60, '', ' cubos']])
+                    - tb.push(['C', '2 largo × 6 ancho × 2 de altura', [24, '', ' cubos']])
+                    - tb.push(['D', '7 largo × 4 ancho × 7 de altura', [196, '', ' cubos']])
+                    - tb.push(['E', '4 largo × 8 ancho × 6 de altura', [192, '', ' cubos']])
+                    +table(1, tb)
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'sources', [
+                    {i: 'aimg/i1.png'},
+                    {i: 'aimg/i2.png'},
+                    {i: 'aimg/i3.png'},
+                    {t: '24 cubos.'},
+                    {t: '48 cubos.'},
+                    {t: '30 cubos.'},
+                ])
+                app.$set(app.tempsobj, 'targets', [
+                    {t: 'V #[strong =] 5 #[strong ×] 2 #[strong ×] 3'},
+                    {t: 'V #[strong =] 4 #[strong ×] 3 #[strong ×] 4'},
+                    {t: 'V #[strong =] 3 #[strong ×] 2 #[strong ×] 4'},
+                ])
+                app.$set(app.tempsobj, 'oks', [
+                    ['s_0', 't_2'],
+                    ['s_1', 't_0'],
+                    ['s_2', 't_1'],
+                    ['s_3', 't_2'],
+                    ['s_4', 't_1'],
+                    ['s_5', 't_0'],
+                ])

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordeno cantidades</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        
+        .borderize {
+            border:2px solid var(--accent);
+            border-radius: 10px;
+            box-sizing: border-box;
+            background: #FEE8B6;
+        }
+        .inputbox input{
+            font-size: 1.4rem;
+            padding: 2px;
+        }
+        .img-fluid{max-width: 200px; margin: 10px auto;}
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Ordeno cantidades</h1>
+
+        <div class="instruccion mt-5">Encierra la cantidad en donde el 7 tenga mayor valor.</div>
+        
+        <div class="row justify-content-center align-items-center mt-5">
+            <selectableoptions v-model="r[0]" ref="q0" @isright="right++" answer="ok" :options="[{val:'no', txt:'637'}, {val:'no2', txt:'476'},  {val:'ok', txt:'701'}]" customclass="col-sm-4">
+            <template v-slot:option="{option}"><div class="py-2 mx-4 text-center"><strong class="h1 main">{{option.txt}}</strong></div></template>
+            </selectableoptions>
+        </div>
+
+
+        <div class="instruccion mt-5">Ordena las siguientes cantidades de menor a mayor.</div>
+        
+        <div class="row mt-4 justify-content-center align-items-center borderize py-2 text-center">
+            <div class="col-md-6"><strong class="h3 sec">346, 296, 179, 321:</strong></div>
+            <div class="col-md-6">
+                <div class="row no-gutters">
+                    <div class="col"><inputbox v-model="r[1]" ref="q1" @isright="right++" :answer="179" type="number" placeh="#"></inputbox></div>
+                    <div class="col"><inputbox v-model="r[2]" ref="q2" @isright="right++" :answer="296" type="number" placeh="#"></inputbox></div>
+                    <div class="col"><inputbox v-model="r[3]" ref="q3" @isright="right++" :answer="321" type="number" placeh="#"></inputbox></div>
+                    <div class="col"><inputbox v-model="r[4]" ref="q4" @isright="right++" :answer="346" type="number" placeh="#"></inputbox></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-center align-items-center borderize py-2 text-center">
+            <div class="col-md-6"><strong class="h3 sec">648, 295, 468, 128:</strong></div>
+            <div class="col-md-6">
+                <div class="row no-gutters">
+                    <div class="col"><inputbox v-model="r[5]" ref="q5" @isright="right++" :answer="128" type="number" placeh="#"></inputbox></div>
+                    <div class="col"><inputbox v-model="r[6]" ref="q6" @isright="right++" :answer="295" type="number" placeh="#"></inputbox></div>
+                    <div class="col"><inputbox v-model="r[7]" ref="q7" @isright="right++" :answer="468" type="number" placeh="#"></inputbox></div>
+                    <div class="col"><inputbox v-model="r[8]" ref="q8" @isright="right++" :answer="648" type="number" placeh="#"></inputbox></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-center align-items-center borderize py-2 text-center">
+            <div class="col-md-6"><strong class="h3 sec">734, 512, 789, 510:</strong></div>
+            <div class="col-md-6">
+                <div class="row no-gutters">
+                    <div class="col"><inputbox v-model="r[9]" ref="q9" @isright="right++" :answer="510" type="number" placeh="#"></inputbox></div>
+                    <div class="col"><inputbox v-model="r[10]" ref="q10" @isright="right++" :answer="512" type="number" placeh="#"></inputbox></div>
+                    <div class="col"><inputbox v-model="r[11]" ref="q11" @isright="right++" :answer="734" type="number" placeh="#"></inputbox></div>
+                    <div class="col"><inputbox v-model="r[12]" ref="q12" @isright="right++" :answer="789" type="number" placeh="#"></inputbox></div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="instruccion mt-5">Observa las cantidades y coloca cada número en la cifra que corresponda.</div>
+        <div class="row mt-4 justify-content-center align-items-center borderize py-2 text-center">
+            <div class="col-md-10">
+           <table class="table">
+            <thead>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Centenas</th>
+                    <th>Decenas</th>
+                    <th>Unidades</th>
+                </tr>
+            </thead>
+           <tbody>
+               <tr v-for="i in [
+                    {i:13, n: 467, a: [4, 6, 7]},
+                    {i:16, n: 902, a: [9, '0', 2]},
+                    {i:19, n: 540, a: [5, 4, '0']},
+                    {i:22, n: 849, a: [8, 4, 9]},
+                    {i:25, n: 765, a: [7, 6, 5]},
+                ]">
+                   <td><strong class="h2 main">{{i.n}}</strong></td>
+                   <td><inputbox v-model="r[i.i]" :ref="'q'+i.i" @isright="right++" :answer="i.a[0]" type="number" placeh="#"></inputbox></td>
+                   <td><inputbox v-model="r[i.i+1]" :ref="'q'+i.i+1" @isright="right++" :answer="i.a[1]" type="number" placeh="#"></inputbox></td>
+                   <td><inputbox v-model="r[i.i+2]" :ref="'q'+i.i+2" @isright="right++" :answer="i.a[2]" type="number" placeh="#"></inputbox></td>
+               </tr>
+               
+           </tbody>
+           </table>
+           </div>
+           <div class="col-md-2"><img src="aimg/i1.png" class="img-fluid"></div>
+
+        </div>
+
+
+        <div class="instruccion mt-5">Escribe las siguientes cantidades en notación desarrollada.</div>
+        <div class="row mt-4 justify-content-center align-items-center borderize py-2 text-center">
+           <div class="col-md-2"><img src="aimg/i2.png" class="img-fluid"></div>
+            <div class="col-md-10">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Notación desarrollada</th>
+                    </tr>
+                </thead>
+            <tbody>
+                <tr v-for="i in [
+                        {i:28, n: 579, a: [500, 70, 9]},
+                        {i:31, n: 823, a: [800, 20, 3]},
+                        {i:34, n: 978, a: [900, 70, 8]},
+                        {i:37, n: 616, a: [600, 10, 6]},
+                        {i:40, n: 427, a: [400, 20, 7]},
+                    ]">
+                        <td><strong class="h2 sec">{{i.n}}</strong></td>
+                        <td>
+                            <div class="row no-gutters">
+                                <div class="col"><inputbox v-model="r[i.i]" :ref="'q'+i.i" @isright="right++" :answer="i.a[0]" type="number" placeh="#"></inputbox></div>
+                                <div class="col"><strong class="h1 main">+</strong></div>
+                                <div class="col"><inputbox v-model="r[i.i+1]" :ref="'q'+i.i+1" @isright="right++" :answer="i.a[1]" type="number" placeh="#"></inputbox></div>
+                                <div class="col"><strong class="h1 main">+</strong></div>
+                                <div class="col"><inputbox v-model="r[i.i+2]" :ref="'q'+i.i+2" @isright="right++" :answer="i.a[2]" type="number" placeh="#"></inputbox></div>
+                        </td>
+                </tr>
+                
+            </tbody>
+            </table>
+            </div>
+        </div>
+        
+
+
+       <!-- ENDING -->
+       <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+       <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+   </div>
+   
+   <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+   <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+   <script src="../../assets/modulos/check.js"></script>
+   <script src="../../assets/modulos/inputbox.js"></script>
+   <script src="../../assets/modulos/choose.js"></script>
+   <script src="../../assets/modulos/finalize.js"></script>
+   <script src="../../assets/assets.js"></script>
+   <script></script>
+</body>
+</html>

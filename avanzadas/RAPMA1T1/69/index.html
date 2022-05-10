@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css"/>
+    <style>
+      .balanza {
+          width: 320px;
+          align-items: flex-start;
+          text-align: center;
+      }
+      .balanza .barra {
+          width: 220%;
+          margin-left: -60%;
+          height: 8px;
+          border: 2px solid #2C2827;
+          background: #D2DB30;
+          box-sizing: border-box;
+          margin-bottom: -18%;
+          position: relative;
+          z-index: 2;
+          transform: rotate(0);
+          transition: transform 0.5s;
+      }
+      .balanza .base {
+          position: relative;
+          z-index: 3;
+      }
+      .balanza .plato {
+          position: relative;
+          z-index: 1;
+          height: 100%;
+      }
+      .balanza .plato > img {
+          position: relative;
+          z-index: 1;
+      }
+      .balanza .plato .drop {
+          display: flex;
+          justify-content: center;
+          position: absolute;
+          bottom: 6%;
+          z-index: 0;
+          width: 100%;
+          min-height: 40%;
+      }
+      .balanza .plato .drop img {
+          width: 45%;
+          margin: 0 -12%;
+      }
+      .balanza .plato .drop img:nth-child(1),
+      .balanza .plato .drop img:nth-child(3) {
+          margin-top: -5%;
+      }
+      .balanza .bl,
+      .balanza .br {
+          margin-top: 0;
+          transition: margin 0.5s;
+      }
+      .balanza.left .barra {
+          transform: rotate(-10deg);
+          transition: transform 0.5s;
+      }
+      .balanza.left .bl,
+      .balanza.left .br {
+          transition: margin 0.5s;
+      }
+      .balanza.left .bl {
+          margin-top: 7%;
+      }
+      .balanza.left .br {
+          margin-top: -4%;
+      }
+      .balanza.right .barra {
+          transform: rotate(10deg);
+          transition: transform 0.5s;
+      }
+      .balanza.right .bl,
+      .balanza.right .br {
+          transition: margin 0.5s;
+      }
+      .balanza.right .br {
+          margin-top: 7%;
+      }
+      .balanza.right .bl {
+          margin-top: -4%;
+      }
+      .frutas {
+          min-height: 100px;
+      }
+      [wascloned] {
+          display: none;
+      }
+      .drag {
+          width: auto;
+          height: auto;
+          margin: 6px;
+      }
+      .drag img {
+          min-width: 20px;
+      }
+      .drag .platano {
+          max-width: 60px;
+      }
+      .drag .manzana {
+          max-width: 34px;
+      }
+      .drag .melon {
+          max-width: 70px;
+      }
+      .drag .sandia {
+          max-width: 100px;
+      }
+      .drag .pera {
+          max-width: 38px;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- START-->
+      <scene v-if="currentScene==0" :key="0" start-scene="start-scene" @completed="sceneCompleted"></scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25" @loaded="resetvals">
+        <info type="dragdrop" title="" text="Coloca las frutas que sean necesarias para que la balanza tenga el mismo peso." textaudio="s/instruccion1.mp3" :autoplay="true"></info>
+        <activity>
+          <div class="row w100">
+            <div class="balanza row" :class="temps.pos[temps.balance]">
+              <div class="w30 plato bl"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop" data="fr" droptimes="multiple"></div>
+              </div>
+              <div class="w30">
+                <div class="barra"></div>
+                <div class="base"><img class="w100" src="i/balanza.png"/></div>
+              </div>
+              <div class="w30 plato br"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop"><img src="i/platano.png"/><img src="i/platano.png"/><img src="i/platano.png"/></div>
+              </div>
+            </div>
+          </div>
+          <div class="row w100 wrap frutas">
+            <template v-for="(i, index) in [['platano',1], ['platano',1], ['platano',1]]">
+              <drag ref="a1" data="fr" dropzone=".drop" append-clone="append-clone" extval="extval" @dropped="addWeight(3, i[1])"><img :src="'i/'+i[0]+'.png'" :class="i[0]"/></drag>
+            </template>
+          </div>
+          <button class="button big animate__animated animate__flip" @click="validateWeight('a1')">Verificar</button>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25" @loaded="resetvals">
+        <info type="dragdrop" title="" text="Coloca las frutas que sean necesarias para que la balanza tenga el mismo peso." textaudio="s/instruccion1.mp3" :autoplay="false"></info>
+        <activity>
+          <div class="row w100">
+            <div class="balanza row" :class="temps.pos[temps.balance]">
+              <div class="w30 plato bl"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop" data="fr" droptimes="multiple"></div>
+              </div>
+              <div class="w30">
+                <div class="barra"></div>
+                <div class="base"><img class="w100" src="i/balanza.png"/></div>
+              </div>
+              <div class="w30 plato br"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop"><img src="i/melon.png"/></div>
+              </div>
+            </div>
+          </div>
+          <div class="row w100 wrap frutas">
+            <template v-for="(i, index) in [['melon',1], ['melon',1], ['melon',1]]">
+              <drag ref="a2" data="fr" dropzone=".drop" append-clone="append-clone" extval="extval" @dropped="addWeight(1, i[1])"><img :src="'i/'+i[0]+'.png'" :class="i[0]"/></drag>
+            </template>
+          </div>
+          <button class="button big animate__animated animate__flip" @click="validateWeight('a2')">Verificar</button>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25" @loaded="resetvals">
+        <info type="dragdrop" title="" text="Coloca las frutas que sean necesarias para que la balanza tenga el mismo peso." textaudio="s/instruccion1.mp3" :autoplay="false"></info>
+        <activity>
+          <div class="row w100">
+            <div class="balanza row" :class="temps.pos[temps.balance]">
+              <div class="w30 plato bl"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop" data="fr" droptimes="multiple"></div>
+              </div>
+              <div class="w30">
+                <div class="barra"></div>
+                <div class="base"><img class="w100" src="i/balanza.png"/></div>
+              </div>
+              <div class="w30 plato br"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop"><img src="i/sandia.png"/></div>
+              </div>
+            </div>
+          </div>
+          <div class="row w100 wrap frutas">
+            <template v-for="(i, index) in [['sandia',1], ['sandia',1], ['sandia',1]]">
+              <drag ref="a3" data="fr" dropzone=".drop" append-clone="append-clone" extval="extval" @dropped="addWeight(1, i[1])"><img :src="'i/'+i[0]+'.png'" :class="i[0]"/></drag>
+            </template>
+          </div>
+          <button class="button big animate__animated animate__flip" @click="validateWeight('a3')">Verificar</button>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==4" :key="4" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25" @loaded="resetvals">
+        <info type="dragdrop" title="" text="Coloca las frutas que sean necesarias para que la balanza tenga el mismo peso." textaudio="s/instruccion1.mp3" :autoplay="false"></info>
+        <activity>
+          <div class="row w100">
+            <div class="balanza row" :class="temps.pos[temps.balance]">
+              <div class="w30 plato bl"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop" data="fr" droptimes="multiple"></div>
+              </div>
+              <div class="w30">
+                <div class="barra"></div>
+                <div class="base"><img class="w100" src="i/balanza.png"/></div>
+              </div>
+              <div class="w30 plato br"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop"><img src="i/manzana.png"/><img src="i/manzana.png"/></div>
+              </div>
+            </div>
+          </div>
+          <div class="row w100 wrap frutas">
+            <template v-for="(i, index) in [['manzana',1], ['manzana',1], ['manzana',1], ['manzana',1]]">
+              <drag ref="a4" data="fr" dropzone=".drop" append-clone="append-clone" extval="extval" @dropped="addWeight(2, i[1])"><img :src="'i/'+i[0]+'.png'" :class="i[0]"/></drag>
+            </template>
+          </div>
+          <button class="button big animate__animated animate__flip" @click="validateWeight('a4')">Verificar</button>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==5" :key="5" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25" @loaded="resetvals">
+        <info type="dragdrop" title="" text="Coloca las frutas que sean necesarias para que la balanza tenga el mismo peso." textaudio="s/instruccion1.mp3" :autoplay="false"></info>
+        <activity>
+          <div class="row w100">
+            <div class="balanza row" :class="temps.pos[temps.balance]">
+              <div class="w30 plato bl"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop" data="fr" droptimes="multiple"></div>
+              </div>
+              <div class="w30">
+                <div class="barra"></div>
+                <div class="base"><img class="w100" src="i/balanza.png"/></div>
+              </div>
+              <div class="w30 plato br"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop"><img src="i/platano.png"/><img src="i/platano.png"/><img src="i/pera.png"/></div>
+              </div>
+            </div>
+          </div>
+          <div class="row w100 wrap frutas">
+            <template v-for="(i, index) in [['pera',1], ['pera',1], ['pera',1], ['platano',1], ['platano',1], ['platano',1], ['platano',1], ['platano',1]]">
+              <drag ref="a5" data="fr" dropzone=".drop" append-clone="append-clone" extval="extval" @dropped="addWeight(3, i[1])"><img :src="'i/'+i[0]+'.png'" :class="i[0]"/></drag>
+            </template>
+          </div>
+          <button class="button big animate__animated animate__flip" @click="validateWeight('a5')">Verificar</button>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==6" :key="6" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25" @loaded="resetvals">
+        <info type="dragdrop" title="" text="Coloca las frutas que sean necesarias para que la balanza tenga el mismo peso." textaudio="s/instruccion1.mp3" :autoplay="false"></info>
+        <activity>
+          <div class="row w100">
+            <div class="balanza row" :class="temps.pos[temps.balance]">
+              <div class="w30 plato bl"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop" data="fr" droptimes="multiple"></div>
+              </div>
+              <div class="w30">
+                <div class="barra"></div>
+                <div class="base"><img class="w100" src="i/balanza.png"/></div>
+              </div>
+              <div class="w30 plato br"><img class="w100" src="i/balanzabox.png"/>
+                <div class="drop"><img src="i/manzana.png"/><img src="i/manzana.png"/><img src="i/manzana.png"/><img src="i/pera.png"/></div>
+              </div>
+            </div>
+          </div>
+          <div class="row w100 wrap frutas">
+            <template v-for="(i, index) in [ ['manzana',1],['manzana',1],['manzana',1],['manzana',1],['manzana',1], ['pera',1],['pera',1],['pera',1], ]">
+              <drag ref="a6" data="fr" dropzone=".drop" append-clone="append-clone" extval="extval" @dropped="addWeight(4, i[1])"><img :src="'i/'+i[0]+'.png'" :class="i[0]"/></drag>
+            </template>
+          </div>
+          <button class="button big animate__animated animate__flip" @click="validateWeight('a6')">Verificar</button>
+        </activity>
+      </scene>
+      <!-- END-->
+      <scene v-if="currentScene==7" :key="7" end-scene="end-scene" :final-data="finalData"></scene>
+    </div>
+    <!-- CDNS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <!-- Fireworks-->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- Modulos-->
+    <script src="../../assets/modulos/sequence.js"></script>
+    <script src="../../assets/modulos/videoplayer.js"></script>
+    <script src="../../assets/modulos/popup.js"></script>
+    <script src="../../assets/modulos/number.js"></script>
+    <script src="../../assets/modulos/inputable.js"></script>
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/tooltiper.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/selectives.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/desplegar.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- Mainscript-->
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$devmode = false
+      app.$set(app.temps, 'pos', ['right', ' ', 'left'])
+      app.$set(app.temps, 'balance', 0)
+      
+      app.$set(app.temps, 'weight', 0)
+      
+      
+      app.addWeight = function (rightweight, fruitweight){
+          app.temps.weight = app.temps.weight + fruitweight
+          if(app.temps.weight < rightweight){
+              app.temps.balance = 0
+          } else if(app.temps.weight == rightweight) {
+              app.temps.balance = 1
+          } else {
+              app.temps.balance = 2
+          }
+      }
+      
+      app.validateWeight = function (refs){
+          if(app.temps.balance == 1){
+              EventBus.$emit('isok')
+          } else {
+              s_error.play()
+              for(i in app.$refs[refs]) {
+                  let dr = app.$refs[refs][i]
+                  dr.undroppableFn()
+                  dr.backToInitPos()
+                  dr.removeClones()
+                  app.resetvals()
+              }
+          }
+      }
+      
+      app.resetvals = function () {
+          app.temps.balance = 0
+          app.temps.weight = 0
+      }
+      
+      
+      
+      /*
+      setInterval(function (){
+          app.temps.balance++
+          if(app.temps.balance>2){
+              app.temps.balance = 0
+          }
+      }, 1000)
+      */
+      
+      app.currentScene = 0
+      app.scenesCount = 6
+    </script>
+  </body>
+</html>

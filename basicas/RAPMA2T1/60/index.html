@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivino la figura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style type="text/css">
+        span {
+            font-weight: bold;
+            color: #0083BF;
+        }
+        .quest {
+	padding: 10px;
+	border-radius: 10px;
+	font-size: 1.4rem;
+}
+.quest strong {
+	font-size: 2.4rem;
+}
+.quest.q1 {
+	background: #F4E6EC;
+}
+.quest.q2 {
+	background: #FDE4CA;
+}
+.quest.q3 {
+	background: #D5E6EF;
+}
+.quest.q4 {
+	background: #E8F2DA;
+}
+.quest .inputbox {
+	max-width: 80px;
+	position: absolute;
+	left: -6px;
+	top: 0;
+}
+.quest .inputbox input {
+	border: 6px solid #fff;
+	font-size: 1.4rem;
+	padding: 6px 6px;
+	background: var(--main);
+	color:#fff;
+}
+.quest img {
+	margin-top: 10px;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Adivino la figura</h1>
+        <!-- <img src="../../assets/aimg/check.svg" class="animate__animated animate__heartBeat"> -->
+        <div class="instruccion mt-5">Lee la descripción de cada figura y relacionala en el espacio correspondiente.
+        </div>
+
+        <div class="row mt-3 align-items-center quest q1">
+            <div class="col-md-6"> <strong class="main">1.</strong> Tengo <span>más de dos lados y menos de
+                    cuatro</span>. Mi lado que descansa sobre el suelo es muy largo. </div>
+            <div class="col-md-6">
+                <inputbox v-model="r[0]" ref="q0" @isright="right++" :answer="4" type="number" placeh="#"></inputbox>
+                <img src="aimg/a4.svg" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="row mt-3 align-items-center quest q2">
+            <div class="col-md-6"> <strong class="main">2.</strong> Tengo <span>cuatro lados,</span> dos cortos y dos
+                largos, aunque no soy un rectángulo. </div>
+            <div class="col-md-6">
+                <inputbox v-model="r[1]" ref="q1" @isright="right++" :answer="1" type="number" placeh="#"></inputbox>
+                <img src="aimg/a1.svg" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="row mt-3 align-items-center quest q3">
+            <div class="col-md-6"> <strong class="main">3.</strong> Tengo <span>cuatro lados rectos.</span> El cuadrado
+                es mi amigo, pero soy más largo que él. </div>
+            <div class="col-md-6">
+                <inputbox v-model="r[2]" ref="q2" @isright="right++" :answer="2" type="number" placeh="#"></inputbox>
+                <img src="aimg/a2.svg" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="row mt-3 align-items-center quest q4">
+            <div class="col-md-6"> <strong class="main">4.</strong> Tengo <span>más de 4 lados y menos de 6,</span> el
+                trapecio y el triángulo siempre me van bien. </div>
+            <div class="col-md-6">
+                <inputbox v-model="r[3]" ref="q3" @isright="right++" :answer="3" type="number" placeh="#"></inputbox>
+                <img src="aimg/a3.svg" class="img-fluid">
+            </div>
+        </div> <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+
+</html>

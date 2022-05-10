@@ -1,0 +1,85 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sumo y multiplico</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .ex1 {
+          background: #FEF3E1;
+          padding: 10px;
+          border-radius: 10px;
+      }
+      .ex1 .inputbox {
+          font-size: 1.6rem;
+          color: #8C6F54;
+      }
+      .ex1 .inputbox input {
+          max-width: 200px;
+          margin-right: 10px;
+          font-size: 1.6rem;
+          border-color: #8C6F54;
+          color: #8C6F54;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Sumo y multiplico</h1>
+      <div class="row">
+        <embedvideo urlid="TOYb54iai-w" title="La multiplicación"></embedvideo>
+      </div>
+      <div class="row">
+        <div class="col-12"><img class="w-100" src="aimg/a1.png"/></div>
+      </div>
+      <div class="instruccion mt-5">Contesta las siguientes preguntas con base en la información anterior.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-12 mb-5">
+          <labeltext num="1.">¿Cuántas palanquetas compran en la escuela Federal 1 en dos semanas?</labeltext>
+          <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" :answer="1530" type="number" placeh="#">
+            <template v-slot:after=""><strong>palanquetas.</strong></template>
+          </inputbox>
+        </div>
+        <div class="col-12 mb-5">
+          <labeltext num="2.">¿Cuántas cajas se venden en las cinco escuelas en una semana?</labeltext>
+          <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" :answer="101" type="number" placeh="#">
+            <template v-slot:after=""><strong>cajas.</strong></template>
+          </inputbox>
+        </div>
+        <div class="col-12">
+          <labeltext num="3.">Si el precio de cada palanqueta es de $2.50, ¿cuánto cobra el vendedor si vende la misma cantidad durante cuatro semanas?</labeltext>
+          <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" :answer="45450" type="number" placeh="#">
+            <template v-slot:after=""><strong>pesos.</strong></template>
+          </inputbox>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

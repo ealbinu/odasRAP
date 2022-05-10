@@ -1,0 +1,126 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Encuentro figuras y patrones</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .ex1 .itm {
+          background: #f5f5f5;
+          margin: 10px;
+          border-radius: 10px;
+          min-height: 100%;
+          height: 100%;
+          padding: 10px;
+      }
+      .ex1 .itm .choose {
+          height: 100%;
+          min-height: 100%;
+          display: flex;
+          flex-direction: column;
+      }
+      .ex1 .itm .choose .label {
+          margin-bottom: auto;
+      }
+      .ex1 .itm .choose .options {
+          background: #fff;
+          padding: 10px;
+          border-radius: 10px;
+          margin: auto 0;
+          justify-content: center;
+          align-items: center;
+          box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+      }
+      .ex1 .itm .choose .options div{
+          margin: 6px;
+          border: none;
+          padding: 6px;
+          border-radius: 10px;
+      }
+      .ex1 .itm .choose .options div.active{
+          border: 2px solid var(--main);
+      }
+      .ex1 .itm .choose .options img {
+          max-height: 50px;
+      
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Encuentro figuras y patrones</h1>
+      <h2>¡Primero fíjate si va! / Estructuras de vidrio / De varias formas</h2>
+      <div class="instruccion mt-5">Observa las siguientes sucesiones de figuras y marca así <checkmark></checkmark> las figuras que las completan.</div>
+      <div class="row mt-3 ex1 flex-wrap">
+        <div class="col-md-6 mb-4">
+          <div class="itm">
+            <choose v-model="r[0]" :ref="refCount()" text="&lt;img src=aimg/a.png class=img-fluid&gt;" :options="['&lt;img src=aimg/a1.png&gt;', '&lt;img src=aimg/a2.png&gt;', '&lt;img src=aimg/a3.png&gt;']" @isright="right++" :answer-num="0"></choose>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="itm">
+            <choose v-model="r[1]" :ref="refCount()" text="&lt;img src=aimg/b.png class=img-fluid&gt;" :options="['&lt;img src=aimg/b1.png&gt;', '&lt;img src=aimg/b2.png&gt;', '&lt;img src=aimg/b3.png&gt;']" @isright="right++" :answer-num="0"></choose>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="itm">
+            <choose v-model="r[2]" :ref="refCount()" text="&lt;img src=aimg/c.png class=img-fluid&gt;" :options="['&lt;img src=aimg/c1.png&gt;', '&lt;img src=aimg/c2.png&gt;', '&lt;img src=aimg/c3.png&gt;']" @isright="right++" :answer-num="2"></choose>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="itm">
+            <choose v-model="r[3]" :ref="refCount()" text="&lt;img src=aimg/d.png class=img-fluid&gt;" :options="['&lt;img src=aimg/d1.png&gt;', '&lt;img src=aimg/d2.png&gt;', '&lt;img src=aimg/d3.png&gt;']" @isright="right++" :answer-num="0"></choose>
+          </div>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Observa la siguiente serie y escribe <strong>V</strong> si el enunciado es verdadero o <strong>F</strong> si es falso.</div>
+      <div class="row">
+        <div class="col-12"><img class="w-100" src="aimg/e.png"/></div>
+      </div>
+      <div class="row mt-3 ex2">
+        <div class="col-12 trueorfalse">
+          <template v-for="(i, index) in tempsobj.ex2" v-if="tempsobj.ex2">
+            <inputbox v-model="r[index+4]" :ref="refCount()" @isright="right++" :answer="i.v" type="text" placeh="-">
+              <template v-slot:before="">
+                <labeltext :num="(index+1)+'.'">{{i.t}}</labeltext>
+              </template>
+            </inputbox>
+          </template>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$set(app.tempsobj, 'ex2', [
+           {v: 'V', t: 'La figura 4 tendrá 24 cuadros de altura por 24 de ancho.'},
+           {v: 'F', t: 'En la figura 5 habrá 230 cuadros de color verde.'},
+           {v: 'V', t: 'Para formar cada cuadrícula siguiente se multiplica el número de recuadros por 2.'},
+       ])
+    </script>
+  </body>
+</html>

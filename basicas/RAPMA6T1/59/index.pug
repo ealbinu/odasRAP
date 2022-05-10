@@ -1,0 +1,62 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Identifico desarrollos planos'
+- subtitle = 'El cuerpo oculto / ¿Cuál es el bueno?'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            /*
+            .ex1 {}
+            */
+            .fig{ max-height:  100px; margin: 20px 0; }
+            @media (max-width: 768px){
+                .fig{
+                    max-height: 80px; margin: 8px 0;
+                }
+            }
+            .r_source{
+                border: 4px solid #99cc99 !important;
+            }
+            .r_target{
+                border: 4px solid #eecc99 !important;
+            }
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Relaciona cada figura con el desarrollo plano que le corresponda. 
+
+            .row.mt-3.ex1
+                .col-12
+                    relational(v-if="tempsobj.sources" v-model="r[0]" :ref="refCount()" @isright="right++" :sources="tempsobj.sources" :targets="tempsobj.targets" :oks="tempsobj.oks")
+                        template(v-slot:source="{source}"): img(:src="source.i").img-fluid.fig
+                        template(v-slot:target="{target}"): img(:src="target.i").img-fluid.fig
+         
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'sources', [
+                    {i: 'aimg/f1.png'},
+                    {i: 'aimg/f2.png'},
+                    {i: 'aimg/f3.png'},
+                    {i: 'aimg/f4.png'},
+                ])
+                app.$set(app.tempsobj, 'targets', [
+                    {i: 'aimg/r2.png'},
+                    {i: 'aimg/r4.png'},
+                    {i: 'aimg/r3.png'},
+                    {i: 'aimg/r1.png'},
+                ])
+                app.$set(app.tempsobj, 'oks', [
+                    ['s_0', 't_3'],
+                    ['s_1', 't_0'],
+                    ['s_2', 't_2'],
+                    ['s_3', 't_1'],
+                ])

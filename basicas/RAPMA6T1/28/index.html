@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resuelvo sumas con decimales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+.oper {
+	background: #f5f5f5;
+	border-radius: 10px;
+	padding: 10px;
+	border: 2px solid #fff;
+	letter-spacing: 8px;
+	line-height: 1.8;
+}
+.oper .inputbox {
+	display: inline-block;
+	max-width: 24px;
+}
+.oper .inputbox input {
+	font-size: 1rem;
+	padding: 0;
+	border-width: 1px;
+}
+.oper hr {
+	border-top: 3px solid #00A0CD;
+	margin: 8px 0;
+}
+.oper:nth-child(1) {
+	background: radial-gradient(#D3E7BC, #fff);
+}
+.oper:nth-child(1) hr {
+	border-top: 3px solid #6CB743;
+}
+.oper:nth-child(2) {
+	background: radial-gradient(#BECDE2, #fff);
+}
+.oper:nth-child(2) hr {
+	border-top: 3px solid #0083BF;
+}
+.oper:nth-child(3) {
+	background: radial-gradient(#FADCB8, #fff);
+}
+.oper:nth-child(3) hr {
+	border-top: 3px solid #E9832C;
+}
+.oper:nth-child(4) {
+	background: radial-gradient(#F0A39F, #fff);
+}
+.oper:nth-child(4) hr {
+	border-top: 3px solid #D8222A;
+}
+.inputbox .isright,
+.inputbox .iswrong {
+	width: 20px;
+	height: 20px;
+	top: -16px;
+}
+
+
+.ex2 .inputbox {
+	font-size: 2rem;
+	color: var(--sec);
+}
+.ex2 .inputbox input {
+	max-width: 180px;
+	margin-right: 10px;
+}
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Resuelvo sumas con decimales</h1>
+        <h2>Rompecabezas</h2>
+
+        <div class="instruccion mt-5">Completa las operaciones y coloca el punto decimal en donde falta.</div>
+
+        <div class="row mt-3 text-right">
+            <div class="col-md-3 col-6 oper">
+                123.078<br>
+                <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" answer="9" type="text" placeh="#"></inputbox>.300<br>
+                +45.650
+                <hr>
+                178.02<inputbox v-model="r[1]" :ref="refCount()" @isright="right++" answer="8" type="text" placeh="#"></inputbox>
+            </div>
+            <div class="col-md-3 col-6 oper">
+                46.<inputbox v-model="r[2]" :ref="refCount()" @isright="right++" answer="0" type="text" placeh="#"></inputbox><inputbox v-model="r[3]" :ref="refCount()" @isright="right++"  answer="0" type="text" placeh="#"></inputbox>4<br>
+                −18.132
+                <hr>
+                27<inputbox v-model="r[4]" :ref="refCount()" @isright="right++" answer="." type="text" placeh="#"></inputbox>872
+            </div>
+            <div class="col-md-3 col-6 oper">
+                345<inputbox v-model="r[5]" :ref="refCount()" @isright="right++" answer="." type="text" placeh="#"></inputbox>0403<br>
+                1.67<inputbox v-model="r[6]" :ref="refCount()" @isright="right++" answer="8" type="text" placeh="#"></inputbox>0<br>
+                + 21.<inputbox v-model="r[7]" :ref="refCount()" @isright="right++" answer="3" type="text" placeh="#"></inputbox>000
+                <hr>
+                368<inputbox v-model="r[8]" :ref="refCount()" @isright="right++" answer="." type="text" placeh="#"></inputbox>0183
+            </div>
+            <div class="col-md-3 col-6 oper">
+                7<inputbox v-model="r[9]" :ref="refCount()" @isright="right++" answer="." type="text" placeh="#"></inputbox>9876<br>
+                −0.6<inputbox v-model="r[10]" :ref="refCount()" @isright="right++" answer="8" type="text" placeh="#"></inputbox><inputbox v-model="r[11]" :ref="refCount()" @isright="right++" answer="9" type="text" placeh="#"></inputbox>0
+                <hr>
+                7.2986
+            </div>
+        </div>
+        <div class="row mt-3 text-right">
+            <div class="col-md-3 col-6 oper">
+                85.914<br>
+                −7<inputbox v-model="r[12]" :ref="refCount()" @isright="right++" answer="8" type="text" placeh="#"></inputbox>.<inputbox v-model="r[13]" :ref="refCount()" @isright="right++" answer="4" type="text" placeh="#"></inputbox><inputbox v-model="r[14]" :ref="refCount()" @isright="right++" answer="3" type="text" placeh="#"></inputbox>1
+                <hr>
+                7.48<inputbox v-model="r[15]" :ref="refCount()" @isright="right++" answer="3" type="text" placeh="#"></inputbox>
+            </div>
+            <div class="col-md-3 col-6 oper">
+                <inputbox v-model="r[16]" :ref="refCount()" @isright="right++" answer="9" type="text" placeh="#"></inputbox>.3<inputbox v-model="r[17]" :ref="refCount()" @isright="right++" answer="4" type="text" placeh="#"></inputbox><br>
+                +7.9<inputbox v-model="r[18]" :ref="refCount()" @isright="right++" answer="9" type="text" placeh="#"></inputbox>
+                <hr>
+                17<inputbox v-model="r[19]" :ref="refCount()" @isright="right++" answer="." type="text" placeh="#"></inputbox><inputbox v-model="r[20]" :ref="refCount()" @isright="right++" answer="3" type="text" placeh="#"></inputbox>3
+            </div>
+            <div class="col-md-3 col-6 oper">
+                <inputbox v-model="r[21]" :ref="refCount()" @isright="right++" answer="0" type="text" placeh="#"></inputbox>.2<inputbox v-model="r[22]" :ref="refCount()" @isright="right++" answer="5" type="text" placeh="#"></inputbox><br>
+                −0.<inputbox v-model="r[23]" :ref="refCount()" @isright="right++" answer="0" type="text" placeh="#"></inputbox>9
+                <hr>
+                <inputbox v-model="r[24]" :ref="refCount()" @isright="right++" answer="0" type="text" placeh="#"></inputbox>.<inputbox v-model="r[25]" :ref="refCount()" @isright="right++" answer="1" type="text" placeh="#"></inputbox>6
+            </div>
+            <div class="col-md-3 col-6 oper">
+                0.<inputbox v-model="r[26]" :ref="refCount()" @isright="right++" answer="7" type="text" placeh="#"></inputbox>9<br>
+                +<inputbox v-model="r[27]" :ref="refCount()" @isright="right++" answer="8" type="text" placeh="#"></inputbox>.97
+                <hr>
+                9.7<inputbox v-model="r[28]" :ref="refCount()" @isright="right++" answer="6" type="text" placeh="#"></inputbox>
+            </div>
+        </div>
+
+
+        <div class="instruccion mt-5">Analiza la siguiente situación y resuelve los problemas.</div>
+
+        <div class="row mt-3 ex2">
+            <div class="col-md-6 text-center">
+                <img src="aimg/a1.png" class="w-100">
+                <div class="mt-4">
+                    <p class="h5">Las dimensiones del jardin <strong class="main">A</strong> son:</p>
+                    <inputbox v-model="r[29]" :ref="refCount()" @isright="right++" answer="27.550" type="text" placeh="##.###"><template v-slot:after><strong>m</strong></template></inputbox>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="aimg/a2.png" class="w-100">
+                <div class="mt-4">
+                    <p class="h5">Las dimensiones del jardin <strong class="main">B</strong> son:</p>
+                    <inputbox v-model="r[30]" :ref="refCount()" @isright="right++" answer="31.2" type="text" placeh="##.#"><template v-slot:after><strong>m</strong></template></inputbox>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+
+
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+
+</html>

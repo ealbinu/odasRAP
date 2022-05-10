@@ -1,0 +1,91 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Encuentro figuras y patrones'
+- subtitle = '¡Primero fíjate si va! / Estructuras de vidrio / De varias formas'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .ex1 .itm {
+                background: #f5f5f5;
+                margin: 10px;
+                border-radius: 10px;
+                min-height: 100%;
+                height: 100%;
+                padding: 10px;
+            }
+            .ex1 .itm .choose {
+                height: 100%;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            .ex1 .itm .choose .label {
+                margin-bottom: auto;
+            }
+            .ex1 .itm .choose .options {
+                background: #fff;
+                padding: 10px;
+                border-radius: 10px;
+                margin: auto 0;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+            }
+            .ex1 .itm .choose .options div{
+                margin: 6px;
+                border: none;
+                padding: 6px;
+                border-radius: 10px;
+            }
+            .ex1 .itm .choose .options div.active{
+                border: 2px solid var(--main);
+            }
+            .ex1 .itm .choose .options img {
+                max-height: 50px;
+
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Observa las siguientes sucesiones de figuras y marca así <checkmark></checkmark> las figuras que las completan.
+
+            .row.mt-3.ex1.flex-wrap
+                .col-md-6.mb-4: .itm
+                    choose(v-model="r[0]" :ref="refCount()" text="<img src=aimg/a.png class=img-fluid>" :options="['<img src=aimg/a1.png>', '<img src=aimg/a2.png>', '<img src=aimg/a3.png>']" @isright="right++" :answer-num="0")
+                .col-md-6.mb-4: .itm
+                    choose(v-model="r[1]" :ref="refCount()" text="<img src=aimg/b.png class=img-fluid>" :options="['<img src=aimg/b1.png>', '<img src=aimg/b2.png>', '<img src=aimg/b3.png>']" @isright="right++" :answer-num="0")
+                .col-md-6.mb-4: .itm
+                    choose(v-model="r[2]" :ref="refCount()" text="<img src=aimg/c.png class=img-fluid>" :options="['<img src=aimg/c1.png>', '<img src=aimg/c2.png>', '<img src=aimg/c3.png>']" @isright="right++" :answer-num="2")
+                .col-md-6.mb-4: .itm
+                    choose(v-model="r[3]" :ref="refCount()" text="<img src=aimg/d.png class=img-fluid>" :options="['<img src=aimg/d1.png>', '<img src=aimg/d2.png>', '<img src=aimg/d3.png>']" @isright="right++" :answer-num="0")
+            
+            .instruccion.mt-5 Observa la siguiente serie y escribe #[strong V] si el enunciado es verdadero o #[strong F] si es falso.
+
+            .row: .col-12: img(src="aimg/e.png").w-100
+            
+            .row.mt-3.ex2
+                .col-12.trueorfalse
+                    template(v-for="(i, index) in tempsobj.ex2" v-if="tempsobj.ex2")
+                        inputbox(v-model="r[index+4]" :ref="refCount()" @isright="right++" :answer="i.v" type="text" placeh="-")
+                            template(v-slot:before="")
+                                labeltext(:num="(index+1)+'.'") {{i.t}}
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+               app.$set(app.tempsobj, 'ex2', [
+                    {v: 'V', t: 'La figura 4 tendrá 24 cuadros de altura por 24 de ancho.'},
+                    {v: 'F', t: 'En la figura 5 habrá 230 cuadros de color verde.'},
+                    {v: 'V', t: 'Para formar cada cuadrícula siguiente se multiplica el número de recuadros por 2.'},
+                ])

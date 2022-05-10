@@ -1,0 +1,135 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sumo centenas</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .ex1 .inputbox {
+          font-size: 1.4rem;
+          background: #f5f5f5;
+          padding: 10px;
+          border-radius: 10px;
+      }
+      .ex1 .inputbox input {
+          max-width: 120px;
+          font-size: 1.4rem;
+          padding: 2px;
+          margin-right: 6px;
+      }
+      @media (max-width: 680px) {
+          .ex1 .inputbox {
+              font-size: 1.2rem;
+          }
+          .ex1 .inputbox input {
+              max-width: 100px;
+              font-size: 1.2rem;
+          }
+      }
+      .ex2 .inputbox .numbers {
+          background: var(--clear);
+          width: 30%;
+          font-size: 1.6rem;
+          color: var(--sec);
+          text-align: center;
+          border-radius: 10px 0 0 10px;
+      }
+      .ex2 .inputbox input {
+          padding: 2px;
+          font-size: 1.3rem;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Sumo centenas</h1>
+      <h2>1 000 chocolates</h2>
+      <div class="instruccion mt-5">Observa la imagen y contesta las preguntas.</div>
+      <div class="row">
+        <div class="col-12"><img class="w-100" src="aimg/1a.png"/></div>
+      </div>
+      <div class="row mt-3 ex1">
+        <div class="col-12">
+          <labeltext num="1.">¿Cuántas cajas se pueden formar con 600 tornillos sueltos?</labeltext>
+          <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#">
+            <template v-slot:after="">cajas de tornillos.</template>
+          </inputbox>
+        </div>
+        <div class="col-12">
+          <labeltext num="2.">¿Cuántas cajas se pueden formar con 800 tornillos sueltos?</labeltext>
+          <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" :answer="8" type="number" placeh="#">
+            <template v-slot:after="">cajas de tornillos.</template>
+          </inputbox>
+        </div>
+        <div class="col-12">
+          <labeltext num="3.">Si tienes 5 cajas y la mitad de otra, ¿cuántos tornillos tienes en total?</labeltext>
+          <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" :answer="550" type="number" placeh="#">
+            <template v-slot:after="">tornillos.</template>
+          </inputbox>
+        </div>
+        <div class="col-12">
+          <labeltext num="4."> Si Ignacio y Luis ayudaron a su papá a empacar 900 tornillos, ¿cuántas cajas formaron?</labeltext>
+          <inputbox v-model="r[3]" :ref="refCount()" @isright="right++" :answer="9" type="number" placeh="#">
+            <template v-slot:after="">cajas de tornillos.</template>
+          </inputbox>
+        </div>
+        <div class="col-12">
+          <labeltext num="5.">Si el tío de Ignacio y Luis tiene 10 cajas de tornillos, ¿cuántos tornillos sueltos tiene en total?</labeltext>
+          <inputbox v-model="r[4]" :ref="refCount()" @isright="right++" :answer="1000" type="number" placeh="#">
+            <template v-slot:after="">tornillos.</template>
+          </inputbox>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Escribe el nombre de los siguientes números.</div>
+      <div class="row mt-3 ex2">
+        <div class="col-md-6 mb-3" v-for="(i, index) in tempsobj.a">
+          <inputbox v-model="r[index+5]" :ref="refCount()" @isright="right++" :answer="i.t" type="text" placeh="-">
+            <template v-slot:before="">
+              <numbers>{{i.n}}</numbers>
+            </template>
+          </inputbox>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$set(app.tempsobj, 'a', [
+          {n:100, t:'Cien'},
+          {n:200, t:'Doscientos'},
+          {n:300, t:'Trescientos'},
+          {n:400, t:'Cuatrocientos'},
+          {n:500, t:'Quinientos'},
+          {n:600, t:'Seiscientos'},
+          {n:700, t:'Setecientos'},
+          {n:800, t:'Ochocientos'},
+          {n:900, t:'Novecientos'},
+          {n:1000, t:'Mil'},
+      ])
+    </script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Sumo y resto'
+- subtitle = 'Completa la decena'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .inputbox{
+                font-size: 1.2rem;
+            }
+            .ex1 .inputbox input {
+                max-width: 60px;
+                font-size: 1.2rem;
+                border-radius: 6px;
+                padding: 2px;
+                border-color: var(--pastel2);
+                box-shadow: 4px 4px 0 var(--pastel4);
+                margin-left: 6px;
+            }
+            .ex2 .inputbox input {
+                max-width: 60px;
+                font-size: 1.2rem;
+                border-radius: 6px;
+                padding: 2px;
+                border-color: var(--pastel3);
+                box-shadow: 4px 4px 0 var(--pastel1);
+                margin-left: 6px;
+            }
+            .ex2{
+                background: linear-gradient( to right,#D1E2E8, #fff);
+                border-radius: 10px;
+                padding: 20px 0;
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Resuelve las siguientes operaciones.
+
+            .row.mt-3.ex1
+                template(v-for="(i, index) in tempsobj.a")
+                    .col-md-4.mt-3
+                        .common: inputbox(v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i.r" type="number" placeh="#")
+                            template(v-slot:before="") {{i.b}}
+            
+            .instruccion.mt-5 Resuelve las siguientes operaciones.
+
+
+            .row.mt-3.ex2.centerrow
+                .col-md-6.col-8
+                    template(v-for="(i, index) in tempsobj.b")
+                        .mt-3: inputbox(v-model="r[index+12]" :ref="refCount()" @isright="right++" :answer="i.r" type="number" placeh="#")
+                            template(v-slot:before="") {{i.b}}
+
+                .col-md-6.col-4: img(src="aimg/b.png").img-fluid
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'a', [
+                    {b: '29 + 1 =', r: 30},
+                    {b: '97 − 7 =', r: 90},
+                    {b: '38 − 8 =', r: 30},
+                    {b: '59 − 9 =', r: 50},
+                    {b: '63 + 7 =', r: 70},
+                    {b: '83 + 7 =', r: 90},
+                    {b: '68 + 2 =', r: 70},
+                    {b: '75 + 5 =', r: 80},
+                    {b: '67 − 7 =', r: 60},
+                    {b: '36 − 6 =', r: 30},
+                    {b: '64 + 6 =', r: 70},
+                    {b: '88 − 8 =', r: 80},
+                ])
+
+                app.$set(app.tempsobj, 'b', [
+                    {b: '30 − 20 =', r: 10},
+                    {b: '50 + 30 =', r: 80},
+                    {b: '60 − 40 =', r: 20},
+                    {b: '10 + 50 =', r: 60},
+                    {b: '90 − 70 =', r: 20},
+                ])

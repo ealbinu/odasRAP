@@ -1,0 +1,118 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Juego con las multiplicaciones</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .parrafoinputs {
+          font-size: 1.4rem;
+          font-weight: bold;
+      }
+      .parrafoinputs .inputbox {
+          max-width: 80px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Juego con las multiplicaciones</h1>
+      <h2>¿Por cuánto multiplico?</h2>
+      <div class="instruccion mt-5">Escribe la información que falta en las siguientes operaciones.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c1 text-center"><span>8 x </span>
+            <inputbox v-model="r[0]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="9"></inputbox><span>= 72</span>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c2 text-center"><span>81 = </span>
+            <inputbox v-model="r[1]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="9"></inputbox><span> x </span>
+            <inputbox v-model="r[2]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="9"></inputbox>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c3 text-center"><span>6 x </span>
+            <inputbox v-model="r[3]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="8"></inputbox><span> = 48</span>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c4 text-center">
+            <inputbox v-model="r[4]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="42"></inputbox><span> = 7 x 6</span>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c5 text-center">
+            <inputbox v-model="r[5]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="5"></inputbox><span> x 9 = 45</span>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c1 text-center"><span>40 = </span>
+            <inputbox v-model="r[6]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="8"></inputbox><span> x</span>
+            <inputbox v-model="r[7]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="5"></inputbox>
+          </div>
+        </div>
+      </div>
+      <div class="row ex1">
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c1 text-center"><span>9 x 7 = </span>
+            <inputbox v-model="r[8]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="63"></inputbox>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c2 text-center">
+            <inputbox v-model="r[9]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="49"></inputbox><span> = 7 x 7</span>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c3 text-center"><span>8 x </span>
+            <inputbox v-model="r[10]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="7"></inputbox><span> = 56</span>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c4 text-center"><span>36 = </span>
+            <inputbox v-model="r[11]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="9"></inputbox><span> x </span>
+            <inputbox v-model="r[12]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="4"></inputbox>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c5 text-center"><span>5 x 5 = </span>
+            <inputbox v-model="r[13]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="25"></inputbox>
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+          <div class="parrafoinputs c1 text-center">
+            <inputbox v-model="r[14]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="100"></inputbox><span> = 10 x 10</span>
+          </div>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>//app.$set(app.tempsobj, 'a', [])</script>
+  </body>
+</html>

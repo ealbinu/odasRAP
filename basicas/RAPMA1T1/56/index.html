@@ -1,0 +1,117 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sumo y resto</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .inputbox{
+          font-size: 1.2rem;
+      }
+      .ex1 .inputbox input {
+          max-width: 60px;
+          font-size: 1.2rem;
+          border-radius: 6px;
+          padding: 2px;
+          border-color: var(--pastel2);
+          box-shadow: 4px 4px 0 var(--pastel4);
+          margin-left: 6px;
+      }
+      .ex2 .inputbox input {
+          max-width: 60px;
+          font-size: 1.2rem;
+          border-radius: 6px;
+          padding: 2px;
+          border-color: var(--pastel3);
+          box-shadow: 4px 4px 0 var(--pastel1);
+          margin-left: 6px;
+      }
+      .ex2{
+          background: linear-gradient( to right,#D1E2E8, #fff);
+          border-radius: 10px;
+          padding: 20px 0;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Sumo y resto</h1>
+      <h2>Completa la decena</h2>
+      <div class="instruccion mt-5">Resuelve las siguientes operaciones.</div>
+      <div class="row mt-3 ex1">
+        <template v-for="(i, index) in tempsobj.a">
+          <div class="col-md-4 mt-3">
+            <div class="common">
+              <inputbox v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i.r" type="number" placeh="#">
+                <template v-slot:before="">{{i.b}}</template>
+              </inputbox>
+            </div>
+          </div>
+        </template>
+      </div>
+      <div class="instruccion mt-5">Resuelve las siguientes operaciones.</div>
+      <div class="row mt-3 ex2 centerrow">
+        <div class="col-md-6 col-8">
+          <template v-for="(i, index) in tempsobj.b">
+            <div class="mt-3">
+              <inputbox v-model="r[index+12]" :ref="refCount()" @isright="right++" :answer="i.r" type="number" placeh="#">
+                <template v-slot:before="">{{i.b}}</template>
+              </inputbox>
+            </div>
+          </template>
+        </div>
+        <div class="col-md-6 col-4"><img class="img-fluid" src="aimg/b.png"/></div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$set(app.tempsobj, 'a', [
+          {b: '29 + 1 =', r: 30},
+          {b: '97 − 7 =', r: 90},
+          {b: '38 − 8 =', r: 30},
+          {b: '59 − 9 =', r: 50},
+          {b: '63 + 7 =', r: 70},
+          {b: '83 + 7 =', r: 90},
+          {b: '68 + 2 =', r: 70},
+          {b: '75 + 5 =', r: 80},
+          {b: '67 − 7 =', r: 60},
+          {b: '36 − 6 =', r: 30},
+          {b: '64 + 6 =', r: 70},
+          {b: '88 − 8 =', r: 80},
+      ])
+      
+      app.$set(app.tempsobj, 'b', [
+          {b: '30 − 20 =', r: 10},
+          {b: '50 + 30 =', r: 80},
+          {b: '60 − 40 =', r: 20},
+          {b: '10 + 50 =', r: 60},
+          {b: '90 − 70 =', r: 20},
+      ])
+    </script>
+  </body>
+</html>

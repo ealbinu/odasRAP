@@ -1,0 +1,70 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Multiplico y resuelvo'
+- subtitle = 'Tipos de galletas'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .inputbox.ib2{
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+            .inputbox.ib2 input{margin: 0 4px;}
+            .ex2 .inputbox.ib2 input{
+                max-width: 80px;
+            }
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Resuelve los siguientes problemas.
+
+            .mt-3.ex1: .common
+                    labeltext(num="1.") Raúl compró 5 carritos deportivos y cada uno le costó $2. ¿Cuánto pagó por todos?
+                    inputbox(v-model="r[0]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="10")
+                        template(v-slot:before="") Pagó $
+                        template(v-slot:after="")  .
+            .mt-3.ex1: .common
+                    labeltext(num="2.") En un muelle hay 6 lanchas. Si cada una tiene 2 chalecos salvavidas, ¿cuántos chalecos hay en total?
+                    inputbox(v-model="r[1]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="12")
+                        template(v-slot:before="") Hay 
+                        template(v-slot:after="")  chalecos en total.
+            .mt-3.ex1: .common
+                    labeltext(num="3.") Toño compró 3 bolsas de canicas. Si cada una tiene 5 canicas, ¿cuántas canicas tiene en total?
+                    inputbox(v-model="r[2]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="15")
+                        template(v-slot:before="") Tiene 
+                        template(v-slot:after="")  canicas.
+            .mt-3.ex1: .common
+                    labeltext(num="4.") Mis 4 amigos y yo haremos un día de campo. Si cada uno llevará 4 sándwiches para la comida, ¿cuántos llevaremos en total?
+                    inputbox(v-model="r[3]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="20")
+                        template(v-slot:after="")  sándwiches.
+            
+
+            .instruccion.mt-5 Resuelve las siguientes multiplicaciones.
+
+            .row.mt-3.ex2.justify-content-center
+                template(v-for="(i, index) in tempsobj.ex2")
+                    .col-md-4.mt-2: .common.c2
+                        inputbox(v-model="d['a'+index]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="i[1]")
+                            template(v-slot:before="") {{i[0]}}
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'ex2', [
+                    ['2 × 1 =', 2],
+                    ['2 × 7 =',14],
+                    ['2 × 3 =',6],
+                    ['2 × 4 =',8],
+                    ['2 × 5 =',10],
+                    ['2 × 2 =',4],
+                    ['2 × 8 =',16],
+                    ['2 × 6 =',12],
+                ])

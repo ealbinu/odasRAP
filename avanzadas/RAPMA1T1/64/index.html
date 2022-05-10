@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sé qué pasó primero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        .dropzone, .drag {
+            background: #fff;
+            width: 180px;
+            height: 180px;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        .dropzone{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .dropzone .number{ color: var(--main); }
+    </style>
+    </head>
+<body>
+    <div id="app">
+        
+        <scene v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted"></scene>
+
+        <!-- ### scene -->
+        <scene v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="3" scene-color="#015093">
+            <info type="dragdrop" title="Sé qué pasó primero" text="Coloca las imágenes en los recuadros blancos de acuerdo al orden en que sucedieron." textaudio="asound/instruccion.mp3" :autoplay="true"></info>
+            <activity>
+                
+                
+                <div class="row">
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="1"><div class="number">1</div></div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="2"><div class="number">2</div></div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="3"><div class="number">3</div></div>
+                </div>
+                
+                <div class="row">
+                    <drag data="2" dropzone=".dropzone" stay-if-ok append-to-dropzone><img src="aimg/a2.svg"></drag>
+                    <drag data="1" dropzone=".dropzone" stay-if-ok append-to-dropzone><img src="aimg/a1.svg"></drag>
+                    <drag data="3" dropzone=".dropzone" stay-if-ok append-to-dropzone><img src="aimg/a3.svg"></drag>
+                </div>
+                
+
+            </activity>
+        </scene> <!-- end scene -->
+
+
+        <!-- ### scene -->
+        <scene v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="3" scene-color="#015093">
+            <info type="dragdrop" title="Sé que pasó primero" text="Coloca las imágenes en los recuadros blancos de acuerdo al orden en que sucedieron." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
+            <activity>
+                
+                
+                <div class="row">
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="1"><div class="number">1</div></div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="2"><div class="number">2</div></div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="3"><div class="number">3</div></div>
+                </div>
+                
+                <div class="row">
+                    <drag data="2" dropzone=".dropzone" stay-if-ok append-to-dropzone><img src="aimg/a5.svg"></drag>
+                    <drag data="1" dropzone=".dropzone" stay-if-ok append-to-dropzone><img src="aimg/a4.svg"></drag>
+                    <drag data="3" dropzone=".dropzone" stay-if-ok append-to-dropzone><img src="aimg/a6.svg"></drag>
+                </div>
+                
+
+            </activity>
+        </scene> <!-- end scene -->
+       
+       
+        <!-- ### scene -->
+        <scene v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode"
+        :answers="3" scene-color="#015093">
+            <info type="dragdrop" title="Sé que pasó primero" text="Coloca las imágenes en los recuadros blancos de acuerdo al orden en que sucedieron." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
+            <activity>
+                
+                
+                <div class="row">
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="1"><div class="number">1</div></div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="2"><div class="number">2</div></div>
+                    <div class="dropzone" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="3"><div class="number">3</div></div>
+                </div>
+                
+                <div class="row">
+                    <drag data="1" dropzone=".dropzone" stay-if-ok append-to-dropzone><img src="aimg/a7.svg"></drag>
+                    <drag data="3" dropzone=".dropzone" stay-if-ok append-to-dropzone><img src="aimg/a9.svg"></drag>
+                    <drag data="2" dropzone=".dropzone" stay-if-ok append-to-dropzone><img src="aimg/a8.svg"></drag>
+                </div>
+                
+
+            </activity>
+        </scene> <!-- end scene -->
+        
+        
+
+
+
+        <scene v-if="currentScene==4" :key="4" end-scene :final-data="finalData"></scene>
+    
+    </div>
+    <!-- libraries -->
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    
+    <!-- fireworks -->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- modulos -->
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- mainscript -->
+    <script src="../../assets/assets.js"></script>
+    <script>
+        app.currentScene = 0
+        app.scenesCount = 3
+        app.$devmode = false
+    </script>
+</body>
+</html>

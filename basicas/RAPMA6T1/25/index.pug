@@ -1,0 +1,97 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Comparo fracciones con decimales'
+- subtitle = '¿Quién es el más alto?'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .ex1 strong {
+                color: var(--accent);
+                margin-right: 20px;
+            }
+            .ex1 .operation {
+                background: #f5f5f5;
+                font-size: 1.2rem;
+                border-radius: 10px;
+                padding: 10px;
+            }
+            .ex1 .operation div {
+                font-weight: bold;
+                padding: 6px;
+                min-width: 40px;
+            }
+            .ex1 .operation hr {
+                margin: 0;
+                border: 2px solid var(--sec);
+            }
+            .ex1 .operation .inputbox {
+                width: 80px;
+            }
+            .ex1 .operation .inputbox input {
+                font-size: 1.6rem;
+                color: var(--main);
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Compara los siguientes números fraccionarios y decimales entre sí, utilizando los signos #[strong >], #[strong <] o #[strong =].
+
+            .row.mt-3.ex1
+                .col-md-6.mb-3
+                    .d-flex.align-items-center.text-center.operation
+                        strong a)
+                        div 2
+                        div
+                            | 1
+                            hr
+                            | 5
+                        inputbox(v-model="r[0]" :ref="refCount()" @isright="right++" answer="<" type="text" placeh="> < =")
+                        div 2.5
+                .col-md-6.mb-3
+                    .d-flex.align-items-center.text-center.operation
+                        strong b)
+                        div
+                            | 3
+                            hr
+                            | 4
+                        inputbox(v-model="r[1]" :ref="refCount()" @isright="right++" answer=">" type="text" placeh="> < =")
+                        div 0.625
+                .col-md-6.mb-3
+                    .d-flex.align-items-center.text-center.operation
+                        strong c)
+                        div 0.875
+                        inputbox(v-model="r[2]" :ref="refCount()" @isright="right++" answer="=" type="text" placeh="> < =")
+                        div
+                            | 7
+                            hr
+                            | 8
+                .col-md-6.mb-3
+                    .d-flex.align-items-center.text-center.operation
+                        strong d)
+                        div 2
+                        div
+                            | 1
+                            hr
+                            | 4
+                        inputbox(v-model="r[3]" :ref="refCount()" @isright="right++" answer=">" type="text" placeh="> < =")
+                        div
+                            | 9
+                            hr
+                            | 5
+            
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

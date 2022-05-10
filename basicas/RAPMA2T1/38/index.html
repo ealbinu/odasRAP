@@ -1,0 +1,109 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Multiplico y resuelvo</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .inputbox.ib2{
+          font-weight: bold;
+          font-size: 1.2rem;
+      }
+      .inputbox.ib2 input{margin: 0 4px;}
+      .ex2 .inputbox.ib2 input{
+          max-width: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Multiplico y resuelvo</h1>
+      <h2>Tipos de galletas</h2>
+      <div class="instruccion mt-5">Resuelve los siguientes problemas.</div>
+      <div class="mt-3 ex1">
+        <div class="common">
+          <labeltext num="1.">Raúl compró 5 carritos deportivos y cada uno le costó $2. ¿Cuánto pagó por todos?</labeltext>
+          <inputbox v-model="r[0]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="10">
+            <template v-slot:before="">Pagó $</template>
+            <template v-slot:after=""> .</template>
+          </inputbox>
+        </div>
+      </div>
+      <div class="mt-3 ex1">
+        <div class="common">
+          <labeltext num="2.">En un muelle hay 6 lanchas. Si cada una tiene 2 chalecos salvavidas, ¿cuántos chalecos hay en total?</labeltext>
+          <inputbox v-model="r[1]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="12">
+            <template v-slot:before="">Hay </template>
+            <template v-slot:after=""> chalecos en total.</template>
+          </inputbox>
+        </div>
+      </div>
+      <div class="mt-3 ex1">
+        <div class="common">
+          <labeltext num="3.">Toño compró 3 bolsas de canicas. Si cada una tiene 5 canicas, ¿cuántas canicas tiene en total?</labeltext>
+          <inputbox v-model="r[2]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="15">
+            <template v-slot:before="">Tiene </template>
+            <template v-slot:after=""> canicas.</template>
+          </inputbox>
+        </div>
+      </div>
+      <div class="mt-3 ex1">
+        <div class="common">
+          <labeltext num="4.">Mis 4 amigos y yo haremos un día de campo. Si cada uno llevará 4 sándwiches para la comida, ¿cuántos llevaremos en total?</labeltext>
+          <inputbox v-model="r[3]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="20">
+            <template v-slot:after=""> sándwiches.</template>
+          </inputbox>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Resuelve las siguientes multiplicaciones.</div>
+      <div class="row mt-3 ex2 justify-content-center">
+        <template v-for="(i, index) in tempsobj.ex2">
+          <div class="col-md-4 mt-2">
+            <div class="common c2">
+              <inputbox v-model="d['a'+index]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="i[1]">
+                <template v-slot:before="">{{i[0]}}</template>
+              </inputbox>
+            </div>
+          </div>
+        </template>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$set(app.tempsobj, 'ex2', [
+          ['2 × 1 =', 2],
+          ['2 × 7 =',14],
+          ['2 × 3 =',6],
+          ['2 × 4 =',8],
+          ['2 × 5 =',10],
+          ['2 × 2 =',4],
+          ['2 × 8 =',16],
+          ['2 × 6 =',12],
+      ])
+    </script>
+  </body>
+</html>

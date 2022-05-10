@@ -1,0 +1,211 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Defino cuerpos geométricos</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .ex1 .bx1,
+      .ex1 .bx2 {
+          border: 6px solid #f5f5f5;
+          border-radius: 10px;
+          padding: 10px;
+      }
+      .ex1 img {
+          max-height: 200px;
+      }
+      .ex1 .inputbox {
+          margin-bottom: 6px;
+          justify-content: flex-start;
+      }
+      .ex1 .inputbox input {
+          font-size: 1.2rem;
+          width: 60px;
+          margin-right: 6px;
+      }
+      .ex1 .demo {
+          color: var(--sec);
+          padding: 6px 0;
+          background: #f5f5f5;
+          border-radius: 10px;
+          margin-bottom: 6px;
+      }
+      .ex1 .demo strong {
+          font-size: 1.2rem;
+          display: inline-block;
+          width: 60px;
+          text-align: center;
+          margin-right: 6px;
+      }
+      .ex2 .inputbox input{
+          font-size: 1.2rem;
+      }
+      .ex2 img{
+          max-width: 200px;
+      }
+      .ex3 .inputbox input {
+          font-size: 1.1rem;
+          padding: 0;
+      }
+      @media (max-width: 680px) {
+          .ex3 .inputbox input {
+              font-size: 0.9rem;
+          }
+      }
+      .ex3 .tabla .head {
+          text-align: center;
+          color: #fff;
+      }
+      .ex3 .tabla .head > div {
+          border: 2px solid #fff;
+          background: #00AEB5;
+          border-radius: 6px;
+          padding: 6px 0;
+      }
+      @media (max-width: 680px) {
+          .ex3 .tabla .head > div {
+              font-size: 0.7rem;
+          }
+      }
+      .ex3 .tabla .body {
+          text-align: center;
+      }
+      .ex3 .tabla .body img {
+          max-height: 80px;
+          border-radius: 8px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .ex3 .tabla .body > div {
+          border: 2px solid #fff;
+          background: #f5f5f5;
+          border-radius: 6px;
+          padding: 6px 0;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Defino cuerpos geométricos</h1>
+      <h2>Desplazamientos / ¿En qué son diferentes?</h2>
+      <div class="text-center">
+        <embedvideo urlid="SNzcH1dSuF4" title="Elaboración de cuerpos geométricos"></embedvideo>
+      </div>
+      <div class="instruccion mt-5">Observa los siguientes cuerpos geométricos y escribe la letra que corresponde de acuerdo a sus partes. Observa el ejemplo.</div>
+      <div class="row mt-3 ex1">
+        <div class="col-md-6">
+          <div class="row bx1 justify-content-center align-items-center">
+            <div class="col-md-6 col-5"><img class="img-fluid" src="aimg/1a.png"/></div>
+            <div class="col">
+              <div class="demo"><strong>A</strong><span>Base</span></div>
+              <template v-for="(i, index) in [{v:'B',t:'Altura'},{v:'C',t:'Cara'},{v:'D',t:'Vértice'}]">
+                <inputbox v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i.v" type="text" placeh="-">
+                  <template v-slot:after="">{{i.t}}</template>
+                </inputbox>
+              </template>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row bx2 justify-content-center align-items-center">
+            <div class="col-md-6 col-5"><img class="img-fluid" src="aimg/1b.png"/></div>
+            <div class="col">
+              <template v-for="(i, index) in [{v:'A',t:'Base'},{v:'B',t:'Altura'},{v:'C',t:'Cara'}, {v:'D',t:'Vértice'}]">
+                <inputbox v-model="r[index+3]" :ref="refCount()" @isright="right++" :answer="i.v" type="text" placeh="-">
+                  <template v-slot:after="">{{i.t}}</template>
+                </inputbox>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Escribe el nombre de los siguientes cuerpos geométricos.</div>
+      <div class="row mt-3 ex2">
+        <div class="col-md-4">
+          <div class="text-center"><img class="img-fluid" src="aimg/2a.png"/></div>
+          <inputbox v-model="r[7]" :ref="refCount()" @isright="right++" answer="Pirámide hexagonal" type="text" placeh="- -"></inputbox>
+        </div>
+        <div class="col-md-4">
+          <div class="text-center"><img class="img-fluid" src="aimg/2b.png"/></div>
+          <inputbox v-model="r[8]" :ref="refCount()" @isright="right++" answer="Prisma triangular" type="text" placeh="- -"></inputbox>
+        </div>
+        <div class="col-md-4">
+          <div class="text-center"><img class="img-fluid" src="aimg/2c.png"/></div>
+          <inputbox v-model="r[9]" :ref="refCount()" @isright="right++" answer="Pirámide cuadrangular" type="text" placeh="- -"></inputbox>
+        </div>
+      </div>
+      <div class="instruccion mt-5">Completa la tabla con los datos que se piden. Observa el ejemplo.</div>
+      <div class="mt-3 ex3">
+        <div class="tabla">
+          <div class="head row align-items-center no-gutters">
+            <div class="col-2">&nbsp;</div>
+            <div class="col-4">Nombre del cuerpo</div>
+            <div class="col">Aristas</div>
+            <div class="col">Vértices</div>
+            <div class="col">Caras</div>
+            <div class="col">Bases</div>
+          </div>
+          <div class="body demo row align-items-center no-gutters">
+            <div class="col-2"><img class="img-fluid" src="aimg/3a.png"/></div>
+            <div class="col-4"><strong>Priámide triangular</strong></div>
+            <div class="col"><strong>6</strong></div>
+            <div class="col"><strong>4</strong></div>
+            <div class="col"><strong>3</strong></div>
+            <div class="col"><strong>1</strong></div>
+          </div>
+          <div class="body row align-items-center no-gutters" v-for="(i, index) in tempsobj.a">
+            <div class="col-2"><img class="img-fluid" :src="i.img"/></div>
+            <div class="col-4">
+              <inputbox v-model="r[index+i.inx]" :ref="refCount()" @isright="right++" :answer="i.n" type="text" placeh="- -"></inputbox>
+            </div>
+            <div class="col">
+              <inputbox v-model="r[index+i.inx+1]" :ref="refCount()" @isright="right++" :answer="i.a" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col">
+              <inputbox v-model="r[index+i.inx+2]" :ref="refCount()" @isright="right++" :answer="i.v" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col">
+              <inputbox v-model="r[index+i.inx+3]" :ref="refCount()" @isright="right++" :answer="i.c" type="number" placeh="#"></inputbox>
+            </div>
+            <div class="col">
+              <inputbox v-model="r[index+i.inx+4]" :ref="refCount()" @isright="right++" :answer="i.b" type="number" placeh="#"></inputbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$set(app.tempsobj, 'a', [
+          {img: 'aimg/3b.png', n: 'Prisma rectangular', a:12, v:8, c:4, b:2, inx: 10 },
+          {img: 'aimg/3c.png', n: 'Pirámide hexagonal', a:12, v:7,  c:6, b:1, inx: 14},
+          {img: 'aimg/3d.png', n: 'Prisma hexagonal',   a:18, v:12, c:6, b:2, inx: 18 }
+      ])
+    </script>
+  </body>
+</html>

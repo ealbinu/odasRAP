@@ -1,0 +1,86 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Obtengo múltiplos comunes'
+- subtitle = 'Los medicamentos'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .mcms {
+                font-size: 1.2rem;
+            }
+            .mcms .selectable {
+                padding: 0 3px;
+            }
+            .mcms .numbers {
+                background: #fff;
+                padding: 0 6px;
+                border-radius: 4px;
+                margin-right: 10px;
+            }
+            
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Calcula el mínimo común múltiplo (#[strong mcm]) de cada número y encierra los múltiplos que se repiten en cada fila.
+
+
+            .row.ex1.mcms.mt-3.common.br
+                each ro in [['a', 2], ['b',8]]
+                    .col-md-5
+                        small Múltiplos de:
+                        .common.row.centerrow.c1
+                            numbers(smaller c=1) #{ro[1]}
+                            template(v-for="(i, index) in tempsobj."+ro[0])
+                                selectable(:isok="i==8||i==16" initclass="txt" v-model="d['"+ro[0]+"'+index]" :ref="refCount()" @isright="right++") {{i}}
+                                template(v-if="(index+1) < tempsobj."+ro[0]+".length") , 
+                .col-md
+                    strong.main mcm
+                    inputbox(v-model="r[0]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="8")
+            
+            .row.ex1.mcms.mt-3.common.br
+                each ro in [['c', 5], ['d',9]]
+                    .col-md-5
+                        small Múltiplos de:
+                        .common.row.centerrow.c2
+                            numbers(smaller c=1) #{ro[1]}
+                            template(v-for="(i, index) in tempsobj."+ro[0])
+                                selectable(:isok="i==45" initclass="txt" v-model="d['"+ro[0]+"'+index]" :ref="refCount()" @isright="right++") {{i}}
+                                template(v-if="(index+1) < tempsobj."+ro[0]+".length") , 
+                .col-md
+                    strong.main mcm
+                    inputbox(v-model="r[1]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="45")
+            
+            .row.ex1.mcms.mt-3.common.br
+                each ro in [['e', 6], ['f',3]]
+                    .col-md-5
+                        small Múltiplos de:
+                        .common.row.centerrow.c3
+                            numbers(smaller c=1) #{ro[1]}
+                            template(v-for="(i, index) in tempsobj."+ro[0])
+                                selectable(:isok="i==6 || i==12" initclass="txt" v-model="d['"+ro[0]+"'+index]" :ref="refCount()" @isright="right++") {{i}}
+                                template(v-if="(index+1) < tempsobj."+ro[0]+".length") , 
+                .col-md
+                    strong.main mcm
+                    inputbox(v-model="r[2]" initclass="ib2" :ref="refCount()" @isright="right++"  type="number" placeh="#" :answer="6")
+   
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'a', [2, 4, 6, 8, 10, 12, 14, 16, 18])
+                app.$set(app.tempsobj, 'b', [8, 16, 24, 32, 40])
+                
+                app.$set(app.tempsobj, 'c', [5,10,15,20,25,30,35,40,45])
+                app.$set(app.tempsobj, 'd', [9,18,27,36,45])
+                
+                app.$set(app.tempsobj, 'e', [6,12,18,24,30,36,42,48,54])
+                app.$set(app.tempsobj, 'f', [3,6,9,12,15])

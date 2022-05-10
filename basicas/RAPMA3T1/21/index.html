@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resto muy bien</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+        body {
+            background-color: #9AD5EB;
+            background-image: url("aimg/bg.svg");
+            background-position: bottom;
+            background-repeat: no-repeat;
+        }
+        .resultado {
+            background: #fff;
+            border-radius: 10px;
+        }
+        .box {
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 6px 8px 0 #7BC1EB;
+            text-align: center;
+        }
+        .box .title {
+            font-size: 1.4rem;
+            background: #fff;
+            padding: 10px 0;
+            border-radius: 10px;
+            color: #63AE42;
+        }
+        .box .sum {
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.4);
+            margin: 4px 0;
+            padding: 10px 0;
+            border-radius: 10px;
+        }
+        .box .inputbox input {
+            font-size: 1.1rem;
+            padding: 2px;
+        }
+        .b1 .box {
+            background: #D1E4B9;
+        }
+        .b2 .box {
+            background: #BEE1E0;
+        }
+        .b3 .box {
+            background: #ABCDE2;
+        }
+        .b4 .box {
+            background: #E0C2D4;
+        }
+        .b5 .box {
+            background: #F9D4AD;
+        }
+        .b6 .box {
+            background: #C3B4CE;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Resto muy bien</h1>
+        <h2>El maquinista</h2>
+
+        <div class="instruccion mt-5">Realiza mentalmente las restas de los recuadros. Observa los ejemplos.</div>
+        <div class="row mt-3">
+           <div class="col-md-3 b1">
+                <div class="box">
+                    <div class="title text-center"><strong>Resta 7</strong></div>
+                    <div class="row sum"> <div class="col-4">600</div> <div class="col"><strong class="main">593</strong></div></div>
+                    <div class="row sum" v-for="(i, index) in [128, 630, 327, 179, 289]">
+                            <div class="col-4">{{i}}</div>
+                            <div class="col"><inputbox v-model="r[index]" :ref="'q'+(index)" @isright="right++" :answer="i-7" type="number" placeh="#"></inputbox></div>
+                    </div>
+                </div>
+            </div><!--col-md-3-->
+           <div class="col-md-3 b2">
+                <div class="box">
+                    <div class="title text-center"><strong>Resta 5</strong></div>
+                    <div class="row sum"> <div class="col-4">312</div> <div class="col"><strong class="main">307</strong></div></div>
+                    <div class="row sum" v-for="(i, index) in [238,599,174,245,731]">
+                            <div class="col-4">{{i}}</div>
+                            <div class="col"><inputbox v-model="r[index+5]" :ref="'q'+(index+5)" @isright="right++" :answer="i-5" type="number" placeh="#"></inputbox></div>
+                    </div>
+                </div>
+            </div><!--col-md-3-->
+           <div class="col-md-3 b3">
+                <div class="box">
+                    <div class="title text-center"><strong>Resta 2</strong></div>
+                    <div class="row sum"> <div class="col-4">120</div> <div class="col"><strong class="main">118</strong></div></div>
+                    <div class="row sum" v-for="(i, index) in [241,100,483,594,776]">
+                            <div class="col-4">{{i}}</div>
+                            <div class="col"><inputbox v-model="r[index+10]" :ref="'q'+(index+10)" @isright="right++" :answer="i-2" type="number" placeh="#"></inputbox></div>
+                    </div>
+                </div>
+            </div><!--col-md-3-->
+           <div class="col-md-3 b4">
+                <div class="box">
+                    <div class="title text-center"><strong>Resta 6</strong></div>
+                    <div class="row sum"> <div class="col-4">636</div> <div class="col"><strong class="main">630</strong></div></div>
+                    <div class="row sum" v-for="(i, index) in [200,219,407,658,131]">
+                            <div class="col-4">{{i}}</div>
+                            <div class="col"><inputbox v-model="r[index+15]" :ref="'q'+(index+15)" @isright="right++" :answer="i-6" type="number" placeh="#"></inputbox></div>
+                    </div>
+                </div>
+            </div><!--col-md-3-->
+        </div>
+
+        <div class="row mt-3">
+           <div class="col-md-3 b5">
+                <div class="box">
+                    <div class="title text-center"><strong>Resta 4</strong></div>
+                    <div class="row sum"> <div class="col-4">822</div> <div class="col"><strong class="main">818</strong></div></div>
+                    <div class="row sum" v-for="(i, index) in [731,150,200,620,303]">
+                            <div class="col-4">{{i}}</div>
+                            <div class="col"><inputbox v-model="r[index+20]" :ref="'q'+(index+20)" @isright="right++" :answer="i-4" type="number" placeh="#"></inputbox></div>
+                    </div>
+                </div>
+            </div><!--col-md-3-->
+           <div class="col-md-3 b6">
+                <div class="box">
+                    <div class="title text-center"><strong>Resta 9</strong></div>
+                    <div class="row sum"> <div class="col-4">400</div> <div class="col"><strong class="main">391</strong></div></div>
+                    <div class="row sum" v-for="(i, index) in [190,738,999,608,412]">
+                            <div class="col-4">{{i}}</div>
+                            <div class="col"><inputbox v-model="r[index+25]" :ref="'q'+(index+25)" @isright="right++" :answer="i-9" type="number" placeh="#"></inputbox></div>
+                    </div>
+                </div>
+            </div><!--col-md-3-->
+        </div>
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

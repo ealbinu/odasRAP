@@ -1,0 +1,135 @@
+
+<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Obtengo múltiplos comunes</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <style>
+      .mcms {
+          font-size: 1.2rem;
+      }
+      .mcms .selectable {
+          padding: 0 3px;
+      }
+      .mcms .numbers {
+          background: #fff;
+          padding: 0 6px;
+          border-radius: 4px;
+          margin-right: 10px;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+      <h1>Obtengo múltiplos comunes</h1>
+      <h2>Los medicamentos</h2>
+      <div class="instruccion mt-5">Calcula el mínimo común múltiplo (<strong>mcm</strong>) de cada número y encierra los múltiplos que se repiten en cada fila.</div>
+      <div class="row ex1 mcms mt-3 common br">
+        <div class="col-md-5"><small>Múltiplos de:</small>
+          <div class="common row centerrow c1">
+            <numbers smaller="smaller" c="1">2</numbers>
+            <template v-for="(i, index) in tempsobj.a">
+              <selectable :isok="i==8||i==16" initclass="txt" v-model="d['a'+index]" :ref="refCount()" @isright="right++">{{i}}</selectable>
+              <template v-if="(index+1) &lt; tempsobj.a.length">, </template>
+            </template>
+          </div>
+        </div>
+        <div class="col-md-5"><small>Múltiplos de:</small>
+          <div class="common row centerrow c1">
+            <numbers smaller="smaller" c="1">8</numbers>
+            <template v-for="(i, index) in tempsobj.b">
+              <selectable :isok="i==8||i==16" initclass="txt" v-model="d['b'+index]" :ref="refCount()" @isright="right++">{{i}}</selectable>
+              <template v-if="(index+1) &lt; tempsobj.b.length">, </template>
+            </template>
+          </div>
+        </div>
+        <div class="col-md"><strong class="main">mcm</strong>
+          <inputbox v-model="r[0]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="8"></inputbox>
+        </div>
+      </div>
+      <div class="row ex1 mcms mt-3 common br">
+        <div class="col-md-5"><small>Múltiplos de:</small>
+          <div class="common row centerrow c2">
+            <numbers smaller="smaller" c="1">5</numbers>
+            <template v-for="(i, index) in tempsobj.c">
+              <selectable :isok="i==45" initclass="txt" v-model="d['c'+index]" :ref="refCount()" @isright="right++">{{i}}</selectable>
+              <template v-if="(index+1) &lt; tempsobj.c.length">, </template>
+            </template>
+          </div>
+        </div>
+        <div class="col-md-5"><small>Múltiplos de:</small>
+          <div class="common row centerrow c2">
+            <numbers smaller="smaller" c="1">9</numbers>
+            <template v-for="(i, index) in tempsobj.d">
+              <selectable :isok="i==45" initclass="txt" v-model="d['d'+index]" :ref="refCount()" @isright="right++">{{i}}</selectable>
+              <template v-if="(index+1) &lt; tempsobj.d.length">, </template>
+            </template>
+          </div>
+        </div>
+        <div class="col-md"><strong class="main">mcm</strong>
+          <inputbox v-model="r[1]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="45"></inputbox>
+        </div>
+      </div>
+      <div class="row ex1 mcms mt-3 common br">
+        <div class="col-md-5"><small>Múltiplos de:</small>
+          <div class="common row centerrow c3">
+            <numbers smaller="smaller" c="1">6</numbers>
+            <template v-for="(i, index) in tempsobj.e">
+              <selectable :isok="i==6 || i==12" initclass="txt" v-model="d['e'+index]" :ref="refCount()" @isright="right++">{{i}}</selectable>
+              <template v-if="(index+1) &lt; tempsobj.e.length">, </template>
+            </template>
+          </div>
+        </div>
+        <div class="col-md-5"><small>Múltiplos de:</small>
+          <div class="common row centerrow c3">
+            <numbers smaller="smaller" c="1">3</numbers>
+            <template v-for="(i, index) in tempsobj.f">
+              <selectable :isok="i==6 || i==12" initclass="txt" v-model="d['f'+index]" :ref="refCount()" @isright="right++">{{i}}</selectable>
+              <template v-if="(index+1) &lt; tempsobj.f.length">, </template>
+            </template>
+          </div>
+        </div>
+        <div class="col-md"><strong class="main">mcm</strong>
+          <inputbox v-model="r[2]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="6"></inputbox>
+        </div>
+      </div>
+      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
+    <script src="../../assets/modulos/dragdropMod.js"></script>
+    <script src="../../assets/modulos/dropdowns.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/tip.js"></script>
+    <script src="../../assets/modulos/relational.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/modulos/utils.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$set(app.tempsobj, 'a', [2, 4, 6, 8, 10, 12, 14, 16, 18])
+      app.$set(app.tempsobj, 'b', [8, 16, 24, 32, 40])
+      
+      app.$set(app.tempsobj, 'c', [5,10,15,20,25,30,35,40,45])
+      app.$set(app.tempsobj, 'd', [9,18,27,36,45])
+      
+      app.$set(app.tempsobj, 'e', [6,12,18,24,30,36,42,48,54])
+      app.$set(app.tempsobj, 'f', [3,6,9,12,15])
+    </script>
+  </body>
+</html>

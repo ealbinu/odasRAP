@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplico y juego</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
+    <link rel="stylesheet" href="../../assets/assets.css">
+    <style>
+       .options div{margin: 10px 20px;} 
+       .opcion {
+            padding: 20px 4px;
+            border-radius: 10px;
+            border: 2px solid #fff;
+        }
+        .opcion:nth-child(odd) {
+            background: #DDF0EE;
+            color: #1E97C9;
+        }
+        .opcion:nth-child(even) {
+            background: #EFDEE6;
+            color: #84669E;
+        }
+        .opcion strong {
+            font-size: 2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
+        <h1>Multiplico y juego</h1>
+        <h2>Memorama de multiplicaciones</h2>
+
+
+        <div class="instruccion mt-5">Resuelve las multiplicaciones mentalmente y anota el resultado.</div>
+        
+        <div class="row mt-3">
+            <div class="col-lg-3 col-6 opcion" v-for="(i, index) in [
+                {m:'4x5=', a:'20'},
+                {m:'7x8=', a:'56'},
+                {m:'5x10=', a:'50'},
+                {m:'7x6=', a:'42'},
+                
+                {m:'3x5=', a:'15'},
+                {m:'4x6=', a:'24'},
+                {m:'9x7=', a:'63'},
+                {m:'8x4=', a:'32'},
+                
+                {m:'4x9=', a:'36'},
+                {m:'9x5=', a:'45'},
+                {m:'2x7=', a:'14'},
+                {m:'3x3=', a:'9'},
+                
+                {m:'4x2=', a:'8'},
+                {m:'6x9=', a:'54'},
+                {m:'9x9=', a:'81'},
+                {m:'3x6=', a:'18'},
+                
+                {m:'4x4=', a:'16'},
+                {m:'5x5=', a:'25'},
+                {m:'2x6=', a:'12'},
+                {m:'6x10=', a:'60'}
+                ]">
+                    <div class="row justify-content-center align-items-center text-center">
+                        <div class="col-7"><strong>{{i.m}}</strong></div>
+                        <div class="col-5"><inputbox v-model="r[index]" :ref="'q'+index" @isright="right++" :answer="i.a" type="number" placeh="#"></inputbox></div>
+                    </div>
+            </div>
+        </div>
+        
+
+
+        <!-- ENDING -->
+        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
+        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
+    </div>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="../../assets/modulos/selectable.js"></script>
+    <script src="../../assets/modulos/selectableoptions.js"></script>
+    <script src="../../assets/modulos/check.js"></script>
+    <script src="../../assets/modulos/inputbox.js"></script>
+    <script src="../../assets/modulos/choose.js"></script>
+    <script src="../../assets/modulos/finalize.js"></script>
+    <script src="../../assets/assets.js"></script>
+    <script></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Estimo el resultado'
+- subtitle = '¡A estimar!'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .choose .options div {
+                border: 2px solid #fff;
+                padding: 10px;
+            }
+            .choose .options div.active {
+                border: 2px solid var(--main);
+                border-radius: 10px;
+            }
+            .choose .options div img {
+                max-width: 180px;
+                width: 100%;
+            }
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+
+            .instruccion.mt-5 Resuelve los siguientes problemas usando cálculo mental. Después selecciona la respuesta correcta.
+
+            .row.mt-3.ex1
+                .col-12: choose(v-model="r[0]" :ref="refCount()" :answer-num="1" num="1." text="Elías está indeciso entre comprar unos auriculares que cuestan $550 y tienen un costo de envío de $120, o unos que cuestan $500 y tienen un costo de envío de $100. ¿Cuáles auriculares le cuestan menos a Elías?" :options="['<img src=aimg/a1.png>','<img src=aimg/a2.png>']" @isright="right++" )
+            .row.mt-2.ex1
+                .col-12: choose(v-model="r[1]" :ref="refCount()" :answer-num="1" num="2." text="María debe decidir entre comprar un paquete de galletas que cuesta $20 y un refresco de $22, o un paquete de galletas de chocolate de $23 y una malteada de $30. ¿Con cuál combinación gastaría más dinero?" :options="['<img src=aimg/b1.png>','<img src=aimg/b2.png>']" @isright="right++" )
+            .row.mt-2.ex1
+                .col-12: choose(v-model="r[2]" :ref="refCount()" :answer-num="1" num="3." text="Manuel fue a la tlapalería y le mostraron un paquete con 100 tornillos y 110 clavos, otro con 70 tornillos y 150 clavos, y un tercero con 200 tornillos. ¿Qué paquete debería comprar Manuel para tener el mayor número de piezas?" :options="['<img src=aimg/c1.png>','<img src=aimg/c2.png>', '<img src=aimg/c3.png>']" @isright="right++" )
+            
+
+
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

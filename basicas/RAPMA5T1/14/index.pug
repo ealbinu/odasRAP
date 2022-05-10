@@ -1,0 +1,139 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Comparo fracciones'
+- subtitle = '¿Cuál es mayor? / Comparación de cantidades'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .fracomp{
+                display: flex;
+            }
+            .ex2 .inputbox {
+                margin-bottom: 20px;
+            }
+            .ex2 .inputbox input {
+                min-width: 60px;
+                margin-left: -40px;
+                max-width: 80px;
+                padding: 2px;
+                font-size: 1.3rem;
+                box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+            }
+            .ex2 > div:nth-child(1) input {
+                border-color: #DB8743;
+            }
+            .ex2 > div:nth-child(2) input {
+                border-color: #49B0B7;
+            }
+            .ex2 > div:nth-child(3) input {
+                border-color: #A96293;
+            }
+            .ex2 > div:nth-child(4) input {
+                border-color: #A55D90;
+            }
+            .ex2 > div:nth-child(5) input {
+                border-color: #DB8844;
+            }
+            .ex2 > div:nth-child(6) input {
+                border-color: #3DABB3;
+            }
+            .illu{
+                width: 90%;
+                max-width: 180px;
+                
+            }
+            .selectableoptions {
+                flex-grow: 1;
+                font-size: 4rem;
+                font-family: 'barnacle_boyregular';
+            }
+            .selectableoptions .option {
+                text-align: center;
+            }
+            .selectableoptions .option.off {
+                color: #888;
+            }
+            .selectableoptions .option.on {
+                color: var(--main);
+            }
+            .ex3 .label span[frac] {
+                display: inline-block;
+                vertical-align: middle;
+                width: 30px;
+                text-align: center;
+            }
+            .ex3 .label span[frac] hr {
+                border: none;
+                border-top: 3px solid var(--sec);
+                margin: 0;
+            }
+
+
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+            
+            .text-center: embedvideo(urlid="56JHaprztGw" title="Estrategias para comparar fracciones")
+
+            .instruccion.mt-5 Compara las siguientes fracciones y escribe los signos #[strong >] o #[strong <] según corresponda.
+
+            .row.mt-3.ex1
+                .col-md-6.text-center.fracomp
+                    img(src="aimg/1a.png").img-fluid
+                    //inputbox(v-model="r[0]" :ref="refCount()" @isright="right++" answer="<" type="text" placeh="> o <")
+                    selectableoptions(v-model="r[0]" :ref="refCount()" @isright="right++" answer="me" :options="[{val:'ma', sym:'>'},  {val:'me', sym:'<'},  ]" customclass="col-6")
+                        template(v-slot:option="{option}") {{option.sym}}
+                    img(src="aimg/1b.png").img-fluid
+                .col-md-6.text-center.fracomp
+                    img(src="aimg/1c.png").img-fluid
+                    //inputbox(v-model="r[1]" :ref="refCount()" @isright="right++" answer=">" type="text" placeh="> o <")
+                    selectableoptions(v-model="r[1]" :ref="refCount()" @isright="right++" answer="ma" :options="[{val:'ma', sym:'>'},  {val:'me', sym:'<'},  ]" customclass="col-6")
+                        template(v-slot:option="{option}") {{option.sym}}
+                    img(src="aimg/1d.png").img-fluid
+                .col-md-6.text-center.fracomp
+                    img(src="aimg/1e.png").img-fluid
+                    //inputbox(v-model="r[2]" :ref="refCount()" @isright="right++" answer="<" type="text" placeh="> o <")
+                    selectableoptions(v-model="r[2]" :ref="refCount()" @isright="right++" answer="me" :options="[{val:'ma', sym:'>'},  {val:'me', sym:'<'},  ]" customclass="col-6")
+                        template(v-slot:option="{option}") {{option.sym}}
+                    img(src="aimg/1f.png").img-fluid
+                .col-md-6.text-center.fracomp
+                    img(src="aimg/1g.png").img-fluid
+                    //inputbox(v-model="r[3]" :ref="refCount()" @isright="right++" answer=">" type="text" placeh="> o <")
+                    selectableoptions(v-model="r[3]" :ref="refCount()" @isright="right++" answer="ma" :options="[{val:'ma', sym:'>'},  {val:'me', sym:'<'},  ]" customclass="col-6")
+                        template(v-slot:option="{option}") {{option.sym}}
+                    img(src="aimg/1h.png").img-fluid
+            
+            .instruccion.mt-5 Escribe los números del #[strong 1] al #[strong 6] para ordenar las siguientes figuras de menor a mayor, de acuerdo a la fracción que representan.
+            
+            .row.mt-3.ex2
+                .col-md-4.col-6: inputbox(v-model="r[4]" :ref="refCount()" @isright="right++" :answer="2" type="number" placeh="#"): template(v-slot:before=""): img(src="aimg/2a.png").img-fluid
+                .col-md-4.col-6: inputbox(v-model="r[5]" :ref="refCount()" @isright="right++" :answer="3" type="number" placeh="#"): template(v-slot:before=""): img(src="aimg/2b.png").img-fluid
+                .col-md-4.col-6: inputbox(v-model="r[6]" :ref="refCount()" @isright="right++" :answer="4" type="number" placeh="#"): template(v-slot:before=""): img(src="aimg/2c.png").img-fluid
+                .col-md-4.col-6: inputbox(v-model="r[7]" :ref="refCount()" @isright="right++" :answer="5" type="number" placeh="#"): template(v-slot:before=""): img(src="aimg/2d.png").img-fluid
+                .col-md-4.col-6: inputbox(v-model="r[8]" :ref="refCount()" @isright="right++" :answer="1" type="number" placeh="#"): template(v-slot:before=""): img(src="aimg/2e.png").img-fluid
+                .col-md-4.col-6: inputbox(v-model="r[9]" :ref="refCount()" @isright="right++" :answer="6" type="number" placeh="#"): template(v-slot:before=""): img(src="aimg/2f.png").img-fluid
+
+            .instruccion.mt-5 Elige la respuesta correcta.
+
+            .row.mt-3.ex3
+                .col-12
+                    labeltext(num="1.") Manuel tiene tres parcelas, en la primera siembra <span frac>2<hr>4</span> de maíz, en la segunda <span frac>4<hr>6</span> de frijol y en la tercera <span frac>4<hr>8</span> de soya.
+                    .text-center: img(src="aimg/3a.png").illu
+                    choose(v-model="r[10]" :ref="refCount()" num="a)" text="¿Cuál producto es el que más siembra?" :options="['Siembra más frijol.','Siembra más maíz.','Siembra más soya.']" @isright="right++" answer="Siembra más frijol.")
+                    choose(v-model="r[11]" :ref="refCount()" num="b)" text="¿Cuál de los otros dos productos siembra más?" :options="['Siembra más soya.','Siembra la misma cantidad.','Siembra más maíz.']" @isright="right++" answer="Siembra la misma cantidad.")
+                    labeltext(num="2.") Isabel fue al mercado y compró <span frac>5<hr>6</span> kg de jitomates, <span frac>3<hr>5</span> kg de chiles y <span frac>5<hr>3</span> kg de cebollas.
+                    .text-center: img(src="aimg/3b.png").illu
+                    choose(v-model="r[12]" :ref="refCount()" num="a)" text="¿De qué verdura compró menos?" :options="['Compró menos jitomates.','Compró menos chiles.','Compró menos cebollas.']" @isright="right++" answer="Compró menos chiles.")
+                    choose(v-model="r[13]" :ref="refCount()" num="b)" text="Selecciona la opción que muestre los productos de mayor a menor peso." :options="['Chiles, cebollas y jitomates.','Jitomates, chiles y cebollas.','Cebollas, jitomates y chiles.']" @isright="right++" answer="Cebollas, jitomates y chiles.")
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                //app.$set(app.tempsobj, 'a', [])

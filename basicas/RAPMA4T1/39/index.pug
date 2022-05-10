@@ -1,0 +1,166 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Defino cuerpos geométricos'
+- subtitle = 'Desplazamientos / ¿En qué son diferentes?'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .ex1 .bx1,
+            .ex1 .bx2 {
+                border: 6px solid #f5f5f5;
+                border-radius: 10px;
+                padding: 10px;
+            }
+            .ex1 img {
+                max-height: 200px;
+            }
+            .ex1 .inputbox {
+                margin-bottom: 6px;
+                justify-content: flex-start;
+            }
+            .ex1 .inputbox input {
+                font-size: 1.2rem;
+                width: 60px;
+                margin-right: 6px;
+            }
+            .ex1 .demo {
+                color: var(--sec);
+                padding: 6px 0;
+                background: #f5f5f5;
+                border-radius: 10px;
+                margin-bottom: 6px;
+            }
+            .ex1 .demo strong {
+                font-size: 1.2rem;
+                display: inline-block;
+                width: 60px;
+                text-align: center;
+                margin-right: 6px;
+            }
+            .ex2 .inputbox input{
+                font-size: 1.2rem;
+            }
+            .ex2 img{
+                max-width: 200px;
+            }
+            .ex3 .inputbox input {
+                font-size: 1.1rem;
+                padding: 0;
+            }
+            @media (max-width: 680px) {
+                .ex3 .inputbox input {
+                    font-size: 0.9rem;
+                }
+            }
+            .ex3 .tabla .head {
+                text-align: center;
+                color: #fff;
+            }
+            .ex3 .tabla .head > div {
+                border: 2px solid #fff;
+                background: #00AEB5;
+                border-radius: 6px;
+                padding: 6px 0;
+            }
+            @media (max-width: 680px) {
+                .ex3 .tabla .head > div {
+                    font-size: 0.7rem;
+                }
+            }
+            .ex3 .tabla .body {
+                text-align: center;
+            }
+            .ex3 .tabla .body img {
+                max-height: 80px;
+                border-radius: 8px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            }
+            .ex3 .tabla .body > div {
+                border: 2px solid #fff;
+                background: #f5f5f5;
+                border-radius: 6px;
+                padding: 6px 0;
+            }
+
+
+    body
+        #app.container.my-5.animate__animated.animate__fadeIn.animate__delay-1s
+            h1 #{title}
+            if subtitle.length>1
+                h2 #{subtitle}
+            
+            .text-center: embedvideo(urlid="SNzcH1dSuF4" title="Elaboración de cuerpos geométricos")
+
+            .instruccion.mt-5 Observa los siguientes cuerpos geométricos y escribe la letra que corresponde de acuerdo a sus partes. Observa el ejemplo.
+
+            .row.mt-3.ex1
+                .col-md-6
+                    .row.bx1.justify-content-center.align-items-center
+                        .col-md-6.col-5: img(src="aimg/1a.png").img-fluid
+                        .col
+                            div.demo
+                                strong A
+                                span Base
+                            template(v-for="(i, index) in [{v:'B',t:'Altura'},{v:'C',t:'Cara'},{v:'D',t:'Vértice'}]")
+                                inputbox(v-model="r[index]" :ref="refCount()" @isright="right++" :answer="i.v" type="text" placeh="-")
+                                    template(v-slot:after="") {{i.t}}
+                .col-md-6
+                    .row.bx2.justify-content-center.align-items-center
+                        .col-md-6.col-5: img(src="aimg/1b.png").img-fluid
+                        .col
+                            template(v-for="(i, index) in [{v:'A',t:'Base'},{v:'B',t:'Altura'},{v:'C',t:'Cara'}, {v:'D',t:'Vértice'}]")
+                                inputbox(v-model="r[index+3]" :ref="refCount()" @isright="right++" :answer="i.v" type="text" placeh="-")
+                                    template(v-slot:after="") {{i.t}}
+
+
+            .instruccion.mt-5 Escribe el nombre de los siguientes cuerpos geométricos.
+            .row.mt-3.ex2
+                .col-md-4
+                    .text-center: img(src="aimg/2a.png").img-fluid
+                    inputbox(v-model="r[7]" :ref="refCount()" @isright="right++" answer="Pirámide hexagonal" type="text" placeh="- -")
+                .col-md-4
+                    .text-center: img(src="aimg/2b.png").img-fluid
+                    inputbox(v-model="r[8]" :ref="refCount()" @isright="right++" answer="Prisma triangular" type="text" placeh="- -")
+                .col-md-4
+                    .text-center: img(src="aimg/2c.png").img-fluid
+                    inputbox(v-model="r[9]" :ref="refCount()" @isright="right++" answer="Pirámide cuadrangular" type="text" placeh="- -")
+
+            .instruccion.mt-5 Completa la tabla con los datos que se piden. Observa el ejemplo.
+
+            .mt-3.ex3
+                .tabla
+                    .head.row.align-items-center.no-gutters
+                        .col-2 &nbsp;
+                        .col-4 Nombre del cuerpo
+                        .col Aristas
+                        .col Vértices
+                        .col Caras
+                        .col Bases
+                    .body.demo.row.align-items-center.no-gutters
+                        .col-2: img(src="aimg/3a.png").img-fluid
+                        .col-4: strong Priámide triangular
+                        .col: strong 6
+                        .col: strong 4
+                        .col: strong 3
+                        .col: strong 1
+                    .body.row.align-items-center.no-gutters(v-for="(i, index) in tempsobj.a")
+                        .col-2: img(:src="i.img").img-fluid
+                        .col-4: inputbox(v-model="r[index+i.inx]" :ref="refCount()" @isright="right++" :answer="i.n" type="text" placeh="- -")
+                        .col: inputbox(v-model="r[index+i.inx+1]" :ref="refCount()" @isright="right++" :answer="i.a" type="number" placeh="#")
+                        .col: inputbox(v-model="r[index+i.inx+2]" :ref="refCount()" @isright="right++" :answer="i.v" type="number" placeh="#")
+                        .col: inputbox(v-model="r[index+i.inx+3]" :ref="refCount()" @isright="right++" :answer="i.c" type="number" placeh="#")
+                        .col: inputbox(v-model="r[index+i.inx+4]" :ref="refCount()" @isright="right++" :answer="i.b" type="number" placeh="#")
+
+
+
+            finalize(@evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total")
+        +scripts
+            script.
+                app.$set(app.tempsobj, 'a', [
+                    {img: 'aimg/3b.png', n: 'Prisma rectangular', a:12, v:8, c:4, b:2, inx: 10 },
+                    {img: 'aimg/3c.png', n: 'Pirámide hexagonal', a:12, v:7,  c:6, b:1, inx: 14},
+                    {img: 'aimg/3d.png', n: 'Prisma hexagonal',   a:18, v:12, c:6, b:2, inx: 18 }
+                ])
