@@ -63,6 +63,20 @@
         .dropzonecard.hover {
             background: #FFD900;
         }
+        @media (max-width:680px){
+            .tarjeta{
+                flex-direction: column;
+            }
+            .drag.tarjeta{
+                margin: 4px;
+                width: auto;
+            }
+            .tarjeta div{
+                width: auto;
+                flex-direction: column;
+            }
+        }
+        
     </style>
     </head>
 <body>
@@ -189,7 +203,7 @@
                     <div class="tarjeta"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div>
 
                 </div>
-                <div class="row">
+                <div class="row w100">
                     <drag initclass="tarjeta" data="ok" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"></div></drag>
                     <drag initclass="tarjeta" data="no" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"></div></drag>
                     <drag initclass="tarjeta" data="no" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div></drag>
@@ -204,7 +218,7 @@
         :answers="1" scene-color="#FEBA11">
             <info type="dragdrop" title="Agrupo Figuras" text="Ahora, coloca la tarjeta que complete la suma." textaudio="asound/instruccion.mp3" :autoplay="false"></info>
             <activity>
-                <div class="row">
+                <div class="row w100">
                     <div class="tarjeta"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"></div>
                     <div class="simbolo number c1">+</div>
                     <div class="tarjeta dropzonecard" droptimes="untilok" errorsound="../../assets/asound/vuelveaintentar_mujer.mp3" data="ok"></div>
@@ -212,7 +226,7 @@
                     <div class="tarjeta manysuns"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div>
 
                 </div>
-                <div class="row">
+                <div class="row w100">
                     <drag initclass="tarjeta" data="no" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"></div></drag>
                     <drag initclass="tarjeta" data="no" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"></div></drag>
                     <drag initclass="tarjeta" data="ok" dropzone=".dropzonecard" stay-if-ok><div><img src="aimg/sol1.svg"><img src="aimg/sol2.svg"><img src="aimg/sol1.svg"></div></drag>
@@ -250,7 +264,7 @@
     <!-- mainscript -->
     <script src="../../assets/assets.js"></script>
     <script>
-        app.currentScene = 0
+        app.currentScene = 6
         app.scenesCount = 7
         app.$devmode = false
     </script>
