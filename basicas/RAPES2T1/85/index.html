@@ -1,110 +1,12 @@
-
-<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Confirmo lo que aprendí</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
-    <link rel="stylesheet" href="../../assets/assets.css"/>
-    <style>
-      .blank{border-bottom:2px solid var(--main);width:50px;display:inline-block}
-      .frc{display:inline-block;text-align:center;vertical-align:middle}
-      .choose .options div hr,.frc hr{borde:none;border-top:2px solid var(--sec);min-width:40px;margin:0}
-      .choose .options div{;padding:6px;border-bottom:none; border-radius: 10px; background:#f5f5f5;}
-      .choose .options div.active{border:2px solid var(--main);background:#fff;box-shadow:4px 4px 0 rgba(0,0,0,.1)}
-      .choose .options div{ display: flex; flex-direction: column; justify-content: center; align-items: center; }
-      .choose .options div img{ max-width: 120px; border-radius: 6px; }
-      img{ display: block; margin: 0 auto; width: 100%; max-width: 380px; }
-      .choose .options div img.im1{ max-width: 80px; }
-      .choose .options div img.im2{ max-width: 60px; }
-    </style>
-    <body></body>
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-      <h1>Confirmo lo que aprendí</h1>
-      <div class="instruccion mt-5">Marca la respuesta correcta.</div>
-      <div class="row mt-3">
-        <div class="col-12">
-          <template v-for="(i, index) in temps">
-            <choose :key="index" v-model="r[index]" :ref="refCount()" :num="(index+1)+'.'" :text="i.p" :options="i.ops" @isright="right++" :answer="i.ops[i.a]"></choose>
-          </template>
-        </div>
-      </div>
-      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
-    <script src="../../assets/modulos/dragdropMod.js"></script>
-    <script src="../../assets/modulos/dropdowns.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/tip.js"></script>
-    <script src="../../assets/modulos/relational.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/modulos/utils.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script>
-      app.$set(app, 'temps', [
-          {
-              p: '¿Cuál es el juego que consiste en completar cuadros en blanco?',
-              ops: ['Crucigrama.','Trabalenguas.','Copla.'],
-              a:0
-          },
-          {
-              p: 'Es donde debes buscar el significado de una palabra que no conoces.',
-              ops: ['Revista.','Diccionario.','Periódico.'],
-              a:1
-          },
-          {
-              p: 'Selecciona la oración interrogativa.',
-              ops: ['¡Mira, un puesto de frutas!','¿Dónde está la tienda?','La casa de Pablo es roja.'],
-              a:1
-          },
-          {
-              p: '¿Para qué son las ilustraciones en los textos informativos?',
-              ops: ['Para exponer el tema.','Para confundir al lector.','Para complementar la información.'],
-              a:2
-          },
-          {
-              p: 'En los poemas, cada línea corresponde a un verso y un grupo de versos forman una:',
-              ops: ['Fábula.','Leyenda.','Estrofa.'],
-              a:2
-          },
-          {
-              p: 'La moraleja sirve para darnos una:',
-              ops: ['Adivinanza.','Canción.','Enseñanza.'],
-              a:2
-          },
-          {
-              p: 'Es el conjunto de preguntas que se hacen a ciertas personas para obtener información.',
-              ops: ['Cuento.','Entrevista.','Fábula.'],
-              a:1
-          },
-          {
-              p: 'Son las partes de un cuento.',
-              ops: ['Inicio, desarrollo y final.','Fábula, rima y copla.','Índice, introducción y conclusión.'],
-              a:0
-          },
-      
-          /*
-          {
-              p: '',
-              ops: [''],
-              a:0
-          },
-          */
-          
-      ])
-    </script>
-  </head>
-</html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ponte a prueba</title></head><body><div class="container mx-auto my-5" id="app"><oda-titulo title="Ponte a prueba" subtitle=""></oda-titulo><div><oda-instruccion class="">Selecciona lo que se te pide</oda-instruccion><div class=""><span class=" text-2xl font-extrabold text-clear">1.</span><span class=" ml-3 text-2xl text-gray-500">Selecciona cuál es la parte de un texto informativo en donde se dice de
+qué trata el tema.</span></div><module-choice v-bind:options="[{'v1':'Introducción.','v2':'','v3':''},{'v1':'Desarrollo.','v2':'','v3':''},{'v1':'Conclusión.','v2':'','v3':''}]" v-bind:answer="0" v-bind:allok="false" class=" mt-10 text-2xl text-center text-isok"><template #option="{v1,v2,v3}"><div class="">{{v1}}</div></template></module-choice><div class=" mt-10"><span class=" text-2xl font-extrabold text-clear">2.</span><span class=" ml-3 text-2xl text-gray-500">Selecciona la acción que tienes que realizar antes de buscar las fuentes
+de información para conocer sobre un tema.</span></div><layout-grid columns="1" columns-md="3" gap="5" class=" p-3 mx-auto"><module-select v-bind:allok="false" v-bind:answer="false" class=" mx-auto my-auto h-fit"><div class=" p-5 border-dashed border-sec border-4"><util-text design="0" class=" text-xl text-center text-sec">Leer la
+información en
+las fuentes
+seleccionadas.</util-text></div></module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" mx-auto my-auto h-fit"><div class=" p-5 border-4 border-dashed border-accent"><util-text design="0" class=" text-xl text-center text-accent">Subrayar la
+información que
+responde a las
+preguntas.</util-text></div></module-select><module-select v-bind:allok="false" v-bind:answer="true" class=" mx-auto my-auto h-fit"><div class=" p-5 border-4 border-dashed border-clear"><util-text design="0" class=" text-xl text-center text-clear">Plantear preguntas
+sobre lo que
+queremos saber.</util-text></div></module-select></layout-grid><div class=" mt-10"><span class=" text-2xl font-extrabold text-clear">3.</span><span class=" ml-3 text-2xl text-gray-500">Selecciona las opciones que contienen textos informativos.</span></div><layout-grid columns="1" columns-md="3" gap="2" class=" p-3"><module-check v-bind="{options:['fxemoji:heavycheckmark'],answer:0}" float="" v-bind:allok="false" class=" mx-auto w-fit"><layout-box img="" design="0" class=" shadow-oda w-44 h-14 !rounded-none"><util-text design="0" class=" text-center text-xl text-isok">Cuentos.</util-text></layout-box></module-check><module-check v-bind="{options:['fxemoji:heavycheckmark'],answer:1}" float="" v-bind:allok="false" class=" mx-auto w-fit"><layout-box img="" design="0" class=" shadow-oda w-44 h-14 !rounded-none"><util-text design="0" class=" text-center text-xl text-clear">Noticias.</util-text></layout-box></module-check><module-check v-bind="{options:['fxemoji:heavycheckmark'],answer:1}" float="" v-bind:allok="false" class=" mx-auto w-fit"><layout-box img="" design="0" class=" shadow-oda w-44 h-14 !rounded-none"><util-text design="0" class=" text-center text-xl text-accent">Biografías</util-text></layout-box></module-check><module-check v-bind="{options:['fxemoji:heavycheckmark'],answer:1}" float="" v-bind:allok="false" class=" mx-auto w-fit"><layout-box img="" design="0" class=" shadow-oda w-44 h-14 !rounded-none"><util-text design="0" class=" text-center text-xl text-clear">Textos científicos.</util-text></layout-box></module-check><module-check v-bind="{options:['fxemoji:heavycheckmark'],answer:0}" float="" v-bind:allok="false" class=" mx-auto w-fit"><layout-box img="" design="0" class=" shadow-oda w-44 h-14 !rounded-none"><util-text design="0" class=" text-center text-xl text-accent">Novelas.</util-text></layout-box></module-check><module-check v-bind="{options:['fxemoji:heavycheckmark'],answer:0}" float="" v-bind:allok="false" class=" mx-auto w-fit"><layout-box img="" design="0" class=" shadow-oda w-44 h-14 !rounded-none"><util-text design="0" class=" text-center text-xl text-isok">Leyendas.</util-text></layout-box></module-check></layout-grid><div class=" mt-10"><span class=" text-2xl font-extrabold text-clear">4.</span><span class=" ml-3 text-2xl text-gray-500">Selecciona la palabra que completa la siguiente oración:</span></div><div class=" p-5 mt-5 border-4 border-clear border-2"><span class=" text-xl">El diccionario se encuentra organizado en orden</span><span class=" text-gray-300">___________</span></div><module-choice v-bind:options="[{'v1':'de mayor a menor','v2':'','v3':''},{'v1':'alfabético','v2':'','v3':''},{'v1':'ascendente.','v2':'','v3':''}]" v-bind:answer="1" v-bind:allok="false" class=" mt-10 text-2xl text-center"><template #option="{v1,v2,v3}"><div class="">{{v1}}</div></template></module-choice><div class=" mt-10"><span class=" text-2xl font-extrabold text-clear">5.</span><span class=" ml-3 text-2xl text-gray-500">Selecciona los elementos que permiten organizar el contenido de los
+textos informativos.</span></div><layout-grid columns="1" columns-md="3" gap="10" class=" p-3"><module-check v-bind="{options:['fxemoji:heavycheckmark'],answer:0}" float="" v-bind:allok="false" class=""><layout-grid columns="1" columns-md="1" gap="2" class=" px-auto p-5 border-2 border-clear w-60 !rounded-none"><util-text design="0" class=" text-xl text-black">* Inicio</util-text><util-text design="0" class=" text-xl text-black">* Desarrollo</util-text><util-text design="0" class=" text-xl text-black">* Moraleja</util-text></layout-grid></module-check><module-check v-bind="{options:['fxemoji:heavycheckmark'],answer:0}" float="" v-bind:allok="false" class=""><layout-grid columns="1" columns-md="1" gap="2" class=" px-auto p-5 border-2 border-clear w-60 !rounded-none"><util-text design="0" class=" text-xl text-black">* Portada</util-text><util-text design="0" class=" text-xl text-black">* Contraportada</util-text><util-text design="0" class=" text-xl text-black">* Editorial</util-text></layout-grid></module-check><module-check v-bind="{options:['fxemoji:heavycheckmark'],answer:1}" float="" v-bind:allok="false" class=""><layout-grid columns="1" columns-md="1" gap="2" class=" px-auto p-5 border-2 border-clear w-60 !rounded-none"><util-text design="0" class=" text-2xl text-xl text-black">* Título</util-text><util-text design="0" class=" text-2xl text-xl text-black">* Subtítulos</util-text><util-text design="0" class=" text-xl text-black">* Ilustraciones</util-text></layout-grid></module-check></layout-grid></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2@v1.0.24/basicas/assets/loader.min.js" data-loader-version="v1.0.24" type="text/javascript"></script></body></html>
