@@ -1,119 +1,19 @@
-
-<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Sé acerca de un tema</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
-    <link rel="stylesheet" href="../../assets/assets.css"/>
-    <style>
-      .dragdrop {
-          min-height: 100%;
-          display: flex;
-          flex-direction: column;
-      }
-      .draggable {
-          flex-grow: 1;
-          min-height: 100%;
-          height: 100%;
-      }
-      .draggable > div:not(.result) {
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-      }
-      .draggable > div:not(.result) div {
-          text-align: center;
-          padding: 2px 10px;
-          border-radius: 10px;
-      }
-      
-      .draggable > div:not(.result) div img {
-          max-height: 120px;
-          position: relative;
-          z-index: 1;
-      }
-      .draggable > div:not(.result) div:nth-child(odd){
-          background: #F5E9EE;
-          padding: 10px;
-          border-radius: 10px 0 0 10px;
-      }
-      .items {
-          min-height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          color: #AE4E8F;
-      }
-      .items div:nth-child(odd) {
-          background: #F5E9EE;
-          padding: 10px;
-          border-radius: 0 10px 10px 0;
-      
-      }
-      @media (max-width: 680px) {
-          .items {
-              font-size: 0.7rem;
-          }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-      <h1>Sé acerca de un tema</h1>
-      <h2>La energía eléctrica hace diferencias</h2>
-      <div class="instruccion mt-5">Lee el texto Yerba Santa de las páginas 109 y 110 de tu libro de texto SEP. Después coloca cada imagen con la descripción correspondiente.</div>
-      <div class="row mt-3 ex1 no-gutters">
-        <div class="col-6" v-if="tempsobj.ok">
-          <dragdrop v-model="r[0]" :ref="refCount()" @isright="right++" :options="tempsobj.nonok" :options-ok="tempsobj.ok"></dragdrop>
-        </div>
-        <div class="col-6">
-          <div class="items">
-            <div>Son granos de maíz que se cuecen con cal y agua, luego se muelen para hacer tortillas.</div>
-            <div>Es una piedra rectangular que se usa en las zonas rurales de México. Ahí se muele el nixtamal para hacer tortillas.</div>
-            <div>Son pedazos de madera y troncos que se usan para encender fuego.</div>
-            <div>Instrumento de piedra muy utilizado en México. Sirve para moler especias y hacer salsas.</div>
-            <div>Es un tejido de varas que se usa en las zonas rurales para guardar alimentos.</div>
-            <div>Lugar en una cocina donde se enciende el fuego para calentar la comida y hacer las tortillas.</div>
-          </div>
-        </div>
-      </div>
-      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
-    <script src="../../assets/modulos/dragdropMod.js"></script>
-    <script src="../../assets/modulos/dropdowns.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/tip.js"></script>
-    <script src="../../assets/modulos/relational.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/modulos/utils.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script>
-       app.$set(app.tempsobj, 'ok', [
-          '<img src=aimg/a2.png>',
-          '<img src=aimg/a3.png>',
-          '<img src=aimg/a1.png>',
-          '<img src=aimg/a4.png>',
-          '<img src=aimg/a6.png>',
-          '<img src=aimg/a5.png>',
-      ])
-      
-      app.$set(app.tempsobj, 'nonok', _.shuffle(app.tempsobj.ok))
-    </script>
-  </body>
-</html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Palabras que se esconden.</title></head><body><div class="container mx-auto my-5" id="app"><oda-titulo title="Palabras que se esconden." subtitle=""></oda-titulo><div><oda-instruccion class="">Encierra el objeto del que se habla en cada caso.</oda-instruccion><div class=" p-3 my-3 text-center justify-center items-center flex flex-wrap rounded-xl bg-pastel1">Es un utensilio que usamos para llevar a nuestra boca alimentos líquidos como caldos o sopas.</div><module-choice v-bind:options="[{'v1':'','v2':'','v3':'img/01.png'},{'v1':'','v2':'','v3':'img/02.png'},{'v1':'','v2':'s','v3':'img/03.png'}]" v-bind:answer="1" v-bind:allok="false" class=" p-3 rounded-xl bg-pastel1"><template #option="{v1,v2,v3}"><layout-img v-bind:img-variable="v3" img="" class=" h-40"></layout-img></template></module-choice><div class=" p-3 my-3 text-center justify-center items-center flex flex-wrap rounded-xl bg-pastel2">Es un 
+instrumento 
+musical de seis 
+cuerdas que, al 
+tocarlo, produce 
+un sonido 
+agradable.</div><module-choice v-bind:options="[{'v1':'','v2':'','v3':'img/04.png'},{'v1':'','v2':'','v3':'img/05.png'},{'v1':'','v2':'s','v3':'img/06.png'}]" v-bind:answer="2" v-bind:allok="false" class=" p-3 rounded-xl bg-pastel2"><template #option="{v1,v2,v3}"><layout-img v-bind:img-variable="v3" img="" class=" h-32"></layout-img></template></module-choice><div class=" p-3 my-3 text-center justify-center items-center flex flex-wrap rounded-xl bg-pastel3">Es una herramienta 
+que se usa para 
+golpear clavos 
+en diferentes 
+situaciones, como 
+al hacer muebles o 
+poner un retrato en 
+una pared.</div><module-choice v-bind:options="[{'v1':'','v2':'','v3':'img/07.png'},{'v1':'','v2':'','v3':'img/08.png'},{'v1':'','v2':'s','v3':'img/09.png'}]" v-bind:answer="0" v-bind:allok="false" class=" p-3 rounded-xl bg-pastel3"><template #option="{v1,v2,v3}"><layout-img v-bind:img-variable="v3" img="" class=" h-36"></layout-img></template></module-choice><div class=" p-3 my-3 text-center justify-center items-center flex flex-wrap rounded-xl bg-pastel4">Es el objeto que se 
+usa para guardar 
+libros y cuadernos 
+para transportarlos 
+de manera fácil de tu 
+casa a la escuela.</div><module-choice v-bind:options="[{'v1':'','v2':'','v3':'img/10.png'},{'v1':'','v2':'','v3':'img/11.png'},{'v1':'','v2':'s','v3':'img/12.png'}]" v-bind:answer="2" v-bind:allok="false" class=" p-3 rounded-xl bg-pastel4"><template #option="{v1,v2,v3}"><layout-img v-bind:img-variable="v3" img="" class=" h-32"></layout-img></template></module-choice></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2@v1.0.24/basicas/assets/loader.min.js" data-loader-version="v1.0.24" type="text/javascript"></script></body></html>
