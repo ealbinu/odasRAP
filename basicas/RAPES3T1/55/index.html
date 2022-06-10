@@ -1,75 +1,11 @@
-
-<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Analizo un texto informativo</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
-    <link rel="stylesheet" href="../../assets/assets.css"/>
-    <style>
-      /*
-      .ex1 {}
-      */
-    </style>
-  </head>
-  <body>
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-      <h1>Analizo un texto informativo</h1>
-      <h2>Analizamos un texto informativo / Del texto informativo a la infografía</h2>
-      <div class="instruccion mt-5">Lee el texto informativo de las páginas 100 y 101 de tu libro de texto SEP. Después contesta las preguntas seleccionando la respuesta correcta.</div>
-      <div class="row mt-3">
-        <div class="col-12">
-          <choose :key="index" v-model="r[index]" :ref="refCount()" :num="(index+1)" :text="i.p" :options="i.ops" @isright="right++" :answer="i.ops[i.a]" v-for="(i, index) in temps"></choose>
-        </div>
-      </div>
-      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
-    <script src="../../assets/modulos/dragdropMod.js"></script>
-    <script src="../../assets/modulos/dropdowns.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/tip.js"></script>
-    <script src="../../assets/modulos/relational.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/modulos/utils.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script>
-      app.$set(app, 'temps', [
-          {
-              p: '¿Cómo se llaman los pequeños organismos que afectan el funcionamiento del cuerpo?',
-              ops: ['Insectos.','Gérmenes.'],
-              a:1
-          },
-          {
-              p: '¿Cuál es un medio por el que se transmiten los gérmenes?',
-              ops: ['La saliva.','La vista.'],
-              a:0
-          },
-          {
-              p: ' ¿Cuál es una manera sencilla de cuidarnos de los gérmenes?',
-              ops: ['Lavarnos las manos.','Comer con las manos sucias.'],
-              a:0
-          },
-          {
-              p: '¿Qué debemos hacer al toser o estornudar?',
-              ops: ['Ir al médico.','Taparnos la boca con el antebrazo.'],
-              a:1
-          },
-          
-      ])
-    </script>
-  </body>
-</html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Palabras que se esconden.</title></head><body><div class="container mx-auto my-5" id="app"><oda-titulo title="Palabras que se esconden." subtitle=""></oda-titulo><div><oda-instruccion class="">Lee el siguiente texto y después selecciona las palabras que corresponde
+al significado.
+Guíate con el contexto.</oda-instruccion><layout-grid columns="1" columns-md="2" gap="2" class=" p-5 bg-pastel6 !rounded-none"><layout-grid columns="1" columns-md="1" gap="2" class=""><div class=""><util-text design="0" class=" mb-5 text-center font-bold text-lg text-accent">La contaminación del agua</util-text><span class="">La actividad humana es la principal causa de la contaminación
+del agua, debido a que diariamente se lanzan </span><span class=" font-bold">desechos
+</span><span class="">químicos y basura a los ríos, lagos y mares de nuestro planeta.</span></div><div class=""><util-text design="0" class="">¿Cuáles son los principales contaminantes?</util-text><span class="">Los insecticidas, </span><span class=" font-bold"> pesticidas </span><span class="">y 
+</span><span class=" font-bold">fertilizantes </span><span class="">contaminan las aguas
+subterráneas y los ecosistemas acuáticos en general. Otros
+contaminantes son los compuestos de origen orgánico como
+el petróleo, los
+</span><span class=" font-bold">disolventes </span><span class=""> y los plásticos, que dañan también la
+flora y fauna marina.</span></div></layout-grid><layout-img v-bind:img-variable="null" img="img/1.png" class=" mx-auto w-60 h-fit"></layout-img></layout-grid><div class=" mt-10"><span class=" text-xl font-bold text-accent">1</span><span class=" ml-2 text-xl text-gray-500">Que disuelven, es decir, que deshacen algo.</span></div><layout-grid columns="2" columns-md="4" gap="2" class=" mt-10"><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Desechos</module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Pesticidas</module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Fertilizantes</module-select><module-select v-bind:allok="false" v-bind:answer="true" class=" text-xl text-gray-500">Disolventes</module-select></layout-grid><div class=" mt-10"><span class=" text-xl font-bold text-accent">2</span><span class=" ml-2 text-xl text-gray-500">Sustancias que ayudan a que la tierra sea fértil.</span></div><layout-grid columns="2" columns-md="4" gap="2" class=" mt-10"><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Desechos</module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Pesticidas</module-select><module-select v-bind:allok="false" v-bind:answer="true" class=" text-xl text-gray-500">Fertilizantes</module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Disolventes</module-select></layout-grid><div class=" mt-10"><span class=" text-xl font-bold text-accent">3</span><span class=" ml-2 text-xl text-gray-500">Cualquier cosa que, una vez usada, ya no sirve.</span></div><layout-grid columns="2" columns-md="4" gap="2" class=" mt-10"><module-select v-bind:allok="false" v-bind:answer="true" class=" text-xl text-gray-500">Desechos</module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Pesticidas</module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Fertilizantes</module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Disolventes</module-select></layout-grid><div class=" mt-10"><span class=" text-xl font-bold text-accent">4</span><span class=" ml-2 text-xl text-gray-500">Sustancias que se emplean para combatir plagas.</span></div><layout-grid columns="2" columns-md="4" gap="2" class=" mt-10"><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Desechos</module-select><module-select v-bind:allok="false" v-bind:answer="true" class=" text-xl text-gray-500">Pesticidas</module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Fertilizantes</module-select><module-select v-bind:allok="false" v-bind:answer="false" class=" text-xl text-gray-500">Disolventes</module-select></layout-grid></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2@v1.0.24/basicas/assets/loader.min.js" data-loader-version="v1.0.24" type="text/javascript"></script></body></html>
