@@ -1,109 +1,46 @@
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Resuelvo rápidamente</title></head><body><div class="container mx-auto my-5" id="app"><oda-titulo title="Resuelvo rápidamente" subtitle=""></oda-titulo><div><oda-instruccion class="">Resuelve los siguientes problemas.</oda-instruccion><div class=" p-5 mx-auto mt-5 rounded-xl bg-pastel1"><div class=""><span class=" font-bold text-2xl text-accent">1.
+</span><span class=" text-2xl">Raúl compró 5 carritos deportivos y cada uno le costó $2. ¿Cuánto pagó por todos?</span></div><div class=" mt-5 text-center"><span class=" text-center text-2xl font-bold">Pagó $
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" mx-auto"></module-input></div></div><div class=" p-5 mx-auto mt-5 rounded-xl bg-pastel1"><div class=""><span class=" font-bold text-2xl text-accent">2.
+</span><span class=" text-2xl">En un muelle hay 6 lanchas. Si cada una tiene 2 chalecos salvavidas, ¿Cuántos chalecos hay en total?</span></div><div class=" mt-5 text-center"><span class=" text-center text-2xl font-bold">Hay
+</span><module-input v-bind:allok="false" answer="12" placeholder="#" class=" mx-auto"></module-input><span class=" text-center text-2xl font-bold">
+chalecos en total.</span></div></div><div class=" p-5 mx-auto mt-5 rounded-xl bg-pastel1"><div class=""><span class=" font-bold text-2xl text-accent">3.
+</span><span class=" text-2xl">Toño compró 3 bolsas de canicas. Si cada una tiene 5 canicas, ¿cuántas canicas tiene en total?</span></div><div class=" mt-5 text-center"><span class=" text-center text-2xl font-bold">Tiene
+</span><module-input v-bind:allok="false" answer="15" placeholder="#" class=" mx-auto"></module-input><span class=" text-center text-2xl font-bold">
+canicas.</span></div></div><div class=" p-5 mx-auto mt-5 rounded-xl bg-pastel1"><div class=""><span class=" font-bold text-2xl text-accent">4.
+</span><span class=" text-2xl">Mis 4 amigos y yo haremos un día de campo. Si cada uno llevará 4 sándwiches para la comida, ¿cuántos llevaremos en total?</span></div><div class=" mt-5 text-center"><module-input v-bind:allok="false" answer="16" placeholder="#" class=" mx-auto"></module-input><span class=" text-center text-2xl font-bold">
+sándwiches.</span></div></div><oda-instruccion class="">Resuelve las siguientes multiplicaciones.</oda-instruccion><layout-grid columns="1" columns-md="3" gap="2" class=""><div class=" p-8 mx-auto rounded-xl bg-pastel2"><span class=" text-2xl">2 x 1=
+</span><module-input v-bind:allok="false" answer="2" placeholder="#" class=" text-2xl w-28"></module-input></div><div class=" p-8 mx-auto rounded-xl bg-pastel2"><span class=" text-2xl">2 x 7=
+</span><module-input v-bind:allok="false" answer="14" placeholder="#" class=" text-2xl w-28"></module-input></div><div class=" p-8 mx-auto rounded-xl bg-pastel2"><span class=" text-2xl">2 x 3=
+</span><module-input v-bind:allok="false" answer="6" placeholder="#" class=" text-2xl w-28"></module-input></div><div class=" p-8 mx-auto rounded-xl bg-pastel2"><span class=" text-2xl">2 x 4=
+</span><module-input v-bind:allok="false" answer="8" placeholder="#" class=" text-2xl w-28"></module-input></div><div class=" p-8 mx-auto rounded-xl bg-pastel2"><span class=" text-2xl">2 x 5=
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" text-2xl w-28"></module-input></div><div class=" p-8 mx-auto rounded-xl bg-pastel2"><span class=" text-2xl">2 x 2=
+</span><module-input v-bind:allok="false" answer="4" placeholder="#" class=" text-2xl w-28"></module-input></div></layout-grid><layout-grid columns="1" columns-md="2" gap="2" class=" mt-2"><div class=" p-8 mx-auto rounded-xl bg-pastel2"><span class=" text-2xl">2 x 8=
+</span><module-input v-bind:allok="false" answer="16" placeholder="#" class=" text-2xl w-28"></module-input></div><div class=" p-8 mx-auto rounded-xl bg-pastel2"><span class=" text-2xl">2 x 6=
+</span><module-input v-bind:allok="false" answer="12" placeholder="#" class=" text-2xl w-28"></module-input></div></layout-grid><oda-instruccion class="">Vamos a seguir aprendiendo, ahora que practicaste la multiplicación, vamos a hacer sumas y restas. Une con una línea cada operación al número que la completa.</oda-instruccion><layout-grid columns="3" columns-md="3" gap="2" class=" mx-auto"><div class=" p-2 mx-auto text-center w-full bg-isok"><span class=" mx-auto font-bold text-center text-xl text-white">Sumar</span></div><div class=" p-2 mx-auto text-center w-full bg-notok"><span class=" mx-auto font-bold text-center text-xl text-white">Número</span></div><div class=" p-2 mx-auto text-center w-full bg-accent"><span class=" mx-auto font-bold text-center text-xl text-white">Restar</span></div><div class=" p-1 mx-auto text-center flex-wrap border-2 border-sec"><span class="">35 +__=91</span><module-drop name="drop1" design="1" answer="56" limit="1" class=" w-20 h-10" v-bind:no-arrow="false"></module-drop></div><div class=" p-1 mx-auto text-center border-2 flex items-center border-main"><module-drag v-bind:only-ok="false" v-bind:allok="false" dropzone="drop1" answer="34" liner="1" connector="1" design="0" class=""></module-drag><span class=" mx-2">
+34
+</span><module-drag v-bind:only-ok="false" v-bind:allok="false" dropzone="drop1" answer="34" liner="1" connector="1" design="" class=""></module-drag></div><div class=" p-1 mx-auto text-center flex-wrap border-2 border-accent"><span class="">- 27=29</span><module-drop name="drop1" design="1" answer="56" limit="1" class=" w-20 h-10" v-bind:no-arrow="false"></module-drop></div><div class=" p-1 mx-auto text-center flex-wrap border-2 border-sec"><span class="">21 +__=55</span><module-drop name="drop1" design="1" answer="34" limit="1" class=" w-20 h-10" v-bind:no-arrow="false"></module-drop></div><div class=" p-1 mx-auto text-center border-2 flex items-center border-main"><module-drag v-bind:only-ok="false" v-bind:allok="false" dropzone="drop1" answer="47" liner="1" connector="1" design="" class=""></module-drag><span class=" mx-2">
+47
+</span><module-drag v-bind:only-ok="false" v-bind:allok="false" dropzone="drop1" answer="47" liner="1" connector="1" design="" class=""></module-drag></div><div class=" p-1 mx-auto text-center flex-wrap border-2 border-accent"><span class="">- 17=30</span><module-drop name="drop1" design="1" answer="47" limit="1" class=" w-20 h-10" v-bind:no-arrow="false"></module-drop></div><div class=" p-1 mx-auto text-center flex-wrap border-2 border-sec"><span class="">13 +__=60</span><module-drop name="drop1" design="1" answer="47" limit="1" class=" w-20 h-10" v-bind:no-arrow="false"></module-drop></div><div class=" p-1 mx-auto text-center border-2 flex items-center border-main"><module-drag v-bind:only-ok="false" v-bind:allok="false" dropzone="drop1" answer="56" liner="1" connector="1" design="" class=""></module-drag><span class=" mx-2">
+56
+</span><module-drag v-bind:only-ok="false" v-bind:allok="false" dropzone="drop1" answer="56" liner="1" connector="1" design="" class=""></module-drag></div><div class=" p-1 mx-auto text-center flex-wrap border-2 border-accent"><span class="">- 9=25</span><module-drop name="drop1" design="1" answer="34" limit="1" class=" w-20 h-10" v-bind:no-arrow="false"></module-drop></div></layout-grid><oda-instruccion class="">Suma o resta las operaciones que se encuentran en los arbustos que
+marcan el camino correcto para que el oso llegue a su cueva.</oda-instruccion><layout-img v-bind:img-variable="null" img="img/1.png" class=""></layout-img><div class=" p-8 mx-auto mt-2 bg-pink-500"><layout-grid columns="1" columns-md="5" gap="2" class=" mx-auto"><div class=" mx-auto"><span class=" text-2xl">a)
 
-<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Multiplico y resuelvo</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
-    <link rel="stylesheet" href="../../assets/assets.css"/>
-    <style>
-      .inputbox.ib2{
-          font-weight: bold;
-          font-size: 1.2rem;
-      }
-      .inputbox.ib2 input{margin: 0 4px;}
-      .ex2 .inputbox.ib2 input{
-          max-width: 80px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-      <h1>Multiplico y resuelvo</h1>
-      <h2>Tipos de galletas</h2>
-      <div class="instruccion mt-5">Resuelve los siguientes problemas.</div>
-      <div class="mt-3 ex1">
-        <div class="common">
-          <labeltext num="1.">Raúl compró 5 carritos deportivos y cada uno le costó $2. ¿Cuánto pagó por todos?</labeltext>
-          <inputbox v-model="r[0]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="10">
-            <template v-slot:before="">Pagó $</template>
-            <template v-slot:after=""> .</template>
-          </inputbox>
-        </div>
-      </div>
-      <div class="mt-3 ex1">
-        <div class="common">
-          <labeltext num="2.">En un muelle hay 6 lanchas. Si cada una tiene 2 chalecos salvavidas, ¿cuántos chalecos hay en total?</labeltext>
-          <inputbox v-model="r[1]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="12">
-            <template v-slot:before="">Hay </template>
-            <template v-slot:after=""> chalecos en total.</template>
-          </inputbox>
-        </div>
-      </div>
-      <div class="mt-3 ex1">
-        <div class="common">
-          <labeltext num="3.">Toño compró 3 bolsas de canicas. Si cada una tiene 5 canicas, ¿cuántas canicas tiene en total?</labeltext>
-          <inputbox v-model="r[2]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="15">
-            <template v-slot:before="">Tiene </template>
-            <template v-slot:after=""> canicas.</template>
-          </inputbox>
-        </div>
-      </div>
-      <div class="mt-3 ex1">
-        <div class="common">
-          <labeltext num="4.">Mis 4 amigos y yo haremos un día de campo. Si cada uno llevará 4 sándwiches para la comida, ¿cuántos llevaremos en total?</labeltext>
-          <inputbox v-model="r[3]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="20">
-            <template v-slot:after=""> sándwiches.</template>
-          </inputbox>
-        </div>
-      </div>
-      <div class="instruccion mt-5">Resuelve las siguientes multiplicaciones.</div>
-      <div class="row mt-3 ex2 justify-content-center">
-        <template v-for="(i, index) in tempsobj.ex2">
-          <div class="col-md-4 mt-2">
-            <div class="common c2">
-              <inputbox v-model="d['a'+index]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="i[1]">
-                <template v-slot:before="">{{i[0]}}</template>
-              </inputbox>
-            </div>
-          </div>
-        </template>
-      </div>
-      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
-    <script src="../../assets/modulos/dragdropMod.js"></script>
-    <script src="../../assets/modulos/dropdowns.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/tip.js"></script>
-    <script src="../../assets/modulos/relational.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/modulos/utils.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script>
-      app.$set(app.tempsobj, 'ex2', [
-          ['2 × 1 =', 2],
-          ['2 × 7 =',14],
-          ['2 × 3 =',6],
-          ['2 × 4 =',8],
-          ['2 × 5 =',10],
-          ['2 × 2 =',4],
-          ['2 × 8 =',16],
-          ['2 × 6 =',12],
-      ])
-    </script>
-  </body>
-</html>
+</span><module-input v-bind:allok="false" answer="130" placeholder="#" class=" text-3xl w-36"></module-input></div><div class=" mx-auto"><span class=" text-2xl">b)
+
+</span><module-input v-bind:allok="false" answer="38" placeholder="#" class=" text-3xl w-36"></module-input></div><div class=" mx-auto"><span class=" text-2xl">c)
+
+</span><module-input v-bind:allok="false" answer="51" placeholder="#" class=" text-3xl w-36"></module-input></div><div class=" mx-auto"><span class=" text-2xl">d)
+
+</span><module-input v-bind:allok="false" answer="39" placeholder="#" class=" text-3xl w-36"></module-input></div><div class=" mx-auto"><span class=" text-2xl">e)
+
+</span><module-input v-bind:allok="false" answer="133" placeholder="#" class=" text-3xl w-36"></module-input></div><div class=" mx-auto"><span class=" text-2xl">f)
+
+</span><module-input v-bind:allok="false" answer="33" placeholder="#" class=" text-3xl w-36"></module-input></div><div class=" mx-auto"><span class=" text-2xl">g)
+
+</span><module-input v-bind:allok="false" answer="136" placeholder="#" class=" text-3xl w-36"></module-input></div><div class=" mx-auto"><span class=" text-2xl">h)
+
+</span><module-input v-bind:allok="false" answer="37" placeholder="#" class=" text-3xl w-36"></module-input></div><div class=" mx-auto"><span class=" text-2xl">i)
+
+</span><module-input v-bind:allok="false" answer="32" placeholder="#" class=" text-3xl w-36"></module-input></div><div class=" mx-auto"><span class=" text-2xl">j)
+
+</span><module-input v-bind:allok="false" answer="159" placeholder="#" class=" text-3xl w-36"></module-input></div></layout-grid></div></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2/basicas/assets/loader.min.js" type="text/javascript"></script></body></html>
