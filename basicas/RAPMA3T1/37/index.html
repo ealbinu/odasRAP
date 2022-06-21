@@ -1,118 +1,15 @@
-
-<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Juego con las multiplicaciones</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
-    <link rel="stylesheet" href="../../assets/assets.css"/>
-    <style>
-      .parrafoinputs {
-          font-size: 1.4rem;
-          font-weight: bold;
-      }
-      .parrafoinputs .inputbox {
-          max-width: 80px;
-      }
-      
-    </style>
-  </head>
-  <body data="RAP">
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-      <h1>Juego con las multiplicaciones</h1>
-      <h2>¿Por cuánto multiplico?</h2>
-      <div class="instruccion mt-5">Escribe la información que falta en las siguientes operaciones.</div>
-      <div class="row mt-3 ex1">
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c1 text-center"><span>8 x </span>
-            <inputbox v-model="r[0]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="9"></inputbox><span>= 72</span>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c2 text-center"><span>81 = </span>
-            <inputbox v-model="r[1]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="9"></inputbox><span> x </span>
-            <inputbox v-model="r[2]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="9"></inputbox>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c3 text-center"><span>6 x </span>
-            <inputbox v-model="r[3]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="8"></inputbox><span> = 48</span>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c4 text-center">
-            <inputbox v-model="r[4]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="42"></inputbox><span> = 7 x 6</span>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c5 text-center">
-            <inputbox v-model="r[5]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="5"></inputbox><span> x 9 = 45</span>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c1 text-center"><span>40 = </span>
-            <inputbox v-model="r[6]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="8"></inputbox><span> x</span>
-            <inputbox v-model="r[7]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="5"></inputbox>
-          </div>
-        </div>
-      </div>
-      <div class="row ex1">
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c1 text-center"><span>9 x 7 = </span>
-            <inputbox v-model="r[8]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="63"></inputbox>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c2 text-center">
-            <inputbox v-model="r[9]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="49"></inputbox><span> = 7 x 7</span>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c3 text-center"><span>8 x </span>
-            <inputbox v-model="r[10]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="7"></inputbox><span> = 56</span>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c4 text-center"><span>36 = </span>
-            <inputbox v-model="r[11]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="9"></inputbox><span> x </span>
-            <inputbox v-model="r[12]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="4"></inputbox>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c5 text-center"><span>5 x 5 = </span>
-            <inputbox v-model="r[13]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="25"></inputbox>
-          </div>
-        </div>
-        <div class="col-md-6 mt-2">
-          <div class="parrafoinputs c1 text-center">
-            <inputbox v-model="r[14]" initclass="ib2" :ref="refCount()" @isright="right++" type="number" placeh="#" :answer="100"></inputbox><span> = 10 x 10</span>
-          </div>
-        </div>
-      </div>
-      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
-    <script src="../../assets/modulos/dragdropMod.js"></script>
-    <script src="../../assets/modulos/dropdowns.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/tip.js"></script>
-    <script src="../../assets/modulos/relational.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/modulos/utils.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script>//app.$set(app.tempsobj, 'a', [])</script>
-  </body>
-</html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Trucos para multiplicar</title></head><body data="RAP-MAT"><div class="container mx-auto my-5" id="app"><oda-titulo title="Trucos para multiplicar" subtitle=""></oda-titulo><div><oda-instruccion class="">Escribe la información que falta en las siguientes operaciones.</oda-instruccion><layout-img img="assets/a1.svg" class=" mx-auto"></layout-img><layout-grid columns="1" columns-md="2" gap="4" class=" p-3 mx-auto mt-10"><div class=" mx-auto border-clear border-accent border-2 w-fit"><div class=" p-3 bg-accent"><util-text design="0" class=" font-bold text-center text-4xl text-white">36 x10 =</util-text></div><div class=" p-3"><span class=" text-2xl">36 x
+</span><module-input v-bind:allok="false" answer="1" placeholder="#" class=" w-14"></module-input><span class=" text-2xl">
+=
+</span><module-input v-bind:allok="false" answer="36" placeholder="#" class=" w-14"></module-input></div><div class=" p-3 mt-3 mt-5"><span class=" text-2xl">36 x 10=
+</span><module-input v-bind:allok="false" answer="360" placeholder="#" class=" w-16"></module-input></div></div><div class=" mx-auto border-clear border-2 w-fit"><div class=" p-3 bg-clear"><util-text design="0" class=" font-bold text-center text-4xl text-white">8 x 1 000 =</util-text></div><div class=" p-3"><module-input v-bind:allok="false" answer="8 x 1=8" placeholder="#" class=" w-full"></module-input></div><div class=" p-3 mt-3 mt-5"><module-input v-bind:allok="false" answer="8 x 1000= 8000" placeholder="#" class=" w-full"></module-input></div></div><div class=" mx-auto border-clear border-2 w-fit"><div class=" p-3 bg-clear"><util-text design="0" class=" font-bold text-center text-4xl text-white">9 x 1 000 =</util-text></div><div class=" p-3"><module-input v-bind:allok="false" answer="9 x 1=9" placeholder="#" class=" w-full"></module-input></div><div class=" p-3 mt-3 mt-5"><module-input v-bind:allok="false" answer="9 x 1000= 9000" placeholder="#" class=" w-full"></module-input></div></div><div class=" mx-auto border-clear border-accent border-2 w-fit"><div class=" p-3 bg-accent"><util-text design="0" class=" font-bold text-center text-4xl text-white">10 x 1 000 =</util-text></div><div class=" p-3"><span class=" text-2xl">1 x 1=
+</span><module-input v-bind:allok="false" answer="1" placeholder="#" class=" w-24"></module-input></div><div class=" p-3 mt-3 mt-5"><span class=" text-2xl">10 x 1 000= 10 000
+</span></div></div></layout-grid><layout-grid columns="1" columns-md="2" gap="3" class=" mx-auto mt-10"><div class=" p-5 text-center shadow-oda rounded-xl border-main border-2 bg-pastel1"><span class=" text-xl">500 x
+</span><module-input v-bind:allok="false" answer="7" placeholder="#" class=" text-2xl w-24"></module-input><span class=" text-xl">
+= 3 500</span></div><div class=" p-5 text-center shadow-oda rounded-xl border-2 border-sec bg-pastel2"><module-input v-bind:allok="false" answer="80" placeholder="#" class=" text-2xl w-24"></module-input><span class=" text-xl">
+x 2 = 160
+</span></div><div class=" p-5 text-center shadow-oda rounded-xl border-2 border-clear bg-pastel3"><span class=" text-xl">12 x
+</span><module-input v-bind:allok="false" answer="300" placeholder="#" class=" text-2xl w-24"></module-input><span class=" text-xl">
+= 3 600</span></div><div class=" p-5 text-center shadow-oda rounded-xl border-2 border-main bg-pastel1"><span class=" text-xl">21 x 40 =
+</span><module-input v-bind:allok="false" answer="840" placeholder="#" class=" text-2xl w-24"></module-input></div><div class=" p-5 text-center shadow-oda rounded-xl border-2 border-clear border-sec bg-pastel2"><span class=" text-xl">400 x 3 =
+</span><module-input v-bind:allok="false" answer="1200" placeholder="#" class=" text-2xl w-24"></module-input></div></layout-grid></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2@v1.1.2/lib/loader.min.js" data-loader-version="v1.1.2" type="text/javascript"></script></body></html>
