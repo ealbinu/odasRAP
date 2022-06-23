@@ -1,87 +1,58 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leo las horas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
-    <link rel="stylesheet" href="../../assets/assets.css">
-    <style>
-        .analogs img, .digitals img{
-            max-width: 120px;
-            width: 100%;
-        }
-        .analogs .draggable > div {
-            display: flex;
-            justify-content: center;
-        }
-        .analogs .draggable > div > div {
-            width: 25%;
-            text-align: center;
-            cursor: move;
-        }
-        .analogs {
-            background: #fff;
-            padding: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .digitals {
-            background: #f5f5f5;
-            padding: 20px 0;
-            border-radius: 10px;
-        }
-
-    </style>
-</head>
-
-<body data="RAP">
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-        <h1>Leo las horas</h1>
-
-
-        <!-- <img src="../../assets/aimg/check.svg" class="animate__animated animate__heartBeat"> -->
-        <div class="instruccion mt-5">Acomóda los relojes analógicos sobre los relojes digitales según corresponden.</div>
-
-        <div class="mt-3 analogs text-center">
-            <dragdrop @isright="right++" v-model="r[0]" :ref="refCount()" :options="_.shuffle(['<img src=aimg/a1.png class=img-fluid>','<img src=aimg/a2.png class=img-fluid>','<img src=aimg/a3.png class=img-fluid>','<img src=aimg/a4.png class=img-fluid>'])"
-                :options-ok="['<img src=aimg/a2.png class=img-fluid>','<img src=aimg/a1.png class=img-fluid>','<img src=aimg/a4.png class=img-fluid>','<img src=aimg/a3.png class=img-fluid>']"></dragdrop>
-        </div>
-
-        <div class="row mt-3 justify-content-center align-items-center text-center digitals">
-            <div class="col-3"><img src="aimg/b1.png" class="img-fluid"></div>
-            <div class="col-3"><img src="aimg/b2.png" class="img-fluid"></div>
-            <div class="col-3"><img src="aimg/b3.png" class="img-fluid"></div>
-            <div class="col-3"><img src="aimg/b4.png" class="img-fluid"></div>
-
-        </div>
-
-        <!-- ENDING -->
-        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
-    </div>
-
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <!--sortable-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.19/lodash.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
-    <script src="../../assets/modulos/dragdropMod.js"></script>
-    <!-- /sortable -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script></script>
-</body>
-
-</html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Con el ojo cuadrado</title></head><body data="RAP-MAT"><div class="container mx-auto my-5" id="app"><oda-titulo title="Con el ojo cuadrado" subtitle=""></oda-titulo><div><oda-instruccion class="">Selecciona la respuestas correctas a las siguientes preguntas.</oda-instruccion><div class=""><span class=" text-lg font-bold">a)
+</span><span class=" text-lg">¿Cuántas horas tiene un día?</span><module-choice v-bind:options="[{'v1':'24 horas','v2':'','v3':''},{'v1':'18 horas','v2':'','v3':''},{'v1':'40 horas','v2':'','v3':''}]" v-bind:answer="0" v-bind:allok="false" class=" mt-3 text-lg"><template #option="{v1,v2,v3}"><div class="">{{v1}}</div></template></module-choice></div><div class=" mt-10"><span class=" text-lg font-bold">b)
+</span><span class=" text-lg">¿Cuándo utilizamos la abreviación a.m.?</span><module-choice v-bind:options="[{'v1':'Tarde','v2':'','v3':''},{'v1':'Noche','v2':'','v3':''},{'v1':'Mañana','v2':'','v3':''}]" v-bind:answer="2" v-bind:allok="false" class=" mt-3 text-lg"><template #option="{v1,v2,v3}"><div class="">{{v1}}</div></template></module-choice></div><div class=" mt-10"><span class=" text-lg font-bold">c)
+</span><span class=" text-lg">¿Cuándo utilizamos la abreviación p.m.?</span><module-choice v-bind:options="[{'v1':'Noche','v2':'','v3':''},{'v1':'Tarde','v2':'','v3':''},{'v1':'Mañana','v2':'','v3':''}]" v-bind:answer="1" v-bind:allok="false" class=" mt-3 text-lg"><template #option="{v1,v2,v3}"><div class="">{{v1}}</div></template></module-choice></div><oda-instruccion class="">Contesta las siguientes preguntas.</oda-instruccion><div class=""><span class=" text-lg font-bold">a)
+</span><span class=" text-lg">¿Cuántos minutos tiene media hora?
+</span><module-input v-bind:allok="false" answer="30" placeholder="#" class=" text-2xl w-28"></module-input><span class=" text-lg">
+minutos.
+</span></div><div class=" mt-5"><span class=" text-lg font-bold">b)
+</span><span class=" text-lg">¿Cuántos minutos tiene un cuarto de hora?
+</span><module-input v-bind:allok="false" answer="15" placeholder="#" class=" text-2xl w-28"></module-input><span class=" text-lg">
+minutos.
+</span></div><div class=" mt-5"><span class=" text-lg font-bold">c)
+</span><span class=" text-lg">¿Cuántos minutos pasaron en el transcurso de tres horas?
+</span><module-input v-bind:allok="false" answer="180" placeholder="#" class=" text-2xl w-28"></module-input><span class=" text-lg">
+minutos.
+</span></div><div class=" mt-5"><span class=" text-lg font-bold">d)
+</span><span class=" text-lg">De las 8:00 h a las 15 h, ¿Cuánto tiempo transcurrió? Han transcurrido
+</span><module-input v-bind:allok="false" answer="7" placeholder="#" class=" text-2xl w-28"></module-input><span class=" text-lg">
+horas.
+</span></div><oda-instruccion class="">Coloca los días y los meses según se te pida.</oda-instruccion><div class=""><span class=" text-lg font-bold">a)
+</span><span class=" text-lg">¿Cuáles son los días de la semana? 
+</span><module-input v-bind:allok="false" answer="Lunes" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="martes" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="miércoles" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="jueves" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="viernes" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="sábado" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+y
+</span><module-input v-bind:allok="false" answer="domingo" placeholder="-" class=" mt-5 text-2xl w-28"></module-input></div><div class=" mt-8"><span class=" text-lg font-bold">b)
+</span><span class=" text-lg">¿Cuáles son los meses que integran el año?
+</span><module-input v-bind:allok="false" answer="Enero" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="febrero" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="marzo" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="abril" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="mayo" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="junio" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="julio" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="agosto" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="septiembre" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="octubre" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+,
+</span><module-input v-bind:allok="false" answer="noviembre" placeholder="-" class=" mt-5 text-2xl w-28"></module-input><span class=" text-lg">
+y
+</span><module-input v-bind:allok="false" answer="diciembre" placeholder="-" class=" mt-5 text-2xl w-28"></module-input></div><oda-instruccion class="">Acomoda los relojes analógicos sobre los relojes digitales según corresponden.</oda-instruccion><layout-grid columns="4" columns-md="4" gap="2" class=" p-3 mx-auto bg-pastel1"><module-drag v-bind:only-ok="true" v-bind:only-error="false" v-bind:allok="false" dropzone="drop1" answer="2" liner="0" connector="0" design="" class=" mx-auto w-fit h-fit"><layout-img img="assets/a1.png" class=""></layout-img></module-drag><module-drag v-bind:only-ok="true" v-bind:only-error="false" v-bind:allok="false" dropzone="drop1" answer="1" liner="0" connector="0" design="" class=" mx-auto w-fit h-fit"><layout-img img="assets/a2.png" class=""></layout-img></module-drag><module-drag v-bind:only-ok="true" v-bind:only-error="false" v-bind:allok="false" dropzone="drop1" answer="4" liner="0" connector="0" design="" class=" mx-auto w-fit h-fit"><layout-img img="assets/a3.png" class=""></layout-img></module-drag><module-drag v-bind:only-ok="true" v-bind:only-error="false" v-bind:allok="false" dropzone="drop1" answer="3" liner="0" connector="0" design="" class=" mx-auto w-fit h-fit"><layout-img img="assets/a4.png" class=""></layout-img></module-drag></layout-grid><layout-grid columns="2" columns-md="4" gap="2" class=" mt-10"><layout-grid columns="1" columns-md="1" gap="2" class=""><layout-img img="assets/b1.png" class=""></layout-img><layout-box img="" design="" class=""><module-drop name="drop1" design="1" answer="1" limit="1" class=" w-full h-full bg-pastel1" v-bind:no-arrow="false" v-bind:horizontal="false"></module-drop></layout-box></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=""><layout-img img="assets/b2.png" class=""></layout-img><layout-box img="" design="" class=""><module-drop name="drop1" design="1" answer="2" limit="1" class=" w-full h-full bg-pastel1" v-bind:no-arrow="false" v-bind:horizontal="false"></module-drop></layout-box></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=""><layout-img img="assets/b3.png" class=""></layout-img><layout-box img="" design="" class=""><module-drop name="drop1" design="1" answer="3" limit="1" class=" w-full h-full bg-pastel1" v-bind:no-arrow="false" v-bind:horizontal="false"></module-drop></layout-box></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=""><layout-img img="assets/b4.png" class=""></layout-img><layout-box img="" design="" class=""><module-drop name="drop1" design="1" answer="4" limit="1" class=" w-full h-full bg-pastel1" v-bind:no-arrow="false" v-bind:horizontal="false"></module-drop></layout-box></layout-grid></layout-grid></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2@v1.1.2/lib/loader.min.js" data-loader-version="v1.1.2" type="text/javascript"></script></body></html>
