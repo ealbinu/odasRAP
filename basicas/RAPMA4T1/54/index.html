@@ -1,101 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convierto unidades de tiempo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
-    <link rel="stylesheet" href="../../assets/assets.css">
-    <style>
-
-        .lab {
-            margin-bottom: 10px;
-        }
-        .lab>div {
-            font-size: 1.4rem;
-            text-align: center;
-            padding: 2px 10px;
-            border-radius: 10px;
-        }
-        .lab>div strong {
-            font-size: 2.1rem;
-        }
-        .lab:nth-child(odd)>div {
-            background: #F7C898;
-        }
-        .lab:nth-child(even)>div {
-            background: #A9D8D7;
-        }
-        .inputbox {
-            margin: 0;
-            padding: 0;
-            display: inline-block;
-            max-width: 90px;
-        }
-        .inputbox input {
-            font-size: 1.3rem;
-        }
-
-    </style>
-</head>
-<body data="RAP">
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-        <h1>Convierto unidades de tiempo</h1>
-		<h2 class="repaso">Página de repaso</h2>
-
-        <div class="instruccion mt-5">Observa los ejemplos.</div>
-        
-        <div class="row mt-3">
-            <div class="col-12">
-                <img src="aimg/i1.svg" class="img-fluid">
-            </div>
-        </div>
-        
-        <div class="instruccion mt-5">Realiza las siguientes conversiones de unidades de tiempo. Observa el ejemplo.</div>
-
-        <div class="row mt-3">
-            <div class="col-md-4 lab">
-                <div>
-                    4 días = <strong class="main">96</strong> horas.
-                </div>
-            </div>
-            <div class="col-md-4 lab" v-for="(i, index) in [
-                {t1: '6 lustros = ', ans: '30', t2: ' años.'},
-                {t1: '49 días = ', ans: '7', t2: ' semanas.'},
-                {t1: '36 meses = ', ans: '3', t2: ' años.'},
-                {t1: '900 años = ', ans: '9', t2: ' siglos.'},
-                {t1: '8 milenios = ', ans: '8000', t2: ' años.'},
-                {t1: '6 horas = ', ans: '360', t2: ' minutos.'},
-                {t1: '60 años = ', ans: '6', t2: ' décadas.'},
-                {t1: '5 décadas = ', ans: '10', t2: ' lustros.'},
-            ]">
-                <div>
-                    {{i.t1}} <inputbox v-model="r[index]" :ref="'q'+index" @isright="right++" :answer="i.ans" type="number" placeh="#"></inputbox> {{i.t2}}
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- ENDING -->
-        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
-    </div>
-    
-    
-    
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script></script>
-</body>
-</html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>No hay plazo que no se cumpla</title></head><body data="RAP-MAT"><div class="container mx-auto my-5" id="app"><oda-titulo title="No hay plazo que no se cumpla" subtitle=""></oda-titulo><div><oda-instruccion class="">Observa los ejemplos.</oda-instruccion><div class=" flex justify-center items-center" data-z="false"><layout-img img="assets/i1.svg" class=""></layout-img></div><oda-instruccion class="">Realiza las siguientes conversiones de unidades de tiempo. Observa el ejemplo.</oda-instruccion><layout-grid columns="1" columns-md="3" gap="2" class=""><div class=" p-2 flex justify-center items-center flex-row rounded-xl bg-accent" data-z="false"><util-text design="0" class=" font-bold text-lg text-white">
+4 días =</util-text><util-text design="0" class=" mx-2 font-bold text-lg text-3xl text-main">
+96</util-text><util-text design="0" class=" font-bold text-lg text-white">
+horas.</util-text></div><div class=" p-2 flex justify-center items-center flex-row rounded-xl bg-sec" data-z="false"><util-text design="0" class=" font-bold text-lg text-white">
+6 lustros =</util-text><module-input v-bind:allok="false" answer="30" placeholder="#" class=" mx-2 w-16"></module-input><util-text design="0" class=" font-bold text-lg text-white">
+años.</util-text></div><div class=" p-2 flex justify-center items-center flex-row rounded-xl bg-accent" data-z="false"><util-text design="0" class=" font-bold text-lg text-white">
+49 días =</util-text><module-input v-bind:allok="false" answer="7" placeholder="#" class=" mx-2 w-16"></module-input><util-text design="0" class=" font-bold text-lg text-white">
+semanas.</util-text></div><div class=" p-2 flex justify-center items-center flex-row rounded-xl bg-sec" data-z="false"><util-text design="0" class=" font-bold text-lg text-white">
+36 meses =</util-text><module-input v-bind:allok="false" answer="3" placeholder="#" class=" mx-2 w-16"></module-input><util-text design="0" class=" font-bold text-lg text-white">
+años.</util-text></div><div class=" p-2 flex justify-center items-center flex-row rounded-xl bg-accent" data-z="false"><util-text design="0" class=" font-bold text-lg text-white">
+900 años =</util-text><module-input v-bind:allok="false" answer="9" placeholder="#" class=" mx-2 w-16"></module-input><util-text design="0" class=" font-bold text-lg text-white">
+siglos.</util-text></div><div class=" p-2 flex justify-center items-center flex-row rounded-xl bg-sec" data-z="false"><util-text design="0" class=" font-bold text-lg text-white">
+8 milenios =</util-text><module-input v-bind:allok="false" answer="8000" placeholder="#" class=" mx-2 w-16"></module-input><util-text design="0" class=" font-bold text-lg text-white">
+años.</util-text></div><div class=" p-2 flex justify-center items-center flex-row rounded-xl bg-accent" data-z="false"><util-text design="0" class=" font-bold text-lg text-white">
+6 horas =</util-text><module-input v-bind:allok="false" answer="360" placeholder="#" class=" mx-2 w-16"></module-input><util-text design="0" class=" font-bold text-lg text-white">
+minutos</util-text></div><div class=" p-2 flex justify-center items-center flex-row rounded-xl bg-sec" data-z="false"><util-text design="0" class=" font-bold text-lg text-white">
+60 años =</util-text><module-input v-bind:allok="false" answer="6" placeholder="#" class=" mx-2 w-16"></module-input><util-text design="0" class=" font-bold text-lg text-white">décadas.</util-text></div><div class=" p-2 flex justify-center items-center flex-row rounded-xl bg-accent" data-z="false"><util-text design="0" class=" font-bold text-lg text-white">5 décadas =</util-text><module-input v-bind:allok="false" answer="10" placeholder="#" class=" mx-2 w-16"></module-input><util-text design="0" class=" font-bold text-lg text-white">
+lustros.</util-text></div></layout-grid><oda-instruccion class="">Observa la imagen y resuelve las situaciones.</oda-instruccion><div class=" flex justify-center items-center" data-z="false"><layout-img img="assets/a1.png" class=""></layout-img></div><div class=" mt-5 flex items-center justify-center" data-z="false"><util-text design="3" class=" mr-2 text-xl font-bold">a) </util-text><util-text design="0" class="">Mariela quiere ir al cine, pero ella sale de
+trabajar a las 8:00 p.m. ¿Qué película puede
+ver? </util-text></div><module-choice v-bind:options="[{'v1':'La nave espacial','v2':'','v3':''},{'v1':'Una aventura de vaqueros ','v2':'','v3':''},{'v1':'Mi gran hermano','v2':'','v3':''}]" v-bind:answer="2" v-bind:allok="false" class=" mt-2"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice><div class=" mt-5 flex items-center" data-z="false"><util-text design="4" class=" mr-2 text-xl font-bold">b) </util-text><util-text design="0" class="">Luis quiere ver la película “Una aventura de
+vaqueros” a las 15:30. Si de su casa al cine
+hace 45 minutos, ¿a qué hora tiene que salir de su casa? </util-text></div><module-choice v-bind:options="[{'v1':'A las 20:00 hrs.','v2':'','v3':''},{'v1':'A las 14:45 hrs. ','v2':'','v3':''},{'v1':' A las 13:00 hrs.','v2':'','v3':''}]" v-bind:answer="1" v-bind:allok="false" class=" mt-2"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice><div class=" mt-5 flex items-center justify-center" data-z="false"><util-text design="5" class=" mr-2 text-xl font-bold">c) </util-text><util-text design="0" class="">¿Cuál es la película más cercana a las 4:00 p.m.?</util-text></div><module-choice v-bind:options="[{'v1':'La nave espacial','v2':'','v3':''},{'v1':'Una aventura de vaqueros ','v2':'','v3':''},{'v1':'Mi gran hermano','v2':'','v3':''}]" v-bind:answer="2" v-bind:allok="false" class=" mt-2"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice><div class=" mt-5 flex items-center justify-center" data-z="false"><util-text design="6" class=" mr-2 text-xl font-bold">d) </util-text><util-text design="0" class="">¿Qué película es la primera que se exhibe en el cine? ¿A qué hora?</util-text></div><module-choice v-bind:options="[{'v1':'La nave espacial, a las 12:00 hrs.','v2':'','v3':''},{'v1':'Una aventura de vaqueros, a las 13:00 hrs. ','v2':'','v3':''},{'v1':'Mi gran hermano, a las 14:15 hrs.','v2':'','v3':''}]" v-bind:answer="0" v-bind:allok="false" class=" mt-2"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2@v1.1.2/lib/loader.min.js" data-loader-version="v1.1.2" type="text/javascript"></script></body></html>
