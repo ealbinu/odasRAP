@@ -1,85 +1,32 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Construyo múltiplos de 10</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
-    <link rel="stylesheet" href="../../assets/assets.css">
-    <style>
-
-.camp {
-	background: #F9CF91;
-	padding: 10px;
-	border-radius: 10px;
-	font-size: 1.2rem;
-	border: 2px solid #fff;
-	height: 100%;
-}
-.camp div {
-	text-align: center;
-}
-.camp .inputbox input {
-	padding: 5px 2px;
-	font-size: 1.2rem;
-	border-color: var(--accent);
-}
-
-    </style>
-</head>
-<body data="RAP">
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-        <h1>Construyo múltiplos de 10</h1>
-        <h2>Rápido y correcto / Por 10, por 100 y por 1 000</h2>
-        <div class="instruccion mt-5">Completa las siguientes multiplicaciones.</div>
-
-        <div class="row mt-3 justify-content-center align-items-center">
-           <div class="col-lg-6 camp" v-for="(i, index) in [
-            {t: '45 x ', a: 10, t2: ' = 450'},
-            {t: '450 x ', a: 1000, t2: ' = 450 000'},
-            {t: '670 x ', a: 100, t2: ' = 67 000'},
-            
-            {t: '987 x ', a: 10, t2: ' = 9 870'},
-            {t: '769 x ', a: 100, t2: ' = 76 900'},
-            {t: '4 500 x ', a: 10, t2: ' = 45 000'},
-            
-            {t: '6 x ', a: 1000, t2: ' = 6 000'},
-            {t: '560 x ', a: 10, t2: ' = 5 600'},
-            {t: '780 x ', a: 100, t2: ' = 78 000'},
-            
-            {t: '33 x ', a: 100, t2: ' = 3 300'},
-            {t: '7 800 x ', a: 10, t2: ' = 78 000'},
-            {t: '3 300 x ', a: 1000, t2: ' = 3 300 000'},
-           ]">
-            <div class="row text-align-center justify-content-center align-items-center w-100">
-                <div class="col-3">{{i.t}}</div> <div class="col"><inputbox v-model="r[index]" :ref="'q'+(index)" @isright="right++" :answer="i.a" type="number" placeh="#"></inputbox></div> <div class="col-4">{{i.t2}}</div>
-             </div>
-               
-           </div>
-        </div>
-
-
-
-
-        <!-- ENDING -->
-        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
-    </div>
-    
-    
-    
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script></script>
-</body>
-</html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Multiplicaciones por 10, 100 y 1000</title></head><body data="RAP-MAT"><div class="container mx-auto my-5" id="app"><oda-titulo title="Multiplicaciones por 10, 100 y 1000" subtitle=""></oda-titulo><div><div class=" p-5 mt-5 border-4 border-accent border-dashed rounded-xl" data-z="false"><div class="" data-z="false"><util-text design="0" class=" mb-5">Alberto compró 6 carritos. Si cada carrito le costó $10.00, ¿Cuánto pagó en total?</util-text><span class=" font-bold" data-z="false">La opción 1.
+</span><span class="" data-z="false">Es realizar una suma:
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-12"></module-input><span class=" font-bold" data-z="false">
++
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-12"></module-input><span class=" font-bold" data-z="false">
++
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-12"></module-input><span class=" font-bold" data-z="false">
++
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-12"></module-input><span class=" font-bold" data-z="false">
++
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-12"></module-input><span class=" font-bold" data-z="false">
++
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-12"></module-input><span class=" font-bold" data-z="false">
+=
+</span><module-input v-bind:allok="false" answer="60" placeholder="#" class=" w-12"></module-input></div><div class=" mt-5" data-z="false"><span class=" font-bold" data-z="false">La opción 2.
+</span><span class="" data-z="false">Es realizar una multiplicación:
+</span><span class="" data-z="false">
+6 x
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-12"></module-input><span class=" font-bold" data-z="false">
+=
+</span><module-input v-bind:allok="false" answer="60" placeholder="#" class=" w-12"></module-input></div><div class=" mt-5" data-z="false"><span class="" data-z="false">Realizar una multiplicación en lugar de una suma nos permite resolver el problema
+de una forma más rápida.</span></div><div class=" mt-5" data-z="false"><span class="" data-z="false">¿Crees que exista una forma más rápida para obtener el resultado?</span></div><div class=" mt-5" data-z="false"><span class="" data-z="false">Más adelante lo sabremos.</span></div></div><oda-instruccion class="">Resuelve los siguientes problemas.</oda-instruccion><layout-grid columns="1" columns-md="3" gap="2" class=" p-3 bg-pastel1"><div class=" p-3 border-2 rounded-xl border-accent bg-white" data-z="false"><util-text design="0" class=" font-bold text-2xl text-center text-clear">Datos</util-text><span class="" data-z="false">En 8 bolsas con 10 caramelos cada uno, ¿Cuántos caramelos hay en total?</span></div><div class=" p-3 text-center border-2 rounded-xl border-accent bg-white" data-z="false"><util-text design="0" class=" font-bold text-2xl text-center text-accent">Operación</util-text><span class="" data-z="false">8 x
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-12"></module-input><span class="" data-z="false">
+=
+</span><module-input v-bind:allok="false" answer="80" placeholder="#" class=" w-12"></module-input></div><div class=" p-3 text-center border-2 rounded-xl border-accent bg-white" data-z="false"><util-text design="0" class=" font-bold text-2xl text-center text-isok">Resultado</util-text><span class="" data-z="false">Hay
+</span><module-input v-bind:allok="false" answer="80" placeholder="#" class=" w-12"></module-input><span class="" data-z="false">
+caramelos en total.</span></div></layout-grid><layout-grid columns="1" columns-md="3" gap="2" class=" p-3 mt-3 bg-pastel2"><div class=" p-3 border-2 border-clear rounded-xl bg-white" data-z="false"><util-text design="0" class=" font-bold text-2xl text-center text-clear">Datos</util-text><span class="" data-z="false">En 4 corrales con 10 gallinas cada uno, ¿Cuántas gallinas hay en total?</span></div><div class=" p-3 text-center border-2 border-clear rounded-xl bg-white" data-z="false"><util-text design="0" class=" font-bold text-2xl text-center text-accent">Operación</util-text><span class="" data-z="false">4 x
+</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-12"></module-input><span class="" data-z="false">
+=
+</span><module-input v-bind:allok="false" answer="40" placeholder="#" class=" w-12"></module-input></div><div class=" p-3 text-center border-2 border-clear rounded-xl bg-white" data-z="false"><util-text design="0" class=" font-bold text-2xl text-center text-isok">Resultado</util-text><span class="" data-z="false">Hay
+</span><module-input v-bind:allok="false" answer="40" placeholder="#" class=" w-12"></module-input><span class="" data-z="false">
+gallinas en total.</span></div></layout-grid><oda-instruccion class="">Completa las siguientes multiplicaciones.</oda-instruccion><layout-grid columns="1" columns-md="2" gap="2" class=""><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">45 x</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 450</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">450 x</span><module-input v-bind:allok="false" answer="1000" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 450 000</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">670 x</span><module-input v-bind:allok="false" answer="100" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 67 000</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">987 x</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 9 870</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">769 x</span><module-input v-bind:allok="false" answer="100" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 76 900</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">4 500 x</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 45 000</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">6 x</span><module-input v-bind:allok="false" answer="1000" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 6 000</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">560 x</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 5 600</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">780 x</span><module-input v-bind:allok="false" answer="100" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 78 000</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">33 x</span><module-input v-bind:allok="false" answer="100" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 3 300</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">7 800 x</span><module-input v-bind:allok="false" answer="10" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 78 000</span></layout-grid><layout-grid columns="3" columns-md="3" gap="2" class=" p-3 p-5 bg-accent"><span class=" mx-auto text-2xl text-white" data-z="false">3 300 x</span><module-input v-bind:allok="false" answer="1000" placeholder="#" class=" mx-auto"></module-input><span class=" mx-auto text-2xl text-white" data-z="false">= 3 300 000</span></layout-grid></layout-grid></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2@v1.1.2/lib/loader.min.js" data-loader-version="v1.1.2" type="text/javascript"></script></body></html>
