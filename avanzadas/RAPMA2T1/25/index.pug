@@ -1,0 +1,337 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = 'Identifico el patrón'
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+            .super {
+                position: relative;
+            }
+            .super .drop {
+                width: 10%;
+                height: 70%;
+                position: absolute;
+                background-size: contain;
+                background-repeat: no-repeat;
+                left: 0;
+                top: 0;
+            }
+            .super .drop:nth-child(1) {
+                left: 37.1%;
+                top: 16%;
+                width: 9.5%;
+                background-image: url("i/a1.png");
+            }
+            .super .drop:nth-child(1).isok {
+                background-image: url("i/b1.png");
+            }
+            .super .drop:nth-child(2) {
+                left: 42.1%;
+                top: 18.1%;
+                background-image: url("i/a2.png");
+            }
+            .super .drop:nth-child(2).isok {
+                background-image: url("i/b2.png");
+            }
+            .super .drop:nth-child(3) {
+                left: 47.7%;
+                top: 20.5%;
+                width: 9.5%;
+                background-image: url("i/a3.png");
+            }
+            .super .drop:nth-child(3).isok {
+                background-image: url("i/b3.png");
+            }
+            .super .drop:nth-child(4) {
+                left: 53%;
+                top: 22.5%;
+                width: 8.9%;
+                background-image: url("i/a4.png");
+            }
+            .super .drop:nth-child(4).isok {
+                background-image: url("i/b4.png");
+            }
+            .super .drop:nth-child(5) {
+                left: 57.9%;
+                top: 24.5%;
+                width: 8.7%;
+                background-image: url("i/a5.png");
+            }
+            .super .drop:nth-child(5).isok {
+                background-image: url("i/b5.png");
+            }
+            .super .drop:nth-child(6) {
+                left: 62.7%;
+                top: 26%;
+                width: 7.7%;
+                background-image: url("i/a6.png");
+            }
+            .super .drop:nth-child(6).isok {
+                background-image: url("i/b6.png");
+            }
+            .super .drop:nth-child(7) {
+                left: 66.5%;
+                top: 28%;
+                width: 7.3%;
+                background-image: url("i/a7.png");
+            }
+            .super .drop:nth-child(7).isok {
+                background-image: url("i/b7.png");
+            }
+            .superfigs.drags {
+                width: 100%;
+            }
+            .superfigs.drags .drag {
+                width: auto;
+                height: auto;
+                max-width: 26px;
+                margin: 5px 20px;
+            }
+
+            .oruga {
+                position: relative;
+            }
+            .oruga .drop {
+                position: absolute;
+                width: 7%;
+                height: 40%;
+                left: 0;
+                top: 0;
+            }
+            .oruga .drop:nth-child(1) {
+                left: 35.4%;
+                top: 12%;
+            }
+            .oruga .drop:nth-child(2) {
+                left: 55.6%;
+                top: 30.5%;
+            }
+            .oruga .drop:nth-child(3) {
+                left: 69.4%;
+                top: 16%;
+            }
+            .oruga .drop:nth-child(4) {
+                left: 75.2%;
+                top: 43.5%;
+            }
+            .herramientas .drops {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .herramientas .tool {
+                min-height: 50px;
+                border: 2px solid #E6BC8A;
+                border-radius: 4px;
+                margin: 4px;
+                width: 50px;
+                background-color: #F8E7BF;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+            }
+            .herramientas .tool.sc.isok {
+                background-image: url("i/screw.png");
+            }
+            .herramientas .tool.hm.isok {
+                background-image: url("i/hammer.png");
+            }
+
+            .tren .drops {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .tren .tool {
+                min-height: 50px;
+                border: 2px solid #fff;
+                border-radius: 4px;
+                width: 50px;
+                background-color: #DEDBBB;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+            }
+            .tren .tool.thetren {
+                background-image: url("i/train.png");
+            }
+            .tren .tool.isok[data="vg"] {
+                background-image: url("i/vg.png");
+            }
+            .tren .tool.isok[data="vy"] {
+                background-image: url("i/vy.png");
+            }
+            .tren .tool.isok[data="vr"] {
+                background-image: url("i/vr.png");
+            }
+
+            .emojis .drops {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .emojis .tool {
+                height: 60px;
+                width: 60px;
+                border: 2px solid #000000;
+                border-radius: 50%;
+                background-color: #FFD666;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+                margin: 4px;
+            }
+
+            .emojis .tool.isok[data="emos"] {
+                background-image: url("i/emos.png");
+            }
+            .emojis .tool.isok[data="emol"] {
+                background-image: url("i/emol.png");
+            }
+            .emojis .tool.isok[data="emok"] {
+                background-image: url("i/emok.png");
+            }
+
+
+
+
+    body
+        #app
+            // START
+            scene(v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted")
+
+            // SCENES
+            scene(v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="7" scene-color="#ED1C25")
+                info(type="dragdrop" title=title text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="true")
+                    .mt-auto: embedvideo(urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo" small)
+                    .mt-auto: embedvideo(urlid="28oSwAFFirE" title="Patrones de figuras" small)
+                activity
+                    .row.w100.super
+                        img(src="i/1.png").w100
+                        .drops
+                            template(v-for="(i, index) in ['cu','tr', 'ci', 're', 'cu', 'tr', 'ci']")
+                                .drop(:data="i" droptimes="untilok")
+                    .row.drags.superfigs
+                        template(v-for="(i, index) in ['ci','re', 'cu', 'tr']")
+                            drag(:data="i" dropzone=".drop" dropzone-ok-class="isok" no-error-sound return-to-position)
+                                img(:src="'i/'+i+'.png'").w100
+            
+            // SCENES
+            scene(v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="4" scene-color="#ED1C25")
+                info(type="dragdrop" title=title text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo")
+                    .mt-auto: embedvideo(urlid="28oSwAFFirE" title="Patrones de figuras" small)
+                activity
+                    .row.w100.oruga
+                        img(src="i/oru.png").w100
+                        .drops
+                            template(v-for="(i, index) in 4")
+                                .drop(:data="i" droptimes="untilok")
+                    .row.drags.superfigs
+                        template(v-for="(i, index) in [4,2,1,3]")
+                            drag(:data="i" dropzone=".drop" dropzone-ok-class="isok" stay-if-ok append-to-dropzone)
+                                img(:src="'i/c'+i+'.png'").w100
+            
+            // SCENES
+            scene(v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="7" scene-color="#ED1C25")
+                info(type="dragdrop" title=title text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo")
+                    .mt-auto: embedvideo(urlid="28oSwAFFirE" title="Patrones de figuras" small)
+                activity
+                    .row.w100.herramientas
+                        .drops
+                            .tool(data="screw" droptimes="untilok").isok.sc
+                            .tool.drop(data="screw" droptimes="untilok").sc
+                            .tool(data="hammer" droptimes="untilok").isok.hm
+                            .tool(data="hammer" droptimes="untilok").isok.hm
+                            .tool(data="screw" droptimes="untilok").isok.sc
+                            .tool(data="screw" droptimes="untilok").isok.sc
+                            .tool.drop(data="hammer" droptimes="untilok").hm
+                            .tool.drop(data="hammer" droptimes="untilok").hm
+                            .tool.drop(data="screw" droptimes="untilok").sc
+                            .tool.drop(data="screw" droptimes="untilok").sc
+                            .tool.drop(data="hammer" droptimes="untilok").hm
+                            .tool.drop(data="hammer" droptimes="untilok").hm
+                    .row.drags.superfigs.mt-1
+                        template(v-for="(i, index) in ['hammer', 'screw']")
+                            drag(:data="i" dropzone=".drop" dropzone-ok-class="isok" return-to-position)
+                                img(:src="'i/'+i+'.png'").w100
+            
+            
+            // SCENES
+            scene(v-if="currentScene==4" :key="4" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="5" scene-color="#ED1C25")
+                info(type="dragdrop" title=title text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo")
+                    .mt-auto: embedvideo(urlid="28oSwAFFirE" title="Patrones de figuras" small)
+                activity
+                    .row.w100.tren
+                        .drops
+                            .tool.thetren
+                            .tool(data="vg" droptimes="untilok").isok
+                            .tool(data="vy" droptimes="untilok").drop
+                            .tool(data="vr" droptimes="untilok").isok
+                            .tool(data="vg" droptimes="untilok").isok
+                            .tool(data="vy" droptimes="untilok").isok
+                            .tool(data="vr" droptimes="untilok").isok
+                            .tool(data="vg" droptimes="untilok").drop
+                            .tool(data="vy" droptimes="untilok").drop
+                            .tool(data="vr" droptimes="untilok").isok
+                            .tool(data="vg" droptimes="untilok").drop
+                            .tool(data="vy" droptimes="untilok").drop
+                            .tool(data="vr" droptimes="untilok").isok
+                    .row.drags.superfigs.mt-1
+                        template(v-for="(i, index) in ['vg', 'vr', 'vy']")
+                            drag(:data="i" dropzone=".drop" dropzone-ok-class="isok" return-to-position)
+                                img(:src="'i/'+i+'.png'").w100
+            
+            
+            // SCENES
+            scene(v-if="currentScene==5" :key="5" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="7" scene-color="#ED1C25")
+                info(type="dragdrop" title=title text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo")
+                    .mt-auto: embedvideo(urlid="28oSwAFFirE" title="Patrones de figuras" small)
+                activity
+                    .row.w100.emojis
+                        .drops
+                            .tool(data="emos" droptimes="untilok").isok
+                            .tool(data="emol" droptimes="untilok").drop
+                            .tool(data="emol" droptimes="untilok").isok
+                            .tool(data="emok" droptimes="untilok").isok
+                            .tool(data="emos" droptimes="untilok").drop
+                            .tool(data="emol" droptimes="untilok").drop
+                            .tool(data="emol" droptimes="untilok").isok
+                            .tool(data="emok" droptimes="untilok").drop
+                            .tool(data="emos" droptimes="untilok").isok
+                            .tool(data="emol" droptimes="untilok").isok
+                            .tool(data="emol" droptimes="untilok").isok
+                            .tool(data="emok" droptimes="untilok").drop
+                            .tool(data="emos" droptimes="untilok").drop
+                            .tool(data="emol" droptimes="untilok").isok
+                            .tool(data="emol" droptimes="untilok").drop
+                            
+                    .row.drags.superfigs.mt-1
+                        template(v-for="(i, index) in ['emol', 'emok', 'emos']")
+                            drag(:data="i" dropzone=".drop" dropzone-ok-class="isok" return-to-position)
+                                img(:src="'i/'+i+'.png'").w100
+            
+
+            // END
+            scene(v-if="currentScene==6" :key="6" end-scene :final-data="finalData")
+        
+        +scripts
+            script.
+
+                app.$devmode = false
+                app.$set(app.temps, 'a', [])
+                
+                app.currentScene = 0
+                app.scenesCount = 5

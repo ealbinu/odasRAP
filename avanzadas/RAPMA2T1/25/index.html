@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Identifico el patrón</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
+    <link rel="stylesheet" href="../../assets/assets.css"/>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css"/>
+    <style>
+      .super {
+          position: relative;
+      }
+      .super .drop {
+          width: 10%;
+          height: 70%;
+          position: absolute;
+          background-size: contain;
+          background-repeat: no-repeat;
+          left: 0;
+          top: 0;
+      }
+      .super .drop:nth-child(1) {
+          left: 37.1%;
+          top: 16%;
+          width: 9.5%;
+          background-image: url("i/a1.png");
+      }
+      .super .drop:nth-child(1).isok {
+          background-image: url("i/b1.png");
+      }
+      .super .drop:nth-child(2) {
+          left: 42.1%;
+          top: 18.1%;
+          background-image: url("i/a2.png");
+      }
+      .super .drop:nth-child(2).isok {
+          background-image: url("i/b2.png");
+      }
+      .super .drop:nth-child(3) {
+          left: 47.7%;
+          top: 20.5%;
+          width: 9.5%;
+          background-image: url("i/a3.png");
+      }
+      .super .drop:nth-child(3).isok {
+          background-image: url("i/b3.png");
+      }
+      .super .drop:nth-child(4) {
+          left: 53%;
+          top: 22.5%;
+          width: 8.9%;
+          background-image: url("i/a4.png");
+      }
+      .super .drop:nth-child(4).isok {
+          background-image: url("i/b4.png");
+      }
+      .super .drop:nth-child(5) {
+          left: 57.9%;
+          top: 24.5%;
+          width: 8.7%;
+          background-image: url("i/a5.png");
+      }
+      .super .drop:nth-child(5).isok {
+          background-image: url("i/b5.png");
+      }
+      .super .drop:nth-child(6) {
+          left: 62.7%;
+          top: 26%;
+          width: 7.7%;
+          background-image: url("i/a6.png");
+      }
+      .super .drop:nth-child(6).isok {
+          background-image: url("i/b6.png");
+      }
+      .super .drop:nth-child(7) {
+          left: 66.5%;
+          top: 28%;
+          width: 7.3%;
+          background-image: url("i/a7.png");
+      }
+      .super .drop:nth-child(7).isok {
+          background-image: url("i/b7.png");
+      }
+      .superfigs.drags {
+          width: 100%;
+      }
+      .superfigs.drags .drag {
+          width: auto;
+          height: auto;
+          max-width: 26px;
+          margin: 5px 20px;
+      }
+      
+      .oruga {
+          position: relative;
+      }
+      .oruga .drop {
+          position: absolute;
+          width: 7%;
+          height: 40%;
+          left: 0;
+          top: 0;
+      }
+      .oruga .drop:nth-child(1) {
+          left: 35.4%;
+          top: 12%;
+      }
+      .oruga .drop:nth-child(2) {
+          left: 55.6%;
+          top: 30.5%;
+      }
+      .oruga .drop:nth-child(3) {
+          left: 69.4%;
+          top: 16%;
+      }
+      .oruga .drop:nth-child(4) {
+          left: 75.2%;
+          top: 43.5%;
+      }
+      .herramientas .drops {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+      }
+      .herramientas .tool {
+          min-height: 50px;
+          border: 2px solid #E6BC8A;
+          border-radius: 4px;
+          margin: 4px;
+          width: 50px;
+          background-color: #F8E7BF;
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+          box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+      }
+      .herramientas .tool.sc.isok {
+          background-image: url("i/screw.png");
+      }
+      .herramientas .tool.hm.isok {
+          background-image: url("i/hammer.png");
+      }
+      
+      .tren .drops {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+      }
+      .tren .tool {
+          min-height: 50px;
+          border: 2px solid #fff;
+          border-radius: 4px;
+          width: 50px;
+          background-color: #DEDBBB;
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+          box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+      }
+      .tren .tool.thetren {
+          background-image: url("i/train.png");
+      }
+      .tren .tool.isok[data="vg"] {
+          background-image: url("i/vg.png");
+      }
+      .tren .tool.isok[data="vy"] {
+          background-image: url("i/vy.png");
+      }
+      .tren .tool.isok[data="vr"] {
+          background-image: url("i/vr.png");
+      }
+      
+      .emojis .drops {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+      }
+      .emojis .tool {
+          height: 60px;
+          width: 60px;
+          border: 2px solid #000000;
+          border-radius: 50%;
+          background-color: #FFD666;
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+          box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+          margin: 4px;
+      }
+      
+      .emojis .tool.isok[data="emos"] {
+          background-image: url("i/emos.png");
+      }
+      .emojis .tool.isok[data="emol"] {
+          background-image: url("i/emol.png");
+      }
+      .emojis .tool.isok[data="emok"] {
+          background-image: url("i/emok.png");
+      }
+      
+      
+      
+      
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- START-->
+      <scene v-if="currentScene==0" :key="0" start-scene="start-scene" @completed="sceneCompleted"></scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==1" :key="1" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="7" scene-color="#ED1C25">
+        <info type="dragdrop" title="Identifico el patrón" text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="true">
+          <div class="mt-auto">
+            <embedvideo urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo" small="small"></embedvideo>
+          </div>
+          <div class="mt-auto">
+            <embedvideo urlid="28oSwAFFirE" title="Patrones de figuras" small="small"></embedvideo>
+          </div>
+        </info>
+        <activity>
+          <div class="row w100 super"><img class="w100" src="i/1.png"/>
+            <div class="drops">
+              <template v-for="(i, index) in ['cu','tr', 'ci', 're', 'cu', 'tr', 'ci']">
+                <div class="drop" :data="i" droptimes="untilok"></div>
+              </template>
+            </div>
+          </div>
+          <div class="row drags superfigs">
+            <template v-for="(i, index) in ['ci','re', 'cu', 'tr']">
+              <drag :data="i" dropzone=".drop" dropzone-ok-class="isok" no-error-sound="no-error-sound" return-to-position="return-to-position"><img class="w100" :src="'i/'+i+'.png'"/></drag>
+            </template>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="4" scene-color="#ED1C25">
+        <info type="dragdrop" title="Identifico el patrón" text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="false">
+          <div class="mt-auto">
+            <embedvideo urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo"></embedvideo>
+          </div>
+          <div class="mt-auto">
+            <embedvideo urlid="28oSwAFFirE" title="Patrones de figuras" small="small"></embedvideo>
+          </div>
+        </info>
+        <activity>
+          <div class="row w100 oruga"><img class="w100" src="i/oru.png"/>
+            <div class="drops">
+              <template v-for="(i, index) in 4">
+                <div class="drop" :data="i" droptimes="untilok"></div>
+              </template>
+            </div>
+          </div>
+          <div class="row drags superfigs">
+            <template v-for="(i, index) in [4,2,1,3]">
+              <drag :data="i" dropzone=".drop" dropzone-ok-class="isok" stay-if-ok="stay-if-ok" append-to-dropzone="append-to-dropzone"><img class="w100" :src="'i/c'+i+'.png'"/></drag>
+            </template>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="7" scene-color="#ED1C25">
+        <info type="dragdrop" title="Identifico el patrón" text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="false">
+          <div class="mt-auto">
+            <embedvideo urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo"></embedvideo>
+          </div>
+          <div class="mt-auto">
+            <embedvideo urlid="28oSwAFFirE" title="Patrones de figuras" small="small"></embedvideo>
+          </div>
+        </info>
+        <activity>
+          <div class="row w100 herramientas">
+            <div class="drops">
+              <div class="tool isok sc" data="screw" droptimes="untilok"></div>
+              <div class="tool drop sc" data="screw" droptimes="untilok"></div>
+              <div class="tool isok hm" data="hammer" droptimes="untilok"></div>
+              <div class="tool isok hm" data="hammer" droptimes="untilok"></div>
+              <div class="tool isok sc" data="screw" droptimes="untilok"></div>
+              <div class="tool isok sc" data="screw" droptimes="untilok"></div>
+              <div class="tool drop hm" data="hammer" droptimes="untilok"></div>
+              <div class="tool drop hm" data="hammer" droptimes="untilok"></div>
+              <div class="tool drop sc" data="screw" droptimes="untilok"></div>
+              <div class="tool drop sc" data="screw" droptimes="untilok"></div>
+              <div class="tool drop hm" data="hammer" droptimes="untilok"></div>
+              <div class="tool drop hm" data="hammer" droptimes="untilok"></div>
+            </div>
+          </div>
+          <div class="row drags superfigs mt-1">
+            <template v-for="(i, index) in ['hammer', 'screw']">
+              <drag :data="i" dropzone=".drop" dropzone-ok-class="isok" return-to-position="return-to-position"><img class="w100" :src="'i/'+i+'.png'"/></drag>
+            </template>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==4" :key="4" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="5" scene-color="#ED1C25">
+        <info type="dragdrop" title="Identifico el patrón" text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="false">
+          <div class="mt-auto">
+            <embedvideo urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo"></embedvideo>
+          </div>
+          <div class="mt-auto">
+            <embedvideo urlid="28oSwAFFirE" title="Patrones de figuras" small="small"></embedvideo>
+          </div>
+        </info>
+        <activity>
+          <div class="row w100 tren">
+            <div class="drops">
+              <div class="tool thetren"></div>
+              <div class="tool isok" data="vg" droptimes="untilok"></div>
+              <div class="tool drop" data="vy" droptimes="untilok"></div>
+              <div class="tool isok" data="vr" droptimes="untilok"></div>
+              <div class="tool isok" data="vg" droptimes="untilok"></div>
+              <div class="tool isok" data="vy" droptimes="untilok"></div>
+              <div class="tool isok" data="vr" droptimes="untilok"></div>
+              <div class="tool drop" data="vg" droptimes="untilok"></div>
+              <div class="tool drop" data="vy" droptimes="untilok"></div>
+              <div class="tool isok" data="vr" droptimes="untilok"></div>
+              <div class="tool drop" data="vg" droptimes="untilok"></div>
+              <div class="tool drop" data="vy" droptimes="untilok"></div>
+              <div class="tool isok" data="vr" droptimes="untilok"></div>
+            </div>
+          </div>
+          <div class="row drags superfigs mt-1">
+            <template v-for="(i, index) in ['vg', 'vr', 'vy']">
+              <drag :data="i" dropzone=".drop" dropzone-ok-class="isok" return-to-position="return-to-position"><img class="w100" :src="'i/'+i+'.png'"/></drag>
+            </template>
+          </div>
+        </activity>
+      </scene>
+      <!-- SCENES-->
+      <scene v-if="currentScene==5" :key="5" :score="scoreInScene" :temporals="temporals" alloks="alloks" alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="7" scene-color="#ED1C25">
+        <info type="dragdrop" title="Identifico el patrón" text="Observa las imágenes y coloca la figura o número que corresponda para completar el orden del patrón." textaudio="s/instruccion1.mp3" :autoplay="false">
+          <div class="mt-auto">
+            <embedvideo urlid="tjFbJw4v2Sw" title="Figuras que forman el mundo"></embedvideo>
+          </div>
+          <div class="mt-auto">
+            <embedvideo urlid="28oSwAFFirE" title="Patrones de figuras" small="small"></embedvideo>
+          </div>
+        </info>
+        <activity>
+          <div class="row w100 emojis">
+            <div class="drops">
+              <div class="tool isok" data="emos" droptimes="untilok"></div>
+              <div class="tool drop" data="emol" droptimes="untilok"></div>
+              <div class="tool isok" data="emol" droptimes="untilok"></div>
+              <div class="tool isok" data="emok" droptimes="untilok"></div>
+              <div class="tool drop" data="emos" droptimes="untilok"></div>
+              <div class="tool drop" data="emol" droptimes="untilok"></div>
+              <div class="tool isok" data="emol" droptimes="untilok"></div>
+              <div class="tool drop" data="emok" droptimes="untilok"></div>
+              <div class="tool isok" data="emos" droptimes="untilok"></div>
+              <div class="tool isok" data="emol" droptimes="untilok"></div>
+              <div class="tool isok" data="emol" droptimes="untilok"></div>
+              <div class="tool drop" data="emok" droptimes="untilok"></div>
+              <div class="tool drop" data="emos" droptimes="untilok"></div>
+              <div class="tool isok" data="emol" droptimes="untilok"></div>
+              <div class="tool drop" data="emol" droptimes="untilok"></div>
+            </div>
+          </div>
+          <div class="row drags superfigs mt-1">
+            <template v-for="(i, index) in ['emol', 'emok', 'emos']">
+              <drag :data="i" dropzone=".drop" dropzone-ok-class="isok" return-to-position="return-to-position"><img class="w100" :src="'i/'+i+'.png'"/></drag>
+            </template>
+          </div>
+        </activity>
+      </scene>
+      <!-- END-->
+      <scene v-if="currentScene==6" :key="6" end-scene="end-scene" :final-data="finalData"></scene>
+    </div>
+    <!-- CDNS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <!-- Fireworks-->
+    <script src="../../assets/modulos/fworks.js"></script>
+    <!-- Modulos-->
+    <script src="../../assets/modulos/sequence.js"></script>
+    <script src="../../assets/modulos/videoplayer.js"></script>
+    <script src="../../assets/modulos/popup.js"></script>
+    <script src="../../assets/modulos/number.js"></script>
+    <script src="../../assets/modulos/inputable.js"></script>
+    <script src="../../assets/modulos/embedsvg.js"></script>
+    <script src="../../assets/modulos/tooltiper.js"></script>
+    <script src="../../assets/modulos/dialogaudio.js"></script>
+    <script src="../../assets/modulos/selectives.js"></script>
+    <script src="../../assets/modulos/clickable.js"></script>
+    <script src="../../assets/modulos/drag.js"></script>
+    <script src="../../assets/modulos/audiotext.js"></script>
+    <script src="../../assets/modulos/desplegar.js"></script>
+    <script src="../../assets/modulos/scorebox.js"></script>
+    <script src="../../assets/modulos/scene.js"></script>
+    <script src="../../assets/modulos/info.js"></script>
+    <script src="../../assets/modulos/activity.js"></script>
+    <!-- Mainscript-->
+    <script src="../../assets/assets.js"></script>
+    <script>
+      app.$devmode = false
+      app.$set(app.temps, 'a', [])
+      
+      app.currentScene = 0
+      app.scenesCount = 5
+    </script>
+  </body>
+</html>
