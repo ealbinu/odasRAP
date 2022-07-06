@@ -1,0 +1,89 @@
+include ../../assets/pug/_head
+include ../../assets/pug/_scripts
+
+- title = ''
+
+<!DOCTYPE html>
+html(lang="es")
+    +head
+        style.
+
+
+    body
+        #app
+            // START
+            scene(v-if="currentScene==0" :key="0" start-scene @completed="sceneCompleted")
+
+            // SCENES
+            scene(v-if="currentScene==1" hidescorebox :key="1" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Mira la imagen y selecciona las respuestas correctas." textaudio="s/instruccion1.mp3" :autoplay="true")
+                    .mt-auto: embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+                activity
+                    .row.w100: img(src="i/img.png").w80
+                    .text-center: button(@click="sceneCompleted(false)").button.big.animate__animated.animate__flip Continuar
+            
+            // SCENES P1
+            scene(v-if="currentScene==2" :key="2" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Mira la imagen y selecciona las respuestas correctas." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+                activity
+                    .row.w100: img(src="i/img.png").w60
+                    .h4.text-center: audiotext(audio="s/p1.mp3" text="¿Cuántos conjuntos de 10 flores se pueden formar?" :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in ['10','100','30','50']" :key="'p1'+index" :isok="index == 0" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            
+            // SCENES P2
+            scene(v-if="currentScene==3" :key="3" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Mira la imagen y selecciona las respuestas correctas." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+                activity
+                    .row.w100: img(src="i/img.png").w60
+                    .h4.text-center: audiotext(audio="s/p2.mp3" text="¿Cuántas flores hay en cada fila?" :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in ['8','10','6','9']" :key="'p2'+index" :isok="index == 1" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            
+            // SCENES P3
+            scene(v-if="currentScene==4" :key="4" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Mira la imagen y selecciona las respuestas correctas." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+                activity
+                    .row.w100: img(src="i/img.png").w60
+                    .h4.text-center: audiotext(audio="s/p3.mp3" text="¿Cuántas flores hay en 3 filas?" :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in ['30','40','20','10']" :key="'p3'+index" :isok="index == 0" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            
+            // SCENES P4
+            scene(v-if="currentScene==5" :key="5" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Mira la imagen y selecciona las respuestas correctas." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+                activity
+                    .row.w100: img(src="i/img.png").w60
+                    .h4.text-center: audiotext(audio="s/p4.mp3" text="¿Cuántas flores hay en 5 filas?" :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in ['50','40','100','10']" :key="'p4'+index" :isok="index == 0" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            
+            // SCENES P5
+            scene(v-if="currentScene==6" :key="6" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Mira la imagen y selecciona las respuestas correctas." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+                activity
+                    .row.w100: img(src="i/img.png").w60
+                    .h4.text-center: audiotext(audio="s/p5.mp3" text="¿Cuántas flores hay en 8 filas?" :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in ['30','60','80','100']" :key="'p5'+index" :isok="index == 2" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            
+            // SCENES P6
+            scene(v-if="currentScene==7" :key="7" :score="scoreInScene" :temporals="temporals" alloks alloks-sound="../../assets/asound/bienhecho_mujer.mp3" @completed="sceneCompleted" :devmode="$devmode" :answers="1" scene-color="#ED1C25")
+                info(type="seleccionar" title=title text="Mira la imagen y selecciona las respuestas correctas." textaudio="s/instruccion1.mp3" :autoplay="false")
+                    .mt-auto: embedvideo(urlid="FSXCWWKTPWI" title="Sumo de 10 en 10")
+                activity
+                    .row.w100: img(src="i/img.png").w60
+                    .h4.text-center: audiotext(audio="s/p6.mp3" text="¿Cuántas flores hay en total? " :autoplay="true")
+                    .row.wrap.around: clickable(v-for="(i, index) in ['90','100','80','10']" :key="'p5'+index" :isok="index == 1" simple-ok initclass="pa-1"): number(randomc smaller) {{i}}
+            
+            // END
+            scene(v-if="currentScene==8" :key="8" end-scene :final-data="finalData")
+
+        +scripts
+            script.
+
+                app.$devmode = false
+                app.$set(app.temps, 'a', [])
+                
+                app.currentScene = 0
+                app.scenesCount = 6
