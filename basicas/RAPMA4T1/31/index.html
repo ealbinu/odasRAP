@@ -1,117 +1,19 @@
-
-<!--+parrafoinputs(['La mayoría de los liberales eran', ['civiles', 0],])--><!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Encuentro el factor desconocido</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css"/>
-    <link rel="stylesheet" href="../../assets/assets.css"/>
-    <style>
-      .parrafoinputs .inputbox {
-          display: flex;
-      }
-      .parrafoinputs .inputbox input {
-          max-width: 100px;
-          margin-right: 6px;
-      }
-      .parrafoinputs{
-          display: flex;
-          justify-content: center;
-      }
-      .parrafoinputs .inputbox{
-          display: inline-block;
-      }
-      
-    </style>
-  </head>
-  <body data="RAP">
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-      <h1>Encuentro el factor desconocido</h1>
-      <div class="instruccion mt-5">Resuelve los siguientes problemas en tu cuaderno. Después, escribe en los recuadros correspondientes el resultado.</div>
-      <div class="row mt-3 ex1">
-        <div class="col-12">
-          <labeltext num="1.">En un museo se registraron 630 visitas durante una semana. Si el museo está abierto de lunes a domingo, ¿cuántas visitas tuvieron por día?</labeltext>
-          <div class="parrafoinputs">
-            <inputbox v-model="r[0]" :ref="refCount()" @isright="right++" :answer="90" type="number" placeh="#">
-              <template v-slot:after="">visitas por día.</template>
-            </inputbox>
-          </div>
-        </div>
-        <div class="col-12 mt-3">
-          <labeltext num="2.">En la celebración del Día del Niño se repartieron dulces a los alumnos de 4º. Si la maestra tenía una bolsa con 90 paletas y las repartió equitativamente entre 25 niños, ¿cuántas paletas le tocaron a cada uno y cuántas paletas sobraron?</labeltext>
-          <div class="parrafoinputs">
-            <inputbox v-model="r[1]" :ref="refCount()" @isright="right++" :answer="3" type="number" placeh="#">
-              <template v-slot:after="">paletas a cada niño y sobraron</template>
-            </inputbox>
-            <inputbox v-model="r[2]" :ref="refCount()" @isright="right++" :answer="15" type="number" placeh="#">
-              <template v-slot:after="">paletas.</template>
-            </inputbox>
-          </div>
-        </div>
-        <div class="col-12 mt-3">
-          <labeltext num="3.">El 14 de febrero le regalaron a mi hermana una bolsa de 168 chocolates. Diariamente se come 5 y a mí me regala 3. ¿Para cuántos días le alcanzará la bolsa?</labeltext>
-          <div class="parrafoinputs">
-            <inputbox v-model="r[3]" :ref="refCount()" @isright="right++" :answer="21" type="number" placeh="#">
-              <template v-slot:after="">días.</template>
-            </inputbox>
-          </div>
-          <labeltext>¿Para cuántos días alcanzarían si comiéramos solamente 3 chocolates cada uno?</labeltext>
-          <div class="parrafoinputs">
-            <inputbox v-model="r[4]" :ref="refCount()" @isright="right++" :answer="28" type="number" placeh="#">
-              <template v-slot:after=""> días.</template>
-            </inputbox>
-          </div>
-        </div>
-        <div class="col-12 mt-3">
-          <labeltext num="4.">Tomás gasta diariamente $18.00 en camiones y $12.00 en una torta para el recreo. Si su papá le dio $300.00, ¿para cuántos días le alcanzará el dinero?</labeltext>
-          <div class="parrafoinputs">
-            <inputbox v-model="r[5]" :ref="refCount()" @isright="right++" :answer="10" type="number" placeh="#">
-              <template v-slot:before="">Para </template>
-              <template v-slot:after="">días.</template>
-            </inputbox>
-          </div>
-        </div>
-        <div class="col-12 mt-3">
-          <labeltext num="5.">Sonia quiere acomodar 240 huevos en cajas de 12 huevos. ¿Cuántas cajas podrá llenar?</labeltext>
-          <div class="parrafoinputs">
-            <inputbox v-model="r[6]" :ref="refCount()" @isright="right++" :answer="20" type="number" placeh="#">
-              <template v-slot:after="">cajas.</template>
-            </inputbox>
-          </div>
-        </div>
-        <div class="col-12 mt-3">
-          <labeltext num="6.">Una costurera hace una funda para almohada con 1 metro de tela. ¿Cuántos pares de fundas saldrán de una pieza de tela que tiene 340 metros?</labeltext>
-          <div class="parrafoinputs">
-            <inputbox v-model="r[7]" :ref="refCount()" @isright="right++" :answer="170" type="number" placeh="#">
-              <template v-slot:after="">pares.</template>
-            </inputbox>
-          </div>
-        </div>
-      </div>
-      <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.js"></script>
-    <script src="../../assets/modulos/dragdropMod.js"></script>
-    <script src="../../assets/modulos/dropdowns.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/tip.js"></script>
-    <script src="../../assets/modulos/relational.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/modulos/utils.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script>//app.$set(app.tempsobj, 'a', [])</script>
-  </body>
-</html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Repaso</title></head><body data="RAP-MAT"><div class="container mx-auto my-5" id="app"><oda-titulo title="Repaso" subtitle=""></oda-titulo><div><oda-instruccion class="">Resuelve los siguientes problemas en tu cuaderno. Después, escribe en los recuadros correspondientes el resultado.
+</oda-instruccion><layout-grid columns="1" columns-md="1" gap="2" class=""><div class=" flex" data-z="false"><util-text design="6" class=" mr-2 text-lg font-bold text-xl">1.
+</util-text><util-text design="0" class="">En un museo se registraron 630 visitas durante una semana. Si el museo está abierto de lunes a domingo, ¿cuántas visitas tuvieron por día?
+</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center bg-gray-100" data-z="false"><module-input v-bind:allok="false" answer="90" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" ml-2">visitas por día.
+</util-text></div></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=" mt-3 mt-5"><div class=" flex" data-z="false"><util-text design="6" class=" mr-2 text-lg font-bold text-xl">2.
+</util-text><util-text design="0" class=""> En la celebración del Día del Niño se repartieron dulces a los alumnos de 4º. Si la maestra tenía una bolsa con 90 paletas y las repartió equitativamente entre 25 niños, ¿cuántas paletas le tocaron a cada uno y cuántas paletas sobraron?</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center flex-wrap bg-gray-100" data-z="false"><module-input v-bind:allok="false" answer="3" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">paletas a cada niño y sobraron
+</util-text><module-input v-bind:allok="false" answer="15" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">paletas.
+</util-text></div></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=" mt-3 mt-5"><div class=" flex" data-z="false"><util-text design="6" class=" mr-2 text-lg font-bold text-xl">3.
+</util-text><util-text design="0" class="">El 14 de febrero le regalaron a mi hermana una bolsa de 168 chocolates. Diariamente se come 5 y a mí me regala 3. ¿Para cuántos días le alcanzará la bolsa?</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center flex-wrap bg-gray-100" data-z="false"><module-input v-bind:allok="false" answer="21" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">días.</util-text></div><div class=" flex" data-z="false"><util-text design="0" class="">¿Para cuántos días alcanzarían si comiéramos solamente 3 chocolates cada uno?</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center flex-wrap bg-gray-100" data-z="false"><module-input v-bind:allok="false" answer="28" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">días.</util-text></div></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=" mt-3 mt-5"><div class=" flex" data-z="false"><util-text design="6" class=" mr-2 text-lg font-bold text-xl">4.
+</util-text><util-text design="0" class=""> Tomás gasta diariamente $18.00 en camiones y $12.00 en una torta para el recreo. Si su papá le dio $300.00, ¿para cuántos días le alcanzará el dinero?</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center flex-wrap bg-gray-100" data-z="false"><util-text design="0" class=" m-2">Para</util-text><module-input v-bind:allok="false" answer="10" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">días.</util-text></div></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=" mt-3 mt-5"><div class=" flex" data-z="false"><util-text design="6" class=" mr-2 text-lg font-bold text-xl">5.
+</util-text><util-text design="0" class="">Sonia quiere acomodar 240 huevos en cajas de 12 huevos. ¿Cuántas cajas podrá llenar?</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center flex-wrap bg-gray-100" data-z="false"><module-input v-bind:allok="false" answer="20" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">cajas.</util-text></div></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=" mt-3 mt-5"><div class=" flex" data-z="false"><util-text design="6" class=" mr-2 text-lg font-bold text-xl">6.
+</util-text><util-text design="0" class="">Una costurera hace una funda para almohada con 1 metro de tela. ¿Cuántos pares de fundas saldrán de una pieza de tela que tiene 340 metros?</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center flex-wrap bg-gray-100" data-z="false"><module-input v-bind:allok="false" answer="170" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">pares.</util-text></div></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=" mt-3 mt-5"><div class=" flex" data-z="false"><util-text design="6" class=" mr-2 text-lg font-bold text-xl">7.
+</util-text><util-text design="0" class="">Nancy lee 2 libros por mes. ¿Cuántos libros
+leerá en 9 meses?</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center flex-wrap bg-gray-100" data-z="false"><util-text design="0" class=" m-2">Nancy leerá</util-text><module-input v-bind:allok="false" answer="18" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">libros en 9 meses. </util-text></div></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=" mt-3 mt-5"><div class=" flex" data-z="false"><util-text design="6" class=" mr-2 text-lg font-bold text-xl">8.
+</util-text><util-text design="0" class="">Una gallina pone 30 huevos en dos semanas. ¿Cuántos huevos pone en una
+semana? ¿Cuántos huevos produce en 13 semanas?</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center flex-wrap bg-gray-100" data-z="false"><util-text design="0" class=" m-2">Una gallina pone</util-text><module-input v-bind:allok="false" answer="15" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">huevos en una semana y</util-text><module-input v-bind:allok="false" answer="195" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">huevos
+en 13 semanas.</util-text></div></layout-grid><layout-grid columns="1" columns-md="1" gap="2" class=" mt-3 mt-5"><div class=" flex" data-z="false"><util-text design="6" class=" mr-2 text-lg font-bold text-xl">9.
+</util-text><util-text design="0" class="">Karina cocina 3 pasteles con 6 litros de leche. ¿Cuántos pasteles puede cocinar
+con 12 litros de leche? ¿Cuántos litros de leche necesita para 11 pasteles?</util-text></div><div class=" p-2 flex rounded-xl justify-center items-center flex-wrap bg-gray-100" data-z="false"><util-text design="0" class=" m-2">Karina puede cocinar</util-text><module-input v-bind:allok="false" answer="6" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">pasteles con 12 litros y necesita</util-text><module-input v-bind:allok="false" answer="22" placeholder="#" class=" w-16"></module-input><util-text design="0" class=" m-2">litros de leche para 11 pasteles.</util-text></div></layout-grid></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2@v1.2.22/lib/loader.min.js" data-loader-version="v1.2.22" type="text/javascript"></script></body></html>
