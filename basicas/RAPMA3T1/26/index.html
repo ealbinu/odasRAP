@@ -1,95 +1,27 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmo lo que aprendí</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../assets/font/stylesheet.css">
-    <link rel="stylesheet" href="../../assets/assets.css">
-    <style>
-       .options div{margin: 10px 20px;} 
-
-    </style>
-</head>
-<body data="RAP">
-    <div class="container my-5 animate__animated animate__fadeIn animate__delay-1s" id="app">
-        <h1>Confirmo lo que aprendí</h1>
-
-
-        <div class="instruccion mt-5">Marca la respuesta correcta</div>
-        <div class="row mt-3">
-            <div class="col-sm-12">
-
-                <choose v-for="(i, index) in [
-                    {
-                        p: '¿Cuál es el número que corresponde a la siguiente descomposición? <strong>6 000 + 700 + 90 + 9 =</strong>',
-                        ops: ['6 799','6 979','7 699'],
-                        a: 0
-                    },
-                    {
-                        p: 'En el número <strong>7 458</strong>, ¿cuál es el valor posicional de la cifra que se encuentra en las unidades de millar?',
-                        ops: ['70','7 000','7'],
-                        a: 1
-                    },
-                    {
-                        p: 'Karla tiene 2 billetes de $1 000, 2 de $500, 3 de $200, 1 de $100, 1 de $50 y 1 de $20. ¿Cuánto dinero tiene?',
-                        ops: ['$3 970','$3 870','$3 770'],
-                        a: 2
-                    },
-                    {
-                        p: '¿Cuál de las siguientes operaciones tiene un resultado mayor?',
-                        ops: ['4 000 + 500 =','5 000 + 20 =','4 000 + 200 ='],
-                        a: 1
-                    },
-                    {
-                        p: 'Ramón tenía $3 000 y compró un celular que le costó $2 100. ¿Cuánto dinero le quedó?',
-                        ops: ['$900','$1 100','$1 090'],
-                        a: 0
-                    },
-                    {
-                        p: '¿Cuál de las operaciones no resuelve el siguiente problema?<div><strong>Si un carpintero hace 20 sillas en una semana, ¿cuántas sillas hará en 5 semanas?</strong></div>',
-                        ops: ['20 + 20 + 20 + 20 + 20 =','5 × 20 =','20 × 20 × 20 × 20 × 20 ='],
-                        a: 2
-                    },
-                    {
-                        p: 'En una fábrica empacan 10 chocolates por caja. ¿Cuántos chocolates habrá en 500 cajas?',
-                        ops: ['50 000 chocolates.','5 000 chocolates.','500 chocolates.'],
-                        a: 1
-                    },
-                    {
-                        p: 'Arturo entra a la escuela a las 8:00 a. m. Si de su casa a la escuela hace 45 minutos, ¿a qué hora tiene que salir de su casa para estar puntual en la escuela?',
-                        ops: ['A las 7:15 a.m.','A las 7:25 a.m.','A las 7:05 a.m.'],
-                        a: 0
-                    },
-                    
-                    
-                    
-                    
-                ]"
-                    :key="index" v-model="r[index]" :ref="'q'+index" :num="(index+1)+'.'" :text="i.p"
-                    :options="i.ops" @isright="right++" :answer="i.ops[i.a]"></choose>
-                
-            </div>
-        </div>
-        
-
-
-        <!-- ENDING -->
-        <finalize @evaluate="finalizar" @reset="reset" :resultado="resultado" :right="right" :total="total"></finalize>
-        <!--<blockquote class="blockquote">{{r}}</blockquote>-->
-    </div>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
-    <script src="../../assets/modulos/selectable.js"></script>
-    <script src="../../assets/modulos/selectableoptions.js"></script>
-    <script src="../../assets/modulos/check.js"></script>
-    <script src="../../assets/modulos/inputbox.js"></script>
-    <script src="../../assets/modulos/choose.js"></script>
-    <script src="../../assets/modulos/finalize.js"></script>
-    <script src="../../assets/assets.js"></script>
-    <script></script>
-</body>
-</html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Números de memoria</title></head><body data="RAP-MAT"><div class="container mx-auto my-5" id="app"><oda-titulo title="Números de memoria" subtitle=""></oda-titulo><div><oda-instruccion class="">Escribe los números que faltan en cada suma para que represente lo que indica la
+multiplicación. Luego escribe el resultado.</oda-instruccion><div class=" p-3 mx-auto border-sec border-2 w-fit" data-z="false"><span class=" text-xl font-bold text-sec" data-z="false">7 x 3 = 7 + 7 + 7 =
+</span><module-input v-bind:allok="false" answer="21" placeholder="#" class=" w-12"></module-input><span class=" text-xl font-bold text-sec" data-z="false">
+o también 3 + 3 + 3 +
+</span><module-input v-bind:allok="false" answer="3+3+3+3" placeholder="#" class=" w-36"></module-input><span class=" text-xl font-bold text-sec" data-z="false">
+=
+</span><module-input v-bind:allok="false" answer="21" placeholder="#" class=" w-12"></module-input></div><div class=" p-3 mt-5 mx-auto border-2 border-accent w-fit" data-z="false"><span class=" text-xl font-bold text-accent" data-z="false">8 x 9 = 8 + 8 + 8 + 8 + 8 + 8 + 
+</span><module-input v-bind:allok="false" answer="8+8+8" placeholder="#" class=" w-36"></module-input><span class=" text-xl font-bold text-accent" data-z="false">
+=
+</span><module-input v-bind:allok="false" answer="72" placeholder="#" class=" w-12"></module-input><span class=" text-xl font-bold text-accent" data-z="false">
+o también 9 + 9 + 9 + 9 + 9 + 9 +
+</span><module-input v-bind:allok="false" answer="9+9" placeholder="#" class=" w-12"></module-input><span class=" text-xl font-bold text-accent" data-z="false">
+= 
+</span><module-input v-bind:allok="false" answer="72" placeholder="#" class=" w-12"></module-input></div><div class=" p-3 mt-5 mx-auto border-2 border-accent border-main w-fit" data-z="false"><span class=" text-xl font-bold text-main" data-z="false">4 x 6 = 4 + 4 + 4 + 4 +
+</span><module-input v-bind:allok="false" answer="4+4" placeholder="#" class=" w-36"></module-input><span class=" text-xl font-bold text-main" data-z="false">
+=
+</span><module-input v-bind:allok="false" answer="24" placeholder="#" class=" w-12"></module-input><span class=" text-xl font-bold text-main" data-z="false">
+o también 6 +
+</span><module-input v-bind:allok="false" answer="6+6+6" placeholder="#" class=" w-12"></module-input><span class=" text-xl font-bold text-main" data-z="false">
+= 
+</span><module-input v-bind:allok="false" answer="24" placeholder="#" class=" w-12"></module-input></div><oda-instruccion class="">Marca la respuesta correcta</oda-instruccion><div class="" data-z="false"><span class=" font-bold text-2xl text-accent" data-z="false">1.
+</span><span class=" text-2xl" data-z="false">¿Cuál de las operaciones no resuelve el siguiente problema?</span></div><div class="" data-z="false"><span class=" font-bold text-2xl text-accent" data-z="false">Si un carpintero hace 20 sillas en una semana, ¿Cuántas sillas hará en 5 semanas?</span><module-choice v-bind:options="[{'v1':'20 + 20 + 20 + 20 + 20 =','v2':'','v3':''},{'v1':'5 × 20 =','v2':'','v3':''},{'v1':'20 × 20 × 20 × 20 × 20 =','v2':'','v3':''}]" v-bind:answer="2" v-bind:allok="false" class=" mt-10"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice></div><div class=" mt-5" data-z="false"><span class=" font-bold text-2xl text-accent" data-z="false">2.
+</span><span class=" text-2xl" data-z="false">En una fábrica empacan 10 chocolates por caja. ¿Cuántos chocolates habrá en 500 cajas?</span><module-choice v-bind:options="[{'v1':'50 000 chocolates.','v2':'','v3':''},{'v1':'5 000 chocolates.','v2':'','v3':''},{'v1':'500 chocolates.','v2':'','v3':''}]" v-bind:answer="1" v-bind:allok="false" class=" mt-10"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice></div><div class=" mt-5" data-z="false"><span class=" font-bold text-2xl text-accent" data-z="false">3.
+</span><span class=" text-2xl" data-z="false">Karla tiene 4 billetes de $200. ¿Cuánto dinero tiene?</span><module-choice v-bind:options="[{'v1':'200+200+200+200=800','v2':'','v3':''},{'v1':'200+200+200+200=600','v2':'','v3':''},{'v1':'200+200+200=800','v2':'','v3':''}]" v-bind:answer="1" v-bind:allok="false" class=" mt-10"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice></div><div class=" mt-5" data-z="false"><span class=" font-bold text-2xl text-accent" data-z="false">4.
+</span><span class=" text-2xl" data-z="false">Hay 30 chocolates en 1 caja. ¿Cuántos hay en 6 cajas?</span><module-choice v-bind:options="[{'v1':'30x6= 160','v2':'','v3':''},{'v1':'30+30+30+30=180','v2':'','v3':''},{'v1':'30x6=180','v2':'','v3':''}]" v-bind:answer="2" v-bind:allok="false" class=" mt-10"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice></div><div class="" data-z="false"><span class=" font-bold text-2xl text-accent" data-z="false">5.
+</span><span class=" text-2xl" data-z="false">¿Cuál operación resuelve este problema?</span></div><div class="" data-z="false"><span class=" font-bold text-2xl text-accent" data-z="false">Si Noemí hace 6 muñecas en 1 día, ¿Cuántas hace en 7 días?</span><module-choice v-bind:options="[{'v1':'6 + 6 + 6 + 6 + 6 + 6 =','v2':'','v3':''},{'v1':'6 x 1 =','v2':'','v3':''},{'v1':'6 x 7 =','v2':'','v3':''}]" v-bind:answer="2" v-bind:allok="false" class=" mt-10"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice></div><div class=" mt-5" data-z="false"><span class=" font-bold text-2xl text-accent" data-z="false">6.
+</span><span class=" text-2xl" data-z="false">Guapo, el perro de Ana, come 3 veces carne en la semana. ¿Cuántas veces como carne en un mes?</span><module-choice v-bind:options="[{'v1':'3 x 7= 21','v2':'','v3':''},{'v1':'3 x 4 =12','v2':'','v3':''},{'v1':'3 + 3 + 3 = 12','v2':'','v3':''}]" v-bind:answer="1" v-bind:allok="false" class=" mt-10"><template #option="{v1,v2,v3}"><div class="" data-z="false">{{v1}}</div></template></module-choice></div></div><oda-finalizar></oda-finalizar></div><script src="https://cdn.jsdelivr.net/gh/bluemx/blueodasv2@v1.2.22/lib/loader.min.js" data-loader-version="v1.2.22" type="text/javascript"></script></body></html>
